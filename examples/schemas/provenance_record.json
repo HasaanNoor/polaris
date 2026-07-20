@@ -1,0 +1,35 @@
+{
+  "provenance_record_id": "prov_001",
+  "investigation_id": "inv_education_life_expectancy",
+  "artifact_id": "artifact_education_life_expectancy",
+  "timestamp": "2026-07-20T12:10:00Z",
+  "actor_type": "agent",
+  "actor_id": "dataset_selection",
+  "operation_type": "retrieve_source_data",
+  "data_value_category": "retrieved_source_data",
+  "input_references": [],
+  "output_references": [
+    {
+      "reference_id": "raw_synthetic_extract",
+      "reference_type": "dataset_extract",
+      "description": "Synthetic extract used for schema example."
+    }
+  ],
+  "source_dataset_references": [
+    {
+      "dataset_id": "ds_synthetic_oecd_indicators",
+      "source_version": "example-1",
+      "retrieval_timestamp": "2026-07-20T12:05:00Z"
+    }
+  ],
+  "transformation_description": "Recorded synthetic retrieval metadata only.",
+  "software_version": "polaris 0.1.0",
+  "configuration_hash": "sha256:config-example",
+  "code_reference": "phase-1-local",
+  "parameters": {
+    "synthetic": true
+  },
+  "warnings": [],
+  "parent_provenance_record_ids": [],
+  "schema_version": "1.0.0"
+}

@@ -32,6 +32,25 @@ Required top-level fields:
 - reproducibility metadata;
 - generated report reference.
 
+## Phase 1 Implementation
+
+Phase 1 implements this conceptual contract as Pydantic v2 schemas in `src/polaris/schemas`. The implementation intentionally narrows the artifact to contract fields only: it records plans, references, provenance, result sections, diagnostics, uncertainty, causal assessment, evidence quality, warnings, errors, and reproducibility metadata, but it does not retrieve data, execute statistics, persist artifacts, orchestrate agents, or render reports.
+
+The central implemented schema is `ResearchArtifact`. It is versioned and immutable after validation. It may embed typed records or carry stable references for datasets and provenance, allowing later storage strategies to change without changing the public contract.
+
+Phase 1 also defines typed sections for:
+
+- observed data references;
+- derived data references;
+- descriptive values;
+- effect estimates;
+- uncertainty intervals;
+- model diagnostics;
+- causal-identification assessment;
+- narrative interpretation.
+
+This preserves the Phase 0 requirement that observed values, derived values, model outputs, and narrative interpretation remain distinguishable.
+
 ## Separation of Evidence Types
 
 Observed data: raw or source-provided values with source identifiers, access date, version, geography, time period, and unit.

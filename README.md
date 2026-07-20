@@ -4,7 +4,13 @@ Agentic platform for societal intelligence and causal research.
 
 ## Status
 
-Polaris is in **Phase 0: documentation and design specification**. The repository currently defines the project mission, research principles, architecture, methodology policies, candidate datasets, and initial roadmap. It does not yet contain application code, production infrastructure, or approved dataset integrations.
+Polaris is in **Phase 1: core schemas complete**. The repository now includes typed Python schema contracts for research questions, dataset manifests, agent messages, provenance records, statistical specifications, and versioned research artifacts. It does not yet contain application services, production infrastructure, statistical execution, orchestration runtime, LLM integration, or approved dataset integrations.
+
+## Package Overview
+
+The Phase 1 package lives under `src/polaris/schemas` and uses Pydantic v2 for typed validation and JSON serialization. The schemas reject unknown fields by default, use timezone-aware UTC timestamps, and keep observed data, derived data, analytical outputs, provenance, and narrative interpretation distinct.
+
+JSON examples are available in `examples/schemas`. Schema tests are available in `tests/schemas`.
 
 ## Problem Statement
 
@@ -60,8 +66,8 @@ LLMs must not invent evidence, silently introduce unsupported claims, calculate 
 
 ## Roadmap Summary
 
-Phase 0 completes the documentation baseline. Later phases will add schemas, deterministic analytical services, dataset ingestion, typed agent contracts, orchestration, tests, reproducible artifacts, reporting, frontend workflows, deployment, observability, and only then narrowly scoped evidence-grounded LLM enhancement where justified.
+Phase 0 completed the documentation baseline. Phase 1 added the minimal schema foundation. Later phases will add repository tooling, deterministic analytical services, dataset ingestion, typed agent contracts, orchestration, reproducible artifact storage, reporting, frontend workflows, deployment, observability, and only then narrowly scoped evidence-grounded LLM enhancement where justified.
 
 ## Current Status and Next Phase
 
-Current decision records establish Polaris as a research system with mandatory multi-agent orchestration and a deterministic analytical core. The next phase should convert the documented contracts into minimal schemas and validation tests without adding speculative application infrastructure.
+Current decision records establish Polaris as a research system with mandatory multi-agent orchestration, a deterministic analytical core, and Pydantic-based schema contracts. The next phase should add minimal repository tooling without expanding into application frameworks or infrastructure.

@@ -9,6 +9,10 @@ __pycache__/
 .python-version
 .venv/
 venv/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
 
 # IDE
 .vscode/

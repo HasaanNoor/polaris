@@ -1,0 +1,42 @@
+{
+  "question_id": "rq_education_life_expectancy",
+  "raw_text": "Is secondary school enrollment associated with life expectancy across OECD countries from 2010 to 2020?",
+  "normalized_text": "association between secondary school enrollment and life expectancy in OECD countries, 2010-2020",
+  "category": "correlational",
+  "outcome_variables": [
+    {
+      "variable_id": "life_expectancy",
+      "label": "Life expectancy at birth"
+    }
+  ],
+  "exposure_variables": [
+    {
+      "variable_id": "secondary_enrollment",
+      "label": "Secondary school enrollment"
+    }
+  ],
+  "covariates": [
+    {
+      "variable_id": "gdp_per_capita",
+      "label": "GDP per capita"
+    }
+  ],
+  "population": "OECD country-years",
+  "geographic_scope": {
+    "codes": ["OECD"],
+    "description": "OECD member countries"
+  },
+  "temporal_scope": {
+    "start": 2010,
+    "end": 2020
+  },
+  "unit_of_analysis": "country-year",
+  "requested_evidence_level": "moderate",
+  "requested_analytical_methods": ["correlation", "regression_adjustment"],
+  "assumptions": ["Indicator definitions are sufficiently comparable for exploratory association."],
+  "exclusions": ["No causal interpretation requested."],
+  "required_metadata": ["source versions", "indicator definitions", "missingness by country-year"],
+  "validation_warnings": [],
+  "created_at": "2026-07-20T12:00:00Z",
+  "schema_version": "1.0.0"
+}

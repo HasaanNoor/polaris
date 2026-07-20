@@ -1,0 +1,62 @@
+{
+  "specification_id": "spec_education_life_expectancy_assoc",
+  "investigation_id": "inv_education_life_expectancy",
+  "analysis_type": "regression",
+  "model_family": "linear",
+  "outcome_variable": {
+    "variable_id": "life_expectancy",
+    "label": "Life expectancy at birth"
+  },
+  "exposure_variables": [
+    {
+      "variable_id": "secondary_enrollment",
+      "label": "Secondary school enrollment"
+    }
+  ],
+  "covariates": [
+    {
+      "variable_id": "gdp_per_capita",
+      "label": "GDP per capita"
+    }
+  ],
+  "grouping_variables": [],
+  "fixed_effects": [
+    {
+      "variable_id": "country",
+      "label": "Country"
+    }
+  ],
+  "time_variable": {
+    "variable_id": "year",
+    "label": "Year"
+  },
+  "unit_of_analysis": "country-year",
+  "sample_restrictions": ["OECD countries with non-missing synthetic indicators"],
+  "missing_data_strategy": {
+    "strategy": "complete_case",
+    "rationale": "Synthetic example keeps missing-data handling explicit.",
+    "affected_variables": [
+      {
+        "variable_id": "life_expectancy",
+        "label": "Life expectancy at birth"
+      }
+    ]
+  },
+  "transformations": [],
+  "weighting": null,
+  "standard_error_strategy": {
+    "strategy": "clustered",
+    "cluster_variables": [
+      {
+        "variable_id": "country",
+        "label": "Country"
+      }
+    ]
+  },
+  "multiple_comparison_strategy": "single primary association",
+  "confidence_level": 0.95,
+  "robustness_checks_requested": ["exclude high-missingness country-years"],
+  "causal_identification_claim_level": "associational",
+  "assumptions": ["Regression adjustment is not treated as causal identification."],
+  "schema_version": "1.0.0"
+}

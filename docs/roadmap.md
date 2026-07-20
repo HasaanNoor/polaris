@@ -12,13 +12,13 @@ Verification: all required Markdown files are populated, internally linked, and 
 
 Non-goals: application code, dependencies, CI, Docker, frontend, backend, and approved dataset integrations.
 
-## Phase 1: Core Schemas
+## Phase 1: Core Schemas (complete)
 
 Objective: convert Phase 0 concepts into minimal typed schemas.
 
 Deliverables: research question, dataset manifest, agent message, provenance record, statistical specification, and research artifact schemas.
 
-Verification: schema validation tests and examples.
+Verification: schema validation tests and examples. Implemented in `src/polaris/schemas`, `tests/schemas`, and `examples/schemas`.
 
 ## Phase 2: Repository Tooling
 

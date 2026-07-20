@@ -1,0 +1,64 @@
+{
+  "dataset_id": "ds_synthetic_oecd_indicators",
+  "title": "Synthetic OECD Education and Health Indicators",
+  "provider": "Polaris synthetic example",
+  "source_url": "https://example.org/synthetic-oecd-indicators",
+  "access_url": "https://example.org/synthetic-oecd-indicators/download",
+  "description": "Compact synthetic metadata for schema validation examples.",
+  "license": "Synthetic example; not for analytical use.",
+  "status": "candidate",
+  "geographic_coverage": {
+    "codes": ["OECD"],
+    "description": "Illustrative OECD aggregate coverage"
+  },
+  "temporal_coverage": {
+    "start": 2010,
+    "end": 2020
+  },
+  "revision_metadata": {
+    "release_date": "2026-07-01",
+    "revision_policy": "Synthetic example has no revisions.",
+    "update_frequency": "none",
+    "source_version": "example-1"
+  },
+  "variables": [
+    {
+      "variable_id": "life_expectancy",
+      "label": "Life expectancy at birth",
+      "description": "Synthetic years of expected life at birth.",
+      "unit": "years",
+      "data_type": "float",
+      "role": "outcome",
+      "source_field_name": "life_exp",
+      "missing_value_representation": ["NA"],
+      "comparability_notes": ["Synthetic values do not represent real countries."]
+    },
+    {
+      "variable_id": "secondary_enrollment",
+      "label": "Secondary school enrollment",
+      "description": "Synthetic gross enrollment percentage.",
+      "unit": "percent",
+      "data_type": "float",
+      "role": "exposure",
+      "source_field_name": "sec_enroll",
+      "missing_value_representation": ["NA"],
+      "comparability_notes": ["Synthetic values do not represent real countries."]
+    }
+  ],
+  "units": ["country-year"],
+  "frequency": "annual",
+  "methodology_reference": "https://example.org/synthetic-methodology",
+  "comparability_warnings": [
+    {
+      "severity": "medium",
+      "code": "synthetic_data",
+      "message": "This example is synthetic and is not an approved integration."
+    }
+  ],
+  "licensing_warnings": [],
+  "access_restrictions": [],
+  "source_version": "example-1",
+  "retrieval_timestamp": "2026-07-20T12:05:00Z",
+  "checksum": "sha256:example",
+  "schema_version": "1.0.0"
+}

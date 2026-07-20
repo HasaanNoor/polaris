@@ -1,0 +1,23 @@
+{
+  "message_id": "msg_001",
+  "investigation_id": "inv_education_life_expectancy",
+  "sender_agent": "research_coordinator",
+  "recipient_agent": "question_interpreter",
+  "recipient_agents": [],
+  "message_type": "investigation_request",
+  "timestamp": "2026-07-20T12:01:00Z",
+  "correlation_id": null,
+  "parent_message_id": null,
+  "status": "created",
+  "payload": {
+    "payload_type": "investigation_request",
+    "question_id": "rq_education_life_expectancy",
+    "requested_agents": ["question_interpreter", "dataset_selection"],
+    "priority": "normal"
+  },
+  "warnings": [],
+  "errors": [],
+  "evidence_references": [],
+  "artifact_references": [],
+  "schema_version": "1.0.0"
+}

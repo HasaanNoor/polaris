@@ -1,0 +1,186 @@
+{
+  "artifact_id": "artifact_education_life_expectancy",
+  "artifact_version": "1",
+  "schema_version": "1.0.0",
+  "investigation_id": "inv_education_life_expectancy",
+  "research_question": {
+    "question_id": "rq_education_life_expectancy",
+    "raw_text": "Is secondary school enrollment associated with life expectancy across OECD countries from 2010 to 2020?",
+    "normalized_text": "association between secondary school enrollment and life expectancy in OECD countries, 2010-2020",
+    "category": "correlational",
+    "outcome_variables": [
+      {
+        "variable_id": "life_expectancy",
+        "label": "Life expectancy at birth"
+      }
+    ],
+    "exposure_variables": [
+      {
+        "variable_id": "secondary_enrollment",
+        "label": "Secondary school enrollment"
+      }
+    ],
+    "covariates": [
+      {
+        "variable_id": "gdp_per_capita",
+        "label": "GDP per capita"
+      }
+    ],
+    "population": "OECD country-years",
+    "geographic_scope": {
+      "codes": ["OECD"],
+      "description": "OECD member countries"
+    },
+    "temporal_scope": {
+      "start": 2010,
+      "end": 2020
+    },
+    "unit_of_analysis": "country-year",
+    "requested_evidence_level": "moderate",
+    "requested_analytical_methods": ["correlation", "regression_adjustment"],
+    "assumptions": ["Indicator definitions are sufficiently comparable for exploratory association."],
+    "exclusions": ["No causal interpretation requested."],
+    "required_metadata": ["source versions", "indicator definitions", "missingness by country-year"],
+    "validation_warnings": [],
+    "created_at": "2026-07-20T12:00:00Z",
+    "schema_version": "1.0.0"
+  },
+  "investigation_status": "insufficient_evidence",
+  "investigation_plan": {
+    "steps": ["validate metadata", "review candidate datasets", "specify associational analysis"],
+    "stop_conditions": ["insufficient approved evidence"]
+  },
+  "agent_contributions": [
+    {
+      "payload_type": "agent_contribution",
+      "agent_role": "dataset_selection",
+      "contribution_summary": "Identified only a synthetic candidate dataset for schema demonstration.",
+      "output_references": ["ds_synthetic_oecd_indicators"],
+      "validation_status": "candidate_only"
+    }
+  ],
+  "dataset_manifests": [],
+  "dataset_references": ["ds_synthetic_oecd_indicators"],
+  "provenance_records": [],
+  "provenance_record_references": ["prov_001"],
+  "transformations": [
+    {
+      "transformation_id": "transform_none",
+      "description": "No analytical transformations executed in Phase 1.",
+      "input_references": [],
+      "output_references": [],
+      "provenance_record_ids": []
+    }
+  ],
+  "missing_data_decisions": [
+    {
+      "decision_id": "missing_complete_case_planned",
+      "affected_variables": [
+        {
+          "variable_id": "life_expectancy",
+          "label": "Life expectancy at birth"
+        }
+      ],
+      "strategy": "complete_case_planned",
+      "rationale": "Missing-data decisions are recorded as planned metadata only.",
+      "provenance_record_ids": []
+    }
+  ],
+  "statistical_specifications": [],
+  "observed_data_references": [
+    {
+      "reference_id": "observed_life_expectancy",
+      "dataset_id": "ds_synthetic_oecd_indicators",
+      "variable": {
+        "variable_id": "life_expectancy",
+        "label": "Life expectancy at birth"
+      },
+      "data_value_category": "observed_value"
+    }
+  ],
+  "derived_data_references": [
+    {
+      "reference_id": "derived_country_year_panel",
+      "variable": {
+        "variable_id": "country_year_panel",
+        "label": "Country-year panel"
+      },
+      "transformation_id": "transform_none",
+      "data_value_category": "derived_variable"
+    }
+  ],
+  "analytical_results": {
+    "descriptive_values": [
+      {
+        "value_id": "desc_n_country_years",
+        "variable": {
+          "variable_id": "country_year_panel",
+          "label": "Country-year panel"
+        },
+        "statistic": "planned_observation_count",
+        "value": "not_computed",
+        "unit": "country-years"
+      }
+    ],
+    "effect_estimates": [],
+    "uncertainty": [],
+    "diagnostics": [],
+    "causal_assessment": {
+      "level": "associational",
+      "summary": "The planned specification can describe association only; it cannot identify a causal effect.",
+      "assumptions": ["Comparable indicators would be required before analysis."],
+      "threats": ["Confounding and reverse causality are not addressed by this schema-only phase."]
+    },
+    "narrative_interpretations": [
+      {
+        "interpretation_id": "interp_association_only",
+        "text": "This artifact records a planned association investigation and does not report a causal conclusion.",
+        "evidence_reference_ids": ["observed_life_expectancy"],
+        "data_value_category": "narrative_interpretation"
+      }
+    ]
+  },
+  "model_diagnostics": [],
+  "effect_estimates": [],
+  "uncertainty": [],
+  "causal_identification_assessment": {
+    "level": "associational",
+    "summary": "No causal identification strategy is represented.",
+    "assumptions": [],
+    "threats": ["Regression adjustment alone would not establish causality."]
+  },
+  "robustness_and_sensitivity_results": [],
+  "conflicting_findings": [],
+  "evidence_quality_assessment": {
+    "strength": "insufficient",
+    "rationale": "The example is synthetic and Phase 1 does not approve datasets or execute analysis.",
+    "limitations": ["No external data retrieval", "No statistical execution"]
+  },
+  "limitations": ["Synthetic example only", "Contract validation only"],
+  "citations": [
+    {
+      "title": "Polaris Phase 1 synthetic schema example",
+      "url": "https://example.org/polaris-phase-1",
+      "accessed_at": "2026-07-20T12:00:00Z"
+    }
+  ],
+  "warnings": [
+    {
+      "severity": "medium",
+      "code": "schema_only",
+      "message": "Phase 1 defines contracts and does not execute analysis."
+    }
+  ],
+  "errors": [],
+  "reproducibility_metadata": {
+    "code_reference": "phase-1-local",
+    "software_versions": ["polaris 0.1.0"],
+    "dependency_versions": ["pydantic v2"],
+    "random_seed": null,
+    "execution_environment": "local schema validation",
+    "validation_results": ["example validates against ResearchArtifact"]
+  },
+  "human_readable_report_reference": null,
+  "created_at": "2026-07-20T12:30:00Z",
+  "updated_at": "2026-07-20T12:30:00Z"
+}
