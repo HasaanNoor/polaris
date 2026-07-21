@@ -1,0 +1,66 @@
+{
+  "dataset_id": "who_gho_illustrative",
+  "title": "Illustrative WHO Global Health Observatory Metadata",
+  "provider": "World Health Organization",
+  "source_url": "https://www.who.int/data/gho",
+  "access_url": "https://www.who.int/data/gho",
+  "description": "Illustrative candidate manifest for public-health indicator metadata. It is metadata-only and not a production data connector.",
+  "license": "Illustrative candidate record; access terms require review before analytical use.",
+  "status": "candidate",
+  "geographic_coverage": {
+    "codes": ["GLOBAL_HEALTH"],
+    "description": "Global health metadata coverage is represented broadly; individual country coverage is not enumerated here."
+  },
+  "temporal_coverage": {
+    "start": 2000,
+    "end": 2022,
+    "label": "Illustrative annual range"
+  },
+  "revision_metadata": {
+    "release_date": null,
+    "revision_policy": "Revision policy requires source review before approved integration.",
+    "update_frequency": "varies by indicator",
+    "source_version": "illustrative-candidate"
+  },
+  "variables": [
+    {
+      "variable_id": "maternal_mortality_ratio",
+      "label": "Maternal mortality ratio",
+      "description": "Illustrative public-health outcome indicator.",
+      "unit": "deaths per 100,000 live births",
+      "data_type": "float",
+      "role": "outcome",
+      "source_field_name": "MDG_0000000026",
+      "missing_value_representation": ["null"],
+      "comparability_notes": ["Modeled estimates and reporting systems require methodology review."]
+    },
+    {
+      "variable_id": "life_expectancy_at_birth",
+      "label": "Life expectancy at birth",
+      "description": "Illustrative health status indicator in years.",
+      "unit": "years",
+      "data_type": "float",
+      "role": "outcome",
+      "source_field_name": "WHOSIS_000001",
+      "missing_value_representation": ["null"],
+      "comparability_notes": ["Methods require source-level review before comparison."]
+    }
+  ],
+  "units": ["country-year"],
+  "frequency": "annual",
+  "methodology_reference": "https://www.who.int/data/gho/indicator-metadata-registry",
+  "comparability_warnings": [
+    {
+      "severity": "medium",
+      "code": "method_variation",
+      "message": "Indicator methods may vary across countries and years.",
+      "field": "variables"
+    }
+  ],
+  "licensing_warnings": [],
+  "access_restrictions": [],
+  "source_version": "illustrative-candidate",
+  "retrieval_timestamp": null,
+  "checksum": null,
+  "schema_version": "1.0.0"
+}

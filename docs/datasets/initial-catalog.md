@@ -2,6 +2,8 @@
 
 All entries are **candidates pending review**. This catalog does not represent approved integrations.
 
+Phase 2 adds a compact metadata-only example catalog in `catalog/datasets`. These JSON manifests are illustrative candidate records used to exercise registry loading, search, warnings, access restrictions, and coverage matching. They do not represent production integrations and must not be treated as verified current metadata.
+
 | Source | Domain | Candidate Use | Required Review |
 | --- | --- | --- | --- |
 | World Bank World Development Indicators | development, economics, health, education, demographics | cross-country indicators and time series | licensing, revisions, indicator definitions, missingness |
@@ -24,3 +26,11 @@ All entries are **candidates pending review**. This catalog does not represent a
 | Polity Project | governance, regime characteristics | historical regime indicators | coding rules, continuity, limitations |
 | International IDEA | elections, democracy | electoral and democracy datasets | definitions, coverage, update practices |
 | Global Innovation Index | innovation | innovation composite indicators | weighting, normalization, sensitivity |
+
+## Phase 2 Example Manifest Files
+
+| Manifest | Provider | Purpose |
+| --- | --- | --- |
+| `world_bank_wdi.json` | World Bank | Illustrative development, health, education, and economic metadata with global aggregate coverage and warning metadata. |
+| `who_gho.json` | World Health Organization | Illustrative public-health metadata with overlapping life-expectancy variables and methodology reference. |
+| `unesco_uis.json` | UNESCO Institute for Statistics | Illustrative education metadata with access-restriction and licensing-warning examples. |

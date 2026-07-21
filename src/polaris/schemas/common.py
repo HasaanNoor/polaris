@@ -1,6 +1,6 @@
 """Shared schema primitives and controlled Polaris vocabularies."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import StrEnum
 from typing import Annotated
 
@@ -17,7 +17,7 @@ def _non_empty(value: str) -> str:
 def _utc_datetime(value: datetime) -> datetime:
     if value.tzinfo is None or value.utcoffset() is None:
         raise ValueError("datetime must be timezone-aware")
-    return value.astimezone(timezone.utc)
+    return value.astimezone(UTC)
 
 
 NonEmptyStr = Annotated[str, AfterValidator(_non_empty)]

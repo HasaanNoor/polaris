@@ -202,5 +202,7 @@ class ResearchArtifact(FrozenPolarisBaseModel):
             raise ValueError("updated_at must not precede created_at")
         if self.investigation_status == InvestigationStatus.INSUFFICIENT_EVIDENCE:
             if self.evidence_quality_assessment.strength != EvidenceStrength.INSUFFICIENT:
-                raise ValueError("insufficient-evidence artifacts require insufficient evidence strength")
+                raise ValueError(
+                    "insufficient-evidence artifacts require insufficient evidence strength"
+                )
         return self

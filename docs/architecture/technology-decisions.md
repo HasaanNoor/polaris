@@ -2,7 +2,7 @@
 
 ## Current Status
 
-Phase 1 adopts a minimal Python schema foundation. Python 3.12 or a compatible modern Python version is the supported runtime target, with Pydantic v2 used for typed validation and JSON serialization. Pytest is used for schema validation tests. Ruff is configured for linting and formatting checks only.
+Phase 2 uses the Phase 1 Python schema foundation and adds a deterministic in-memory dataset registry. Python 3.12 or a compatible modern Python version is the supported runtime target, with Pydantic v2 used for typed validation and JSON serialization. Pytest is used for schema and registry tests. Ruff is configured for linting and formatting checks only.
 
 ## Candidate Direction
 
@@ -27,7 +27,7 @@ The following technologies are candidates for later evaluation:
 
 These candidates fit the likely needs of typed APIs, deterministic analysis, reproducible data processing, web workflows, and documentation-driven testing. They are not approved stack decisions in Phase 0.
 
-Only Python, Pydantic v2, pytest, and minimal Ruff configuration are adopted in Phase 1. FastAPI, PostgreSQL, SQLAlchemy, Alembic, React, TypeScript, Docker, GitHub Actions, analytics libraries, orchestration frameworks, and LLM libraries remain deferred.
+Only Python, Pydantic v2, pytest, minimal Ruff configuration, local JSON manifest files, and an in-memory deterministic registry are adopted through Phase 2. FastAPI, PostgreSQL, SQLAlchemy, Alembic, React, TypeScript, Docker, GitHub Actions, analytics libraries, orchestration frameworks, Elasticsearch, vector databases, embedding models, and LLM libraries remain deferred.
 
 ## Deferred Possibilities
 

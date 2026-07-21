@@ -1,0 +1,73 @@
+{
+  "dataset_id": "unesco_uis_illustrative",
+  "title": "Illustrative UNESCO Institute for Statistics Metadata",
+  "provider": "UNESCO Institute for Statistics",
+  "source_url": "https://uis.unesco.org/",
+  "access_url": "https://uis.unesco.org/",
+  "description": "Illustrative candidate manifest for education indicator metadata. Coverage fields are compact examples for local registry behavior.",
+  "license": "Illustrative candidate record; redistribution terms require review.",
+  "status": "candidate",
+  "geographic_coverage": {
+    "codes": ["EDUCATION_GLOBAL"],
+    "description": "Education metadata coverage is represented broadly; Pakistan and other individual countries are not enumerated in this manifest."
+  },
+  "temporal_coverage": {
+    "start": 2010,
+    "end": 2021,
+    "label": "Illustrative annual range"
+  },
+  "revision_metadata": {
+    "release_date": null,
+    "revision_policy": "Revision and imputation policy requires review before approved integration.",
+    "update_frequency": "varies by release",
+    "source_version": "illustrative-candidate"
+  },
+  "variables": [
+    {
+      "variable_id": "secondary_school_enrollment",
+      "label": "Secondary school enrollment",
+      "description": "Illustrative gross secondary enrollment indicator.",
+      "unit": "percent",
+      "data_type": "float",
+      "role": "outcome",
+      "source_field_name": "EDULIT_DS",
+      "missing_value_representation": ["null", ".."],
+      "comparability_notes": ["Reporting gaps and definition changes require review."]
+    },
+    {
+      "variable_id": "education_expenditure_percent_gdp",
+      "label": "Education expenditure as percent of GDP",
+      "description": "Illustrative education finance indicator.",
+      "unit": "percent",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "FINANCE_GDP",
+      "missing_value_representation": ["null", ".."],
+      "comparability_notes": ["Budget classification differences may affect comparability."]
+    }
+  ],
+  "units": ["country-year"],
+  "frequency": "annual",
+  "methodology_reference": null,
+  "comparability_warnings": [
+    {
+      "severity": "medium",
+      "code": "reporting_gaps",
+      "message": "Education reporting gaps may affect cross-country comparability.",
+      "field": "geographic_coverage"
+    }
+  ],
+  "licensing_warnings": [
+    {
+      "severity": "medium",
+      "code": "redistribution_review_required",
+      "message": "Redistribution terms require review before approved use.",
+      "field": "license"
+    }
+  ],
+  "access_restrictions": ["Terms review required before redistribution."],
+  "source_version": "illustrative-candidate",
+  "retrieval_timestamp": null,
+  "checksum": null,
+  "schema_version": "1.0.0"
+}

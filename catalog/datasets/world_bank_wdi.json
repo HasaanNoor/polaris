@@ -1,0 +1,84 @@
+{
+  "dataset_id": "world_bank_wdi_illustrative",
+  "title": "Illustrative World Bank World Development Indicators Metadata",
+  "provider": "World Bank",
+  "source_url": "https://databank.worldbank.org/source/world-development-indicators",
+  "access_url": "https://databank.worldbank.org/source/world-development-indicators",
+  "description": "Illustrative candidate manifest for development, health, education, and economic indicator metadata. Coverage and variables are compact examples for registry tests, not a production integration.",
+  "license": "Illustrative candidate record; license requires review before analytical use.",
+  "status": "candidate",
+  "geographic_coverage": {
+    "codes": ["GLOBAL"],
+    "description": "Explicit global aggregate metadata record; country-level membership is not enumerated in this illustrative manifest."
+  },
+  "temporal_coverage": {
+    "start": 1990,
+    "end": 2023,
+    "label": "Illustrative annual range"
+  },
+  "revision_metadata": {
+    "release_date": null,
+    "revision_policy": "Provider revisions require review before approved integration.",
+    "update_frequency": "annual",
+    "source_version": "illustrative-candidate"
+  },
+  "variables": [
+    {
+      "variable_id": "life_expectancy_at_birth",
+      "label": "Life expectancy at birth",
+      "description": "Illustrative health outcome indicator in years.",
+      "unit": "years",
+      "data_type": "float",
+      "role": "outcome",
+      "source_field_name": "SP.DYN.LE00.IN",
+      "missing_value_representation": ["null"],
+      "comparability_notes": ["Indicator definitions and source methods require review before use."]
+    },
+    {
+      "variable_id": "gdp_per_capita_current_usd",
+      "label": "GDP per capita, current US dollars",
+      "description": "Illustrative economic indicator.",
+      "unit": "current US dollars",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "NY.GDP.PCAP.CD",
+      "missing_value_representation": ["null"],
+      "comparability_notes": ["National accounts revisions may affect comparability over time."]
+    },
+    {
+      "variable_id": "secondary_school_enrollment",
+      "label": "Secondary school enrollment",
+      "description": "Illustrative education participation indicator.",
+      "unit": "percent",
+      "data_type": "float",
+      "role": "exposure",
+      "source_field_name": "SE.SEC.ENRR",
+      "missing_value_representation": ["null"],
+      "comparability_notes": ["Enrollment definitions require source-level review."]
+    }
+  ],
+  "units": ["country-year"],
+  "frequency": "annual",
+  "methodology_reference": "https://databank.worldbank.org/metadataglossary/world-development-indicators",
+  "comparability_warnings": [
+    {
+      "severity": "medium",
+      "code": "illustrative_metadata",
+      "message": "This candidate manifest is compact illustrative metadata and is not an approved integration.",
+      "field": "variables"
+    }
+  ],
+  "licensing_warnings": [
+    {
+      "severity": "low",
+      "code": "license_review_required",
+      "message": "License terms must be reviewed before analytical use.",
+      "field": "license"
+    }
+  ],
+  "access_restrictions": [],
+  "source_version": "illustrative-candidate",
+  "retrieval_timestamp": null,
+  "checksum": null,
+  "schema_version": "1.0.0"
+}

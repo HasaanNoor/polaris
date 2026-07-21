@@ -49,3 +49,11 @@ Each source review must result in one of:
 - deprecated.
 
 The initial catalog uses only "candidate pending review".
+
+## Phase 2 Metadata Search
+
+The Phase 2 registry can identify candidate sources by explicit metadata filters such as provider, status, variable identifiers, variable labels, frequency, license text, geographic metadata, temporal coverage, access restrictions, and methodology-reference presence.
+
+Search does not approve a source. Warning-bearing datasets remain visible by default so later review stages can inspect limitations. Callers may explicitly exclude records with comparability warnings, licensing warnings, or access restrictions, or require no recorded access restrictions when a question requires unrestricted access.
+
+Geographic matching is limited to exact manifest codes and names represented in the manifest description. A broad code such as `GLOBAL` is matched only when explicitly requested; Phase 2 does not infer that a global record contains every country or jurisdiction.

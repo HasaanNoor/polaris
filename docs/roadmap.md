@@ -20,15 +20,23 @@ Deliverables: research question, dataset manifest, agent message, provenance rec
 
 Verification: schema validation tests and examples. Implemented in `src/polaris/schemas`, `tests/schemas`, and `examples/schemas`.
 
-## Phase 2: Repository Tooling
+## Phase 2: Dataset Registry and Metadata Search (complete)
 
-Objective: add minimal development tooling required to validate schemas and documentation.
+Objective: implement a deterministic, in-memory registry for validated dataset manifests.
 
-Deliverables: formatter, linter, test runner, and local validation commands.
+Deliverables: local JSON manifest loader, duplicate-safe registry, structured metadata search query, explainable search results, temporal and geographic coverage matching, warning and access-restriction surfacing, domain errors, illustrative catalog, tests, and ADR.
+
+Verification: registry, loader, search, coverage, catalog, and Phase 1 schema tests pass with Ruff checks.
+
+## Phase 3: Repository Tooling
+
+Objective: add minimal development tooling required to validate schemas, registry behavior, and documentation.
+
+Deliverables: expanded formatter, linter, test runner, and local validation commands.
 
 Verification: clean validation run from a fresh checkout.
 
-## Phase 3: Deterministic Research Question Parser
+## Phase 4: Deterministic Research Question Parser
 
 Objective: classify supported research questions without LLMs.
 
@@ -36,15 +44,15 @@ Deliverables: parser rules, classification labels, required metadata checks, and
 
 Verification: unit tests for well-formed and poorly formed questions.
 
-## Phase 4: Dataset Metadata Registry
+## Phase 5: Dataset Metadata Review
 
-Objective: represent candidate datasets without ingesting data.
+Objective: review and harden candidate dataset metadata without ingesting observations.
 
-Deliverables: registry schema, source-review fields, licensing fields, revision metadata, and warnings.
+Deliverables: source-review fields, licensing decisions, revision metadata checks, and warnings.
 
 Verification: registry validation and candidate-source examples.
 
-## Phase 5: Provenance and Artifact Store
+## Phase 6: Provenance and Artifact Store
 
 Objective: persist versioned research artifacts and provenance records.
 
@@ -52,7 +60,7 @@ Deliverables: storage abstraction, artifact versioning, hash strategy, and retri
 
 Verification: artifact round-trip tests and immutable-version checks.
 
-## Phase 6: Dataset Retrieval Prototype
+## Phase 7: Dataset Retrieval Prototype
 
 Objective: retrieve a small reviewed public dataset through deterministic connectors.
 
@@ -60,7 +68,7 @@ Deliverables: connector interface, retrieval logs, source metadata capture, and 
 
 Verification: reproducible retrieval test using pinned source metadata.
 
-## Phase 7: Data Quality Service
+## Phase 8: Data Quality Service
 
 Objective: assess missingness, coverage, comparability, revisions, and source warnings.
 
@@ -68,7 +76,7 @@ Deliverables: quality rules, dataset-quality report, and warning taxonomy.
 
 Verification: tests using datasets with known quality issues.
 
-## Phase 8: Transformation Pipeline
+## Phase 9: Transformation Pipeline
 
 Objective: support traceable cleaning and derived-variable creation.
 
@@ -76,7 +84,7 @@ Deliverables: transformation records, observed-versus-derived separation, imputa
 
 Verification: lineage tests from raw values to transformed outputs.
 
-## Phase 9: Descriptive Analytics
+## Phase 10: Descriptive Analytics
 
 Objective: compute deterministic descriptive statistics and uncertainty summaries where applicable.
 
@@ -84,7 +92,7 @@ Deliverables: summary statistics, group comparisons, trend summaries, and report
 
 Verification: numerical tests against fixed fixtures.
 
-## Phase 10: Statistical Modeling Service
+## Phase 11: Statistical Modeling Service
 
 Objective: add deterministic statistical model execution.
 
@@ -92,7 +100,7 @@ Deliverables: model specifications, diagnostics, effect estimates, uncertainty o
 
 Verification: tests against known analytical results.
 
-## Phase 11: Initial Deterministic Agents
+## Phase 12: Initial Deterministic Agents
 
 Objective: implement typed agents for coordination, question interpretation, dataset selection, data quality, and statistical analysis.
 
@@ -100,7 +108,7 @@ Deliverables: agent contracts, deterministic strategies, validation failures, an
 
 Verification: contract tests and end-to-end artifact generation.
 
-## Phase 12: Orchestration Runtime
+## Phase 13: Orchestration Runtime
 
 Objective: coordinate agents through explicit state transitions and failure handling.
 
@@ -108,7 +116,7 @@ Deliverables: orchestration graph, retry policy, stop conditions, and partial-re
 
 Verification: workflow tests for success, insufficient evidence, and conflicting-source outcomes.
 
-## Phase 13: Evidence Critic and Synthesis
+## Phase 14: Evidence Critic and Synthesis
 
 Objective: critique analytical outputs and generate cautious reports from artifacts.
 
@@ -116,7 +124,7 @@ Deliverables: evidence-quality assessment, limitation extraction, conflict repre
 
 Verification: tests preventing unsupported causal or quantitative claims.
 
-## Phase 14: Causal Identification Assessment
+## Phase 15: Causal Identification Assessment
 
 Objective: assess whether a question and dataset support explicit causal interpretation.
 
@@ -124,7 +132,7 @@ Deliverables: identification taxonomy, design checks, assumption records, and un
 
 Verification: fixture tests for descriptive, regression-adjusted, quasi-experimental, and experimental cases.
 
-## Phase 15: Robustness and Sensitivity
+## Phase 16: Robustness and Sensitivity
 
 Objective: evaluate stability of findings under reasonable alternative specifications.
 
@@ -132,7 +140,7 @@ Deliverables: robustness-test registry, sensitivity outputs, and reporting rules
 
 Verification: reproducible robustness results on fixed fixtures.
 
-## Phase 16: Domain Agent Expansion
+## Phase 17: Domain Agent Expansion
 
 Objective: introduce deterministic domain agents incrementally.
 
@@ -142,7 +150,7 @@ Verification: typed outputs and domain-specific warning tests.
 
 Non-goal: implementing every target agent at once.
 
-## Phase 17: Human-Readable Report Renderer
+## Phase 18: Human-Readable Report Renderer
 
 Objective: generate readable reports from research artifacts.
 
@@ -150,7 +158,7 @@ Deliverables: report templates, citations, tables, figures, limitations, and rep
 
 Verification: snapshot tests and manual report review.
 
-## Phase 18: Frontend Research Workspace
+## Phase 19: Frontend Research Workspace
 
 Objective: provide a usable interface for submitting questions and reviewing artifacts.
 
@@ -158,7 +166,7 @@ Deliverables: question form, investigation status, dataset views, evidence panel
 
 Verification: browser tests for primary workflows.
 
-## Phase 19: Evidence-Grounded LLM Evaluation
+## Phase 20: Evidence-Grounded LLM Evaluation
 
 Objective: evaluate whether selected agents benefit from LLM strategies.
 
@@ -166,7 +174,7 @@ Deliverables: candidate tasks, grounding constraints, evaluation set, refusal be
 
 Verification: LLM outputs cannot alter deterministic analytical results or add unsupported claims.
 
-## Phase 20: Controlled LLM Enhancement
+## Phase 21: Controlled LLM Enhancement
 
 Objective: add evidence-grounded LLM strategies only where Phase 19 justifies them.
 
@@ -174,7 +182,7 @@ Deliverables: strategy adapters, prompt/version records, grounding checks, and f
 
 Verification: regression tests for unsupported evidence, uncertainty concealment, and contract stability.
 
-## Phase 21: Deployment Baseline
+## Phase 22: Deployment Baseline
 
 Objective: package a minimal deployable system after core workflows exist.
 
@@ -182,7 +190,7 @@ Deliverables: deployment decision record, runtime configuration, persistence con
 
 Verification: reproducible deployment in the selected environment.
 
-## Phase 22: Observability and Governance
+## Phase 23: Observability and Governance
 
 Objective: monitor investigations, failures, provenance, and methodological policy enforcement.
 
@@ -190,7 +198,7 @@ Deliverables: structured logs, metrics, audit views, and review queues.
 
 Verification: traceability tests from report claims to artifacts and logs.
 
-## Phase 23: Public Demo and Documentation Hardening
+## Phase 24: Public Demo and Documentation Hardening
 
 Objective: publish a constrained public demonstration using reviewed datasets and documented limitations.
 

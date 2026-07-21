@@ -7,7 +7,6 @@ from typing import Any
 
 import pytest
 
-
 EXAMPLES_DIR = Path(__file__).resolve().parents[2] / "examples" / "schemas"
 
 

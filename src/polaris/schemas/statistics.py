@@ -4,6 +4,7 @@ from pydantic import Field, model_validator
 
 from polaris.schemas.common import (
     CausalIdentificationLevel,
+    InvestigationId,
     NonEmptyStr,
     PolarisBaseModel,
     SchemaVersion,
@@ -11,7 +12,6 @@ from polaris.schemas.common import (
     StatisticalAnalysisType,
     StatisticalModelFamily,
     VariableReference,
-    InvestigationId,
 )
 
 

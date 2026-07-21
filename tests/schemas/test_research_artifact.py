@@ -11,7 +11,6 @@ from polaris.schemas.provenance import ProvenanceRecord
 from polaris.schemas.research_question import ResearchQuestion
 from polaris.schemas.statistics import StatisticalSpecification
 
-
 EXAMPLE_MODELS = {
     "research_question.json": ResearchQuestion,
     "dataset_manifest.json": DatasetManifest,
@@ -52,8 +51,13 @@ def test_artifact_status_represents_insufficient_evidence(example_data):
 def test_artifact_separates_observed_derived_analytical_and_narrative_sections(example_data):
     artifact = ResearchArtifact.model_validate(example_data["research_artifact"])
 
-    assert artifact.observed_data_references[0].data_value_category == DataValueCategory.OBSERVED_VALUE
-    assert artifact.derived_data_references[0].data_value_category == DataValueCategory.DERIVED_VARIABLE
+    assert (
+        artifact.observed_data_references[0].data_value_category == DataValueCategory.OBSERVED_VALUE
+    )
+    assert (
+        artifact.derived_data_references[0].data_value_category
+        == DataValueCategory.DERIVED_VARIABLE
+    )
     assert artifact.analytical_results.descriptive_values
     assert (
         artifact.analytical_results.narrative_interpretations[0].data_value_category
@@ -61,7 +65,10 @@ def test_artifact_separates_observed_derived_analytical_and_narrative_sections(e
     )
 
 
-def test_research_artifact_rejects_inconsistent_insufficient_evidence_status(example_data, copy_data):
+def test_research_artifact_rejects_inconsistent_insufficient_evidence_status(
+    example_data,
+    copy_data,
+):
     data = copy_data(example_data["research_artifact"])
     data["evidence_quality_assessment"]["strength"] = "moderate"
 
