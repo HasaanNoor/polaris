@@ -57,3 +57,9 @@ The Phase 2 registry can identify candidate sources by explicit metadata filters
 Search does not approve a source. Warning-bearing datasets remain visible by default so later review stages can inspect limitations. Callers may explicitly exclude records with comparability warnings, licensing warnings, or access restrictions, or require no recorded access restrictions when a question requires unrestricted access.
 
 Geographic matching is limited to exact manifest codes and names represented in the manifest description. A broad code such as `GLOBAL` is matched only when explicitly requested; Phase 2 does not infer that a global record contains every country or jurisdiction.
+
+## Phase 3 Local File Interpretation
+
+Phase 3 can test whether a local CSV file conforms to a registered candidate manifest. This is a source-contract check, not a source-approval decision.
+
+Successful ingestion means the file could be parsed, mapped, normalized, checksummed, and structurally profiled under Phase 3 rules. It does not mean the source is representative, unbiased, current, suitable for causal analysis, or approved for use.

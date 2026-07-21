@@ -28,13 +28,13 @@ Deliverables: local JSON manifest loader, duplicate-safe registry, structured me
 
 Verification: registry, loader, search, coverage, catalog, and Phase 1 schema tests pass with Ruff checks.
 
-## Phase 3: Repository Tooling
+## Phase 3: Tabular Dataset Ingestion and Validation (complete)
 
-Objective: add minimal development tooling required to validate schemas, registry behavior, and documentation.
+Objective: implement deterministic local ingestion and validation for tabular source files associated with registered manifests.
 
-Deliverables: expanded formatter, linter, test runner, and local validation commands.
+Deliverables: typed ingestion configuration and request models, local CSV loader, manifest-to-column validation, value normalization, structural validation report, deterministic data-quality profile, immutable ingestion result, domain-specific errors, synthetic example CSV files, tests, documentation, and ADR-006.
 
-Verification: clean validation run from a fresh checkout.
+Verification: schema, registry, and ingestion tests pass with Ruff lint, Ruff format check, and Git whitespace checks.
 
 ## Phase 4: Deterministic Research Question Parser
 

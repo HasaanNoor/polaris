@@ -34,3 +34,13 @@ Phase 2 adds a compact metadata-only example catalog in `catalog/datasets`. Thes
 | `world_bank_wdi.json` | World Bank | Illustrative development, health, education, and economic metadata with global aggregate coverage and warning metadata. |
 | `who_gho.json` | World Health Organization | Illustrative public-health metadata with overlapping life-expectancy variables and methodology reference. |
 | `unesco_uis.json` | UNESCO Institute for Statistics | Illustrative education metadata with access-restriction and licensing-warning examples. |
+
+## Phase 3 Example CSV Files
+
+Small synthetic CSV files in `data/examples` exercise local ingestion behavior for the three illustrative manifests. They are not official provider exports and must not be treated as downloaded source data.
+
+| File | Purpose |
+| --- | --- |
+| `world_bank_wdi_sample.csv` | Synthetic WDI-shaped rows with valid floats, a `null` value, and extra country/year context columns. |
+| `who_gho_sample.csv` | Synthetic WHO-shaped rows with valid floats, a `null` value, and one intentional type-conversion issue. |
+| `unesco_uis_sample.csv` | Synthetic UNESCO-shaped rows with valid floats plus `..` and `null` missing-value tokens. |
