@@ -11,6 +11,7 @@ from polaris.schemas.common import (
     SpecificationId,
     StatisticalAnalysisType,
     StatisticalModelFamily,
+    StatisticalProcedure,
     VariableReference,
 )
 
@@ -43,6 +44,7 @@ class StatisticalSpecification(PolarisBaseModel):
     investigation_id: InvestigationId
     analysis_type: StatisticalAnalysisType
     model_family: StatisticalModelFamily = StatisticalModelFamily.NONE
+    procedure: StatisticalProcedure | None = None
     outcome_variable: VariableReference
     exposure_variables: list[VariableReference] = Field(default_factory=list)
     covariates: list[VariableReference] = Field(default_factory=list)

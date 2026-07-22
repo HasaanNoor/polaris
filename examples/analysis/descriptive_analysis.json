@@ -1,0 +1,22 @@
+{
+  "specification_id": "example_descriptive_analysis",
+  "investigation_id": "example_analysis_investigation",
+  "analysis_type": "descriptive",
+  "model_family": "none",
+  "procedure": "descriptive_statistics",
+  "outcome_variable": {
+    "variable_id": "life_expectancy_at_birth"
+  },
+  "exposure_variables": [],
+  "covariates": [],
+  "unit_of_analysis": "country-year",
+  "missing_data_strategy": {
+    "strategy": "complete_case",
+    "rationale": "Phase 4 example uses explicit complete-case reporting."
+  },
+  "confidence_level": 0.95,
+  "causal_identification_claim_level": "descriptive_only",
+  "assumptions": [
+    "Illustrative example only; no substantive interpretation is generated."
+  ]
+}

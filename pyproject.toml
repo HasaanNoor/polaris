@@ -9,7 +9,9 @@ description = "Typed schema contracts for Polaris research artifacts."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+  "numpy>=1.26,<3",
   "pydantic>=2.8,<3",
+  "scipy>=1.11,<2",
 ]
 
 [project.optional-dependencies]

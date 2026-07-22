@@ -2,7 +2,7 @@
 
 ## Current Status
 
-Phase 3 uses the Phase 1 Python schema foundation, the Phase 2 deterministic in-memory dataset registry, and a local CSV ingestion layer. Python 3.12 or a compatible modern Python version is the supported runtime target, with Pydantic v2 used for typed validation and JSON serialization. The ingestion loader uses Python's standard `csv` module and `hashlib` for SHA-256 checksums. Pytest is used for schema, registry, and ingestion tests. Ruff is configured for linting and formatting checks only.
+Phase 4 uses the Phase 1 Python schema foundation, the Phase 2 deterministic in-memory dataset registry, the Phase 3 local CSV ingestion layer, and a deterministic statistical analysis package. Python 3.12 or a compatible modern Python version is the supported runtime target, with Pydantic v2 used for typed validation and JSON serialization. The ingestion loader uses Python's standard `csv` module and `hashlib` for SHA-256 checksums. NumPy and SciPy are adopted for Phase 4 numerical arrays, correlations, distribution statistics, and linear-algebra-backed OLS diagnostics. Pytest is used for schema, registry, ingestion, and analysis tests. Ruff is configured for linting and formatting checks only.
 
 ## Candidate Direction
 
@@ -17,8 +17,6 @@ The following technologies are candidates for later evaluation:
 - TypeScript;
 - Plotly;
 - pandas;
-- NumPy;
-- SciPy;
 - statsmodels;
 - scikit-learn;
 - Docker;
@@ -27,7 +25,7 @@ The following technologies are candidates for later evaluation:
 
 These candidates fit the likely needs of typed APIs, deterministic analysis, reproducible data processing, web workflows, and documentation-driven testing. They are not approved stack decisions in Phase 0.
 
-Only Python, Pydantic v2, pytest, minimal Ruff configuration, local JSON manifest files, an in-memory deterministic registry, standard-library CSV parsing, and standard-library SHA-256 checksums are adopted through Phase 3. FastAPI, PostgreSQL, SQLAlchemy, Alembic, React, TypeScript, Docker, GitHub Actions, pandas, NumPy, SciPy, statsmodels, scikit-learn, orchestration frameworks, Elasticsearch, vector databases, embedding models, and LLM libraries remain deferred.
+Only Python, Pydantic v2, NumPy, SciPy, pytest, minimal Ruff configuration, local JSON manifest files, an in-memory deterministic registry, standard-library CSV parsing, standard-library SHA-256 checksums, and deterministic local statistical execution are adopted through Phase 4. FastAPI, PostgreSQL, SQLAlchemy, Alembic, React, TypeScript, Docker, GitHub Actions, pandas, statsmodels, scikit-learn, orchestration frameworks, Elasticsearch, vector databases, embedding models, and LLM libraries remain deferred.
 
 ## Deferred Possibilities
 

@@ -36,13 +36,13 @@ Deliverables: typed ingestion configuration and request models, local CSV loader
 
 Verification: schema, registry, and ingestion tests pass with Ruff lint, Ruff format check, and Git whitespace checks.
 
-## Phase 4: Deterministic Research Question Parser
+## Phase 4: Deterministic Statistical Analysis and Diagnostics (complete)
 
-Objective: classify supported research questions without LLMs.
+Objective: execute explicit statistical specifications against successful Phase 3 ingestion results.
 
-Deliverables: parser rules, classification labels, required metadata checks, and invalid-question diagnostics.
+Deliverables: typed analysis request and immutable result models, compatibility validation, complete-case sample construction, descriptive statistics, Pearson and Spearman correlations, OLS regression, diagnostics, typed analytical findings, provenance, deterministic result identifiers, examples, tests, documentation, and ADR-007.
 
-Verification: unit tests for well-formed and poorly formed questions.
+Verification: analysis tests, schema/registry/ingestion regression tests, Ruff linting, Ruff format checks, and Git whitespace checks.
 
 ## Phase 5: Dataset Metadata Review
 

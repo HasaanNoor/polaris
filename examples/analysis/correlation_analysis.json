@@ -1,0 +1,29 @@
+{
+  "specification_id": "example_correlation_analysis",
+  "investigation_id": "example_analysis_investigation",
+  "analysis_type": "correlation",
+  "model_family": "none",
+  "procedure": "pearson_correlation",
+  "outcome_variable": {
+    "variable_id": "life_expectancy_at_birth"
+  },
+  "exposure_variables": [
+    {
+      "variable_id": "gdp_per_capita_current_usd"
+    },
+    {
+      "variable_id": "secondary_school_enrollment"
+    }
+  ],
+  "covariates": [],
+  "unit_of_analysis": "country-year",
+  "missing_data_strategy": {
+    "strategy": "complete_case",
+    "rationale": "Phase 4 example uses complete paired observations."
+  },
+  "confidence_level": 0.95,
+  "causal_identification_claim_level": "associational",
+  "assumptions": [
+    "Correlation output is numerical only and does not claim causation."
+  ]
+}

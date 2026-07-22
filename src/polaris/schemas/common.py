@@ -191,6 +191,14 @@ class StatisticalModelFamily(StrEnum):
     BAYESIAN = "bayesian"
 
 
+class StatisticalProcedure(StrEnum):
+    DESCRIPTIVE_STATISTICS = "descriptive_statistics"
+    PEARSON_CORRELATION = "pearson_correlation"
+    SPEARMAN_CORRELATION = "spearman_correlation"
+    ORDINARY_LEAST_SQUARES = "ordinary_least_squares"
+    BINARY_LOGISTIC_REGRESSION = "binary_logistic_regression"
+
+
 class CausalIdentificationLevel(StrEnum):
     NOT_CAUSAL = "not_causal"
     DESCRIPTIVE_ONLY = "descriptive_only"

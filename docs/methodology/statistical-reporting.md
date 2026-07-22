@@ -22,6 +22,16 @@ Every statistical output must include:
 - robustness or sensitivity checks where appropriate;
 - limitations and practical significance.
 
+## Phase 4 Deterministic Analysis Boundary
+
+Phase 4 statistical results are machine-readable analytical artifacts, not narrative research conclusions. Supported procedures are descriptive statistics, Pearson correlation, Spearman correlation, and ordinary least squares regression. Each analysis must be requested through an explicit statistical specification and run only against a successful Phase 3 ingestion result.
+
+Phase 4 uses complete-case analysis only. Rows excluded for missing required variables must be reported with source row numbers and variable identifiers. Missing values are not imputed, filled, interpolated, or treated as zero.
+
+Correlation results report coefficients, p-values where supported, observation counts, missing-row exclusions, and warnings for undefined or constant-variable cases. They do not label relationships as substantively strong or weak and do not claim causation.
+
+OLS results report coefficients, standard errors, test statistics, p-values, confidence intervals, threshold comparisons only when an explicit threshold is provided, fit statistics, residual and fitted-value summaries, diagnostics, and warnings. Diagnostics report calculated facts or not-applicable statuses; they do not automatically modify the requested model.
+
 ## Effect Sizes
 
 Reports must distinguish statistical detectability from practical significance. Effect sizes should be expressed in interpretable units when possible. Standardized measures may be included when they aid comparison, but they must not replace substantive interpretation.

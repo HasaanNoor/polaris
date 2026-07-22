@@ -4,7 +4,7 @@ Agentic platform for societal intelligence and causal research.
 
 ## Status
 
-Polaris is in **Phase 3: local tabular ingestion complete**. The repository includes typed Python schema contracts for research questions, dataset manifests, agent messages, provenance records, statistical specifications, and versioned research artifacts; a local in-memory registry for validated dataset manifests; and deterministic local CSV ingestion with validation, normalization, checksums, provenance-compatible metadata, and structural data-quality profiles. It does not yet contain application services, production infrastructure, statistical execution, orchestration runtime, LLM integration, dataset downloads, or approved dataset integrations.
+Polaris is in **Phase 4: deterministic statistical analysis complete**. The repository includes typed Python schema contracts for research questions, dataset manifests, agent messages, provenance records, statistical specifications, and versioned research artifacts; a local in-memory registry for validated dataset manifests; deterministic local CSV ingestion with validation, normalization, checksums, provenance-compatible metadata, and structural data-quality profiles; and deterministic statistical analysis for explicit specifications. It does not yet contain application services, production infrastructure, orchestration runtime, LLM integration, dataset downloads, or approved dataset integrations.
 
 ## Package Overview
 
@@ -14,7 +14,9 @@ The Phase 2 registry package lives under `src/polaris/registry`. It loads local 
 
 The Phase 3 ingestion package lives under `src/polaris/ingestion`. It resolves a registered manifest, reads a local CSV file, validates exact manifest-to-column mappings, normalizes supported scalar values, reports typed validation findings, computes SHA-256 checksums, and returns immutable ingestion results. Ingestion is local-only and does not download datasets or perform statistical analysis.
 
-JSON schema examples are available in `examples/schemas`. The illustrative metadata catalog is available in `catalog/datasets`. Small synthetic CSV examples are available in `data/examples`. Tests are available in `tests/schemas`, `tests/registry`, and `tests/ingestion`.
+The Phase 4 analysis package lives under `src/polaris/analysis`. It consumes a successful `DatasetIngestionResult` and an explicit `StatisticalSpecification`, validates compatibility, builds a complete-case analysis sample, computes descriptive statistics, Pearson and Spearman correlations, OLS regression, diagnostics, typed findings, deterministic result identifiers, and analysis provenance. Analysis does not select datasets or methods, impute missing values, generate narrative conclusions, claim causality, or use LLMs.
+
+JSON schema examples are available in `examples/schemas`. Illustrative analysis specifications are available in `examples/analysis`. The illustrative metadata catalog is available in `catalog/datasets`. Small synthetic CSV examples are available in `data/examples`. Tests are available in `tests/schemas`, `tests/registry`, `tests/ingestion`, and `tests/analysis`.
 
 ## Problem Statement
 
@@ -66,12 +68,12 @@ LLMs must not invent evidence, silently introduce unsupported claims, calculate 
 - [Evidence Standards](docs/methodology/evidence-standards.md)
 - [Dataset Source Selection](docs/datasets/source-selection.md)
 - [Initial Dataset Catalog](docs/datasets/initial-catalog.md)
-- [Architecture Decision Records](docs/decisions/001-project-principles.md)
+- [Architecture Decision Records](docs/decisions/001-project-principles.md), including [ADR-007](docs/decisions/007-deterministic-statistical-engine.md)
 
 ## Roadmap Summary
 
-Phase 0 completed the documentation baseline. Phase 1 added the minimal schema foundation. Phase 2 added deterministic local dataset-manifest loading, registration, coverage matching, warning surfacing, and structured metadata search. Phase 3 added deterministic local CSV ingestion and validation. Later phases will add repository tooling, deterministic analytical services, typed agent contracts, orchestration, reproducible artifact storage, reporting, frontend workflows, deployment, observability, and only then narrowly scoped evidence-grounded LLM enhancement where justified.
+Phase 0 completed the documentation baseline. Phase 1 added the minimal schema foundation. Phase 2 added deterministic local dataset-manifest loading, registration, coverage matching, warning surfacing, and structured metadata search. Phase 3 added deterministic local CSV ingestion and validation. Phase 4 added deterministic statistical analysis and diagnostics for explicit specifications. Later phases will add typed agent contracts, orchestration, reproducible artifact storage, reporting, frontend workflows, deployment, observability, and only then narrowly scoped evidence-grounded LLM enhancement where justified.
 
 ## Current Status and Next Phase
 
-Current decision records establish Polaris as a research system with mandatory multi-agent orchestration, a deterministic analytical core, Pydantic-based schema contracts, an in-memory deterministic dataset registry, and local CSV ingestion. The next phase should continue building deterministic local capabilities without expanding into application frameworks or infrastructure.
+Current decision records establish Polaris as a research system with mandatory multi-agent orchestration, a deterministic analytical core, Pydantic-based schema contracts, an in-memory deterministic dataset registry, local CSV ingestion, and deterministic statistical execution. The next phase should continue building deterministic local capabilities without expanding into application frameworks or infrastructure.

@@ -1,0 +1,30 @@
+{
+  "specification_id": "example_ols_analysis",
+  "investigation_id": "example_analysis_investigation",
+  "analysis_type": "regression",
+  "model_family": "linear",
+  "procedure": "ordinary_least_squares",
+  "outcome_variable": {
+    "variable_id": "life_expectancy_at_birth"
+  },
+  "exposure_variables": [
+    {
+      "variable_id": "gdp_per_capita_current_usd"
+    }
+  ],
+  "covariates": [
+    {
+      "variable_id": "secondary_school_enrollment"
+    }
+  ],
+  "unit_of_analysis": "country-year",
+  "missing_data_strategy": {
+    "strategy": "complete_case",
+    "rationale": "Phase 4 initial regression uses listwise deletion with row reporting."
+  },
+  "confidence_level": 0.95,
+  "causal_identification_claim_level": "associational",
+  "assumptions": [
+    "OLS example is illustrative and does not assert causal identification."
+  ]
+}
