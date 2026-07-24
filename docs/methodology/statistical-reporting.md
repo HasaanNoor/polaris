@@ -32,6 +32,12 @@ Correlation results report coefficients, p-values where supported, observation c
 
 OLS results report coefficients, standard errors, test statistics, p-values, confidence intervals, threshold comparisons only when an explicit threshold is provided, fit statistics, residual and fitted-value summaries, diagnostics, and warnings. Diagnostics report calculated facts or not-applicable statuses; they do not automatically modify the requested model.
 
+## Phase 5 Structured Evidence Boundary
+
+Phase 5 converts Phase 4 results into typed evidence records and bounded claim candidates. Evidence records preserve numerical facts, sample construction, diagnostics, warnings, source checksums, result IDs, and provenance. Claim candidates reference supporting evidence IDs and carry propagated limitation codes.
+
+Phase 5 does not generate natural-language conclusions, causal claims, policy recommendations, or subjective strength labels. Direction is encoded only through exact positive, negative, zero, undefined, or not-applicable categories. Statistical threshold comparisons may be preserved when Phase 4 explicitly produced them, but they are not treated as substantive importance.
+
 ## Effect Sizes
 
 Reports must distinguish statistical detectability from practical significance. Effect sizes should be expressed in interpretable units when possible. Standardized measures may be included when they aid comparison, but they must not replace substantive interpretation.

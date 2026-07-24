@@ -1,0 +1,40 @@
+{
+  "illustrative": true,
+  "schema_version": "1.0.0",
+  "artifact_kind": "phase5_evidence_example",
+  "source_analysis_result_id": "analysis_illustrative_correlation",
+  "evidence_records": [
+    {
+      "evidence_id": "evidence_illustrative_correlation_x_y",
+      "evidence_type": "correlation",
+      "variable_id_1": "y",
+      "variable_id_2": "x",
+      "method": "pearson",
+      "correlation_coefficient": 1.0,
+      "p_value": 0.0,
+      "observation_count": 8,
+      "defined": true,
+      "direction": "positive",
+      "missing_exclusion_count": 1,
+      "limitation_codes": ["PERFECT_CORRELATION"]
+    }
+  ],
+  "claim_candidates": [
+    {
+      "claim_id": "claim_illustrative_association_x_y",
+      "claim_type": "association",
+      "subject_variable": "y",
+      "outcome_variable": "x",
+      "direction": "positive",
+      "statistical_procedure": "pearson_correlation",
+      "supporting_evidence_ids": ["evidence_illustrative_correlation_x_y"],
+      "limitation_codes": [
+        "OBSERVATIONAL_ASSOCIATION",
+        "PERFECT_CORRELATION",
+        "UNSUPPORTED_GENERALIZATION"
+      ],
+      "causal": false,
+      "generalization_scope": "analysis_sample"
+    }
+  ]
+}

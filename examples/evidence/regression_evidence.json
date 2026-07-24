@@ -1,0 +1,76 @@
+{
+  "illustrative": true,
+  "schema_version": "1.0.0",
+  "artifact_kind": "phase5_evidence_example",
+  "source_analysis_result_id": "analysis_illustrative_ols",
+  "evidence_records": [
+    {
+      "evidence_id": "evidence_illustrative_ols_coefficient_x",
+      "evidence_type": "regression_coefficient",
+      "dependent_variable_id": "y",
+      "term": "x",
+      "variable_id": "x",
+      "estimate": 2.0,
+      "standard_error": 0.0,
+      "test_statistic": null,
+      "p_value": null,
+      "confidence_interval_low": null,
+      "confidence_interval_high": null,
+      "below_significance_threshold": null,
+      "direction": "positive",
+      "is_intercept": false,
+      "model_result_id": "analysis_illustrative_ols"
+    },
+    {
+      "evidence_id": "evidence_illustrative_ols_fit",
+      "evidence_type": "model_fit",
+      "dependent_variable_id": "y",
+      "predictor_variable_ids": ["x", "z"],
+      "r_squared": 1.0,
+      "adjusted_r_squared": 1.0,
+      "residual_degrees_of_freedom": 5.0,
+      "model_degrees_of_freedom": 2.0,
+      "residual_sum_of_squares": 0.0,
+      "mean_squared_error": 0.0
+    },
+    {
+      "evidence_id": "evidence_illustrative_condition_number",
+      "evidence_type": "model_diagnostic",
+      "diagnostic_type": "condition_number",
+      "status": "calculated",
+      "statistic": 100.0,
+      "p_value": null,
+      "warning_codes": []
+    },
+    {
+      "evidence_id": "evidence_illustrative_sample_quality",
+      "evidence_type": "sample_quality",
+      "original_accepted_record_count": 9,
+      "final_analysis_sample_size": 7,
+      "excluded_row_count": 2,
+      "missing_value_exclusion_count": 2,
+      "accepted_records_used_percentage": 77.77777777777779,
+      "limitation_codes": ["MISSING_DATA_EXCLUSION"]
+    }
+  ],
+  "claim_candidates": [
+    {
+      "claim_id": "claim_illustrative_conditional_association_x_y",
+      "claim_type": "conditional_association",
+      "subject_variable": "x",
+      "outcome_variable": "y",
+      "related_variables": ["x", "z"],
+      "direction": "positive",
+      "statistical_procedure": "ordinary_least_squares",
+      "supporting_evidence_ids": ["evidence_illustrative_ols_coefficient_x"],
+      "limitation_codes": [
+        "LIMITED_MODEL_SCOPE",
+        "MISSING_DATA_EXCLUSION",
+        "OBSERVATIONAL_ASSOCIATION",
+        "UNSUPPORTED_GENERALIZATION"
+      ],
+      "causal": false,
+      "generalization_scope": "analysis_sample"
+    }
+  ]
+}

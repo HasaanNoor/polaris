@@ -38,6 +38,7 @@ Causal wording is not allowed based only on:
 - regression adjustment;
 - predictive accuracy;
 - statistical significance;
+- Phase 5 evidence extraction or claim-candidate generation;
 - an LLM-generated explanation.
 
 ## Required Stop Conditions

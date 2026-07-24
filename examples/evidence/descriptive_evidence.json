@@ -1,0 +1,45 @@
+{
+  "illustrative": true,
+  "schema_version": "1.0.0",
+  "artifact_kind": "phase5_evidence_example",
+  "source_analysis_result_id": "analysis_illustrative_descriptive",
+  "evidence_records": [
+    {
+      "evidence_id": "evidence_illustrative_descriptive_y",
+      "evidence_type": "descriptive_summary",
+      "variable_id": "y",
+      "summary_kind": "numeric",
+      "count": 8,
+      "missing_count": 1,
+      "mean": 10.75,
+      "standard_deviation": 5.627314338711377,
+      "minimum": 3.0,
+      "percentile_25": 6.5,
+      "median": 10.0,
+      "percentile_75": 15.5,
+      "maximum": 19.0
+    },
+    {
+      "evidence_id": "evidence_illustrative_descriptive_category",
+      "evidence_type": "descriptive_summary",
+      "variable_id": "category",
+      "summary_kind": "categorical",
+      "count": 9,
+      "missing_count": 0,
+      "unique_count": 4,
+      "most_frequent_value": "B",
+      "most_frequent_value_count": 3
+    }
+  ],
+  "claim_candidates": [
+    {
+      "claim_id": "claim_illustrative_descriptive_y",
+      "claim_type": "descriptive_observation",
+      "subject_variable": "y",
+      "direction": "not_applicable",
+      "supporting_evidence_ids": ["evidence_illustrative_descriptive_y"],
+      "causal": false,
+      "generalization_scope": "analysis_sample"
+    }
+  ]
+}

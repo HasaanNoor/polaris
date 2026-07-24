@@ -48,6 +48,9 @@ Conflicting: credible sources point in different directions or use incompatible 
 - Statistical significance alone is not sufficient evidence.
 - Lack of statistical significance does not establish absence of an effect.
 - Effect sizes and uncertainty must be reported when estimates are presented.
+- Structured Phase 5 claim candidates must reference evidence records rather than duplicate them.
+- Phase 5 claim candidates are bounded machine-readable propositions, not evidence-quality ratings or narrative conclusions.
+- Correlation and OLS claim candidates must remain non-causal unless a later causal-identification phase explicitly supports stronger claims.
 - Multiple comparisons must be disclosed and, where appropriate, adjusted or treated as exploratory.
 - Robustness and sensitivity analysis are required when model choices, missingness, variable definitions, or source selection materially affect interpretation.
 - Survey evidence must report sampling frame, mode, weighting, design effects when available, nonresponse risks, and question-wording limitations.
