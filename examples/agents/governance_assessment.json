@@ -1,0 +1,107 @@
+{
+  "assessment": {
+    "agent_domain": "governance",
+    "assessment_id": "agent_assessment_6876470adc0ae57051f987c32356028a0f1f5dd283956579c01cfa39168bfebc",
+    "coverage_summary": {
+      "coverage_status": "no_relevant_evidence",
+      "cross_domain_claim_count": 0,
+      "direct_domain_variable_count": 0,
+      "limitations_count": 0,
+      "relevant_claim_count": 0,
+      "relevant_evidence_count": 0,
+      "total_claims": 2,
+      "total_evidence_records": 3
+    },
+    "domain_concerns": [
+      {
+        "concern_code": "DOMAIN_CONTEXT_NOT_MEASURED",
+        "limitation_codes": [],
+        "source_ids": [],
+        "variable_ids": []
+      }
+    ],
+    "domain_relevance_records": [
+      {
+        "agent_domain": "governance",
+        "matched_concept_categories": [],
+        "matched_variable_ids": [],
+        "relevance_reason_codes": [
+          "NO_DOMAIN_MATCH"
+        ],
+        "relevance_status": "not_relevant",
+        "source_id": "claim_gdp_fertility",
+        "source_type": "claim_candidate"
+      },
+      {
+        "agent_domain": "governance",
+        "matched_concept_categories": [],
+        "matched_variable_ids": [],
+        "relevance_reason_codes": [
+          "NO_DOMAIN_MATCH"
+        ],
+        "relevance_status": "not_relevant",
+        "source_id": "claim_literacy_fertility",
+        "source_type": "claim_candidate"
+      },
+      {
+        "agent_domain": "governance",
+        "matched_concept_categories": [],
+        "matched_variable_ids": [],
+        "relevance_reason_codes": [
+          "NO_DOMAIN_MATCH"
+        ],
+        "relevance_status": "not_relevant",
+        "source_id": "evidence_gdp",
+        "source_type": "evidence_record"
+      },
+      {
+        "agent_domain": "governance",
+        "matched_concept_categories": [],
+        "matched_variable_ids": [],
+        "relevance_reason_codes": [
+          "NO_DOMAIN_MATCH"
+        ],
+        "relevance_status": "not_relevant",
+        "source_id": "evidence_literacy",
+        "source_type": "evidence_record"
+      },
+      {
+        "agent_domain": "governance",
+        "matched_concept_categories": [],
+        "matched_variable_ids": [],
+        "relevance_reason_codes": [
+          "NO_DOMAIN_MATCH"
+        ],
+        "relevance_status": "not_relevant",
+        "source_id": "evidence_sample",
+        "source_type": "evidence_record"
+      }
+    ],
+    "inherited_limitations": [],
+    "provenance": {
+      "agent_domain": "governance",
+      "assessment_timestamp": "2026-07-25T00:00:00Z",
+      "dataset_id": "agent_dataset",
+      "phase5_schema_version": "1.0.0",
+      "phase6_schema_version": "1.0.0",
+      "ruleset_version": "deterministic_phase6_v1",
+      "software_version": "polaris-0.1.0",
+      "source_analysis_result_id": "analysis_agent",
+      "source_checksum_sha256": "abc123",
+      "source_evidence_artifact_id": "evidence_artifact_agent"
+    },
+    "relevant_claim_ids": [],
+    "relevant_evidence_ids": [],
+    "schema_version": "1.0.0",
+    "source_evidence_artifact_id": "evidence_artifact_agent",
+    "unsupported_inferences": [
+      "causality",
+      "intervention_recommendation",
+      "mechanism",
+      "policy_effectiveness",
+      "temporal_prediction"
+    ]
+  },
+  "illustrative": true,
+  "source_scenario": "Shared Phase 5 fixture: female_literacy and gdp_per_capita in an OLS association with fertility_rate."
+}

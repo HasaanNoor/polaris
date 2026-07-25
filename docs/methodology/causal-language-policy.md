@@ -39,6 +39,7 @@ Causal wording is not allowed based only on:
 - predictive accuracy;
 - statistical significance;
 - Phase 5 evidence extraction or claim-candidate generation;
+- Phase 6 domain-agent relevance or concern codes;
 - an LLM-generated explanation.
 
 ## Required Stop Conditions

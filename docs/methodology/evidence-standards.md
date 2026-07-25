@@ -50,6 +50,8 @@ Conflicting: credible sources point in different directions or use incompatible 
 - Effect sizes and uncertainty must be reported when estimates are presented.
 - Structured Phase 5 claim candidates must reference evidence records rather than duplicate them.
 - Phase 5 claim candidates are bounded machine-readable propositions, not evidence-quality ratings or narrative conclusions.
+- Phase 6 domain assessments must reference Phase 5 evidence and claim IDs rather than duplicate evidence payloads.
+- Phase 6 domain agents may add deterministic domain concern codes, but they must not remove Phase 5 limitations or strengthen claim candidates into causal, policy, medical, or mechanism conclusions.
 - Correlation and OLS claim candidates must remain non-causal unless a later causal-identification phase explicitly supports stronger claims.
 - Multiple comparisons must be disclosed and, where appropriate, adjusted or treated as exploratory.
 - Robustness and sensitivity analysis are required when model choices, missingness, variable definitions, or source selection materially affect interpretation.

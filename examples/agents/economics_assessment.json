@@ -1,0 +1,246 @@
+{
+  "assessment": {
+    "agent_domain": "economics",
+    "assessment_id": "agent_assessment_57512fc993dab13295186354b58441cba359a88b886c0160e90481b58a8887e2",
+    "coverage_summary": {
+      "coverage_status": "relevant_evidence",
+      "cross_domain_claim_count": 2,
+      "direct_domain_variable_count": 1,
+      "limitations_count": 4,
+      "relevant_claim_count": 2,
+      "relevant_evidence_count": 3,
+      "total_claims": 2,
+      "total_evidence_records": 3
+    },
+    "domain_concerns": [
+      {
+        "concern_code": "CROSS_DOMAIN_RELATIONSHIP",
+        "limitation_codes": [],
+        "source_ids": [
+          "claim_gdp_fertility",
+          "claim_literacy_fertility",
+          "evidence_gdp",
+          "evidence_literacy",
+          "evidence_sample"
+        ],
+        "variable_ids": [
+          "gdp_per_capita"
+        ]
+      },
+      {
+        "concern_code": "DIRECT_DOMAIN_VARIABLE",
+        "limitation_codes": [],
+        "source_ids": [
+          "claim_gdp_fertility",
+          "claim_literacy_fertility",
+          "evidence_gdp",
+          "evidence_literacy",
+          "evidence_sample"
+        ],
+        "variable_ids": [
+          "gdp_per_capita"
+        ]
+      },
+      {
+        "concern_code": "DOMAIN_CONTROL_PRESENT",
+        "limitation_codes": [],
+        "source_ids": [
+          "claim_gdp_fertility",
+          "claim_literacy_fertility",
+          "evidence_gdp",
+          "evidence_literacy",
+          "evidence_sample"
+        ],
+        "variable_ids": [
+          "gdp_per_capita"
+        ]
+      },
+      {
+        "concern_code": "LIMITED_MODEL_SCOPE",
+        "limitation_codes": [
+          "LIMITED_MODEL_SCOPE"
+        ],
+        "source_ids": [],
+        "variable_ids": []
+      },
+      {
+        "concern_code": "MISSING_DATA_RELEVANT",
+        "limitation_codes": [
+          "MISSING_DATA_EXCLUSION"
+        ],
+        "source_ids": [],
+        "variable_ids": []
+      },
+      {
+        "concern_code": "OBSERVATIONAL_ONLY",
+        "limitation_codes": [],
+        "source_ids": [
+          "claim_gdp_fertility",
+          "claim_literacy_fertility",
+          "evidence_gdp",
+          "evidence_literacy",
+          "evidence_sample"
+        ],
+        "variable_ids": [
+          "gdp_per_capita"
+        ]
+      },
+      {
+        "concern_code": "UNSUPPORTED_CAUSAL_INFERENCE",
+        "limitation_codes": [],
+        "source_ids": [
+          "claim_gdp_fertility",
+          "claim_literacy_fertility",
+          "evidence_gdp",
+          "evidence_literacy",
+          "evidence_sample"
+        ],
+        "variable_ids": [
+          "gdp_per_capita"
+        ]
+      },
+      {
+        "concern_code": "UNSUPPORTED_GENERALIZATION",
+        "limitation_codes": [
+          "UNSUPPORTED_GENERALIZATION"
+        ],
+        "source_ids": [],
+        "variable_ids": []
+      },
+      {
+        "concern_code": "UNSUPPORTED_POLICY_INFERENCE",
+        "limitation_codes": [],
+        "source_ids": [
+          "claim_gdp_fertility",
+          "claim_literacy_fertility",
+          "evidence_gdp",
+          "evidence_literacy",
+          "evidence_sample"
+        ],
+        "variable_ids": [
+          "gdp_per_capita"
+        ]
+      }
+    ],
+    "domain_relevance_records": [
+      {
+        "agent_domain": "economics",
+        "matched_concept_categories": [
+          "gdp"
+        ],
+        "matched_variable_ids": [
+          "gdp_per_capita"
+        ],
+        "relevance_reason_codes": [
+          "CROSS_DOMAIN_RELATIONSHIP",
+          "DIRECT_DOMAIN_VARIABLE",
+          "DOMAIN_CONTROL_PRESENT"
+        ],
+        "relevance_status": "relevant",
+        "source_id": "claim_gdp_fertility",
+        "source_type": "claim_candidate"
+      },
+      {
+        "agent_domain": "economics",
+        "matched_concept_categories": [
+          "gdp"
+        ],
+        "matched_variable_ids": [
+          "gdp_per_capita"
+        ],
+        "relevance_reason_codes": [
+          "CROSS_DOMAIN_RELATIONSHIP",
+          "DIRECT_DOMAIN_VARIABLE",
+          "DOMAIN_CONTROL_PRESENT"
+        ],
+        "relevance_status": "relevant",
+        "source_id": "claim_literacy_fertility",
+        "source_type": "claim_candidate"
+      },
+      {
+        "agent_domain": "economics",
+        "matched_concept_categories": [
+          "gdp"
+        ],
+        "matched_variable_ids": [
+          "gdp_per_capita"
+        ],
+        "relevance_reason_codes": [
+          "DIRECT_DOMAIN_VARIABLE"
+        ],
+        "relevance_status": "relevant",
+        "source_id": "evidence_gdp",
+        "source_type": "evidence_record"
+      },
+      {
+        "agent_domain": "economics",
+        "matched_concept_categories": [
+          "gdp"
+        ],
+        "matched_variable_ids": [
+          "gdp_per_capita"
+        ],
+        "relevance_reason_codes": [
+          "DIRECT_DOMAIN_VARIABLE"
+        ],
+        "relevance_status": "relevant",
+        "source_id": "evidence_literacy",
+        "source_type": "evidence_record"
+      },
+      {
+        "agent_domain": "economics",
+        "matched_concept_categories": [
+          "gdp"
+        ],
+        "matched_variable_ids": [
+          "gdp_per_capita"
+        ],
+        "relevance_reason_codes": [
+          "DIRECT_DOMAIN_VARIABLE"
+        ],
+        "relevance_status": "relevant",
+        "source_id": "evidence_sample",
+        "source_type": "evidence_record"
+      }
+    ],
+    "inherited_limitations": [
+      "LIMITED_MODEL_SCOPE",
+      "MISSING_DATA_EXCLUSION",
+      "OBSERVATIONAL_ASSOCIATION",
+      "UNSUPPORTED_GENERALIZATION"
+    ],
+    "provenance": {
+      "agent_domain": "economics",
+      "assessment_timestamp": "2026-07-25T00:00:00Z",
+      "dataset_id": "agent_dataset",
+      "phase5_schema_version": "1.0.0",
+      "phase6_schema_version": "1.0.0",
+      "ruleset_version": "deterministic_phase6_v1",
+      "software_version": "polaris-0.1.0",
+      "source_analysis_result_id": "analysis_agent",
+      "source_checksum_sha256": "abc123",
+      "source_evidence_artifact_id": "evidence_artifact_agent"
+    },
+    "relevant_claim_ids": [
+      "claim_gdp_fertility",
+      "claim_literacy_fertility"
+    ],
+    "relevant_evidence_ids": [
+      "evidence_gdp",
+      "evidence_literacy",
+      "evidence_sample"
+    ],
+    "schema_version": "1.0.0",
+    "source_evidence_artifact_id": "evidence_artifact_agent",
+    "unsupported_inferences": [
+      "causality",
+      "intervention_recommendation",
+      "mechanism",
+      "policy_effectiveness",
+      "population_wide_generalization",
+      "temporal_prediction"
+    ]
+  },
+  "illustrative": true,
+  "source_scenario": "Shared Phase 5 fixture: female_literacy and gdp_per_capita in an OLS association with fertility_rate."
+}
