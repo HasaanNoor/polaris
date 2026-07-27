@@ -41,6 +41,7 @@ Causal wording is not allowed based only on:
 - Phase 5 evidence extraction or claim-candidate generation;
 - Phase 6 domain-agent relevance or concern codes;
 - Phase 7 coordination, agreement, divergence, evidence-gap, or domain-gap records;
+- Phase 8 synthesis artifacts, domain summaries, cross-domain findings, grounding findings, and fallback prose;
 - an LLM-generated explanation.
 
 ## Required Stop Conditions

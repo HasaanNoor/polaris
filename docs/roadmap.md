@@ -72,7 +72,17 @@ Verification: coordination tests, integration tests across Phases 3-7, schema/re
 
 Non-goals: LLMs, retrieval, outside context, databases, embeddings, causal inference, policy recommendations, natural-language synthesis, statistical recalculation, probabilistic debate, and final report generation.
 
-## Phase 8: Provenance and Artifact Store
+## Phase 8: Guardrailed LLM-Assisted Interdisciplinary Synthesis (complete)
+
+Objective: produce structured interdisciplinary natural-language synthesis from a deterministic Phase 7 coordinated assessment without inventing evidence or violating upstream limitations.
+
+Deliverables: frozen synthesis request/result models, `SynthesisArtifact`, deterministic fallback synthesis, prompt-grounding payload construction, strict prompt rules, small provider protocol, structured provider response validation, fabricated-reference checks, causal-language safeguards, policy/medical recommendation safeguards, limitation and unsupported-inference preservation, uncertainty codes, synthesis provenance, public API, illustrative example, tests, documentation, and ADR-011.
+
+Verification: synthesis tests, integration tests across Phases 3-8, schema/registry/ingestion/analysis/evidence/agent/coordination regression tests, Ruff linting, Ruff format checks, and Git whitespace checks.
+
+Non-goals: raw data inspection, statistical recalculation, dataset selection, outside retrieval, embeddings, databases, multi-provider framework, policy recommendations, medical recommendations, causal or mechanism claims, final report generation, frontend work, and application infrastructure.
+
+## Phase 9: Provenance and Artifact Store
 
 Objective: persist versioned research artifacts and provenance records.
 
@@ -80,7 +90,7 @@ Deliverables: storage abstraction, artifact versioning, hash strategy, and retri
 
 Verification: artifact round-trip tests and immutable-version checks.
 
-## Phase 9: Dataset Retrieval Prototype
+## Phase 10: Dataset Retrieval Prototype
 
 Objective: retrieve a small reviewed public dataset through deterministic connectors.
 
@@ -88,7 +98,7 @@ Deliverables: connector interface, retrieval logs, source metadata capture, and 
 
 Verification: reproducible retrieval test using pinned source metadata.
 
-## Phase 10: Data Quality Service
+## Phase 11: Data Quality Service
 
 Objective: assess missingness, coverage, comparability, revisions, and source warnings.
 
@@ -96,7 +106,7 @@ Deliverables: quality rules, dataset-quality report, and warning taxonomy.
 
 Verification: tests using datasets with known quality issues.
 
-## Phase 11: Transformation Pipeline
+## Phase 12: Transformation Pipeline
 
 Objective: support traceable cleaning and derived-variable creation.
 
@@ -104,7 +114,7 @@ Deliverables: transformation records, observed-versus-derived separation, imputa
 
 Verification: lineage tests from raw values to transformed outputs.
 
-## Phase 12: Descriptive Analytics
+## Phase 13: Descriptive Analytics
 
 Objective: compute deterministic descriptive statistics and uncertainty summaries where applicable.
 
@@ -112,7 +122,7 @@ Deliverables: summary statistics, group comparisons, trend summaries, and report
 
 Verification: numerical tests against fixed fixtures.
 
-## Phase 13: Statistical Modeling Service
+## Phase 14: Statistical Modeling Service
 
 Objective: add deterministic statistical model execution.
 
@@ -120,7 +130,7 @@ Deliverables: model specifications, diagnostics, effect estimates, uncertainty o
 
 Verification: tests against known analytical results.
 
-## Phase 14: Additional Deterministic Agents
+## Phase 15: Additional Deterministic Agents
 
 Objective: implement typed agents for coordination, question interpretation, dataset selection, data quality, and statistical analysis.
 
@@ -128,7 +138,7 @@ Deliverables: agent contracts, deterministic strategies, validation failures, an
 
 Verification: contract tests and end-to-end artifact generation.
 
-## Phase 15: Orchestration Runtime
+## Phase 16: Orchestration Runtime
 
 Objective: coordinate agents through explicit state transitions and failure handling.
 
@@ -136,7 +146,7 @@ Deliverables: orchestration graph, retry policy, stop conditions, and partial-re
 
 Verification: workflow tests for success, insufficient evidence, and conflicting-source outcomes.
 
-## Phase 16: Evidence Critic and Synthesis
+## Phase 17: Evidence Critic and Retrieval-Grounded Synthesis
 
 Objective: critique analytical outputs and generate cautious reports from artifacts.
 

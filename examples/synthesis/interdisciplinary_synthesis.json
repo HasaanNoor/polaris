@@ -1,0 +1,213 @@
+{
+  "synthesis_id": "synthesis_6fd1cf64b2e9e0acc8fa5c0a0e2bd8d883d36af7b1766e9c6f0dc23530165942",
+  "source_coordinated_assessment_id": "coordinated_assessment_969397336506ad37ffd2bbdaeffdcf35b9dbaa832a4a95e96aa2df1c4ab495c6",
+  "synthesis_mode": "deterministic",
+  "overall_summary": "The coordinated assessment contains 3 referenced evidence records and 2 referenced non-causal claim candidates across governance, economics, education, public_health. Unsupported inference boundaries remain active, including causal inference.",
+  "domain_summaries": [
+    {
+      "domain": "governance",
+      "summary": "governance was supplied with no relevant evidence and should not be described as producing substantive evidence in this synthesis.",
+      "referenced_claim_ids": [],
+      "referenced_evidence_ids": [],
+      "limitations": [],
+      "coverage_status": "no_relevant_evidence"
+    },
+    {
+      "domain": "economics",
+      "summary": "economics selected 3 evidence references and 2 claim references from the coordinated assessment. These references support cautious association-oriented synthesis only.",
+      "referenced_claim_ids": [
+        "claim_gdp_fertility",
+        "claim_literacy_fertility"
+      ],
+      "referenced_evidence_ids": [
+        "evidence_gdp",
+        "evidence_literacy",
+        "evidence_sample"
+      ],
+      "limitations": [
+        "LIMITED_MODEL_SCOPE",
+        "MISSING_DATA_EXCLUSION",
+        "OBSERVATIONAL_ASSOCIATION",
+        "UNSUPPORTED_GENERALIZATION"
+      ],
+      "coverage_status": "relevant_evidence"
+    },
+    {
+      "domain": "education",
+      "summary": "education selected 3 evidence references and 2 claim references from the coordinated assessment. These references support cautious association-oriented synthesis only.",
+      "referenced_claim_ids": [
+        "claim_gdp_fertility",
+        "claim_literacy_fertility"
+      ],
+      "referenced_evidence_ids": [
+        "evidence_gdp",
+        "evidence_literacy",
+        "evidence_sample"
+      ],
+      "limitations": [
+        "LIMITED_MODEL_SCOPE",
+        "MISSING_DATA_EXCLUSION",
+        "OBSERVATIONAL_ASSOCIATION",
+        "UNSUPPORTED_GENERALIZATION"
+      ],
+      "coverage_status": "relevant_evidence"
+    },
+    {
+      "domain": "public_health",
+      "summary": "public_health selected 3 evidence references and 2 claim references from the coordinated assessment. These references support cautious association-oriented synthesis only.",
+      "referenced_claim_ids": [
+        "claim_gdp_fertility",
+        "claim_literacy_fertility"
+      ],
+      "referenced_evidence_ids": [
+        "evidence_gdp",
+        "evidence_literacy",
+        "evidence_sample"
+      ],
+      "limitations": [
+        "LIMITED_MODEL_SCOPE",
+        "MISSING_DATA_EXCLUSION",
+        "OBSERVATIONAL_ASSOCIATION",
+        "UNSUPPORTED_GENERALIZATION"
+      ],
+      "coverage_status": "relevant_evidence"
+    }
+  ],
+  "cross_domain_findings": [
+    {
+      "finding_id": "cross_synthesis_2fe1a8e2dec4239080971aafec73ac8e573ebbad64798785531b636e7f76bf72",
+      "summary": "Claim claim_gdp_fertility appears across economics, education, public_health. This indicates shared domain relevance for the same structured non-causal claim. It is not causal proof and not independent confirmation.",
+      "domains": [
+        "economics",
+        "education",
+        "public_health"
+      ],
+      "referenced_claim_ids": [
+        "claim_gdp_fertility"
+      ],
+      "referenced_evidence_ids": [],
+      "referenced_agreement_ids": [],
+      "referenced_divergence_ids": []
+    },
+    {
+      "finding_id": "cross_synthesis_50e231ecf661693860a381c17457367f26895c936b2ab5ba1e65a271e4da1216",
+      "summary": "Evidence evidence_gdp is shared across economics, education, public_health. Agreement means shared selection of a structured reference.",
+      "domains": [
+        "economics",
+        "education",
+        "public_health"
+      ],
+      "referenced_claim_ids": [],
+      "referenced_evidence_ids": [
+        "evidence_gdp"
+      ],
+      "referenced_agreement_ids": [],
+      "referenced_divergence_ids": []
+    },
+    {
+      "finding_id": "cross_synthesis_9626f405b3e8505df50875161f24e96745eac179f068454abfec0dd9196adfb7",
+      "summary": "Claim claim_literacy_fertility appears across economics, education, public_health. This indicates shared domain relevance for the same structured non-causal claim. It is not causal proof and not independent confirmation.",
+      "domains": [
+        "economics",
+        "education",
+        "public_health"
+      ],
+      "referenced_claim_ids": [
+        "claim_literacy_fertility"
+      ],
+      "referenced_evidence_ids": [],
+      "referenced_agreement_ids": [],
+      "referenced_divergence_ids": []
+    },
+    {
+      "finding_id": "cross_synthesis_b8a778b15e7476ca6421bbdadb2268f94db0822cb49d9408e5a22c4cb2caa628",
+      "summary": "Evidence evidence_sample is shared across economics, education, public_health. Agreement means shared selection of a structured reference.",
+      "domains": [
+        "economics",
+        "education",
+        "public_health"
+      ],
+      "referenced_claim_ids": [],
+      "referenced_evidence_ids": [
+        "evidence_sample"
+      ],
+      "referenced_agreement_ids": [],
+      "referenced_divergence_ids": []
+    },
+    {
+      "finding_id": "cross_synthesis_fa1204c110256f0375189a110fcd2a4f3ca3850b7679d29214e85d27075816fb",
+      "summary": "Evidence evidence_literacy is shared across economics, education, public_health. Agreement means shared selection of a structured reference.",
+      "domains": [
+        "economics",
+        "education",
+        "public_health"
+      ],
+      "referenced_claim_ids": [],
+      "referenced_evidence_ids": [
+        "evidence_literacy"
+      ],
+      "referenced_agreement_ids": [],
+      "referenced_divergence_ids": []
+    }
+  ],
+  "limitations_summary": "The synthesis preserves these source limitation codes: LIMITED_MODEL_SCOPE, MISSING_DATA_EXCLUSION, OBSERVATIONAL_ASSOCIATION, UNSUPPORTED_GENERALIZATION. They constrain interpretation and prevent causal or population-wide conclusions.",
+  "evidence_gaps_summary": "The coordinated assessment records evidence gaps: cross_domain_claim_with_limited_domain_coverage, cross_domain_claim_with_limited_domain_coverage; domain gaps: governance:domain_has_no_relevant_evidence.",
+  "unsupported_inferences_preserved": [
+    "causality",
+    "intervention_recommendation",
+    "mechanism",
+    "medical_conclusion",
+    "policy_effectiveness",
+    "population_wide_generalization",
+    "temporal_prediction"
+  ],
+  "uncertainty": [
+    "causal_inference_unsupported",
+    "domain_coverage_incomplete",
+    "evidence_strength_not_assessed",
+    "generalization_limited",
+    "model_scope_limited"
+  ],
+  "referenced_claim_ids": [
+    "claim_gdp_fertility",
+    "claim_literacy_fertility"
+  ],
+  "referenced_evidence_ids": [
+    "evidence_gdp",
+    "evidence_literacy",
+    "evidence_sample"
+  ],
+  "referenced_assessment_ids": [
+    "agent_assessment_57512fc993dab13295186354b58441cba359a88b886c0160e90481b58a8887e2",
+    "agent_assessment_5d2d1947921894e6867ff39fed37ee89b99fbebb726fc1cfadd91e17e362c276",
+    "agent_assessment_6876470adc0ae57051f987c32356028a0f1f5dd283956579c01cfa39168bfebc",
+    "agent_assessment_a007b54a61928b02351467ce2ce055c1432d79a6d9fef21f9151763a07daf171"
+  ],
+  "grounding_findings": [],
+  "provenance": {
+    "source_coordinated_assessment_id": "coordinated_assessment_969397336506ad37ffd2bbdaeffdcf35b9dbaa832a4a95e96aa2df1c4ab495c6",
+    "source_evidence_artifact_id": "evidence_artifact_agent",
+    "source_analysis_result_id": "analysis_agent",
+    "dataset_id": "agent_dataset",
+    "source_checksum_sha256": "abc123",
+    "source_assessment_ids": [
+      "agent_assessment_57512fc993dab13295186354b58441cba359a88b886c0160e90481b58a8887e2",
+      "agent_assessment_5d2d1947921894e6867ff39fed37ee89b99fbebb726fc1cfadd91e17e362c276",
+      "agent_assessment_6876470adc0ae57051f987c32356028a0f1f5dd283956579c01cfa39168bfebc",
+      "agent_assessment_a007b54a61928b02351467ce2ce055c1432d79a6d9fef21f9151763a07daf171"
+    ],
+    "synthesis_mode_requested": "deterministic",
+    "synthesis_mode_used": "deterministic",
+    "provider": null,
+    "model_identifier": null,
+    "prompt_version": "phase8_grounded_json_v1",
+    "ruleset_version": "guardrailed_phase8_v1",
+    "content_digest_sha256": "f650fff9b82238646e89cf3b40d0a0f30e71fbd542efc668c39970a397fafd69",
+    "synthesis_timestamp": "2026-07-27T17:37:07.471234Z",
+    "software_version": "polaris-0.1.0",
+    "phase5_schema_version": "1.0.0",
+    "phase7_schema_version": "1.0.0",
+    "phase8_schema_version": "1.0.0"
+  },
+  "schema_version": "1.0.0"
+}
