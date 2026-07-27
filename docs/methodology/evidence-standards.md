@@ -52,6 +52,9 @@ Conflicting: credible sources point in different directions or use incompatible 
 - Phase 5 claim candidates are bounded machine-readable propositions, not evidence-quality ratings or narrative conclusions.
 - Phase 6 domain assessments must reference Phase 5 evidence and claim IDs rather than duplicate evidence payloads.
 - Phase 6 domain agents may add deterministic domain concern codes, but they must not remove Phase 5 limitations or strengthen claim candidates into causal, policy, medical, or mechanism conclusions.
+- Phase 7 coordinated assessments must reconcile Phase 6 structured records by reference. Agreement means shared structured evidence, claim, limitation, unsupported inference, or concern codes; it does not mean subjective consensus or final interpretation.
+- Phase 7 divergence means a deterministic domain-specific difference such as uneven coverage or domain-specific relevance. It must not be described as contradiction unless a later typed contract represents contradictory structured states.
+- Phase 7 must preserve limitations and unsupported-inference warnings so later synthesis layers know which claims they must not make.
 - Correlation and OLS claim candidates must remain non-causal unless a later causal-identification phase explicitly supports stronger claims.
 - Multiple comparisons must be disclosed and, where appropriate, adjusted or treated as exploratory.
 - Robustness and sensitivity analysis are required when model choices, missingness, variable definitions, or source selection materially affect interpretation.

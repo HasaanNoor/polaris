@@ -62,13 +62,15 @@ Verification: agent tests, integration tests across Phases 3-6, schema/registry/
 
 Non-goals: LLMs, retrieval, outside context, databases, policy recommendations, causal inference, coordinator synthesis, and final research-report generation.
 
-## Phase 7: Dataset Metadata Review
+## Phase 7: Deterministic Multi-Agent Coordination (complete)
 
-Objective: review and harden candidate dataset metadata without ingesting observations.
+Objective: coordinate deterministic Phase 6 domain assessments into one structured interdisciplinary state object.
 
-Deliverables: source-review fields, licensing decisions, revision metadata checks, and warnings.
+Deliverables: frozen coordination request/result models, `CoordinatedAssessment`, assessment-set validation, domain coverage aggregation, evidence-domain mapping, claim-domain mapping, conservative agreement and divergence records, shared limitation aggregation, unsupported-inference aggregation, evidence and domain gaps, deterministic IDs, provenance, public API, examples, tests, documentation, and ADR-010.
 
-Verification: registry validation and candidate-source examples.
+Verification: coordination tests, integration tests across Phases 3-7, schema/registry/ingestion/analysis/evidence/agent regression tests, Ruff linting, Ruff format checks, and Git whitespace checks.
+
+Non-goals: LLMs, retrieval, outside context, databases, embeddings, causal inference, policy recommendations, natural-language synthesis, statistical recalculation, probabilistic debate, and final report generation.
 
 ## Phase 8: Provenance and Artifact Store
 

@@ -1,0 +1,227 @@
+{
+  "coordinated_assessment_id": "coordinated_assessment_example_phase7",
+  "source_evidence_artifact_id": "evidence_artifact_agent",
+  "source_analysis_result_id": "analysis_agent",
+  "dataset_id": "agent_dataset",
+  "source_checksum_sha256": "abc123",
+  "participating_domains": ["governance", "economics", "education", "public_health"],
+  "missing_domains": [],
+  "source_assessment_ids": [
+    "agent_assessment_governance",
+    "agent_assessment_economics",
+    "agent_assessment_education",
+    "agent_assessment_public_health"
+  ],
+  "domain_coverage": [
+    {
+      "domain": "governance",
+      "assessment_supplied": true,
+      "assessment_id": "agent_assessment_governance",
+      "relevant_evidence_count": 0,
+      "relevant_claim_count": 0,
+      "direct_domain_variable_count": 0,
+      "cross_domain_claim_count": 0,
+      "inherited_limitation_count": 0,
+      "domain_concern_count": 1,
+      "coverage_status": "no_relevant_evidence"
+    },
+    {
+      "domain": "economics",
+      "assessment_supplied": true,
+      "assessment_id": "agent_assessment_economics",
+      "relevant_evidence_count": 1,
+      "relevant_claim_count": 1,
+      "direct_domain_variable_count": 1,
+      "cross_domain_claim_count": 1,
+      "inherited_limitation_count": 2,
+      "domain_concern_count": 3,
+      "coverage_status": "relevant_evidence"
+    },
+    {
+      "domain": "education",
+      "assessment_supplied": true,
+      "assessment_id": "agent_assessment_education",
+      "relevant_evidence_count": 1,
+      "relevant_claim_count": 1,
+      "direct_domain_variable_count": 1,
+      "cross_domain_claim_count": 1,
+      "inherited_limitation_count": 2,
+      "domain_concern_count": 3,
+      "coverage_status": "relevant_evidence"
+    },
+    {
+      "domain": "public_health",
+      "assessment_supplied": true,
+      "assessment_id": "agent_assessment_public_health",
+      "relevant_evidence_count": 1,
+      "relevant_claim_count": 1,
+      "direct_domain_variable_count": 1,
+      "cross_domain_claim_count": 1,
+      "inherited_limitation_count": 2,
+      "domain_concern_count": 3,
+      "coverage_status": "relevant_evidence"
+    }
+  ],
+  "evidence_domain_map": [
+    {
+      "evidence_id": "evidence_literacy",
+      "selecting_domains": ["education", "public_health"],
+      "relevance_by_domain": [
+        {
+          "domain": "education",
+          "relevance_status": "relevant",
+          "relevance_reason_codes": ["DIRECT_DOMAIN_VARIABLE"],
+          "matched_variable_ids": ["female_literacy"],
+          "matched_concept_categories": ["literacy"]
+        },
+        {
+          "domain": "public_health",
+          "relevance_status": "relevant",
+          "relevance_reason_codes": ["DIRECT_DOMAIN_VARIABLE"],
+          "matched_variable_ids": ["fertility_rate"],
+          "matched_concept_categories": ["fertility"]
+        }
+      ],
+      "selection_count": 2,
+      "cross_domain": true
+    }
+  ],
+  "claim_domain_map": [
+    {
+      "claim_id": "claim_literacy_fertility",
+      "selecting_domains": ["economics", "education", "public_health"],
+      "relevance_by_domain": [
+        {
+          "domain": "economics",
+          "relevance_status": "relevant",
+          "relevance_reason_codes": ["DOMAIN_CONTROL_PRESENT", "CROSS_DOMAIN_RELATIONSHIP"],
+          "matched_variable_ids": ["gdp_per_capita"],
+          "matched_concept_categories": ["gdp"]
+        },
+        {
+          "domain": "education",
+          "relevance_status": "relevant",
+          "relevance_reason_codes": ["DIRECT_DOMAIN_VARIABLE", "CROSS_DOMAIN_RELATIONSHIP"],
+          "matched_variable_ids": ["female_literacy"],
+          "matched_concept_categories": ["literacy"]
+        },
+        {
+          "domain": "public_health",
+          "relevance_status": "relevant",
+          "relevance_reason_codes": ["DIRECT_DOMAIN_VARIABLE", "CROSS_DOMAIN_RELATIONSHIP"],
+          "matched_variable_ids": ["fertility_rate"],
+          "matched_concept_categories": ["fertility"]
+        }
+      ],
+      "shared_limitations": ["OBSERVATIONAL_ASSOCIATION", "LIMITED_MODEL_SCOPE"],
+      "selection_count": 3,
+      "cross_domain": true
+    }
+  ],
+  "agreements": [
+    {
+      "agreement_id": "coordination_agreement_example_shared_evidence",
+      "agreement_type": "shared_evidence",
+      "source_ids": ["evidence_literacy"],
+      "limitation_codes": [],
+      "unsupported_inference_codes": [],
+      "domain_concern_codes": [],
+      "participating_domains": ["education", "public_health"]
+    },
+    {
+      "agreement_id": "coordination_agreement_example_shared_claim",
+      "agreement_type": "shared_claim",
+      "source_ids": ["claim_literacy_fertility"],
+      "limitation_codes": ["OBSERVATIONAL_ASSOCIATION", "LIMITED_MODEL_SCOPE"],
+      "unsupported_inference_codes": [],
+      "domain_concern_codes": [],
+      "participating_domains": ["economics", "education", "public_health"]
+    }
+  ],
+  "divergences": [
+    {
+      "divergence_id": "coordination_divergence_example_governance_coverage",
+      "divergence_type": "uneven_evidence_coverage",
+      "domains_involved": ["economics", "education", "public_health"],
+      "source_ids": ["claim_literacy_fertility"],
+      "limitation_codes": [],
+      "unsupported_inference_codes": [],
+      "domain_concern_codes": [],
+      "factual_basis": "structured source coverage is uneven across supplied domains"
+    }
+  ],
+  "shared_limitations": [
+    {
+      "limitation_code": "OBSERVATIONAL_ASSOCIATION",
+      "domains": ["economics", "education", "public_health"],
+      "associated_source_ids": ["claim_literacy_fertility", "evidence_literacy"],
+      "global_limitation": false
+    },
+    {
+      "limitation_code": "LIMITED_MODEL_SCOPE",
+      "domains": ["economics", "education", "public_health"],
+      "associated_source_ids": ["claim_literacy_fertility"],
+      "global_limitation": false
+    }
+  ],
+  "shared_unsupported_inferences": [
+    {
+      "inference_code": "causality",
+      "domains": ["governance", "economics", "education", "public_health"],
+      "all_participating_agents": true,
+      "relevant_claim_ids": ["claim_literacy_fertility"]
+    },
+    {
+      "inference_code": "medical_conclusion",
+      "domains": ["public_health"],
+      "all_participating_agents": false,
+      "relevant_claim_ids": ["claim_literacy_fertility"]
+    }
+  ],
+  "evidence_gaps": [
+    {
+      "gap_id": "coordination_evidence_gap_example_limited_claim_coverage",
+      "gap_type": "cross_domain_claim_with_limited_domain_coverage",
+      "source_ids": ["claim_literacy_fertility"],
+      "domains": ["economics", "education", "public_health"]
+    }
+  ],
+  "domain_gaps": [
+    {
+      "gap_id": "coordination_domain_gap_example_governance_empty",
+      "gap_type": "domain_has_no_relevant_evidence",
+      "domain": "governance",
+      "assessment_supplied": true,
+      "coverage_status": "no_relevant_evidence"
+    }
+  ],
+  "coordination_findings": [
+    {
+      "finding_code": "broad_unsupported_causality_warning",
+      "severity": "high",
+      "source_ids": [],
+      "domains": ["governance", "economics", "education", "public_health"]
+    }
+  ],
+  "provenance": {
+    "source_evidence_artifact_id": "evidence_artifact_agent",
+    "source_assessment_ids": [
+      "agent_assessment_governance",
+      "agent_assessment_economics",
+      "agent_assessment_education",
+      "agent_assessment_public_health"
+    ],
+    "source_analysis_result_id": "analysis_agent",
+    "dataset_id": "agent_dataset",
+    "source_checksum_sha256": "abc123",
+    "participating_domains": ["governance", "economics", "education", "public_health"],
+    "missing_domains": [],
+    "coordination_ruleset_version": "deterministic_phase7_v1",
+    "coordination_timestamp": "2026-07-26T00:00:00Z",
+    "software_version": "polaris-0.1.0",
+    "phase5_schema_version": "1.0.0",
+    "phase6_schema_version": "1.0.0",
+    "phase7_schema_version": "1.0.0"
+  },
+  "schema_version": "1.0.0"
+}
