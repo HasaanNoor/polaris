@@ -82,7 +82,17 @@ Verification: synthesis tests, integration tests across Phases 3-8, schema/regis
 
 Non-goals: raw data inspection, statistical recalculation, dataset selection, outside retrieval, embeddings, databases, multi-provider framework, policy recommendations, medical recommendations, causal or mechanism claims, final report generation, frontend work, and application infrastructure.
 
-## Phase 9: Provenance and Artifact Store
+## Phase 9: Structured Research Report Generation (complete)
+
+Objective: convert validated Polaris artifacts into structured, reviewable, exportable research reports.
+
+Deliverables: frozen report request/result models, lineage compatibility validation, deterministic section assembly, research-question, dataset, methodology, statistical-results, evidence, claim, domain-assessment, cross-domain, synthesis, limitations, gaps, unsupported-inferences, provenance, and reference-index sections, deterministic report IDs, JSON serialization, Markdown rendering, standalone HTML rendering, illustrative examples, tests, documentation, and ADR-012.
+
+Verification: reporting tests, integration tests across Phases 3-9, schema/registry/ingestion/analysis/evidence/agent/coordination/synthesis regression tests, Ruff linting, Ruff format checks, and Git whitespace checks.
+
+Non-goals: new statistical analysis, evidence creation, claim creation, agent reruns during reporting, LLM calls, external retrieval, external bibliography generation, causal interpretation, policy recommendations, medical recommendations, PDF, DOCX, LaTeX, frontend work, and application infrastructure.
+
+## Phase 10: Provenance and Artifact Store
 
 Objective: persist versioned research artifacts and provenance records.
 
@@ -90,7 +100,7 @@ Deliverables: storage abstraction, artifact versioning, hash strategy, and retri
 
 Verification: artifact round-trip tests and immutable-version checks.
 
-## Phase 10: Dataset Retrieval Prototype
+## Phase 11: Dataset Retrieval Prototype
 
 Objective: retrieve a small reviewed public dataset through deterministic connectors.
 
@@ -98,7 +108,7 @@ Deliverables: connector interface, retrieval logs, source metadata capture, and 
 
 Verification: reproducible retrieval test using pinned source metadata.
 
-## Phase 11: Data Quality Service
+## Phase 12: Data Quality Service
 
 Objective: assess missingness, coverage, comparability, revisions, and source warnings.
 
