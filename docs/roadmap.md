@@ -92,21 +92,25 @@ Verification: reporting tests, integration tests across Phases 3-9, schema/regis
 
 Non-goals: new statistical analysis, evidence creation, claim creation, agent reruns during reporting, LLM calls, external retrieval, external bibliography generation, causal interpretation, policy recommendations, medical recommendations, PDF, DOCX, LaTeX, frontend work, and application infrastructure.
 
-## Phase 10: Provenance and Artifact Store
+## Phase 10: Real Dataset Acquisition and Provider Integration (complete)
 
-Objective: persist versioned research artifacts and provenance records.
+Objective: transition from illustrative-only datasets to explicit acquisition of real-world public provider datasets while preserving deterministic offline research.
+
+Deliverables: provider interface, built-in World Bank WDI, WHO GHO, and UNESCO UIS adapters, typed download and snapshot models, immutable raw snapshot storage, sidecar snapshot metadata, SHA-256 validation, duplicate checksum cache reuse, generated Phase 3-compatible manifests, provider registry, dataset-registry source classification, offline examples, tests, and ADR-013.
+
+Verification: provider tests, registry and ingestion compatibility tests, full regression tests, Ruff linting, Ruff format checks, and Git whitespace checks.
+
+Non-goals: literature retrieval, internet search, LLM reasoning, autonomous agents, streaming APIs, scheduled synchronization, raw-data mutation, and manual preprocessing.
+
+Documentation follow-up: provider selection, planned dataset catalog, variable priorities, and staged integration workflow are documented in [Provider Selection Strategy](data/provider-selection.md), [Planned Dataset Catalog](data/dataset-catalog.md), [Variable Priority](data/variable-priority.md), and [Real-Data Integration Plan](data/integration-plan.md). Phase 10 adapter support currently covers World Bank WDI, WHO GHO, and UNESCO UIS; other selected datasets are planned but do not yet have provider adapters. Dataset selection does not imply that files have been downloaded, validated, or integrated end to end.
+
+## Phase 11: Provenance and Artifact Store
+
+Objective: persist versioned research artifacts and provenance records beyond provider snapshots.
 
 Deliverables: storage abstraction, artifact versioning, hash strategy, and retrieval tests.
 
 Verification: artifact round-trip tests and immutable-version checks.
-
-## Phase 11: Dataset Retrieval Prototype
-
-Objective: retrieve a small reviewed public dataset through deterministic connectors.
-
-Deliverables: connector interface, retrieval logs, source metadata capture, and access-failure handling.
-
-Verification: reproducible retrieval test using pinned source metadata.
 
 ## Phase 12: Data Quality Service
 

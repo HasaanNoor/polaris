@@ -6,6 +6,7 @@ Polaris coordinates empirical investigations while preserving reproducibility, u
 
 - classifying research questions;
 - selecting candidate datasets;
+- acquiring official public datasets as immutable local snapshots;
 - recording provenance;
 - running deterministic transformations and analyses;
 - assessing data quality and causal-identification strength;
@@ -20,6 +21,9 @@ flowchart TD
   C --> I[Question Interpretation Agent]
   C --> D[Dataset Selection Agent]
   D --> M[Dataset manifests]
+  P[Official Provider] --> DL[Explicit dataset acquisition]
+  DL --> R[Immutable raw snapshot]
+  R --> M
   M --> QL[Data Quality Agent]
   QL --> A[Statistical Analysis Agent]
   A --> CI[Causal Identification Agent]
@@ -32,6 +36,10 @@ flowchart TD
 ## Deterministic Analytical Core
 
 Data transformations, statistical calculations, causal estimates, diagnostics, and reproducible results remain deterministic. Agent strategies may vary internally, but external contracts must remain typed and structured.
+
+## Dataset Acquisition
+
+Provider access is an explicit pre-ingestion step. Polaris downloads or copies a provider file once, stores it under `data/raw/<provider>/`, records source URL, original filename, timestamp, byte size, format, and SHA-256 checksum, and generates a normal `DatasetManifest` under `data/manifests/`. Registry, ingestion, analysis, evidence, coordination, synthesis, and reporting operate from those local artifacts and do not require provider access after acquisition.
 
 ## Failure Handling
 

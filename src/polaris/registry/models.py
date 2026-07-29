@@ -15,6 +15,14 @@ class TextMatchMode(StrEnum):
     ALL = "all"
 
 
+class DatasetCollectionType(StrEnum):
+    """Stable dataset-origin categories tracked by the registry."""
+
+    ILLUSTRATIVE = "illustrative"
+    REAL_PROVIDER = "real_provider"
+    SAMPLE = "sample"
+
+
 class TemporalMatchType(StrEnum):
     """Relationship between dataset coverage and requested temporal coverage."""
 
@@ -87,6 +95,7 @@ class DatasetSearchResult(FrozenPolarisBaseModel):
     dataset_id: str
     title: str
     manifest: DatasetManifest
+    collection_type: DatasetCollectionType
     matched_variable_ids: tuple[str, ...] = Field(default_factory=tuple)
     match_reasons: tuple[str, ...] = Field(default_factory=tuple)
     warnings: tuple[str, ...] = Field(default_factory=tuple)
