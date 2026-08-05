@@ -26,4 +26,26 @@ venv/
 .env.*
 
 # OS
-Thumbs.db
+Thumbs.dbx
+
+# -----------------------------------------------------------------------------
+# Polaris: Raw provider datasets (official downloads)
+# -----------------------------------------------------------------------------
+
+data/raw/*
+!data/raw/.gitkeep
+
+# Keep directory structure
+!data/raw/world_bank/
+!data/raw/who/
+!data/raw/unesco/
+
+# Ignore everything inside provider directories
+data/raw/world_bank/*
+data/raw/who/*
+data/raw/unesco/*
+
+# Preserve empty folders
+!data/raw/world_bank/.gitkeep
+!data/raw/who/.gitkeep
+!data/raw/unesco/.gitkeep

@@ -1,0 +1,1639 @@
+{
+  "discovered_datasets": [
+    {
+      "checksum_sha256": "2c576a0636caabc374afaf591fdfd3e9ff6b88c5656d246047057b992fc808f8",
+      "companion_files": [
+        "data/raw/world_bank/WDI_CSV/WDICountry.csv",
+        "data/raw/world_bank/WDI_CSV/WDISeries.csv",
+        "data/raw/world_bank/WDI_CSV/WDIcountry-series.csv",
+        "data/raw/world_bank/WDI_CSV/WDIfootnote.csv",
+        "data/raw/world_bank/WDI_CSV/WDIseries-time.csv"
+      ],
+      "dataset_key": "WDI",
+      "file_size_bytes": 198481686,
+      "path": "data/raw/world_bank/WDI_CSV/WDICSV.csv",
+      "provider": "world_bank"
+    },
+    {
+      "checksum_sha256": "ed045747f9cc5326083b2d27ded6b224ba47edc27b47a8995256f3084e1127d1",
+      "companion_files": [],
+      "dataset_key": "HALE_at_birth_and_age_60",
+      "file_size_bytes": 5405185,
+      "path": "data/raw/who/HALE_at_birth_and_age_60.csv",
+      "provider": "who"
+    },
+    {
+      "checksum_sha256": "91b9b812043cfb2fd96ec2cb957c7e7b97e08bfc1a88e6c42f6518af31156fdc",
+      "companion_files": [],
+      "dataset_key": "life_expectancy_at_birth_and_age_60",
+      "file_size_bytes": 4992233,
+      "path": "data/raw/who/life_expectancy_at_birth_and_age_60.csv",
+      "provider": "who"
+    },
+    {
+      "checksum_sha256": "67217a85be92d5c589c7f256d88093d1dd6fa99fe25c031c475b9fd645f9033d",
+      "companion_files": [],
+      "dataset_key": "mortality_rates_afghanistan",
+      "file_size_bytes": 227288,
+      "path": "data/raw/who/mortality_rates_afghanistan.csv",
+      "provider": "who"
+    },
+    {
+      "checksum_sha256": "a7c6924bfcddeec90c6c4be14ca125909d25278c298ef3948cc89b9c0e784c1f",
+      "companion_files": [],
+      "dataset_key": "mortality_rates_albania",
+      "file_size_bytes": 186702,
+      "path": "data/raw/who/mortality_rates_albania.csv",
+      "provider": "who"
+    },
+    {
+      "checksum_sha256": "2c15dd1bc26d94e0bb7e6221c682789c7badefb6783a4422f0e52667f51f7765",
+      "companion_files": [],
+      "dataset_key": "mortality_rates_east_asia_and_pacific",
+      "file_size_bytes": 90749,
+      "path": "data/raw/who/mortality_rates_east_asia_and_pacific.csv",
+      "provider": "who"
+    },
+    {
+      "checksum_sha256": "1366e98a344ab35d2def559754b40c3be3185e1dc60f4d6f627602f15a074301",
+      "companion_files": [],
+      "dataset_key": "mortality_rates_europe_and_central_asia",
+      "file_size_bytes": 177387,
+      "path": "data/raw/who/mortality_rates_europe_and_central_asia.csv",
+      "provider": "who"
+    },
+    {
+      "checksum_sha256": "fa88c9744721694b360117fd6ebbd32c53668c617aa2ad931c31e157e327bef5",
+      "companion_files": [],
+      "dataset_key": "mortality_rates_global",
+      "file_size_bytes": 82796,
+      "path": "data/raw/who/mortality_rates_global.csv",
+      "provider": "who"
+    },
+    {
+      "checksum_sha256": "cac03ad6d2dca4c63739d64ca995af5eb3472f3e29d936bebd1057365c4510f2",
+      "companion_files": [],
+      "dataset_key": "mortality_rates_low_income",
+      "file_size_bytes": 88384,
+      "path": "data/raw/who/mortality_rates_low_income.csv",
+      "provider": "who"
+    },
+    {
+      "checksum_sha256": "4f74b668bb0851889e1e06f44bce20c5d36d3479d31ff1ad94de41d553b721b5",
+      "companion_files": [
+        "data/raw/unesco/DEM/DEM_COUNTRY.csv",
+        "data/raw/unesco/DEM/DEM_LABEL.csv"
+      ],
+      "dataset_key": "DEM_DATA_NATIONAL",
+      "file_size_bytes": 11604674,
+      "path": "data/raw/unesco/DEM/DEM_DATA_NATIONAL.csv",
+      "provider": "unesco"
+    },
+    {
+      "checksum_sha256": "6922a28a27308ff8c3baf51e922e5c724a5c86459203e8ba2994558e47b008d2",
+      "companion_files": [
+        "data/raw/unesco/SCN-SDG/SCN-SDG_COUNTRY.csv",
+        "data/raw/unesco/SCN-SDG/SCN-SDG_DATA_REGIONAL.csv",
+        "data/raw/unesco/SCN-SDG/SCN-SDG_LABEL.csv",
+        "data/raw/unesco/SCN-SDG/SCN-SDG_METADATA.csv",
+        "data/raw/unesco/SCN-SDG/SCN-SDG_REGION.csv"
+      ],
+      "dataset_key": "SCN-SDG_DATA_NATIONAL",
+      "file_size_bytes": 157328,
+      "path": "data/raw/unesco/SCN-SDG/SCN-SDG_DATA_NATIONAL.csv",
+      "provider": "unesco"
+    },
+    {
+      "checksum_sha256": "83b883bdc86adbd4524b3b6bf3b91f78c20ace3eca39c2fbd5424e0b5f325cfe",
+      "companion_files": [
+        "data/raw/unesco/SCN-SDG/SCN-SDG_COUNTRY.csv",
+        "data/raw/unesco/SCN-SDG/SCN-SDG_DATA_NATIONAL.csv",
+        "data/raw/unesco/SCN-SDG/SCN-SDG_LABEL.csv",
+        "data/raw/unesco/SCN-SDG/SCN-SDG_METADATA.csv",
+        "data/raw/unesco/SCN-SDG/SCN-SDG_REGION.csv"
+      ],
+      "dataset_key": "SCN-SDG_DATA_REGIONAL",
+      "file_size_bytes": 167178,
+      "path": "data/raw/unesco/SCN-SDG/SCN-SDG_DATA_REGIONAL.csv",
+      "provider": "unesco"
+    },
+    {
+      "checksum_sha256": "3232451b9bc7fb7aeca2f5f7bb1523240b918d613ea7c7c0de3e2659515afaca",
+      "companion_files": [
+        "data/raw/unesco/SDG/SDG_COUNTRY.csv",
+        "data/raw/unesco/SDG/SDG_DATA_REGIONAL.csv",
+        "data/raw/unesco/SDG/SDG_LABEL.csv",
+        "data/raw/unesco/SDG/SDG_METADATA.csv",
+        "data/raw/unesco/SDG/SDG_REGION.csv"
+      ],
+      "dataset_key": "SDG_DATA_NATIONAL",
+      "file_size_bytes": 75077101,
+      "path": "data/raw/unesco/SDG/SDG_DATA_NATIONAL.csv",
+      "provider": "unesco"
+    },
+    {
+      "checksum_sha256": "7b117d51936149984ab20fac4e49274f465379a7608a31e854eb1b5095ca36af",
+      "companion_files": [
+        "data/raw/unesco/SDG/SDG_COUNTRY.csv",
+        "data/raw/unesco/SDG/SDG_DATA_NATIONAL.csv",
+        "data/raw/unesco/SDG/SDG_LABEL.csv",
+        "data/raw/unesco/SDG/SDG_METADATA.csv",
+        "data/raw/unesco/SDG/SDG_REGION.csv"
+      ],
+      "dataset_key": "SDG_DATA_REGIONAL",
+      "file_size_bytes": 46674184,
+      "path": "data/raw/unesco/SDG/SDG_DATA_REGIONAL.csv",
+      "provider": "unesco"
+    },
+    {
+      "checksum_sha256": "02efd702a46b4376740b381d03f12c74267a9cdde0ec03a9e6b219b8ac2e4e5d",
+      "companion_files": [
+        "data/raw/unesco/SDG11/SDG11_COUNTRY.csv",
+        "data/raw/unesco/SDG11/SDG11_LABEL.csv",
+        "data/raw/unesco/SDG11/SDG11_METADATA.csv"
+      ],
+      "dataset_key": "SDG11_DATA_NATIONAL",
+      "file_size_bytes": 52850,
+      "path": "data/raw/unesco/SDG11/SDG11_DATA_NATIONAL.csv",
+      "provider": "unesco"
+    }
+  ],
+  "manifest_validation": {
+    "access_url_matches": true,
+    "checksum_matches": true,
+    "compatible_with_phase3": true,
+    "dataset_id": "world_bank_wdi_real_validation_00f44391cafe",
+    "manifest_path": "examples/validation/world_bank_wdi_phase11_manifest.json",
+    "missing_manifest_columns": [],
+    "source_path": "examples/validation/world_bank_wdi_phase11_validation.csv",
+    "unexpected_source_columns": []
+  },
+  "pipeline": {
+    "accepted_row_count": 2385,
+    "analysis_result_id": "analysis_8941d97c320b46d0ef37a9128be7fa4a7228906673f89a08b0408d0efb11516f",
+    "analysis_sample_size": 1682,
+    "analysis_succeeded": true,
+    "coordinated_assessment_id": "coordinated_assessment_434794799b37d91232a038e7c2647c1892395e5ed946cb448baa02d0e87043e8",
+    "coordination_succeeded": true,
+    "domain_assessments_succeeded": true,
+    "evidence_artifact_id": "evidence_artifact_c8f460e6bcd957bbe38aed15b02a8912f88da16c168305161e9affe1fe7a4892",
+    "evidence_extraction_succeeded": true,
+    "ingestion_succeeded": true,
+    "report_generation_succeeded": true,
+    "report_id": "report_072af00adec897f1b304e0264465dfcd754e2d1813bbf36020b087828243d57f",
+    "synthesis_artifact_id": "synthesis_e9ba8a29952686c80e230273ab4b59b0b1f701830ddd2f4d2b853b0afc7c547c",
+    "synthesis_succeeded": true
+  },
+  "prepared_schema_inspection": {
+    "column_count": 6,
+    "column_profiles": [
+      {
+        "examples": [
+          "ABW",
+          "ABW",
+          "ABW"
+        ],
+        "inferred_type": "string",
+        "name": "country_code",
+        "non_null_count": 2385,
+        "null_count": 0,
+        "unique_count": 265
+      },
+      {
+        "examples": [
+          "Aruba",
+          "Aruba",
+          "Aruba"
+        ],
+        "inferred_type": "string",
+        "name": "country_name",
+        "non_null_count": 2385,
+        "null_count": 0,
+        "unique_count": 265
+      },
+      {
+        "examples": [
+          "2015",
+          "2016",
+          "2017"
+        ],
+        "inferred_type": "integer",
+        "name": "year",
+        "non_null_count": 2385,
+        "null_count": 0,
+        "unique_count": 9
+      },
+      {
+        "examples": [
+          "75.405",
+          "75.54",
+          "75.62"
+        ],
+        "inferred_type": "float",
+        "name": "life_expectancy_at_birth",
+        "non_null_count": 2376,
+        "null_count": 9,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "27458.220153750623",
+          "27441.55021446005",
+          "28440.04168814911"
+        ],
+        "inferred_type": "float",
+        "name": "gdp_per_capita_current_usd",
+        "non_null_count": 2312,
+        "null_count": 73,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "137.829788208008",
+          "139.320587158203",
+          "135.124725341797"
+        ],
+        "inferred_type": "float",
+        "name": "secondary_school_enrollment",
+        "non_null_count": 1707,
+        "null_count": 678,
+        "unique_count": 1000
+      }
+    ],
+    "columns": [
+      "country_code",
+      "country_name",
+      "year",
+      "life_expectancy_at_birth",
+      "gdp_per_capita_current_usd",
+      "secondary_school_enrollment"
+    ],
+    "country_identifier": {
+      "column": "country_code",
+      "examples": [
+        "ABW",
+        "ABW",
+        "ABW"
+      ],
+      "invalid_count": 0,
+      "non_null_count": 2385,
+      "present": true
+    },
+    "missing_value_counts": [
+      [
+        "country_code",
+        0
+      ],
+      [
+        "country_name",
+        0
+      ],
+      [
+        "year",
+        0
+      ],
+      [
+        "life_expectancy_at_birth",
+        9
+      ],
+      [
+        "gdp_per_capita_current_usd",
+        73
+      ],
+      [
+        "secondary_school_enrollment",
+        678
+      ]
+    ],
+    "path": "examples/validation/world_bank_wdi_phase11_validation.csv",
+    "row_count_inspected": 2385,
+    "total_row_count": 2385,
+    "variable_columns": [
+      "country_name",
+      "life_expectancy_at_birth",
+      "gdp_per_capita_current_usd",
+      "secondary_school_enrollment"
+    ],
+    "year_identifier": {
+      "column": "year",
+      "examples": [
+        "2015",
+        "2016",
+        "2017"
+      ],
+      "invalid_count": 0,
+      "non_null_count": 2385,
+      "present": true
+    }
+  },
+  "raw_schema_inspection": {
+    "column_count": 70,
+    "column_profiles": [
+      {
+        "examples": [
+          "Africa Eastern and Southern",
+          "Africa Eastern and Southern",
+          "Africa Eastern and Southern"
+        ],
+        "inferred_type": "string",
+        "name": "Country Name",
+        "non_null_count": 5000,
+        "null_count": 0,
+        "unique_count": 4
+      },
+      {
+        "examples": [
+          "AFE",
+          "AFE",
+          "AFE"
+        ],
+        "inferred_type": "string",
+        "name": "Country Code",
+        "non_null_count": 5000,
+        "null_count": 0,
+        "unique_count": 4
+      },
+      {
+        "examples": [
+          "Access to clean fuels and technologies for cooking (% of population)",
+          "Access to clean fuels and technologies for cooking, rural (% of rural population)",
+          "Access to clean fuels and technologies for cooking, urban (% of urban population)"
+        ],
+        "inferred_type": "string",
+        "name": "Indicator Name",
+        "non_null_count": 5000,
+        "null_count": 0,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "EG.CFT.ACCS.ZS",
+          "EG.CFT.ACCS.RU.ZS",
+          "EG.CFT.ACCS.UR.ZS"
+        ],
+        "inferred_type": "string",
+        "name": "Indicator Code",
+        "non_null_count": 5000,
+        "null_count": 0,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "135.79257207381818",
+          "88.96779015161066",
+          "5.631544672378124"
+        ],
+        "inferred_type": "float",
+        "name": "1960",
+        "non_null_count": 376,
+        "null_count": 4624,
+        "unique_count": 362
+      },
+      {
+        "examples": [
+          "136.88821691973493",
+          "89.32228440223831",
+          "5.607332596271634"
+        ],
+        "inferred_type": "float",
+        "name": "1961",
+        "non_null_count": 448,
+        "null_count": 4552,
+        "unique_count": 434
+      },
+      {
+        "examples": [
+          "138.05369875588136",
+          "89.68506383092469",
+          "5.585546394974301"
+        ],
+        "inferred_type": "float",
+        "name": "1962",
+        "non_null_count": 467,
+        "null_count": 4533,
+        "unique_count": 453
+      },
+      {
+        "examples": [
+          "139.37164857093663",
+          "90.12247547922887",
+          "5.57057514071277"
+        ],
+        "inferred_type": "float",
+        "name": "1963",
+        "non_null_count": 471,
+        "null_count": 4529,
+        "unique_count": 456
+      },
+      {
+        "examples": [
+          "140.7414982035738",
+          "90.55064471446916",
+          "5.56231078750241"
+        ],
+        "inferred_type": "float",
+        "name": "1964",
+        "non_null_count": 471,
+        "null_count": 4529,
+        "unique_count": 460
+      },
+      {
+        "examples": [
+          "141.78649703631592",
+          "91.01381621635595",
+          "5.562341432347215"
+        ],
+        "inferred_type": "float",
+        "name": "1965",
+        "non_null_count": 482,
+        "null_count": 4518,
+        "unique_count": 466
+      },
+      {
+        "examples": [
+          "143.16515810561344",
+          "91.54445845079836",
+          "5.5697493351796865"
+        ],
+        "inferred_type": "float",
+        "name": "1966",
+        "non_null_count": 486,
+        "null_count": 4514,
+        "unique_count": 474
+      },
+      {
+        "examples": [
+          "144.10482393186547",
+          "92.0497306900274",
+          "5.582844561996714"
+        ],
+        "inferred_type": "float",
+        "name": "1967",
+        "non_null_count": 492,
+        "null_count": 4508,
+        "unique_count": 482
+      },
+      {
+        "examples": [
+          "144.35745487427303",
+          "92.51670437084303",
+          "5.600359498236237"
+        ],
+        "inferred_type": "float",
+        "name": "1968",
+        "non_null_count": 512,
+        "null_count": 4488,
+        "unique_count": 501
+      },
+      {
+        "examples": [
+          "145.88001349872664",
+          "92.95764875267565",
+          "5.618913574981857"
+        ],
+        "inferred_type": "float",
+        "name": "1969",
+        "non_null_count": 515,
+        "null_count": 4485,
+        "unique_count": 505
+      },
+      {
+        "examples": [
+          "10.46615399574767",
+          "3.852873329969485",
+          "1.550058100881709"
+        ],
+        "inferred_type": "float",
+        "name": "1970",
+        "non_null_count": 874,
+        "null_count": 4126,
+        "unique_count": 845
+      },
+      {
+        "examples": [
+          "10.651577520079597",
+          "3.8786494850737108",
+          "0.9133343547614369"
+        ],
+        "inferred_type": "float",
+        "name": "1971",
+        "non_null_count": 897,
+        "null_count": 4103,
+        "unique_count": 869
+      },
+      {
+        "examples": [
+          "11.01963303409111",
+          "3.859804693317637",
+          "0.8385284331406118"
+        ],
+        "inferred_type": "float",
+        "name": "1972",
+        "non_null_count": 905,
+        "null_count": 4095,
+        "unique_count": 878
+      },
+      {
+        "examples": [
+          "10.72157711480353",
+          "3.905356248812815",
+          "0.40182168129413137"
+        ],
+        "inferred_type": "float",
+        "name": "1973",
+        "non_null_count": 916,
+        "null_count": 4084,
+        "unique_count": 888
+      },
+      {
+        "examples": [
+          "10.575863336320142",
+          "3.916508156485745",
+          "0.6006426244041367"
+        ],
+        "inferred_type": "float",
+        "name": "1974",
+        "non_null_count": 939,
+        "null_count": 4061,
+        "unique_count": 912
+      },
+      {
+        "examples": [
+          "11.685355383280905",
+          "3.900009872934135",
+          "1.1892113745566515"
+        ],
+        "inferred_type": "float",
+        "name": "1975",
+        "non_null_count": 954,
+        "null_count": 4046,
+        "unique_count": 925
+      },
+      {
+        "examples": [
+          "12.338749011718503",
+          "3.888247025763189",
+          "1.3707631727300913"
+        ],
+        "inferred_type": "float",
+        "name": "1976",
+        "non_null_count": 978,
+        "null_count": 4022,
+        "unique_count": 947
+      },
+      {
+        "examples": [
+          "12.634259057359353",
+          "3.8305303963798973",
+          "0.5715196864826353"
+        ],
+        "inferred_type": "float",
+        "name": "1977",
+        "non_null_count": 1030,
+        "null_count": 3970,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "12.993149167999634",
+          "3.910531319067426",
+          "0.3725339872036937"
+        ],
+        "inferred_type": "float",
+        "name": "1978",
+        "non_null_count": 1059,
+        "null_count": 3941,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "8.983908168815496",
+          "13.209853760937488",
+          "4.043157935166612"
+        ],
+        "inferred_type": "float",
+        "name": "1979",
+        "non_null_count": 1063,
+        "null_count": 3937,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "11.661171185649122",
+          "12.57101484596701",
+          "4.230523767666619"
+        ],
+        "inferred_type": "float",
+        "name": "1980",
+        "non_null_count": 1088,
+        "null_count": 3912,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "132998254863.81123",
+          "558.7150201897314",
+          "9.852489196364747"
+        ],
+        "inferred_type": "float",
+        "name": "1981",
+        "non_null_count": 1129,
+        "null_count": 3871,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "124581985601.72171",
+          "506.7975223281337",
+          "4.710473722116008"
+        ],
+        "inferred_type": "float",
+        "name": "1982",
+        "non_null_count": 1130,
+        "null_count": 3870,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "135764970334.84233",
+          "535.2566043937396",
+          "5.555496965014481"
+        ],
+        "inferred_type": "float",
+        "name": "1983",
+        "non_null_count": 1146,
+        "null_count": 3854,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "126074310586.29521",
+          "482.1968085984742",
+          "6.394322628457387"
+        ],
+        "inferred_type": "float",
+        "name": "1984",
+        "non_null_count": 1134,
+        "null_count": 3866,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "102745033636.03908",
+          "381.31333620898585",
+          "12.575473776110222"
+        ],
+        "inferred_type": "float",
+        "name": "1985",
+        "non_null_count": 1162,
+        "null_count": 3838,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "113526248806.91467",
+          "408.9241574894884",
+          "4.708898344451066"
+        ],
+        "inferred_type": "float",
+        "name": "1986",
+        "non_null_count": 1165,
+        "null_count": 3835,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "140888665047.85117",
+          "492.50173785249564",
+          "3.3434235714794083"
+        ],
+        "inferred_type": "float",
+        "name": "1987",
+        "non_null_count": 1179,
+        "null_count": 3821,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "153020563824.3836",
+          "519.5968701870293",
+          "3.5704318272650633"
+        ],
+        "inferred_type": "float",
+        "name": "1988",
+        "non_null_count": 1172,
+        "null_count": 3828,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "160337569488.0918",
+          "529.273237998508",
+          "4.029367254099255"
+        ],
+        "inferred_type": "float",
+        "name": "1989",
+        "non_null_count": 1184,
+        "null_count": 3816,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "177898012894.442",
+          "570.6455992814352",
+          "-1.1760340463575232"
+        ],
+        "inferred_type": "float",
+        "name": "1990",
+        "non_null_count": 1483,
+        "null_count": 3517,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "190962530399.66672",
+          "595.9329854016257",
+          "-0.6214217117579932"
+        ],
+        "inferred_type": "float",
+        "name": "1991",
+        "non_null_count": 1599,
+        "null_count": 3401,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "189578051303.99634",
+          "576.0802596776874",
+          "1.2025626996088785"
+        ],
+        "inferred_type": "float",
+        "name": "1992",
+        "non_null_count": 1612,
+        "null_count": 3388,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "188848233659.69946",
+          "558.1875141678522",
+          "3.4527894448498353"
+        ],
+        "inferred_type": "float",
+        "name": "1993",
+        "non_null_count": 1614,
+        "null_count": 3386,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "191414442739.88986",
+          "550.9251845390025",
+          "1.7737591758471916"
+        ],
+        "inferred_type": "float",
+        "name": "1994",
+        "non_null_count": 1630,
+        "null_count": 3370,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "217019088796.72244",
+          "608.6119820719871",
+          "3.0478529167944624"
+        ],
+        "inferred_type": "float",
+        "name": "1995",
+        "non_null_count": 1660,
+        "null_count": 3340,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "219471941766.9466",
+          "599.4232438839093",
+          "1.6352589276589007"
+        ],
+        "inferred_type": "float",
+        "name": "1996",
+        "non_null_count": 1666,
+        "null_count": 3334,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "231494251735.94592",
+          "616.2560147473484",
+          "2.7621702445905503"
+        ],
+        "inferred_type": "float",
+        "name": "1997",
+        "non_null_count": 1684,
+        "null_count": 3316,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "217836225179.2933",
+          "565.0660754705494",
+          "0.9054609495375088"
+        ],
+        "inferred_type": "float",
+        "name": "1998",
+        "non_null_count": 1677,
+        "null_count": 3323,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "216868775635.12976",
+          "547.9930874480838",
+          "1.3027920548905043"
+        ],
+        "inferred_type": "float",
+        "name": "1999",
+        "non_null_count": 1721,
+        "null_count": 3279,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "11.494704278406504",
+          "3.548166793657923",
+          "32.350689419633"
+        ],
+        "inferred_type": "float",
+        "name": "2000",
+        "non_null_count": 2059,
+        "null_count": 2941,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "11.841055065927884",
+          "3.7040243020767645",
+          "32.68334001389758"
+        ],
+        "inferred_type": "float",
+        "name": "2001",
+        "non_null_count": 1997,
+        "null_count": 3003,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "12.202522809351679",
+          "3.890042539758588",
+          "33.100176716893365"
+        ],
+        "inferred_type": "float",
+        "name": "2002",
+        "non_null_count": 2012,
+        "null_count": 2988,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "12.573380001305454",
+          "4.091719963485566",
+          "33.49046486311716"
+        ],
+        "inferred_type": "float",
+        "name": "2003",
+        "non_null_count": 2028,
+        "null_count": 2972,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "12.958690067854816",
+          "4.274248660084077",
+          "33.99118256272117"
+        ],
+        "inferred_type": "float",
+        "name": "2004",
+        "non_null_count": 2038,
+        "null_count": 2962,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "13.371142020062653",
+          "4.532520665728785",
+          "34.47060772949395"
+        ],
+        "inferred_type": "float",
+        "name": "2005",
+        "non_null_count": 2192,
+        "null_count": 2808,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "13.782714058969077",
+          "4.757490140376193",
+          "34.92265553119089"
+        ],
+        "inferred_type": "float",
+        "name": "2006",
+        "non_null_count": 2199,
+        "null_count": 2801,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "14.254177627300376",
+          "5.004034662291207",
+          "35.50102800884387"
+        ],
+        "inferred_type": "float",
+        "name": "2007",
+        "non_null_count": 2245,
+        "null_count": 2755,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "14.736585792190409",
+          "5.248924100914747",
+          "35.915353895754215"
+        ],
+        "inferred_type": "float",
+        "name": "2008",
+        "non_null_count": 2239,
+        "null_count": 2761,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "15.171557105564144",
+          "5.49974660596306",
+          "36.435215900426854"
+        ],
+        "inferred_type": "float",
+        "name": "2009",
+        "non_null_count": 2247,
+        "null_count": 2753,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "15.620173443721153",
+          "5.747850934000397",
+          "36.822686658139915"
+        ],
+        "inferred_type": "float",
+        "name": "2010",
+        "non_null_count": 2362,
+        "null_count": 2638,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "16.123198457413242",
+          "6.028196445222035",
+          "37.252569971696566"
+        ],
+        "inferred_type": "float",
+        "name": "2011",
+        "non_null_count": 2291,
+        "null_count": 2709,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "16.59973400241173",
+          "6.309217696745998",
+          "37.635987054179836"
+        ],
+        "inferred_type": "float",
+        "name": "2012",
+        "non_null_count": 2327,
+        "null_count": 2673,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "17.061049313678552",
+          "6.6436253177026625",
+          "37.96932071572531"
+        ],
+        "inferred_type": "float",
+        "name": "2013",
+        "non_null_count": 2305,
+        "null_count": 2695,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "17.63415020676466",
+          "6.932310305718468",
+          "38.34023239170268"
+        ],
+        "inferred_type": "float",
+        "name": "2014",
+        "non_null_count": 2383,
+        "null_count": 2617,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "18.145833390385175",
+          "7.259936007664522",
+          "38.74198830883055"
+        ],
+        "inferred_type": "float",
+        "name": "2015",
+        "non_null_count": 2402,
+        "null_count": 2598,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "18.68511838055394",
+          "7.606712056855138",
+          "39.05262615876516"
+        ],
+        "inferred_type": "float",
+        "name": "2016",
+        "non_null_count": 2348,
+        "null_count": 2652,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "19.205632430461566",
+          "7.9266044460251335",
+          "39.32106815800108"
+        ],
+        "inferred_type": "float",
+        "name": "2017",
+        "non_null_count": 2335,
+        "null_count": 2665,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "19.74277232561877",
+          "8.309895632499256",
+          "39.64953356464245"
+        ],
+        "inferred_type": "float",
+        "name": "2018",
+        "non_null_count": 2363,
+        "null_count": 2637,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "20.332678973479805",
+          "8.704590789736665",
+          "39.96829860397896"
+        ],
+        "inferred_type": "float",
+        "name": "2019",
+        "non_null_count": 2384,
+        "null_count": 2616,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "20.862800066556645",
+          "9.106639547425047",
+          "40.35462821357813"
+        ],
+        "inferred_type": "float",
+        "name": "2020",
+        "non_null_count": 2206,
+        "null_count": 2794,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "21.419620740007513",
+          "9.480803898591947",
+          "40.723805178702015"
+        ],
+        "inferred_type": "float",
+        "name": "2021",
+        "non_null_count": 2136,
+        "null_count": 2864,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "21.996456231910123",
+          "9.903208961847541",
+          "41.026350512054854"
+        ],
+        "inferred_type": "float",
+        "name": "2022",
+        "non_null_count": 2047,
+        "null_count": 2953,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "22.54144021276354",
+          "10.288153897517871",
+          "41.289974160063146"
+        ],
+        "inferred_type": "float",
+        "name": "2023",
+        "non_null_count": 1847,
+        "null_count": 3153,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "52.598170516358906",
+          "36.08057156580783",
+          "80.04927404964874"
+        ],
+        "inferred_type": "float",
+        "name": "2024",
+        "non_null_count": 1477,
+        "null_count": 3523,
+        "unique_count": 1000
+      },
+      {
+        "examples": [
+          "77.7132793016185",
+          "5.966963787994354",
+          "70.73129156342226"
+        ],
+        "inferred_type": "float",
+        "name": "2025",
+        "non_null_count": 905,
+        "null_count": 4095,
+        "unique_count": 877
+      }
+    ],
+    "columns": [
+      "Country Name",
+      "Country Code",
+      "Indicator Name",
+      "Indicator Code",
+      "1960",
+      "1961",
+      "1962",
+      "1963",
+      "1964",
+      "1965",
+      "1966",
+      "1967",
+      "1968",
+      "1969",
+      "1970",
+      "1971",
+      "1972",
+      "1973",
+      "1974",
+      "1975",
+      "1976",
+      "1977",
+      "1978",
+      "1979",
+      "1980",
+      "1981",
+      "1982",
+      "1983",
+      "1984",
+      "1985",
+      "1986",
+      "1987",
+      "1988",
+      "1989",
+      "1990",
+      "1991",
+      "1992",
+      "1993",
+      "1994",
+      "1995",
+      "1996",
+      "1997",
+      "1998",
+      "1999",
+      "2000",
+      "2001",
+      "2002",
+      "2003",
+      "2004",
+      "2005",
+      "2006",
+      "2007",
+      "2008",
+      "2009",
+      "2010",
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "country_identifier": {
+      "column": "Country Code",
+      "examples": [
+        "AFE",
+        "AFE",
+        "AFE"
+      ],
+      "invalid_count": 0,
+      "non_null_count": 5000,
+      "present": true
+    },
+    "missing_value_counts": [
+      [
+        "Country Name",
+        0
+      ],
+      [
+        "Country Code",
+        0
+      ],
+      [
+        "Indicator Name",
+        0
+      ],
+      [
+        "Indicator Code",
+        0
+      ],
+      [
+        "1960",
+        4624
+      ],
+      [
+        "1961",
+        4552
+      ],
+      [
+        "1962",
+        4533
+      ],
+      [
+        "1963",
+        4529
+      ],
+      [
+        "1964",
+        4529
+      ],
+      [
+        "1965",
+        4518
+      ],
+      [
+        "1966",
+        4514
+      ],
+      [
+        "1967",
+        4508
+      ],
+      [
+        "1968",
+        4488
+      ],
+      [
+        "1969",
+        4485
+      ],
+      [
+        "1970",
+        4126
+      ],
+      [
+        "1971",
+        4103
+      ],
+      [
+        "1972",
+        4095
+      ],
+      [
+        "1973",
+        4084
+      ],
+      [
+        "1974",
+        4061
+      ],
+      [
+        "1975",
+        4046
+      ],
+      [
+        "1976",
+        4022
+      ],
+      [
+        "1977",
+        3970
+      ],
+      [
+        "1978",
+        3941
+      ],
+      [
+        "1979",
+        3937
+      ],
+      [
+        "1980",
+        3912
+      ],
+      [
+        "1981",
+        3871
+      ],
+      [
+        "1982",
+        3870
+      ],
+      [
+        "1983",
+        3854
+      ],
+      [
+        "1984",
+        3866
+      ],
+      [
+        "1985",
+        3838
+      ],
+      [
+        "1986",
+        3835
+      ],
+      [
+        "1987",
+        3821
+      ],
+      [
+        "1988",
+        3828
+      ],
+      [
+        "1989",
+        3816
+      ],
+      [
+        "1990",
+        3517
+      ],
+      [
+        "1991",
+        3401
+      ],
+      [
+        "1992",
+        3388
+      ],
+      [
+        "1993",
+        3386
+      ],
+      [
+        "1994",
+        3370
+      ],
+      [
+        "1995",
+        3340
+      ],
+      [
+        "1996",
+        3334
+      ],
+      [
+        "1997",
+        3316
+      ],
+      [
+        "1998",
+        3323
+      ],
+      [
+        "1999",
+        3279
+      ],
+      [
+        "2000",
+        2941
+      ],
+      [
+        "2001",
+        3003
+      ],
+      [
+        "2002",
+        2988
+      ],
+      [
+        "2003",
+        2972
+      ],
+      [
+        "2004",
+        2962
+      ],
+      [
+        "2005",
+        2808
+      ],
+      [
+        "2006",
+        2801
+      ],
+      [
+        "2007",
+        2755
+      ],
+      [
+        "2008",
+        2761
+      ],
+      [
+        "2009",
+        2753
+      ],
+      [
+        "2010",
+        2638
+      ],
+      [
+        "2011",
+        2709
+      ],
+      [
+        "2012",
+        2673
+      ],
+      [
+        "2013",
+        2695
+      ],
+      [
+        "2014",
+        2617
+      ],
+      [
+        "2015",
+        2598
+      ],
+      [
+        "2016",
+        2652
+      ],
+      [
+        "2017",
+        2665
+      ],
+      [
+        "2018",
+        2637
+      ],
+      [
+        "2019",
+        2616
+      ],
+      [
+        "2020",
+        2794
+      ],
+      [
+        "2021",
+        2864
+      ],
+      [
+        "2022",
+        2953
+      ],
+      [
+        "2023",
+        3153
+      ],
+      [
+        "2024",
+        3523
+      ],
+      [
+        "2025",
+        4095
+      ]
+    ],
+    "path": "data/raw/world_bank/WDI_CSV/WDICSV.csv",
+    "row_count_inspected": 5000,
+    "total_row_count": null,
+    "variable_columns": [
+      "Indicator Code"
+    ],
+    "year_identifier": {
+      "column": null,
+      "examples": [],
+      "invalid_count": 0,
+      "non_null_count": 0,
+      "present": false
+    }
+  },
+  "report": {
+    "output_format": "markdown",
+    "rendered": true,
+    "report_id": "report_072af00adec897f1b304e0264465dfcd754e2d1813bbf36020b087828243d57f"
+  },
+  "selected_dataset": {
+    "checksum_sha256": "2c576a0636caabc374afaf591fdfd3e9ff6b88c5656d246047057b992fc808f8",
+    "companion_files": [
+      "data/raw/world_bank/WDI_CSV/WDICountry.csv",
+      "data/raw/world_bank/WDI_CSV/WDISeries.csv",
+      "data/raw/world_bank/WDI_CSV/WDIcountry-series.csv",
+      "data/raw/world_bank/WDI_CSV/WDIfootnote.csv",
+      "data/raw/world_bank/WDI_CSV/WDIseries-time.csv"
+    ],
+    "dataset_key": "WDI",
+    "file_size_bytes": 198481686,
+    "path": "data/raw/world_bank/WDI_CSV/WDICSV.csv",
+    "provider": "world_bank"
+  },
+  "variable_summaries": [
+    {
+      "data_type": "string",
+      "maximum": "ZWE",
+      "minimum": "ABW",
+      "non_null_count": 2385,
+      "null_count": 0,
+      "role": "identifier",
+      "source_field_name": "country_code",
+      "unique_count": 265,
+      "variable_id": "country_code"
+    },
+    {
+      "data_type": "string",
+      "maximum": "Zimbabwe",
+      "minimum": "Afghanistan",
+      "non_null_count": 2385,
+      "null_count": 0,
+      "role": "identifier",
+      "source_field_name": "country_name",
+      "unique_count": 265,
+      "variable_id": "country_name"
+    },
+    {
+      "data_type": "integer",
+      "maximum": 2023.0,
+      "minimum": 2015.0,
+      "non_null_count": 2385,
+      "null_count": 0,
+      "role": "time",
+      "source_field_name": "year",
+      "unique_count": 9,
+      "variable_id": "year"
+    },
+    {
+      "data_type": "float",
+      "maximum": 86.372,
+      "minimum": 18.818,
+      "non_null_count": 2376,
+      "null_count": 9,
+      "role": "outcome",
+      "source_field_name": "life_expectancy_at_birth",
+      "unique_count": 1000,
+      "variable_id": "life_expectancy_at_birth"
+    },
+    {
+      "data_type": "float",
+      "maximum": 256799.9112120507,
+      "minimum": 232.9378121001527,
+      "non_null_count": 2312,
+      "null_count": 73,
+      "role": "predictor",
+      "source_field_name": "gdp_per_capita_current_usd",
+      "unique_count": 1000,
+      "variable_id": "gdp_per_capita_current_usd"
+    },
+    {
+      "data_type": "float",
+      "maximum": 164.079818725586,
+      "minimum": 3.34785008430481,
+      "non_null_count": 1707,
+      "null_count": 678,
+      "role": "exposure",
+      "source_field_name": "secondary_school_enrollment",
+      "unique_count": 1000,
+      "variable_id": "secondary_school_enrollment"
+    }
+  ]
+}
