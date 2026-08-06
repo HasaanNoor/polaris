@@ -17,6 +17,7 @@ Every investigation must record:
 - software and dependency versions when code exists;
 - execution environment metadata;
 - validation results;
+- harmonization request, variable mappings, country/year normalization rules, join type, duplicate behavior, missingness reasons, and value-level provenance when a derived harmonized dataset is used;
 - report generation metadata.
 
 ## Artifact Reproduction

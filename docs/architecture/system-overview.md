@@ -24,7 +24,9 @@ flowchart TD
   P[Official Provider] --> DL[Explicit dataset acquisition]
   DL --> R[Immutable raw snapshot]
   R --> M
-  M --> QL[Data Quality Agent]
+  M --> ING[Phase 3 validated provider datasets]
+  ING --> H[Country-year harmonization]
+  H --> QL[Data Quality Agent]
   QL --> A[Statistical Analysis Agent]
   A --> CI[Causal Identification Agent]
   CI --> EC[Evidence Critic Agent]
@@ -40,6 +42,10 @@ Data transformations, statistical calculations, causal estimates, diagnostics, a
 ## Dataset Acquisition
 
 Provider access is an explicit pre-ingestion step. Polaris downloads or copies a provider file once, stores it under `data/raw/<provider>/`, records source URL, original filename, timestamp, byte size, format, and SHA-256 checksum, and generates a normal `DatasetManifest` under `data/manifests/`. Registry, ingestion, analysis, evidence, coordination, synthesis, and reporting operate from those local artifacts and do not require provider access after acquisition.
+
+## Country-Year Harmonization
+
+Phase 12 adds a deterministic layer between validated provider ingestion and analysis. It consumes immutable `DatasetIngestionResult` objects, explicit dataset configs, reviewed variable mappings, and a declared join type. It normalizes country and year identifiers, excludes aggregates from country-level joins by default, validates units and definitions, records duplicate keys and conflicts, tracks missingness reason codes, and preserves value-level provenance for each harmonized value. The output is a derived `HarmonizedDataset` that can be exported as a Phase 3-compatible CSV and manifest.
 
 ## Failure Handling
 

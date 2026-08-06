@@ -1,6 +1,6 @@
 # Provider Selection Strategy
 
-Polaris selects real-world datasets for deterministic, provenance-first country-year research. A selected provider is not the same as a downloaded, validated, or fully integrated dataset. Phase 10 implements acquisition infrastructure and built-in adapters for the first three providers only: World Bank WDI, WHO GHO, and UNESCO UIS.
+Polaris selects real-world datasets for deterministic, provenance-first country-year research. A selected provider is not the same as a downloaded, validated, harmonized, or fully integrated dataset. Phase 10 implements acquisition infrastructure and built-in adapters for the first three providers: World Bank WDI, WHO GHO, and UNESCO UIS. Phase 11 validates WDI end to end. Phase 12 validates a narrow WDI plus WHO life-expectancy country-year harmonization example.
 
 ## Selection Criteria
 
@@ -27,9 +27,9 @@ Round 1 is intended to prove the complete Phase 2-9 pipeline using real economic
 
 | Provider | Primary research role | Supported domains | Reason for inclusion | Known limitations | Intended round | Adapter implemented | Dataset selected | Dataset downloaded | Dataset validated | Integrated end to end |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| World Bank World Development Indicators | Cross-country development baseline | economics, development, demographics, infrastructure, health, education | Broad country-year indicator coverage and strong fit for baseline controls and outcomes. | Indicator definitions vary by series; missingness and country aggregation rules require review; revisions can change historical values. | Round 1 | Yes | Yes | Not assumed | Not yet | Not yet |
-| WHO Global Health Observatory | Public-health outcomes and system indicators | public health, mortality, health systems, disease burden | Official global health source with health-specific methodology and country-level indicators. | Health estimates may depend on modeled values, reporting quality, and changing definitions; units must be reviewed by indicator family. | Round 1 | Yes | Yes | Not assumed | Not yet | Not yet |
-| UNESCO Institute for Statistics | Education access, attainment, and finance | education, human development | Official education statistics source with education-specific definitions and global coverage. | Education systems differ across countries; enrollment and completion metrics need level-specific comparability review; reporting gaps are expected. | Round 1 | Yes | Yes | Not assumed | Not yet | Not yet |
+| World Bank World Development Indicators | Cross-country development baseline | economics, development, demographics, infrastructure, health, education | Broad country-year indicator coverage and strong fit for baseline controls and outcomes. | Indicator definitions vary by series; missingness and country aggregation rules require review; revisions can change historical values. | Round 1 | Yes | Yes | Yes, locally | Yes | Yes |
+| WHO Global Health Observatory | Public-health outcomes and system indicators | public health, mortality, health systems, disease burden | Official global health source with health-specific methodology and country-level indicators. | Health estimates may depend on modeled values, reporting quality, and changing definitions; units must be reviewed by indicator family. | Round 1 | Yes | Yes | Yes, locally | Life expectancy subset validated | WDI+WHO life expectancy subset |
+| UNESCO Institute for Statistics | Education access, attainment, and finance | education, human development | Official education statistics source with education-specific definitions and global coverage. | Education systems differ across countries; enrollment and completion metrics need level-specific comparability review; reporting gaps are expected. | Round 1 | Yes | Yes | Yes, locally | Schema-profiled | Not yet |
 
 ### Round 2: Governance and Institutions
 

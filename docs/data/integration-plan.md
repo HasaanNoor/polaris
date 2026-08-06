@@ -1,6 +1,6 @@
 # Real-Data Integration Plan
 
-Phase 10 provides acquisition infrastructure. Real-data research integration remains staged because provider files must be selected, snapshotted, validated, reviewed, analyzed, and carried through the existing deterministic artifact pipeline before they become reliable Polaris research inputs.
+Phase 10 provides acquisition infrastructure, Phase 11 validated official WDI data through Phases 3-9, and Phase 12 adds deterministic country-year harmonization for reviewed multi-provider subsets. Real-data research integration remains staged because provider files must be selected, snapshotted, validated, reviewed, harmonized where needed, analyzed, and carried through the existing deterministic artifact pipeline before they become reliable Polaris research inputs.
 
 ## Workflow
 
@@ -15,9 +15,12 @@ Phase 10 provides acquisition infrastructure. Real-data research integration rem
 9. Run Phase 3 validation.
 10. Inspect schema, country identifiers, year identifiers, missingness, units, and coverage.
 11. Define a reviewed variable subset.
-12. Run Phase 4 analysis.
-13. Verify evidence, agent, coordination, synthesis, and reporting behavior through Phases 5-9.
-14. Preserve all outputs and provenance for reproducibility.
+12. For multi-provider work, define explicit country-year harmonization configs and variable mappings.
+13. Validate country/year normalization, unit and definition compatibility, duplicate keys, aggregate exclusions, conflicts, and missingness.
+14. Export a derived Phase 3-compatible harmonized dataset when harmonization succeeds.
+15. Run Phase 4 analysis.
+16. Verify evidence, agent, coordination, synthesis, and reporting behavior through Phases 5-9.
+17. Preserve all outputs and provenance for reproducibility.
 
 ## Rollout
 
@@ -31,7 +34,7 @@ Datasets:
 
 Goal: prove the complete Phase 2-9 pipeline using real economic, education, and health data.
 
-Round 1 should end with at least one reproducible end-to-end case study that starts from immutable raw snapshots and produces validated analysis, evidence, agent assessments, coordination, synthesis, and a structured report.
+Round 1 now has WDI end-to-end validation and a Phase 12 WDI plus WHO life-expectancy harmonization example. UNESCO UIS and additional WHO files remain staged for reviewed variable mapping before end-to-end claims.
 
 ### Round 2
 
@@ -65,3 +68,6 @@ Round 3 should begin only after governance integration has been validated throug
 - Do not add exact indicator codes until they are verified against current repository metadata or an acquired source snapshot.
 - Do not promote a variable subset without review of units, missingness, coverage, and comparability.
 - Preserve source provenance in every step so downstream reports can identify which source bytes produced each result.
+- Do not harmonize country names fuzzily.
+- Do not treat regions, income groups, or global aggregates as country observations.
+- Do not merge same-named variables across providers without reviewed mappings, compatible units/definitions, and explicit precedence when needed.
