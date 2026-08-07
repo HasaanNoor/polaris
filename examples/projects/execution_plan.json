@@ -1,0 +1,34 @@
+{
+  "project_id": "project_2466ef432f636875b79df2ba29364b06dfb8a98d92629e1e74452b7b09cea8ff",
+  "required_datasets": [
+    "wdi",
+    "who"
+  ],
+  "stages": [
+    "resolve_datasets",
+    "ingest",
+    "harmonize",
+    "analyze",
+    "extract_evidence",
+    "run_agents",
+    "coordinate",
+    "synthesize",
+    "report",
+    "complete"
+  ],
+  "ingestion_dataset_ids": [
+    "wdi",
+    "who"
+  ],
+  "harmonization_required": true,
+  "statistical_analysis_step": "pearson_correlation",
+  "evidence_step": "phase5_extract_evidence",
+  "selected_agents": [
+    "economics",
+    "public_health"
+  ],
+  "coordination_step": "phase7_coordinate_assessments",
+  "synthesis_step": "deterministic",
+  "report_step": "markdown",
+  "schema_version": "1.0.0"
+}

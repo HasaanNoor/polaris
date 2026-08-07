@@ -26,6 +26,9 @@ flowchart TD
   R --> M
   M --> ING[Phase 3 validated provider datasets]
   ING --> H[Country-year harmonization]
+  Q --> P13[Explicit ResearchProjectRequest]
+  P13 --> ING
+  P13 --> H
   H --> QL[Data Quality Agent]
   QL --> A[Statistical Analysis Agent]
   A --> CI[Causal Identification Agent]
@@ -47,6 +50,12 @@ Provider access is an explicit pre-ingestion step. Polaris downloads or copies a
 
 Phase 12 adds a deterministic layer between validated provider ingestion and analysis. It consumes immutable `DatasetIngestionResult` objects, explicit dataset configs, reviewed variable mappings, and a declared join type. It normalizes country and year identifiers, excludes aggregates from country-level joins by default, validates units and definitions, records duplicate keys and conflicts, tracks missingness reason codes, and preserves value-level provenance for each harmonized value. The output is a derived `HarmonizedDataset` that can be exported as a Phase 3-compatible CSV and manifest.
 
+## Research Project Orchestration
+
+Phase 13 adds a lightweight synchronous orchestration layer under `src/polaris/projects`. A `ResearchProjectRequest` explicitly names datasets or artifacts, optional harmonization configuration, a `StatisticalSpecification`, selected domain agents, synthesis settings, and report settings. `plan_research_project(...)` produces an inspectable deterministic execution plan. `run_research_project(...)` executes explicit stages: dataset resolution, ingestion, optional harmonization, analysis, evidence extraction, selected agents, coordination, synthesis, reporting, and completion.
+
+The orchestrator coordinates but does not analyze. It reuses existing Phase 3 ingestion, Phase 12 harmonization, Phase 4 analysis, Phase 5 evidence, Phase 6 agents, Phase 7 coordination, Phase 8 synthesis, and Phase 9 reporting services. Multiple datasets require explicit harmonization mappings. Statistical specifications are never generated from the research question. Agent selection is explicit and stored in deterministic order.
+
 ## Failure Handling
 
 The system must stop or downgrade claims when:
@@ -63,6 +72,8 @@ The system must stop or downgrade claims when:
 ## Provenance Flow
 
 Every dataset, transformation, model output, and narrative claim must link to provenance records. Reports are generated from artifacts, not from untracked agent memory.
+
+Project-level provenance aggregates upstream identifiers and source checksums into one traceable chain from report back to source datasets. It references upstream provenance rather than replacing it.
 
 ## Technology Position
 

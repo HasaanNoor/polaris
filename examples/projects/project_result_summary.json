@@ -1,0 +1,26 @@
+{
+  "agent_assessment_ids": [
+    "agent_assessment_5f4bc87dca0e63f2892036cd450146c582a293b78a0e8abcdcf9aa4e9c35a508",
+    "agent_assessment_bf665d663ac3f529cd7ab272d47be81dcce8e15e1b1fde47289fae9fc02fb189"
+  ],
+  "analysis_result_id": "analysis_3128626ba1296f90a8723f47962ff9d98b7b84ea90fd557c426c0faac61e5cd6",
+  "completed_stages": [
+    "resolve_datasets",
+    "ingest",
+    "harmonize",
+    "analyze",
+    "extract_evidence",
+    "run_agents",
+    "coordinate",
+    "synthesize",
+    "report",
+    "complete"
+  ],
+  "coordinated_assessment_id": "coordinated_assessment_09913d7db5079c98669528b74823cf9a23fe49897a88bdd403f030eed2ce6424",
+  "evidence_artifact_id": "evidence_artifact_69dc0b8f21ef91f524390748921d52cfc502e86f8c8f34d617d33867728d352a",
+  "harmonized_dataset_id": "harmonized_country_year_67e9b4ea18e4343d",
+  "overall_status": "completed",
+  "project_id": "project_2466ef432f636875b79df2ba29364b06dfb8a98d92629e1e74452b7b09cea8ff",
+  "report_id": "report_79e6384869daa38aec4660a3e7fd020267c872f039f344ad47b3786d84fb15f8",
+  "synthesis_id": "synthesis_9cfaf18bb17dd97ea5c52e6481bf66ee9056697695202f96ee7ab16980328eb7"
+}

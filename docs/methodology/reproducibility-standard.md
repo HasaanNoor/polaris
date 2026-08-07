@@ -18,11 +18,14 @@ Every investigation must record:
 - execution environment metadata;
 - validation results;
 - harmonization request, variable mappings, country/year normalization rules, join type, duplicate behavior, missingness reasons, and value-level provenance when a derived harmonized dataset is used;
+- project ID, execution plan, explicit stage results, completed upstream artifact IDs, failed stage if any, and project-level provenance when a Phase 13 project orchestrator is used;
 - report generation metadata.
 
 ## Artifact Reproduction
 
 The machine-readable artifact is the canonical record. The human-readable report must be regenerable from the artifact and templates.
+
+For Phase 13 projects, deterministic project IDs must be derived from stable inputs such as the research question, dataset identifiers or checksums, harmonization configuration, statistical specification, selected agents, synthesis mode, report settings, geographic scope, temporal scope, and orchestration schema version. Execution timestamps are allowed in stage metadata and project provenance, but they must not affect project identity. Failures must stop downstream execution while preserving completed artifacts for inspection.
 
 ## Data Publication and Privacy
 

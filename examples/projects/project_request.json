@@ -1,0 +1,920 @@
+{
+  "project_name": "Test Project",
+  "research_question": {
+    "question_id": "rq_project_test",
+    "raw_text": "How is x associated with y?",
+    "normalized_text": null,
+    "category": "correlational",
+    "outcome_variables": [
+      {
+        "variable_id": "y",
+        "label": null
+      }
+    ],
+    "exposure_variables": [
+      {
+        "variable_id": "x",
+        "label": null
+      }
+    ],
+    "covariates": [],
+    "population": "Test country-year rows",
+    "geographic_scope": {
+      "codes": [
+        "TEST"
+      ],
+      "description": null
+    },
+    "temporal_scope": {
+      "start": 2020,
+      "end": 2021,
+      "label": null
+    },
+    "unit_of_analysis": "country-year",
+    "requested_evidence_level": "limited",
+    "requested_analytical_methods": [
+      "pearson_correlation"
+    ],
+    "assumptions": [],
+    "exclusions": [],
+    "required_metadata": [],
+    "validation_warnings": [],
+    "created_at": "2026-08-07T00:00:00Z",
+    "schema_version": "1.0.0"
+  },
+  "dataset_inputs": [
+    {
+      "kind": "ingestion_artifact",
+      "ingestion_result": {
+        "dataset_manifest": {
+          "dataset_id": "wdi",
+          "title": "wdi",
+          "provider": "World Bank",
+          "source_url": "https://example.test/source",
+          "access_url": null,
+          "description": null,
+          "license": null,
+          "status": "reviewed_candidate",
+          "geographic_coverage": {
+            "codes": [
+              "GLOBAL"
+            ],
+            "description": null
+          },
+          "temporal_coverage": {
+            "start": 2019,
+            "end": 2021,
+            "label": null
+          },
+          "revision_metadata": {
+            "release_date": null,
+            "revision_policy": null,
+            "update_frequency": null,
+            "source_version": null
+          },
+          "variables": [
+            {
+              "variable_id": "country_code",
+              "label": "Country Code",
+              "description": null,
+              "unit": null,
+              "data_type": "string",
+              "role": "identifier",
+              "source_field_name": null,
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "country_name",
+              "label": "Country Name",
+              "description": null,
+              "unit": null,
+              "data_type": "string",
+              "role": "identifier",
+              "source_field_name": null,
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "year",
+              "label": "Year",
+              "description": null,
+              "unit": null,
+              "data_type": "integer",
+              "role": "time",
+              "source_field_name": null,
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "gdp",
+              "label": "Gdp",
+              "description": null,
+              "unit": "current US dollars",
+              "data_type": "float",
+              "role": "predictor",
+              "source_field_name": null,
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "fertility",
+              "label": "Fertility",
+              "description": null,
+              "unit": "births per woman",
+              "data_type": "float",
+              "role": "predictor",
+              "source_field_name": null,
+              "missing_value_representation": [],
+              "comparability_notes": []
+            }
+          ],
+          "units": [],
+          "frequency": "annual",
+          "methodology_reference": null,
+          "comparability_warnings": [],
+          "licensing_warnings": [],
+          "access_restrictions": [],
+          "source_version": null,
+          "retrieval_timestamp": null,
+          "checksum": null,
+          "schema_version": "1.0.0"
+        },
+        "ingestion_request": {
+          "dataset_id": "wdi",
+          "source_path": "examples/projects/tmp_phase13_example/wdi.csv",
+          "configuration": {
+            "delimiter": ",",
+            "encoding": "utf-8",
+            "header": true,
+            "null_value_tokens": [
+              "",
+              "null",
+              "NULL",
+              "NA",
+              "N/A"
+            ],
+            "unexpected_column_mode": "permissive",
+            "allow_type_coercion": true,
+            "max_validation_error_samples": 50,
+            "require_source_checksum": false
+          },
+          "expected_checksum": null
+        },
+        "source_metadata": {
+          "source_path": "examples/projects/tmp_phase13_example/wdi.csv",
+          "checksum_sha256": "8a3faf7cb102e28e554cf59cc9033d0d49e59e72bf20e5ba63a357088c053b65",
+          "file_size_bytes": 118
+        },
+        "checksum_sha256": "8a3faf7cb102e28e554cf59cc9033d0d49e59e72bf20e5ba63a357088c053b65",
+        "normalized_records": [
+          {
+            "row_number": 1,
+            "source_line_number": 2,
+            "values": {
+              "country_code": "PAK",
+              "country_name": "Pakistan",
+              "year": 2020,
+              "gdp": 1500.0,
+              "fertility": 3.4
+            },
+            "source_columns": {
+              "country_code": "country_code",
+              "country_name": "country_name",
+              "year": "year",
+              "gdp": "gdp",
+              "fertility": "fertility"
+            }
+          },
+          {
+            "row_number": 2,
+            "source_line_number": 3,
+            "values": {
+              "country_code": "IND",
+              "country_name": "India",
+              "year": 2020,
+              "gdp": 1900.0,
+              "fertility": 2.1
+            },
+            "source_columns": {
+              "country_code": "country_code",
+              "country_name": "country_name",
+              "year": "year",
+              "gdp": "gdp",
+              "fertility": "fertility"
+            }
+          },
+          {
+            "row_number": 3,
+            "source_line_number": 4,
+            "values": {
+              "country_code": "WLD",
+              "country_name": "World",
+              "year": 2020,
+              "gdp": 11000.0,
+              "fertility": null
+            },
+            "source_columns": {
+              "country_code": "country_code",
+              "country_name": "country_name",
+              "year": "year",
+              "gdp": "gdp",
+              "fertility": "fertility"
+            }
+          }
+        ],
+        "validation_report": {
+          "source_path": "examples/projects/tmp_phase13_example/wdi.csv",
+          "dataset_id": "wdi",
+          "source_row_count": 3,
+          "accepted_row_count": 3,
+          "rejected_row_count": 0,
+          "source_columns": [
+            "country_code",
+            "country_name",
+            "year",
+            "gdp",
+            "fertility"
+          ],
+          "mapped_columns": [
+            {
+              "variable_id": "country_code",
+              "source_column": "country_code",
+              "source_index": 0
+            },
+            {
+              "variable_id": "country_name",
+              "source_column": "country_name",
+              "source_index": 1
+            },
+            {
+              "variable_id": "year",
+              "source_column": "year",
+              "source_index": 2
+            },
+            {
+              "variable_id": "gdp",
+              "source_column": "gdp",
+              "source_index": 3
+            },
+            {
+              "variable_id": "fertility",
+              "source_column": "fertility",
+              "source_index": 4
+            }
+          ],
+          "missing_columns": [],
+          "unexpected_columns": [],
+          "validation_findings": [],
+          "parsing_succeeded": true,
+          "validation_succeeded": true,
+          "analysis_ready": true
+        },
+        "quality_profile": {
+          "dataset_id": "wdi",
+          "row_count": 3,
+          "accepted_row_count": 3,
+          "rejected_row_count": 0,
+          "duplicate_record_count": 0,
+          "variables": [
+            {
+              "variable_id": "country_code",
+              "source_column": "country_code",
+              "data_type": "string",
+              "non_null_count": 3,
+              "null_count": 0,
+              "invalid_value_count": 0,
+              "unique_value_count": 3,
+              "minimum": null,
+              "maximum": null,
+              "observed_types": [
+                "str"
+              ]
+            },
+            {
+              "variable_id": "country_name",
+              "source_column": "country_name",
+              "data_type": "string",
+              "non_null_count": 3,
+              "null_count": 0,
+              "invalid_value_count": 0,
+              "unique_value_count": 3,
+              "minimum": null,
+              "maximum": null,
+              "observed_types": [
+                "str"
+              ]
+            },
+            {
+              "variable_id": "year",
+              "source_column": "year",
+              "data_type": "integer",
+              "non_null_count": 3,
+              "null_count": 0,
+              "invalid_value_count": 0,
+              "unique_value_count": 1,
+              "minimum": 2020,
+              "maximum": 2020,
+              "observed_types": [
+                "int"
+              ]
+            },
+            {
+              "variable_id": "gdp",
+              "source_column": "gdp",
+              "data_type": "float",
+              "non_null_count": 3,
+              "null_count": 0,
+              "invalid_value_count": 0,
+              "unique_value_count": 3,
+              "minimum": 1500.0,
+              "maximum": 11000.0,
+              "observed_types": [
+                "float"
+              ]
+            },
+            {
+              "variable_id": "fertility",
+              "source_column": "fertility",
+              "data_type": "float",
+              "non_null_count": 2,
+              "null_count": 1,
+              "invalid_value_count": 0,
+              "unique_value_count": 2,
+              "minimum": 2.1,
+              "maximum": 3.4,
+              "observed_types": [
+                "float"
+              ]
+            }
+          ]
+        },
+        "provenance": {
+          "dataset_id": "wdi",
+          "source_path": "examples/projects/tmp_phase13_example/wdi.csv",
+          "checksum_sha256": "8a3faf7cb102e28e554cf59cc9033d0d49e59e72bf20e5ba63a357088c053b65",
+          "file_size_bytes": 118,
+          "ingestion_timestamp": "2026-08-07T21:09:43.268490Z",
+          "configuration": {
+            "delimiter": ",",
+            "encoding": "utf-8",
+            "header": true,
+            "null_value_tokens": [
+              "",
+              "null",
+              "NULL",
+              "NA",
+              "N/A"
+            ],
+            "unexpected_column_mode": "permissive",
+            "allow_type_coercion": true,
+            "max_validation_error_samples": 50,
+            "require_source_checksum": false
+          },
+          "software_version": "polaris-0.1.0",
+          "schema_version": "1.0.0"
+        },
+        "provenance_record": null,
+        "ingestion_timestamp": "2026-08-07T21:09:43.268490Z",
+        "schema_version": "1.0.0"
+      }
+    },
+    {
+      "kind": "ingestion_artifact",
+      "ingestion_result": {
+        "dataset_manifest": {
+          "dataset_id": "who",
+          "title": "who",
+          "provider": "WHO",
+          "source_url": "https://example.test/source",
+          "access_url": null,
+          "description": null,
+          "license": null,
+          "status": "reviewed_candidate",
+          "geographic_coverage": {
+            "codes": [
+              "GLOBAL"
+            ],
+            "description": null
+          },
+          "temporal_coverage": {
+            "start": 2019,
+            "end": 2021,
+            "label": null
+          },
+          "revision_metadata": {
+            "release_date": null,
+            "revision_policy": null,
+            "update_frequency": null,
+            "source_version": null
+          },
+          "variables": [
+            {
+              "variable_id": "location_code",
+              "label": "Location Code",
+              "description": null,
+              "unit": null,
+              "data_type": "string",
+              "role": "identifier",
+              "source_field_name": "SpatialDimValueCode",
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "location",
+              "label": "Location",
+              "description": null,
+              "unit": null,
+              "data_type": "string",
+              "role": "predictor",
+              "source_field_name": "Location",
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "period",
+              "label": "Period",
+              "description": null,
+              "unit": null,
+              "data_type": "integer",
+              "role": "time",
+              "source_field_name": "Period",
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "indicator_code",
+              "label": "Indicator Code",
+              "description": null,
+              "unit": null,
+              "data_type": "string",
+              "role": "predictor",
+              "source_field_name": "IndicatorCode",
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "sex_code",
+              "label": "Sex Code",
+              "description": null,
+              "unit": null,
+              "data_type": "string",
+              "role": "predictor",
+              "source_field_name": "Dim1ValueCode",
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "fact_value_numeric",
+              "label": "Fact Value Numeric",
+              "description": null,
+              "unit": "years",
+              "data_type": "float",
+              "role": "predictor",
+              "source_field_name": "FactValueNumeric",
+              "missing_value_representation": [],
+              "comparability_notes": []
+            }
+          ],
+          "units": [],
+          "frequency": "annual",
+          "methodology_reference": null,
+          "comparability_warnings": [],
+          "licensing_warnings": [],
+          "access_restrictions": [],
+          "source_version": null,
+          "retrieval_timestamp": null,
+          "checksum": null,
+          "schema_version": "1.0.0"
+        },
+        "ingestion_request": {
+          "dataset_id": "who",
+          "source_path": "examples/projects/tmp_phase13_example/who.csv",
+          "configuration": {
+            "delimiter": ",",
+            "encoding": "utf-8",
+            "header": true,
+            "null_value_tokens": [
+              "",
+              "null",
+              "NULL",
+              "NA",
+              "N/A"
+            ],
+            "unexpected_column_mode": "permissive",
+            "allow_type_coercion": true,
+            "max_validation_error_samples": 50,
+            "require_source_checksum": false
+          },
+          "expected_checksum": null
+        },
+        "source_metadata": {
+          "source_path": "examples/projects/tmp_phase13_example/who.csv",
+          "checksum_sha256": "efa9193971a00f4d349a09eef011e6e0fccee375245e711e1ebe9b1384ca7397",
+          "file_size_bytes": 261
+        },
+        "checksum_sha256": "efa9193971a00f4d349a09eef011e6e0fccee375245e711e1ebe9b1384ca7397",
+        "normalized_records": [
+          {
+            "row_number": 1,
+            "source_line_number": 2,
+            "values": {
+              "location_code": "PAK",
+              "location": "Pakistan",
+              "period": 2020,
+              "indicator_code": "WHOSIS_000001",
+              "sex_code": "SEX_BTSX",
+              "fact_value_numeric": 66.1
+            },
+            "source_columns": {
+              "location_code": "SpatialDimValueCode",
+              "location": "Location",
+              "period": "Period",
+              "indicator_code": "IndicatorCode",
+              "sex_code": "Dim1ValueCode",
+              "fact_value_numeric": "FactValueNumeric"
+            }
+          },
+          {
+            "row_number": 2,
+            "source_line_number": 3,
+            "values": {
+              "location_code": "IND",
+              "location": "India",
+              "period": 2020,
+              "indicator_code": "WHOSIS_000001",
+              "sex_code": "SEX_BTSX",
+              "fact_value_numeric": 70.1
+            },
+            "source_columns": {
+              "location_code": "SpatialDimValueCode",
+              "location": "Location",
+              "period": "Period",
+              "indicator_code": "IndicatorCode",
+              "sex_code": "Dim1ValueCode",
+              "fact_value_numeric": "FactValueNumeric"
+            }
+          },
+          {
+            "row_number": 3,
+            "source_line_number": 4,
+            "values": {
+              "location_code": "PAK",
+              "location": "Pakistan",
+              "period": 2020,
+              "indicator_code": "WHOSIS_000001",
+              "sex_code": "SEX_MLE",
+              "fact_value_numeric": 65.0
+            },
+            "source_columns": {
+              "location_code": "SpatialDimValueCode",
+              "location": "Location",
+              "period": "Period",
+              "indicator_code": "IndicatorCode",
+              "sex_code": "Dim1ValueCode",
+              "fact_value_numeric": "FactValueNumeric"
+            }
+          },
+          {
+            "row_number": 4,
+            "source_line_number": 5,
+            "values": {
+              "location_code": "PAK",
+              "location": "Pakistan",
+              "period": 2021,
+              "indicator_code": "WHOSIS_000001",
+              "sex_code": "SEX_BTSX",
+              "fact_value_numeric": 66.3
+            },
+            "source_columns": {
+              "location_code": "SpatialDimValueCode",
+              "location": "Location",
+              "period": "Period",
+              "indicator_code": "IndicatorCode",
+              "sex_code": "Dim1ValueCode",
+              "fact_value_numeric": "FactValueNumeric"
+            }
+          }
+        ],
+        "validation_report": {
+          "source_path": "examples/projects/tmp_phase13_example/who.csv",
+          "dataset_id": "who",
+          "source_row_count": 4,
+          "accepted_row_count": 4,
+          "rejected_row_count": 0,
+          "source_columns": [
+            "SpatialDimValueCode",
+            "Location",
+            "Period",
+            "IndicatorCode",
+            "Dim1ValueCode",
+            "FactValueNumeric"
+          ],
+          "mapped_columns": [
+            {
+              "variable_id": "location_code",
+              "source_column": "SpatialDimValueCode",
+              "source_index": 0
+            },
+            {
+              "variable_id": "location",
+              "source_column": "Location",
+              "source_index": 1
+            },
+            {
+              "variable_id": "period",
+              "source_column": "Period",
+              "source_index": 2
+            },
+            {
+              "variable_id": "indicator_code",
+              "source_column": "IndicatorCode",
+              "source_index": 3
+            },
+            {
+              "variable_id": "sex_code",
+              "source_column": "Dim1ValueCode",
+              "source_index": 4
+            },
+            {
+              "variable_id": "fact_value_numeric",
+              "source_column": "FactValueNumeric",
+              "source_index": 5
+            }
+          ],
+          "missing_columns": [],
+          "unexpected_columns": [],
+          "validation_findings": [],
+          "parsing_succeeded": true,
+          "validation_succeeded": true,
+          "analysis_ready": true
+        },
+        "quality_profile": {
+          "dataset_id": "who",
+          "row_count": 4,
+          "accepted_row_count": 4,
+          "rejected_row_count": 0,
+          "duplicate_record_count": 2,
+          "variables": [
+            {
+              "variable_id": "location_code",
+              "source_column": "SpatialDimValueCode",
+              "data_type": "string",
+              "non_null_count": 4,
+              "null_count": 0,
+              "invalid_value_count": 0,
+              "unique_value_count": 2,
+              "minimum": null,
+              "maximum": null,
+              "observed_types": [
+                "str"
+              ]
+            },
+            {
+              "variable_id": "location",
+              "source_column": "Location",
+              "data_type": "string",
+              "non_null_count": 4,
+              "null_count": 0,
+              "invalid_value_count": 0,
+              "unique_value_count": 2,
+              "minimum": null,
+              "maximum": null,
+              "observed_types": [
+                "str"
+              ]
+            },
+            {
+              "variable_id": "period",
+              "source_column": "Period",
+              "data_type": "integer",
+              "non_null_count": 4,
+              "null_count": 0,
+              "invalid_value_count": 0,
+              "unique_value_count": 2,
+              "minimum": 2020,
+              "maximum": 2021,
+              "observed_types": [
+                "int"
+              ]
+            },
+            {
+              "variable_id": "indicator_code",
+              "source_column": "IndicatorCode",
+              "data_type": "string",
+              "non_null_count": 4,
+              "null_count": 0,
+              "invalid_value_count": 0,
+              "unique_value_count": 1,
+              "minimum": null,
+              "maximum": null,
+              "observed_types": [
+                "str"
+              ]
+            },
+            {
+              "variable_id": "sex_code",
+              "source_column": "Dim1ValueCode",
+              "data_type": "string",
+              "non_null_count": 4,
+              "null_count": 0,
+              "invalid_value_count": 0,
+              "unique_value_count": 2,
+              "minimum": null,
+              "maximum": null,
+              "observed_types": [
+                "str"
+              ]
+            },
+            {
+              "variable_id": "fact_value_numeric",
+              "source_column": "FactValueNumeric",
+              "data_type": "float",
+              "non_null_count": 4,
+              "null_count": 0,
+              "invalid_value_count": 0,
+              "unique_value_count": 4,
+              "minimum": 65.0,
+              "maximum": 70.1,
+              "observed_types": [
+                "float"
+              ]
+            }
+          ]
+        },
+        "provenance": {
+          "dataset_id": "who",
+          "source_path": "examples/projects/tmp_phase13_example/who.csv",
+          "checksum_sha256": "efa9193971a00f4d349a09eef011e6e0fccee375245e711e1ebe9b1384ca7397",
+          "file_size_bytes": 261,
+          "ingestion_timestamp": "2026-08-07T21:09:43.268836Z",
+          "configuration": {
+            "delimiter": ",",
+            "encoding": "utf-8",
+            "header": true,
+            "null_value_tokens": [
+              "",
+              "null",
+              "NULL",
+              "NA",
+              "N/A"
+            ],
+            "unexpected_column_mode": "permissive",
+            "allow_type_coercion": true,
+            "max_validation_error_samples": 50,
+            "require_source_checksum": false
+          },
+          "software_version": "polaris-0.1.0",
+          "schema_version": "1.0.0"
+        },
+        "provenance_record": null,
+        "ingestion_timestamp": "2026-08-07T21:09:43.268836Z",
+        "schema_version": "1.0.0"
+      }
+    }
+  ],
+  "statistical_specification": {
+    "specification_id": "spec_project_pearson_correlation",
+    "investigation_id": "investigation_project_test",
+    "analysis_type": "correlation",
+    "model_family": "none",
+    "procedure": "pearson_correlation",
+    "outcome_variable": {
+      "variable_id": "who_life_expectancy_at_birth_both_sexes",
+      "label": null
+    },
+    "exposure_variables": [
+      {
+        "variable_id": "wdi_gdp_per_capita_current_usd",
+        "label": null
+      }
+    ],
+    "covariates": [],
+    "grouping_variables": [],
+    "fixed_effects": [],
+    "time_variable": null,
+    "unit_of_analysis": "country-year",
+    "sample_restrictions": [],
+    "missing_data_strategy": {
+      "strategy": "complete_case",
+      "rationale": "project orchestration test",
+      "affected_variables": []
+    },
+    "transformations": [],
+    "weighting": null,
+    "standard_error_strategy": null,
+    "multiple_comparison_strategy": null,
+    "confidence_level": 0.95,
+    "robustness_checks_requested": [],
+    "causal_identification_claim_level": "associational",
+    "assumptions": [],
+    "schema_version": "1.0.0"
+  },
+  "selected_agents": [
+    "economics",
+    "public_health"
+  ],
+  "synthesis": {
+    "mode": "deterministic",
+    "provider_config": null,
+    "model_identifier": null,
+    "allow_deterministic_fallback": true,
+    "max_synthesis_length": null
+  },
+  "report": {
+    "output_format": "markdown",
+    "report_title": null,
+    "report_subtitle": null,
+    "author": null,
+    "organization": null
+  },
+  "harmonization": {
+    "dataset_configs": [
+      {
+        "dataset_id": "wdi",
+        "alias": "wdi",
+        "provider": "world_bank",
+        "country_field": "country_code",
+        "year_field": "year",
+        "country_name_field": "country_name",
+        "geographic_level_field": null,
+        "include_aggregate_entities": false
+      },
+      {
+        "dataset_id": "who",
+        "alias": "who",
+        "provider": "who",
+        "country_field": "SpatialDimValueCode",
+        "year_field": "Period",
+        "country_name_field": "Location",
+        "geographic_level_field": null,
+        "include_aggregate_entities": false
+      }
+    ],
+    "variable_mappings": [
+      {
+        "source_dataset_id": "wdi",
+        "source_provider": "world_bank",
+        "source_variable_id": "gdp",
+        "source_field_name": "gdp",
+        "canonical_variable_id": "wdi_gdp_per_capita_current_usd",
+        "canonical_label": "GDP per capita, current US dollars",
+        "source_unit": "current US dollars",
+        "canonical_unit": "current US dollars",
+        "conceptual_definition": "WDI GDP per capita in current US dollars.",
+        "expected_data_type": "float",
+        "aggregation_level": "country-year",
+        "transformation_rule": "rename_only",
+        "compatibility_status": "compatible",
+        "row_filters": {},
+        "notes": []
+      },
+      {
+        "source_dataset_id": "who",
+        "source_provider": "who",
+        "source_variable_id": "fact_value_numeric",
+        "source_field_name": "FactValueNumeric",
+        "canonical_variable_id": "who_life_expectancy_at_birth_both_sexes",
+        "canonical_label": "WHO life expectancy at birth, both sexes",
+        "source_unit": "years",
+        "canonical_unit": "years",
+        "conceptual_definition": "WHO life expectancy at birth for both sexes, in years.",
+        "expected_data_type": "float",
+        "aggregation_level": "country-year",
+        "transformation_rule": "rename_only",
+        "compatibility_status": "compatible",
+        "row_filters": {
+          "IndicatorCode": "WHOSIS_000001",
+          "Dim1ValueCode": "SEX_BTSX"
+        },
+        "notes": []
+      }
+    ],
+    "join_type": "left",
+    "anchor_dataset_id": "wdi",
+    "provider_precedence": [],
+    "strictness": {
+      "duplicate_key_behavior": "reject",
+      "exclude_aggregate_entities": true,
+      "exclude_territories": false,
+      "require_unit_match": true,
+      "require_definition": true
+    },
+    "output_dataset_id": null
+  },
+  "geographic_scope": null,
+  "temporal_scope": null,
+  "execution_settings": {
+    "analysis_execution_settings": {
+      "missing_data_policy": "complete_case",
+      "include_intercept": true,
+      "pairwise_correlation": false
+    },
+    "significance_threshold": null,
+    "confidence_level": null,
+    "write_outputs": true,
+    "raise_on_failure": false
+  },
+  "output_directory": "examples/projects/outputs",
+  "schema_version": "1.0.0"
+}
