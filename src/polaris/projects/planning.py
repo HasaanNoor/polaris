@@ -31,6 +31,7 @@ def plan_research_project(
         ResearchStage.EXTRACT_EVIDENCE,
         ResearchStage.RUN_AGENTS,
         ResearchStage.COORDINATE,
+        *(() if request.literature is None else (ResearchStage.RETRIEVE_LITERATURE,)),
         ResearchStage.SYNTHESIZE,
         ResearchStage.REPORT,
         ResearchStage.COMPLETE,
@@ -49,6 +50,9 @@ def plan_research_project(
             "selected_agents": [agent.value for agent in request.selected_agents],
             "synthesis": request.synthesis.model_dump(mode="json"),
             "report": request.report.model_dump(mode="json"),
+            "literature": (
+                request.literature.model_dump(mode="json") if request.literature else None
+            ),
             "geographic_scope": (
                 request.geographic_scope.model_dump(mode="json")
                 if request.geographic_scope is not None

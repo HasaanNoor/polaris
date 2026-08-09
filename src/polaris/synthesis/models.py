@@ -14,6 +14,7 @@ from polaris.coordination.models import (
     CoordinationCoverageStatus,
 )
 from polaris.evidence.models import EVIDENCE_SCHEMA_VERSION, EvidenceArtifact, LimitationCode
+from polaris.literature.models import LiteratureContextArtifact
 from polaris.schemas.common import (
     AwareDatetime,
     DatasetId,
@@ -65,6 +66,7 @@ class SynthesisRequest(FrozenPolarisBaseModel):
     coordinated_assessment: CoordinatedAssessment
     mode: SynthesisMode = SynthesisMode.DETERMINISTIC
     evidence_artifact: EvidenceArtifact | None = None
+    literature_context: LiteratureContextArtifact | None = None
     provider_config: SynthesisProviderConfig | None = None
     model_identifier: NonEmptyStr | None = None
     allow_deterministic_fallback: bool = True

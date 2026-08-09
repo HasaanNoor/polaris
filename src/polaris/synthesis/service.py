@@ -41,6 +41,7 @@ def synthesize_assessment(
     if request.mode is SynthesisMode.DETERMINISTIC:
         return deterministic_synthesis_artifact(
             request.coordinated_assessment,
+            literature_context=request.literature_context,
             requested_mode=request.mode,
             synthesis_timestamp=synthesis_timestamp,
         )
@@ -116,6 +117,7 @@ def _fallback_or_raise(
     )
     return deterministic_synthesis_artifact(
         request.coordinated_assessment,
+        literature_context=request.literature_context,
         requested_mode=request.mode,
         synthesis_timestamp=synthesis_timestamp,
         extra_findings=(*findings, fallback_finding),

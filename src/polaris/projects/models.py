@@ -26,6 +26,7 @@ from polaris.harmonization.models import (
     VariableMapping,
 )
 from polaris.ingestion.models import DatasetIngestionResult, IngestionConfiguration
+from polaris.literature.models import LiteratureContextArtifact, LiteratureProjectConfig
 from polaris.reporting.models import GeneratedReport, ReportFormat
 from polaris.schemas.common import (
     AwareDatetime,
@@ -149,6 +150,7 @@ class ResearchProjectRequest(FrozenPolarisBaseModel):
     selected_agents: tuple[AgentDomain, ...] = Field(min_length=1)
     synthesis: ProjectSynthesisConfig = Field(default_factory=ProjectSynthesisConfig)
     report: ProjectReportConfig = Field(default_factory=ProjectReportConfig)
+    literature: LiteratureProjectConfig | None = None
     harmonization: ProjectHarmonizationConfig | None = None
     geographic_scope: GeographicScope | None = None
     temporal_scope: TemporalScope | None = None
@@ -184,6 +186,7 @@ class ResearchStage(StrEnum):
     EXTRACT_EVIDENCE = "extract_evidence"
     RUN_AGENTS = "run_agents"
     COORDINATE = "coordinate"
+    RETRIEVE_LITERATURE = "retrieve_literature"
     SYNTHESIZE = "synthesize"
     REPORT = "report"
     COMPLETE = "complete"
@@ -210,6 +213,7 @@ class ProjectArtifactKind(StrEnum):
     EVIDENCE_ARTIFACT = "evidence_artifact"
     AGENT_ASSESSMENT = "agent_assessment"
     COORDINATED_ASSESSMENT = "coordinated_assessment"
+    LITERATURE_CONTEXT = "literature_context"
     SYNTHESIS_ARTIFACT = "synthesis_artifact"
     RESEARCH_REPORT = "research_report"
 
@@ -274,6 +278,7 @@ class ProjectProvenance(FrozenPolarisBaseModel):
     evidence_artifact_id: NonEmptyStr | None = None
     agent_assessment_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
     coordination_id: NonEmptyStr | None = None
+    literature_context_id: NonEmptyStr | None = None
     synthesis_id: NonEmptyStr | None = None
     report_id: NonEmptyStr | None = None
     software_version: NonEmptyStr = f"polaris-{__version__}"
@@ -309,6 +314,7 @@ class ResearchProjectResult(FrozenPolarisBaseModel):
     evidence_artifact: EvidenceArtifact | None = None
     domain_assessments: tuple[AgentAssessment, ...] = Field(default_factory=tuple)
     coordinated_assessment: CoordinatedAssessment | None = None
+    literature_context: LiteratureContextArtifact | None = None
     synthesis_artifact: object | None = None
     research_report: GeneratedReport | None = None
     project_provenance: ProjectProvenance

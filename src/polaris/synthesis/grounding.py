@@ -5,6 +5,7 @@ from typing import Any
 from polaris.agents.models import AgentDomain
 from polaris.coordination.models import CoordinatedAssessment, CoordinationCoverageStatus
 from polaris.evidence.models import EvidenceArtifact
+from polaris.literature.models import LiteratureContextArtifact
 from polaris.synthesis.models import GroundingPayload
 
 
@@ -12,6 +13,7 @@ def build_grounding_payload(
     coordinated: CoordinatedAssessment,
     *,
     evidence_artifact: EvidenceArtifact | None = None,
+    literature_context: LiteratureContextArtifact | None = None,
 ) -> GroundingPayload:
     """Build deterministic JSON-compatible synthesis grounding from Phase 7 state."""
 
@@ -136,6 +138,43 @@ def build_grounding_payload(
             for record in coordinated.coordination_findings
         ],
     }
+    if literature_context is not None:
+        payload["literature_context"] = {
+            "instruction": (
+                "Literature context is separate from empirical findings and must not alter "
+                "statistical results or claim IDs."
+            ),
+            "literature_context_id": literature_context.literature_context_id,
+            "corpus_id": literature_context.corpus_id,
+            "empirical_claim_ids": list(literature_context.empirical_claim_ids),
+            "unmatched_claims": list(literature_context.unmatched_claims),
+            "retrieval_summary": literature_context.retrieval_summary.model_dump(mode="json"),
+            "records": [
+                {
+                    "literature_evidence_id": record.literature_evidence_id,
+                    "empirical_claim_id": record.empirical_claim_id,
+                    "retrieval_query": record.retrieval_query,
+                    "support_classification": record.support_classification.value,
+                    "chunks": [
+                        {
+                            "chunk_id": row.chunk.chunk_id,
+                            "document_id": row.document.document_id,
+                            "rank": row.rank,
+                            "score": row.score,
+                            "title": row.document.title,
+                            "authors": list(row.document.authors),
+                            "year": row.document.year,
+                            "publication": row.document.publication,
+                            "doi": row.document.doi,
+                            "url": row.document.url,
+                            "text": row.chunk.text,
+                        }
+                        for row in record.ranked_chunks
+                    ],
+                }
+                for record in literature_context.literature_evidence
+            ],
+        }
     return payload
 
 

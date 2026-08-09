@@ -15,6 +15,7 @@ from polaris.coordination.models import (
 )
 from polaris.evidence.models import EvidenceArtifact, LimitationCode
 from polaris.ingestion.models import DatasetIngestionResult
+from polaris.literature.models import LiteratureContextArtifact
 from polaris.schemas.common import (
     AwareDatetime,
     DatasetId,
@@ -50,6 +51,7 @@ class ReportRequest(FrozenPolarisBaseModel):
     analysis_result: AnalysisResult
     ingestion_result: DatasetIngestionResult
     research_question: ResearchQuestion | None = None
+    literature_context: LiteratureContextArtifact | None = None
     dataset_manifest: DatasetManifest | None = None
     output_format: ReportFormat = ReportFormat.JSON
     report_title: NonEmptyStr | None = None
@@ -238,6 +240,16 @@ class SynthesisSection(FrozenPolarisBaseModel):
     referenced_evidence_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
 
 
+class LiteratureContextSection(FrozenPolarisBaseModel):
+    status: SectionStatus
+    literature_context_id: NonEmptyStr | None = None
+    corpus_id: NonEmptyStr | None = None
+    records: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    unmatched_claims: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
+    retrieval_summary: dict[str, Any] = Field(default_factory=dict)
+    limitations: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
+
+
 class LimitationsSection(FrozenPolarisBaseModel):
     limitation_codes: tuple[LimitationCode, ...]
     analysis_findings: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
@@ -281,6 +293,7 @@ class ReferenceKind(StrEnum):
     DIVERGENCE = "divergence"
     GAP = "gap"
     SOURCE_ARTIFACT = "source_artifact"
+    LITERATURE = "literature"
 
 
 class ReferenceIndexEntry(FrozenPolarisBaseModel):
@@ -304,6 +317,7 @@ class ResearchReport(FrozenPolarisBaseModel):
     domain_assessments_section: DomainAssessmentsSection
     cross_domain_section: CrossDomainSection
     synthesis_section: SynthesisSection
+    literature_context_section: LiteratureContextSection | None = None
     limitations_section: LimitationsSection
     gaps_section: GapsSection
     unsupported_inferences_section: UnsupportedInferencesSection

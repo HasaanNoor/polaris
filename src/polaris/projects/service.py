@@ -16,6 +16,7 @@ from polaris.harmonization.export import export_harmonized_dataset
 from polaris.harmonization.service import harmonize_datasets
 from polaris.ingestion.models import DatasetIngestionResult, IngestionRequest
 from polaris.ingestion.service import ingest_dataset
+from polaris.literature import build_literature_context, ingest_literature_corpus
 from polaris.projects.errors import DatasetResolutionError, ResearchProjectExecutionError
 from polaris.projects.models import (
     ArtifactReference,
@@ -111,6 +112,7 @@ def run_research_project(
         evidence_artifact=context.evidence_artifact,
         domain_assessments=context.domain_assessments,
         coordinated_assessment=context.coordinated_assessment,
+        literature_context=context.literature_context,
         synthesis_artifact=context.synthesis_artifact,
         research_report=context.research_report,
     )
@@ -134,6 +136,7 @@ def run_research_project(
         evidence_artifact=context.evidence_artifact,
         domain_assessments=context.domain_assessments,
         coordinated_assessment=context.coordinated_assessment,
+        literature_context=context.literature_context,
         synthesis_artifact=context.synthesis_artifact,
         research_report=context.research_report,
         project_provenance=provenance,
@@ -165,6 +168,7 @@ class _ExecutionContext:
         self.evidence_artifact = None
         self.domain_assessments = ()
         self.coordinated_assessment = None
+        self.literature_context = None
         self.synthesis_artifact = None
         self.research_report = None
         self.artifact_references: tuple[ArtifactReference, ...] = ()
@@ -202,14 +206,32 @@ class _ExecutionContext:
                 assessment.assessment_id for assessment in self.domain_assessments
             ),
             ResearchStage.SYNTHESIZE: (
-                (self.coordinated_assessment.coordinated_assessment_id,)
-                if self.coordinated_assessment is not None
-                else ()
+                tuple(
+                    item
+                    for item in (
+                        self.coordinated_assessment.coordinated_assessment_id
+                        if self.coordinated_assessment is not None
+                        else None,
+                        self.literature_context.literature_context_id
+                        if self.literature_context is not None
+                        else None,
+                    )
+                    if item is not None
+                )
             ),
-            ResearchStage.REPORT: (
-                (self.synthesis_artifact.synthesis_id,)
-                if self.synthesis_artifact is not None
-                else ()
+            ResearchStage.RETRIEVE_LITERATURE: (
+                tuple(
+                    item
+                    for item in (
+                        self.evidence_artifact.artifact_id
+                        if self.evidence_artifact is not None
+                        else None,
+                        self.coordinated_assessment.coordinated_assessment_id
+                        if self.coordinated_assessment is not None
+                        else None,
+                    )
+                    if item is not None
+                )
             ),
         }
         return mapping.get(stage, ())
@@ -239,6 +261,11 @@ class _ExecutionContext:
             ResearchStage.COORDINATE: (
                 (self.coordinated_assessment.coordinated_assessment_id,)
                 if self.coordinated_assessment is not None
+                else ()
+            ),
+            ResearchStage.RETRIEVE_LITERATURE: (
+                (self.literature_context.literature_context_id,)
+                if self.literature_context is not None
                 else ()
             ),
             ResearchStage.SYNTHESIZE: (
@@ -271,6 +298,7 @@ def _run_stage(
         ResearchStage.EXTRACT_EVIDENCE: lambda: _extract(context),
         ResearchStage.RUN_AGENTS: lambda: _run_agents(context),
         ResearchStage.COORDINATE: lambda: _coordinate(context),
+        ResearchStage.RETRIEVE_LITERATURE: lambda: _retrieve_literature(context),
         ResearchStage.SYNTHESIZE: lambda: _synthesize(
             context,
             synthesis_provider=synthesis_provider,
@@ -462,6 +490,32 @@ def _coordinate(context: _ExecutionContext) -> None:
     )
 
 
+def _retrieve_literature(context: _ExecutionContext) -> None:
+    if context.request.literature is None:
+        return
+    if context.evidence_artifact is None:
+        raise DatasetResolutionError("evidence is required before literature retrieval")
+    config = context.request.literature
+    corpus = ingest_literature_corpus(
+        config.corpus_path,
+        manifest_path=config.manifest_path,
+        chunking_config=config.chunking,
+    )
+    literature_context = build_literature_context(
+        evidence_artifact=context.evidence_artifact,
+        corpus=corpus,
+        research_question=context.request.research_question,
+        project_id=context.plan_project_id,
+        top_k=config.top_k,
+        retrieval_mode=config.retrieval_mode,
+    )
+    context.literature_context = literature_context
+    context.add_artifact(
+        literature_context.literature_context_id,
+        ProjectArtifactKind.LITERATURE_CONTEXT,
+    )
+
+
 def _synthesize(
     context: _ExecutionContext,
     *,
@@ -474,6 +528,7 @@ def _synthesize(
         request=SynthesisRequest(
             coordinated_assessment=context.coordinated_assessment,
             evidence_artifact=context.evidence_artifact,
+            literature_context=context.literature_context,
             mode=config.mode,
             provider_config=config.provider_config,
             model_identifier=config.model_identifier,
@@ -504,6 +559,7 @@ def _report(context: _ExecutionContext) -> None:
             analysis_result=context.analysis_result,
             ingestion_result=context.analysis_ingestion,
             research_question=context.request.research_question,
+            literature_context=context.literature_context,
             dataset_manifest=context.analysis_ingestion.dataset_manifest,
             output_format=config.output_format,
             report_title=config.report_title,

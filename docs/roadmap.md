@@ -128,13 +128,13 @@ Deliverables: `ResearchProjectRequest`, `ResearchExecutionPlan`, `ResearchProjec
 
 Verification: project tests cover models, planning, successful single-dataset execution, successful harmonized multi-provider execution, failure preservation, provenance, reproducibility, and optional real-data execution when local WDI and WHO files are present. The orchestrator reuses Phases 3-9 and 12 and does not choose datasets, infer mappings, invent statistical models, or add LLM behavior.
 
-## Phase 14: Transformation Pipeline
+## Phase 14: Literature Context and Retrieval (complete)
 
-Objective: support traceable cleaning and derived-variable creation.
+Objective: add deterministic, provenance-preserving literature retrieval from a local or explicitly supplied corpus so Polaris can contextualize empirical claims after evidence extraction and coordination.
 
-Deliverables: transformation records, observed-versus-derived separation, imputation flags, and audit logs.
+Deliverables: `LiteratureDocument`, `LiteratureChunk`, `CitationMetadata`, `LiteratureCorpus`, deterministic TXT/Markdown/JSON ingestion, text normalization, paragraph-aware chunking, BM25-style lexical retrieval, `RetrievalRequest`, `RetrievalResult`, claim-to-literature query construction, `LiteratureEvidence`, retrieval quality summaries, `LiteratureContextArtifact`, citation preservation, optional Phase 8 synthesis context, optional Phase 9 report section, optional Phase 13 `RETRIEVE_LITERATURE` stage, examples, tests, documentation, and ADR-017.
 
-Verification: lineage tests from raw values to transformed outputs.
+Verification: literature tests cover strict frozen models, checksums, deterministic chunk IDs, stable retrieval ranking, filters, unmatched claims, citation preservation, synthesis/report integration, and optional project orchestration. The default path is offline, corpus-grounded, and does not browse the internet, generate citations, add statistical methods, or alter empirical findings.
 
 ## Phase 15: Descriptive Analytics
 

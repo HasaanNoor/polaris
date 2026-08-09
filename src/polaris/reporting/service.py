@@ -25,6 +25,7 @@ from polaris.reporting.sections import (
     executive_summary,
     gaps_section,
     limitations_section,
+    literature_context_section,
     methodology_section,
     provenance_section,
     research_question_section,
@@ -110,6 +111,7 @@ def build_research_report(
             synthesis_artifact=request.synthesis_artifact,
         ),
         synthesis_section=synthesis_section(request.synthesis_artifact),
+        literature_context_section=literature_context_section(request.literature_context),
         limitations_section=limitations_section(
             evidence_artifact=request.evidence_artifact,
             analysis_result=request.analysis_result,
@@ -133,6 +135,7 @@ def build_research_report(
         reference_index=build_reference_index(
             evidence_artifact=request.evidence_artifact,
             coordinated_assessment=request.coordinated_assessment,
+            literature_context=request.literature_context,
             source_artifact_ids=source_ids,
         ),
         source_artifact_ids=source_ids,
@@ -190,6 +193,11 @@ def _source_artifact_ids(request: ReportRequest) -> tuple[str, ...]:
                 request.coordinated_assessment.coordinated_assessment_id,
                 request.synthesis_artifact.synthesis_id,
                 request.ingestion_result.dataset_manifest.dataset_id,
+                *(
+                    (request.literature_context.literature_context_id,)
+                    if request.literature_context is not None
+                    else ()
+                ),
             }
         )
     )

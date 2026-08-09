@@ -9,6 +9,7 @@ def build_reference_index(
     *,
     evidence_artifact: EvidenceArtifact,
     coordinated_assessment: CoordinatedAssessment,
+    literature_context=None,
     source_artifact_ids: tuple[str, ...],
 ) -> tuple[ReferenceIndexEntry, ...]:
     entries: list[ReferenceIndexEntry] = []
@@ -116,4 +117,33 @@ def build_reference_index(
                 metadata={},
             )
         )
+    if literature_context is not None:
+        seen: set[str] = set()
+        for record in literature_context.literature_evidence:
+            for row in record.ranked_chunks:
+                ref_id = row.document.document_id
+                if ref_id in seen:
+                    continue
+                seen.add(ref_id)
+                label_parts = (
+                    ", ".join(row.document.authors),
+                    str(row.document.year) if row.document.year is not None else "",
+                    row.document.title or row.document.citation_text or row.document.document_id,
+                )
+                entries.append(
+                    ReferenceIndexEntry(
+                        reference_id=ref_id,
+                        reference_kind=ReferenceKind.LITERATURE,
+                        label="; ".join(part for part in label_parts if part),
+                        metadata={
+                            "title": row.document.title,
+                            "authors": list(row.document.authors),
+                            "year": row.document.year,
+                            "publication": row.document.publication,
+                            "doi": row.document.doi,
+                            "url": row.document.url,
+                            "source_path": row.document.local_source_path,
+                        },
+                    )
+                )
     return tuple(sorted(entries, key=lambda item: (item.reference_kind.value, item.reference_id)))

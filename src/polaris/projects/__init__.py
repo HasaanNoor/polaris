@@ -1,5 +1,6 @@
 """Phase 13 research-project orchestration public API."""
 
+from polaris.literature.models import LiteratureProjectConfig
 from polaris.projects.models import (
     DatasetInput,
     DatasetInputKind,
@@ -25,6 +26,7 @@ __all__ = [
     "DatasetInputKind",
     "HarmonizedDatasetInput",
     "IngestionArtifactInput",
+    "LiteratureProjectConfig",
     "ManifestDatasetInput",
     "ProjectExecutionSettings",
     "ProjectHarmonizationConfig",

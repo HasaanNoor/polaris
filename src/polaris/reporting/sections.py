@@ -21,6 +21,7 @@ from polaris.reporting.models import (
     EvidenceRecordSummary,
     GapsSection,
     LimitationsSection,
+    LiteratureContextSection,
     MethodologySection,
     ProvenanceSection,
     ResearchQuestionSection,
@@ -337,6 +338,49 @@ def synthesis_section(synthesis_artifact: SynthesisArtifact) -> SynthesisSection
         ),
         referenced_claim_ids=synthesis_artifact.referenced_claim_ids,
         referenced_evidence_ids=synthesis_artifact.referenced_evidence_ids,
+    )
+
+
+def literature_context_section(literature_context) -> LiteratureContextSection:
+    if literature_context is None:
+        return LiteratureContextSection(
+            status=SectionStatus.UNAVAILABLE,
+            limitations=("No literature context artifact was supplied.",),
+        )
+    return LiteratureContextSection(
+        status=SectionStatus.AVAILABLE,
+        literature_context_id=literature_context.literature_context_id,
+        corpus_id=literature_context.corpus_id,
+        records=tuple(
+            {
+                "literature_evidence_id": record.literature_evidence_id,
+                "empirical_claim_id": record.empirical_claim_id,
+                "retrieval_query": record.retrieval_query,
+                "support_classification": record.support_classification.value,
+                "chunks": [
+                    {
+                        "rank": row.rank,
+                        "chunk_id": row.chunk.chunk_id,
+                        "document_id": row.document.document_id,
+                        "score": row.score,
+                        "title": row.document.title,
+                        "authors": list(row.document.authors),
+                        "year": row.document.year,
+                        "publication": row.document.publication,
+                        "doi": row.document.doi,
+                        "url": row.document.url,
+                    }
+                    for row in record.ranked_chunks
+                ],
+            }
+            for record in literature_context.literature_evidence
+        ),
+        unmatched_claims=literature_context.unmatched_claims,
+        retrieval_summary=literature_context.retrieval_summary.model_dump(mode="json"),
+        limitations=(
+            "Literature retrieval is corpus-grounded and lexical.",
+            "Retrieved literature does not replace empirical evidence or validate causality.",
+        ),
     )
 
 

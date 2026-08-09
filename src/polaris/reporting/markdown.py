@@ -214,6 +214,11 @@ def render_report_markdown(report: ResearchReport) -> str:
                     ),
                 ),
                 "",
+            ]
+        )
+        lines.extend(_literature_context(report))
+        lines.extend(
+            [
                 "## Limitations",
                 "",
                 _md(report.limitations_section.narrative_summary),
@@ -303,6 +308,60 @@ def render_report_markdown(report: ResearchReport) -> str:
         return "\n".join(lines).rstrip() + "\n"
     except Exception as exc:
         raise ReportRenderingError("failed to render report as Markdown") from exc
+
+
+def _literature_context(report: ResearchReport) -> list[str]:
+    section = report.literature_context_section
+    if section is None or section.status.value != "available":
+        return []
+    rows = []
+    for record in section.records:
+        chunks = record.get("chunks", [])
+        top = chunks[0] if chunks else {}
+        citation = " ".join(
+            str(part)
+            for part in (
+                ", ".join(top.get("authors", ())),
+                top.get("year"),
+                top.get("title"),
+            )
+            if part
+        )
+        rows.append(
+            (
+                record["empirical_claim_id"],
+                record["retrieval_query"],
+                record["support_classification"],
+                top.get("chunk_id"),
+                top.get("score"),
+                citation,
+            )
+        )
+    summary = section.retrieval_summary
+    return [
+        "## Literature Context",
+        "",
+        _table(
+            ("Field", "Value"),
+            (
+                ("Literature context ID", section.literature_context_id),
+                ("Corpus ID", section.corpus_id),
+                ("Documents", summary.get("corpus_document_count")),
+                ("Chunks", summary.get("chunk_count")),
+                ("Queries", summary.get("query_count")),
+                ("Unmatched claims", ", ".join(section.unmatched_claims)),
+            ),
+        ),
+        "",
+        _table(
+            ("Claim ID", "Query", "Class", "Top chunk", "Score", "Citation"),
+            rows,
+        ),
+        "",
+        "Literature context is retrieved from the supplied corpus and does not change "
+        "the empirical findings.",
+        "",
+    ]
 
 
 def _statistical_results(report: ResearchReport) -> list[str]:

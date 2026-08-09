@@ -6,6 +6,7 @@ from polaris.agents.models import AgentDomain, UnsupportedInferenceCode
 from polaris.coordination.models import CoordinatedAssessment, CoordinationCoverageStatus
 from polaris.evidence.models import LimitationCode
 from polaris.evidence.provenance import deterministic_id
+from polaris.literature.models import LiteratureContextArtifact
 from polaris.schemas.common import WarningSeverity
 from polaris.synthesis.grounding import missing_domain_status
 from polaris.synthesis.models import (
@@ -25,6 +26,7 @@ from polaris.synthesis.models import (
 def deterministic_synthesis_artifact(
     coordinated: CoordinatedAssessment,
     *,
+    literature_context: LiteratureContextArtifact | None = None,
     requested_mode: SynthesisMode = SynthesisMode.DETERMINISTIC,
     synthesis_timestamp: datetime | None = None,
     extra_findings: tuple[SynthesisFinding, ...] = (),
@@ -49,7 +51,7 @@ def deterministic_synthesis_artifact(
     )
     uncertainty = _uncertainty(coordinated)
     findings = tuple(extra_findings) + _deterministic_findings(coordinated)
-    overall = _overall_summary(coordinated)
+    overall = _overall_summary(coordinated, literature_context=literature_context)
     limitations_summary = _limitations_summary(coordinated)
     gaps_summary = _gaps_summary(coordinated)
     digest_payload = {
@@ -107,7 +109,11 @@ def deterministic_synthesis_artifact(
     )
 
 
-def _overall_summary(coordinated: CoordinatedAssessment) -> str:
+def _overall_summary(
+    coordinated: CoordinatedAssessment,
+    *,
+    literature_context: LiteratureContextArtifact | None = None,
+) -> str:
     participating = _domain_list(coordinated.participating_domains)
     missing = _domain_list(coordinated.missing_domains)
     claim_count = len(coordinated.claim_domain_map)
@@ -120,6 +126,11 @@ def _overall_summary(coordinated: CoordinatedAssessment) -> str:
         sentence += f" Domain coverage is incomplete; {missing} was not represented."
     if coordinated.shared_unsupported_inferences:
         sentence += " Unsupported inference boundaries remain active, including causal inference."
+    if literature_context is not None:
+        sentence += (
+            " Literature context was retrieved from a supplied local corpus and is reported "
+            "separately from the empirical findings."
+        )
     return sentence
 
 

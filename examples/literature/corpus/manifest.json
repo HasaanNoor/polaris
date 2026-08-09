@@ -1,0 +1,14 @@
+{
+  "documents": {
+    "income-health-illustrative.md": {
+      "document_id": "illustrative_income_health_context",
+      "title": "Income and Health Illustrative Context",
+      "authors": ["Polaris Repository Authors"],
+      "year": 2026,
+      "publication": "Polaris illustrative corpus",
+      "citation_text": "Polaris Repository Authors. 2026. Income and Health Illustrative Context.",
+      "license": "Repository-authored illustrative text",
+      "domains": ["economics", "public_health"]
+    }
+  }
+}
