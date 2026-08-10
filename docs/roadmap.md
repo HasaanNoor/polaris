@@ -136,13 +136,13 @@ Deliverables: `LiteratureDocument`, `LiteratureChunk`, `CitationMetadata`, `Lite
 
 Verification: literature tests cover strict frozen models, checksums, deterministic chunk IDs, stable retrieval ranking, filters, unmatched claims, citation preservation, synthesis/report integration, and optional project orchestration. The default path is offline, corpus-grounded, and does not browse the internet, generate citations, add statistical methods, or alter empirical findings.
 
-## Phase 15: Descriptive Analytics
+## Phase 15: Curated WHO Health Panel Integration (complete)
 
-Objective: compute deterministic descriptive statistics and uncertainty summaries where applicable.
+Objective: convert the locally acquired WHO GHO collection into a deterministic reviewed country-year health panel.
 
-Deliverables: summary statistics, group comparisons, trend summaries, and reporting tables.
+Deliverables: WHO acquisition-catalog loading, indicator schema profiling, reviewed variable mappings, dimension-selection rules, country/year filtering, aggregate exclusion, sex/age/status/projection handling, unit validation, value-level provenance, immutable `WHOHealthRecord` and `WHOHealthPanel` models, quality summary, deferred-indicator registry, Phase 3-compatible export, generic Phase 12 compatibility, WDI plus WHO project example, tests, documentation, and ADR-018.
 
-Verification: numerical tests against fixed fixtures.
+Verification: `tests/who` covers catalog loading, profiling, mappings, dimensions, country handling, panel determinism, export, Phase 3 ingestion, Phase 12 harmonization, and Phase 13 project execution. The current local WHO panel integrates 28 reviewed indicators and defers 14 catalog targets.
 
 ## Phase 16: Statistical Modeling Service
 

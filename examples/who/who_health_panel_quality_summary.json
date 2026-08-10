@@ -1,0 +1,137 @@
+{
+  "age_specific_rows_excluded": 0,
+  "aggregate_exclusions": 25576,
+  "analysis_ready": true,
+  "country_count": 219,
+  "country_year_record_count": 14002,
+  "deferred_indicator_count": 14,
+  "duplicate_findings": [],
+  "integrated_indicator_count": 28,
+  "missingness_by_variable": {
+    "who_adult_mortality_per_1000": {
+      "country_year_absent": 9954
+    },
+    "who_adult_obesity_pct": {
+      "country_year_absent": 5227
+    },
+    "who_alcohol_consumption_litres_per_capita": {
+      "country_year_absent": 9002
+    },
+    "who_child_overweight_pct": {
+      "country_year_absent": 9927
+    },
+    "who_child_stunting_pct": {
+      "country_year_absent": 9952
+    },
+    "who_dtp3_immunization_pct": {
+      "country_year_absent": 8951
+    },
+    "who_hale_birth_years": {
+      "country_year_absent": 9954
+    },
+    "who_health_expenditure_pct_gdp": {
+      "country_year_absent": 9414
+    },
+    "who_health_expenditure_per_capita_usd": {
+      "country_year_absent": 9417
+    },
+    "who_hepatitis_b_under5_pct": {
+      "country_year_absent": 12052
+    },
+    "who_hospital_beds_per_10000": {
+      "country_year_absent": 11044
+    },
+    "who_insufficient_physical_activity_pct": {
+      "country_year_absent": 9540
+    },
+    "who_life_expectancy_birth_years": {
+      "country_year_absent": 9954
+    },
+    "who_maternal_mortality_per_100k": {
+      "country_year_absent": 6436
+    },
+    "who_mcv1_immunization_pct": {
+      "country_year_absent": 8951
+    },
+    "who_medical_doctors_per_10000": {
+      "country_year_absent": 10320
+    },
+    "who_neonatal_mortality_per_1000_live_births": {
+      "country_year_absent": 3589
+    },
+    "who_nursing_midwifery_per_10000": {
+      "country_year_absent": 10420
+    },
+    "who_pm25_exposure": {
+      "country_year_absent": 10950
+    },
+    "who_premature_ncd_mortality_pct": {
+      "country_year_absent": 9954
+    },
+    "who_road_traffic_mortality_per_100k": {
+      "country_year_absent": 13808
+    },
+    "who_safely_managed_sanitation_pct": {
+      "country_year_absent": 10494
+    },
+    "who_safely_managed_water_pct": {
+      "country_year_absent": 10254
+    },
+    "who_skilled_birth_attendance_pct": {
+      "country_year_absent": 11466
+    },
+    "who_suicide_rate_per_100k": {
+      "country_year_absent": 9954
+    },
+    "who_tuberculosis_incidence_per_100k": {
+      "country_year_absent": 9175
+    },
+    "who_uhc_service_coverage_index": {
+      "country_year_absent": 9322
+    },
+    "who_under5_mortality_per_1000_live_births": {
+      "country_year_absent": 707
+    }
+  },
+  "modeled_series_count": 20,
+  "projected_rows_excluded": 0,
+  "selected_indicator_count": 28,
+  "sex_specific_rows_excluded": 83830,
+  "territory_exclusions": 946,
+  "unknown_entity_exclusions": 0,
+  "unresolved_schema_issues": [],
+  "variable_coverage": {
+    "who_adult_mortality_per_1000": 4048,
+    "who_adult_obesity_pct": 8775,
+    "who_alcohol_consumption_litres_per_capita": 5000,
+    "who_child_overweight_pct": 4075,
+    "who_child_stunting_pct": 4050,
+    "who_dtp3_immunization_pct": 5051,
+    "who_hale_birth_years": 4048,
+    "who_health_expenditure_pct_gdp": 4588,
+    "who_health_expenditure_per_capita_usd": 4585,
+    "who_hepatitis_b_under5_pct": 1950,
+    "who_hospital_beds_per_10000": 2958,
+    "who_insufficient_physical_activity_pct": 4462,
+    "who_life_expectancy_birth_years": 4048,
+    "who_maternal_mortality_per_100k": 7566,
+    "who_mcv1_immunization_pct": 5051,
+    "who_medical_doctors_per_10000": 3682,
+    "who_neonatal_mortality_per_1000_live_births": 10413,
+    "who_nursing_midwifery_per_10000": 3582,
+    "who_pm25_exposure": 3052,
+    "who_premature_ncd_mortality_pct": 4048,
+    "who_road_traffic_mortality_per_100k": 194,
+    "who_safely_managed_sanitation_pct": 3508,
+    "who_safely_managed_water_pct": 3748,
+    "who_skilled_birth_attendance_pct": 2536,
+    "who_suicide_rate_per_100k": 4048,
+    "who_tuberculosis_incidence_per_100k": 4827,
+    "who_uhc_service_coverage_index": 4680,
+    "who_under5_mortality_per_1000_live_births": 13295
+  },
+  "year_range": [
+    1931,
+    2025
+  ]
+}

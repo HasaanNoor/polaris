@@ -1,5 +1,11 @@
 # Planned Dataset Catalog
 
+## Curated WHO GHO Panel
+
+Phase 15 adds a derived reviewed dataset, `WHOHealthPanel`, built from official local WHO GHO OData snapshots recorded in `data/raw/who/gho/acquisition_catalog.json`. The panel is not a raw provider file. It exports `examples/who/who_health_panel_sample.csv` and `examples/who/who_health_panel_manifest.json` as Phase 3-compatible derived artifacts, with quality and deferred-indicator metadata beside the CSV.
+
+Current local status: 42 conceptual WHO targets, 41 resolved/downloaded official snapshots, 28 indicators integrated into the reviewed country-year panel, and 14 deferred. Deferred indicators are not forgotten; they are listed in `examples/who/who_deferred_indicators.json` with reasons and future work.
+
 This catalog records planned real-world dataset support. It distinguishes provider adapter implementation from dataset selection, download, validation, and end-to-end integration. A selected dataset has been identified as strategically relevant, but it must still pass acquisition, manifest generation, Phase 3 validation, variable review, and at least one reproducible Phase 4-9 case study before Polaris treats it as integrated.
 
 | Provider | Dataset | Research domain | Geographic coverage | Temporal structure | Expected format | Polaris priority | Adapter status | Download status | Integration status | Notes |

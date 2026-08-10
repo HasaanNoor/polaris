@@ -1,0 +1,879 @@
+[
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ]
+    },
+    "canonical_label": "WHO adult mortality rate, both sexes",
+    "canonical_variable_id": "who_adult_mortality_per_1000",
+    "conceptual_definition": "Probability of dying between ages 15 and 60 per 1,000 population, both sexes.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2021
+    ],
+    "unit": "per 1,000 population",
+    "who_indicator_id": "WHOSIS_000004",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ],
+      "Dim2": [
+        "AGEGROUP_YEARS18-PLUS"
+      ]
+    },
+    "canonical_label": "WHO adult obesity prevalence",
+    "canonical_variable_id": "who_adult_obesity_pct",
+    "conceptual_definition": "Age-standardized adult obesity prevalence, ages 18+, both sexes.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      },
+      {
+        "allowed_values": [
+          "AGEGROUP_YEARS18-PLUS"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim2",
+        "reason": "Adult obesity indicator is defined for ages 18+."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      1980,
+      2024
+    ],
+    "unit": "percent",
+    "who_indicator_id": "NCD_BMI_30A",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ]
+    },
+    "canonical_label": "WHO alcohol consumption per capita",
+    "canonical_variable_id": "who_alcohol_consumption_litres_per_capita",
+    "conceptual_definition": "Total per capita alcohol consumption for age 15+ in litres of pure alcohol, both sexes.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [
+      "WHO defines this as a three-year average."
+    ],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2024
+    ],
+    "unit": "litres pure alcohol per capita",
+    "who_indicator_id": "SA_0000001688",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ]
+    },
+    "canonical_label": "WHO child overweight prevalence",
+    "canonical_variable_id": "who_child_overweight_pct",
+    "conceptual_definition": "Model-based prevalence of overweight among children under 5, both sexes.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      1990,
+      2024
+    ],
+    "unit": "percent",
+    "who_indicator_id": "NUTOVERWEIGHTPREV",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ]
+    },
+    "canonical_label": "WHO child stunting prevalence",
+    "canonical_variable_id": "who_child_stunting_pct",
+    "conceptual_definition": "Model-based prevalence of stunting among children under 5, both sexes.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      1990,
+      2024
+    ],
+    "unit": "percent",
+    "who_indicator_id": "NUTSTUNTINGPREV",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO DTP3 immunization coverage among 1-year-olds",
+    "canonical_variable_id": "who_dtp3_immunization_pct",
+    "conceptual_definition": "DTP3 immunization coverage among 1-year-olds.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": false,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2025
+    ],
+    "unit": "percent",
+    "who_indicator_id": "WHS4_100",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ]
+    },
+    "canonical_label": "WHO healthy life expectancy at birth, both sexes",
+    "canonical_variable_id": "who_hale_birth_years",
+    "conceptual_definition": "Healthy life expectancy at birth in years, explicit WHO both-sexes category.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2021
+    ],
+    "unit": "years",
+    "who_indicator_id": "WHOSIS_000002",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO current health expenditure as percent of GDP",
+    "canonical_variable_id": "who_health_expenditure_pct_gdp",
+    "conceptual_definition": "Current health expenditure as a percentage of gross domestic product.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": false,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2023
+    ],
+    "unit": "percent of GDP",
+    "who_indicator_id": "GHED_CHEGDP_SHA2011",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO current health expenditure per capita in US dollars",
+    "canonical_variable_id": "who_health_expenditure_per_capita_usd",
+    "conceptual_definition": "Current health expenditure per capita in current US dollars.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": false,
+    "notes": [
+      "No price or exchange-rate conversion is applied."
+    ],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2023
+    ],
+    "unit": "current US dollars per capita",
+    "who_indicator_id": "GHED_CHE_pc_US_SHA2011",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "DataSourceDim": [
+        "DATASOURCE_GLOBAL_HEPA_REPORT_2026"
+      ],
+      "Dim1": [
+        "AGEGROUP_YEARSUNDER5"
+      ]
+    },
+    "canonical_label": "WHO hepatitis B surface antigen prevalence under age 5",
+    "canonical_variable_id": "who_hepatitis_b_under5_pct",
+    "conceptual_definition": "HBsAg prevalence among children under 5.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "AGEGROUP_YEARSUNDER5"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "The SDG hepatitis B indicator targets children under 5."
+      },
+      {
+        "allowed_values": [
+          "DATASOURCE_GLOBAL_HEPA_REPORT_2026"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "DataSourceDim",
+        "reason": "Single observed data-source category retained explicitly."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2015,
+      2024
+    ],
+    "unit": "percent",
+    "who_indicator_id": "SDGHEPHBSAGPRV",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO hospital beds per 10,000 population",
+    "canonical_variable_id": "who_hospital_beds_per_10000",
+    "conceptual_definition": "Hospital beds per 10,000 population.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": false,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2023
+    ],
+    "unit": "per 10,000 population",
+    "who_indicator_id": "WHS6_102",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ],
+      "Dim2": [
+        "AGEGROUP_YEARS18-PLUS"
+      ]
+    },
+    "canonical_label": "WHO insufficient physical activity prevalence",
+    "canonical_variable_id": "who_insufficient_physical_activity_pct",
+    "conceptual_definition": "Age-standardized prevalence of insufficient physical activity among adults 18+, both sexes.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      },
+      {
+        "allowed_values": [
+          "AGEGROUP_YEARS18-PLUS"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim2",
+        "reason": "Adult physical-activity indicator is defined for ages 18+."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2022
+    ],
+    "unit": "percent",
+    "who_indicator_id": "NCD_PAA",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ]
+    },
+    "canonical_label": "WHO life expectancy at birth, both sexes",
+    "canonical_variable_id": "who_life_expectancy_birth_years",
+    "conceptual_definition": "Life expectancy at birth in years, explicit WHO both-sexes category.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2021
+    ],
+    "unit": "years",
+    "who_indicator_id": "WHOSIS_000001",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO maternal mortality ratio",
+    "canonical_variable_id": "who_maternal_mortality_per_100k",
+    "conceptual_definition": "Maternal mortality ratio per 100,000 live births.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      1985,
+      2023
+    ],
+    "unit": "per 100,000 live births",
+    "who_indicator_id": "MDG_0000000026",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO MCV1 immunization coverage among 1-year-olds",
+    "canonical_variable_id": "who_mcv1_immunization_pct",
+    "conceptual_definition": "Measles-containing-vaccine first-dose coverage among 1-year-olds.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": false,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2025
+    ],
+    "unit": "percent",
+    "who_indicator_id": "WHS8_110",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO medical doctors per 10,000 population",
+    "canonical_variable_id": "who_medical_doctors_per_10000",
+    "conceptual_definition": "Medical doctors density per 10,000 population.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": false,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      1990,
+      2024
+    ],
+    "unit": "per 10,000 population",
+    "who_indicator_id": "HWF_0001",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ],
+      "Dim2": [
+        "AGEGROUP_DAYS0-27"
+      ]
+    },
+    "canonical_label": "WHO neonatal mortality rate",
+    "canonical_variable_id": "who_neonatal_mortality_per_1000_live_births",
+    "conceptual_definition": "Neonatal mortality rate per 1,000 live births, both sexes, days 0-27.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      },
+      {
+        "allowed_values": [
+          "AGEGROUP_DAYS0-27"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim2",
+        "reason": "Neonatal mortality is inherently a days 0-27 child-age concept."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      1951,
+      2024
+    ],
+    "unit": "per 1,000 live births",
+    "who_indicator_id": "WHOSIS_000003",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO nursing and midwifery personnel per 10,000 population",
+    "canonical_variable_id": "who_nursing_midwifery_per_10000",
+    "conceptual_definition": "Nursing and midwifery personnel density per 10,000 population.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": false,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      1990,
+      2024
+    ],
+    "unit": "per 10,000 population",
+    "who_indicator_id": "HWF_0006",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "RESIDENCEAREATYPE_TOTL"
+      ]
+    },
+    "canonical_label": "WHO PM2.5 exposure",
+    "canonical_variable_id": "who_pm25_exposure",
+    "conceptual_definition": "Concentration of fine particulate matter, total residence.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "RESIDENCEAREATYPE_TOTL"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies total residence category; urban/rural rows are not averaged."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2010,
+      2023
+    ],
+    "unit": "micrograms per cubic metre",
+    "who_indicator_id": "SDGPM25",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ],
+      "Dim2": [
+        "AGEGROUP_YEARS30-69"
+      ]
+    },
+    "canonical_label": "WHO premature NCD mortality probability",
+    "canonical_variable_id": "who_premature_ncd_mortality_pct",
+    "conceptual_definition": "Probability of dying between age 30 and 70 from selected NCD causes, both sexes.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      },
+      {
+        "allowed_values": [
+          "AGEGROUP_YEARS30-69"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim2",
+        "reason": "The indicator definition is inherently ages 30-69."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2021
+    ],
+    "unit": "percent",
+    "who_indicator_id": "NCDMORT3070",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO road traffic mortality rate",
+    "canonical_variable_id": "who_road_traffic_mortality_per_100k",
+    "conceptual_definition": "Estimated road traffic death rate per 100,000 population.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2021,
+      2021
+    ],
+    "unit": "per 100,000 population",
+    "who_indicator_id": "RS_198",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "RESIDENCEAREATYPE_TOTL"
+      ]
+    },
+    "canonical_label": "WHO safely managed sanitation services",
+    "canonical_variable_id": "who_safely_managed_sanitation_pct",
+    "conceptual_definition": "Population using safely managed sanitation services, total residence.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "RESIDENCEAREATYPE_TOTL"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies total residence category; urban/rural rows are not averaged."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2024
+    ],
+    "unit": "percent",
+    "who_indicator_id": "WSH_SANITATION_SAFELY_MANAGED",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "RESIDENCEAREATYPE_TOTL"
+      ]
+    },
+    "canonical_label": "WHO safely managed drinking-water services",
+    "canonical_variable_id": "who_safely_managed_water_pct",
+    "conceptual_definition": "Population using safely managed drinking-water services, total residence.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "RESIDENCEAREATYPE_TOTL"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies total residence category; urban/rural rows are not averaged."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2024
+    ],
+    "unit": "percent",
+    "who_indicator_id": "WSH_WATER_SAFELY_MANAGED",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO births attended by skilled health personnel",
+    "canonical_variable_id": "who_skilled_birth_attendance_pct",
+    "conceptual_definition": "Births attended by skilled health personnel.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": false,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2025
+    ],
+    "unit": "percent",
+    "who_indicator_id": "MDG_0000000025",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ]
+    },
+    "canonical_label": "WHO age-standardized suicide rate, both sexes",
+    "canonical_variable_id": "who_suicide_rate_per_100k",
+    "conceptual_definition": "Age-standardized suicide mortality rate per 100,000 population, both sexes.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2021
+    ],
+    "unit": "per 100,000 population",
+    "who_indicator_id": "MH_12",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO tuberculosis incidence",
+    "canonical_variable_id": "who_tuberculosis_incidence_per_100k",
+    "conceptual_definition": "Incidence of tuberculosis per 100,000 population per year.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2024
+    ],
+    "unit": "per 100,000 population per year",
+    "who_indicator_id": "MDG_0000000020",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {},
+    "canonical_label": "WHO UHC service coverage index",
+    "canonical_variable_id": "who_uhc_service_coverage_index",
+    "conceptual_definition": "Reported SDG 3.8.1 UHC Service Coverage Index.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      2000,
+      2023
+    ],
+    "unit": "index",
+    "who_indicator_id": "UHC_INDEX_REPORTED",
+    "year_field": "TimeDim"
+  },
+  {
+    "allowed_dimension_values": {
+      "Dim1": [
+        "SEX_BTSX"
+      ],
+      "Dim2": [
+        "AGEGROUP_YEARSUNDER5"
+      ],
+      "Dim3": [
+        "WEALTHQUINTILE_TOTL"
+      ]
+    },
+    "canonical_label": "WHO under-five mortality rate",
+    "canonical_variable_id": "who_under5_mortality_per_1000_live_births",
+    "conceptual_definition": "Probability of dying by age 5 per 1,000 live births, both sexes and total wealth quintile.",
+    "country_field": "SpatialDim",
+    "integration_status": "integrated",
+    "modeled_estimates_accepted": true,
+    "notes": [],
+    "preferred_numeric_source_field": "NumericValue",
+    "projections_accepted": false,
+    "required_dimension_filters": [
+      {
+        "allowed_values": [
+          "SEX_BTSX"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim1",
+        "reason": "Provider supplies an explicit both-sexes headline category."
+      },
+      {
+        "allowed_values": [
+          "AGEGROUP_YEARSUNDER5"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim2",
+        "reason": "Under-five mortality is inherently a child-age headline concept."
+      },
+      {
+        "allowed_values": [
+          "WEALTHQUINTILE_TOTL"
+        ],
+        "exclude_reason_code": "row_excluded_by_dimension_rule",
+        "field": "Dim3",
+        "reason": "Provider supplies total wealth quintile; wealth groups are not averaged."
+      }
+    ],
+    "ruleset_version": "2026-08-10",
+    "supported_year_range": [
+      1931,
+      2024
+    ],
+    "unit": "per 1,000 live births",
+    "who_indicator_id": "MDG_0000000007",
+    "year_field": "TimeDim"
+  }
+]

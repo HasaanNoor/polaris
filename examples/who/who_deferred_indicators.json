@@ -1,0 +1,128 @@
+[
+  {
+    "conceptual_target": "Unmet need for family planning",
+    "potentially_useful": true,
+    "reason_deferred": "acquisition deferred; no local provider snapshot exists",
+    "required_future_work": "Resolve official WHO GHO endpoint and re-profile before integration.",
+    "schema_issue": null,
+    "suitability_classification": "LOW",
+    "who_indicator_id": null
+  },
+  {
+    "conceptual_target": "Catastrophic health expenditure / financial hardship from healthcare",
+    "potentially_useful": true,
+    "reason_deferred": "LOW acquisition suitability; kept out of default panel pending review",
+    "required_future_work": "Create an indicator-specific reviewed filter and validate unique country-year keys.",
+    "schema_issue": "other dimensions ('PUBLISHSTATE', 'UNREGION', 'UNSDGREGION', 'WORLDBANKINCOMEGROUP', 'WORLDBANKREGION'); no country-year observations",
+    "suitability_classification": "LOW",
+    "who_indicator_id": "FINPROTECTION_CATA_TOT_10_LEVEL_SH"
+  },
+  {
+    "conceptual_target": "HIV incidence or prevalence",
+    "potentially_useful": true,
+    "reason_deferred": "not in reviewed Phase 15 default mapping registry",
+    "required_future_work": "Review dimensions, unit, projection status, and duplicate behavior.",
+    "schema_issue": "other dimensions ('PUBLISHSTATE',); warnings ('This is a count of new infections, not an incidence rate.',)",
+    "suitability_classification": "MEDIUM",
+    "who_indicator_id": "HIV_0000000026"
+  },
+  {
+    "conceptual_target": "Malaria incidence",
+    "potentially_useful": true,
+    "reason_deferred": "LOW acquisition suitability; kept out of default panel pending review",
+    "required_future_work": "Create an indicator-specific reviewed filter and validate unique country-year keys.",
+    "schema_issue": "warnings ('Estimated incidence; do not equate with reported case incidence without review.',)",
+    "suitability_classification": "LOW",
+    "who_indicator_id": "MALARIA_EST_INCIDENCE"
+  },
+  {
+    "conceptual_target": "Adolescent birth rate",
+    "potentially_useful": true,
+    "reason_deferred": "not in reviewed Phase 15 default mapping registry",
+    "required_future_work": "Review dimensions, unit, projection status, and duplicate behavior.",
+    "schema_issue": "sex dimensions ('SEX_FMLE',); age dimensions ('AGEGROUP_YEARS10-14', 'AGEGROUP_YEARS15-19'); other dimensions ('PUBLISHSTATE', 'UNREGION')",
+    "suitability_classification": "MEDIUM",
+    "who_indicator_id": "MDG_0000000003"
+  },
+  {
+    "conceptual_target": "Mental-health workforce density",
+    "potentially_useful": true,
+    "reason_deferred": "not in reviewed Phase 15 default mapping registry",
+    "required_future_work": "Review dimensions, unit, projection status, and duplicate behavior.",
+    "schema_issue": "other dimensions ('PUBLISHSTATE',); warnings ('Narrower than total mental-health workforce; likely requires special handling.',)",
+    "suitability_classification": "MEDIUM",
+    "who_indicator_id": "MH_6"
+  },
+  {
+    "conceptual_target": "Tobacco use prevalence",
+    "potentially_useful": true,
+    "reason_deferred": "LOW acquisition suitability; kept out of default panel pending review",
+    "required_future_work": "Create an indicator-specific reviewed filter and validate unique country-year keys.",
+    "schema_issue": "sex dimensions ('SEX_BTSX', 'SEX_FMLE', 'SEX_MLE')",
+    "suitability_classification": "LOW",
+    "who_indicator_id": "M_Est_tob_curr_std"
+  },
+  {
+    "conceptual_target": "Diabetes prevalence",
+    "potentially_useful": true,
+    "reason_deferred": "LOW acquisition suitability; kept out of default panel pending review",
+    "required_future_work": "Create an indicator-specific reviewed filter and validate unique country-year keys.",
+    "schema_issue": "sex dimensions ('SEX_BTSX', 'SEX_FMLE', 'SEX_MLE'); age dimensions ('AGEGROUP_YEARS18-PLUS', 'AGEGROUP_YEARS30-PLUS')",
+    "suitability_classification": "LOW",
+    "who_indicator_id": "NCD_DIABETES_PREVALENCE_AGESTD"
+  },
+  {
+    "conceptual_target": "Hypertension prevalence",
+    "potentially_useful": true,
+    "reason_deferred": "LOW acquisition suitability; kept out of default panel pending review",
+    "required_future_work": "Create an indicator-specific reviewed filter and validate unique country-year keys.",
+    "schema_issue": "sex dimensions ('SEX_BTSX', 'SEX_FMLE', 'SEX_MLE')",
+    "suitability_classification": "LOW",
+    "who_indicator_id": "NCD_HYP_PREVALENCE_A"
+  },
+  {
+    "conceptual_target": "Anaemia prevalence",
+    "potentially_useful": true,
+    "reason_deferred": "LOW acquisition suitability; kept out of default panel pending review",
+    "required_future_work": "Create an indicator-specific reviewed filter and validate unique country-year keys.",
+    "schema_issue": "sex dimensions ('SEX_FMLE',)",
+    "suitability_classification": "LOW",
+    "who_indicator_id": "NUTRITION_ANAEMIA_REPRODUCTIVEAGE_PREV"
+  },
+  {
+    "conceptual_target": "Child wasting prevalence",
+    "potentially_useful": true,
+    "reason_deferred": "LOW acquisition suitability; kept out of default panel pending review",
+    "required_future_work": "Create an indicator-specific reviewed filter and validate unique country-year keys.",
+    "schema_issue": "sex dimensions ('SEX_BTSX',); other dimensions ('PUBLISHSTATE', 'UNREGION', 'WORLDBANKINCOMEGROUP'); no country-year observations",
+    "suitability_classification": "LOW",
+    "who_indicator_id": "NUTWASTINGPREV"
+  },
+  {
+    "conceptual_target": "Exclusive breastfeeding prevalence",
+    "potentially_useful": true,
+    "reason_deferred": "LOW acquisition suitability; kept out of default panel pending review",
+    "required_future_work": "Create an indicator-specific reviewed filter and validate unique country-year keys.",
+    "schema_issue": "sex dimensions ('SEX_BTSX', 'SEX_FMLE', 'SEX_MLE'); age dimensions ('AGEGROUP_MONTHS0-1', 'AGEGROUP_MONTHS2-3', 'AGEGROUP_MONTHS4-5', 'AGEGROUP_YEARSALL')",
+    "suitability_classification": "LOW",
+    "who_indicator_id": "NUT_BF_EBF"
+  },
+  {
+    "conceptual_target": "Modern contraceptive / family-planning coverage",
+    "potentially_useful": true,
+    "reason_deferred": "LOW acquisition suitability; kept out of default panel pending review",
+    "required_future_work": "Create an indicator-specific reviewed filter and validate unique country-year keys.",
+    "schema_issue": "sex dimensions ('SEX_FMLE',); age dimensions ('AGEGROUP_YEARS15-49',)",
+    "suitability_classification": "LOW",
+    "who_indicator_id": "SDGFPALL"
+  },
+  {
+    "conceptual_target": "Antenatal-care coverage",
+    "potentially_useful": true,
+    "reason_deferred": "not in reviewed Phase 15 default mapping registry",
+    "required_future_work": "Review dimensions, unit, projection status, and duplicate behavior.",
+    "schema_issue": "other dimensions ('PUBLISHSTATE', 'DATASOURCE')",
+    "suitability_classification": "MEDIUM",
+    "who_indicator_id": "WHS4_154"
+  }
+]

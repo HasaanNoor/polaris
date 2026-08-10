@@ -1,5 +1,11 @@
 # Real-Data Integration Plan
 
+## Phase 15 WHO Panel Integration
+
+WHO acquisition and WHO integration are separate. Acquisition stores immutable official OData snapshots and an acquisition catalog. Integration reads those local files, validates checksums, profiles observed schemas, applies reviewed mappings, filters dimensions, excludes aggregates, normalizes countries/years through existing Phase 12 behavior, and exports a derived Phase 3-compatible CSV plus metadata.
+
+The WHO panel enters Phase 12 as a generic provider dataset. Phase 12 does not depend on WHO-specific logic; it receives `DatasetIngestionResult`, `DatasetHarmonizationConfig`, and `VariableMapping` objects as it does for other providers. Example artifacts under `examples/who` demonstrate WDI plus WHO harmonization and a Phase 13 project.
+
 Phase 10 provides acquisition infrastructure, Phase 11 validated official WDI data through Phases 3-9, and Phase 12 adds deterministic country-year harmonization for reviewed multi-provider subsets. Real-data research integration remains staged because provider files must be selected, snapshotted, validated, reviewed, harmonized where needed, analyzed, and carried through the existing deterministic artifact pipeline before they become reliable Polaris research inputs.
 
 ## Workflow

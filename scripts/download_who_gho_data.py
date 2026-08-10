@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ruff: noqa: E501
 """Acquire a curated WHO GHO OData snapshot collection.
 
 This script is intentionally standalone. It downloads raw WHO provider JSON
@@ -12,13 +13,12 @@ import hashlib
 import json
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
-
 
 BASE_URL = "https://ghoapi.azureedge.net/api"
 RAW_ROOT = Path("data/raw/who/gho")
@@ -78,7 +78,9 @@ TARGETS: list[dict[str, Any]] = [
         "indicator_id": "WHOSIS_000003",
         "rationale": "Isolates first 28 days and maternal/newborn health-system performance.",
         "reason_selected": "WHO GHO neonatal mortality series with country-year observations; the current concise nmr label returned no observations from the data endpoint.",
-        "alternatives": ["nmr: exact current concise title but OData data endpoint returned no observations."],
+        "alternatives": [
+            "nmr: exact current concise title but OData data endpoint returned no observations."
+        ],
         "data_filter": "SpatialDimType eq 'COUNTRY' and Dim1 eq 'SEX_BTSX' and Dim2 eq 'AGEGROUP_DAYS0-27'",
     },
     {
@@ -89,9 +91,7 @@ TARGETS: list[dict[str, Any]] = [
         "indicator_id": "MDG_0000000026",
         "rationale": "Reproductive and maternal-care outcome.",
         "reason_selected": "Modeled/global-comparable MMR series rather than country-reported-only estimates.",
-        "alternatives": [
-            "MDG_0000000032: country reported estimates; less comparable."
-        ],
+        "alternatives": ["MDG_0000000032: country reported estimates; less comparable."],
     },
     {
         "number": 7,
@@ -121,7 +121,9 @@ TARGETS: list[dict[str, Any]] = [
         "indicator_id": "GHED_CHE_pc_US_SHA2011",
         "rationale": "Health spending available per person.",
         "reason_selected": "Direct current-health-expenditure per-capita series with country-year observations; the PPP variant returned no observations from the data endpoint.",
-        "alternatives": ["GHED_CHE_pc_PPP_SHA2011: PPP int$ per capita but OData data endpoint returned no observations."],
+        "alternatives": [
+            "GHED_CHE_pc_PPP_SHA2011: PPP int$ per capita but OData data endpoint returned no observations."
+        ],
         "warnings": ["US-dollar values may require later price/exchange-rate handling."],
         "data_filter": "SpatialDimType eq 'COUNTRY'",
     },
@@ -259,7 +261,9 @@ TARGETS: list[dict[str, Any]] = [
         "indicator_id": "NCDMORT3070",
         "rationale": "Combined major NCD outcome.",
         "reason_selected": "Direct combined 30-70 mortality probability for cardiovascular disease, cancer, diabetes, and chronic respiratory disease.",
-        "alternatives": ["Separate cardiovascular/cancer/respiratory mortality series avoided as redundant."],
+        "alternatives": [
+            "Separate cardiovascular/cancer/respiratory mortality series avoided as redundant."
+        ],
     },
     {
         "number": 23,
@@ -339,8 +343,12 @@ TARGETS: list[dict[str, Any]] = [
         "indicator_id": "MALARIA_EST_INCIDENCE",
         "rationale": "Communicable-disease burden.",
         "reason_selected": "Estimated malaria incidence series with country-year observations; the SDGMALARIA data endpoint returned no observations.",
-        "alternatives": ["SDGMALARIA: SDG malaria incidence title but OData data endpoint returned no observations."],
-        "warnings": ["Estimated incidence; do not equate with reported case incidence without review."],
+        "alternatives": [
+            "SDGMALARIA: SDG malaria incidence title but OData data endpoint returned no observations."
+        ],
+        "warnings": [
+            "Estimated incidence; do not equate with reported case incidence without review."
+        ],
         "data_filter": "SpatialDimType eq 'COUNTRY'",
     },
     {
@@ -362,7 +370,9 @@ TARGETS: list[dict[str, Any]] = [
         "indicator_id": "SDGHEPHBSAGPRV",
         "rationale": "Communicable-disease burden where sufficiently comparable.",
         "reason_selected": "SDG hepatitis B surface antigen prevalence.",
-        "alternatives": ["HEPATITIS_HBV_PREVALENCE_PER100: chronic HBV prevalence in general population."],
+        "alternatives": [
+            "HEPATITIS_HBV_PREVALENCE_PER100: chronic HBV prevalence in general population."
+        ],
     },
     {
         "number": 33,
@@ -382,7 +392,10 @@ TARGETS: list[dict[str, Any]] = [
         "indicator_id": "MDG_0000000025",
         "rationale": "Delivery-care access.",
         "reason_selected": "General skilled-birth-attendance percentage, not adolescent-only or survey-window shorthand.",
-        "alternatives": ["sba: two/three-year survey-window shorthand.", "sba5: five-year survey-window shorthand."],
+        "alternatives": [
+            "sba: two/three-year survey-window shorthand.",
+            "sba5: five-year survey-window shorthand.",
+        ],
     },
     {
         "number": 35,
@@ -402,7 +415,10 @@ TARGETS: list[dict[str, Any]] = [
         "indicator_id": "SDGFPALL",
         "rationale": "Contraceptive access.",
         "reason_selected": "SDG need for family planning satisfied with modern methods.",
-        "alternatives": ["FAMILYPLANNINGUNPDUHC: modelled estimates variant.", "cpmo: contraceptive prevalence - modern methods."],
+        "alternatives": [
+            "FAMILYPLANNINGUNPDUHC: modelled estimates variant.",
+            "cpmo: contraceptive prevalence - modern methods.",
+        ],
     },
     {
         "number": 37,
@@ -413,7 +429,9 @@ TARGETS: list[dict[str, Any]] = [
         "rationale": "Unmet service demand.",
         "reason_selected": "Deferred: no general-population unmet-need series was found in the current GHO indicator index.",
         "alternatives": ["MDG_0000000006_AGE1519: adolescent-only unmet need; not selected."],
-        "warnings": ["Deferred rather than substituting adolescent-only unmet need for the requested general concept."],
+        "warnings": [
+            "Deferred rather than substituting adolescent-only unmet need for the requested general concept."
+        ],
     },
     {
         "number": 38,
@@ -423,8 +441,14 @@ TARGETS: list[dict[str, Any]] = [
         "indicator_id": "MH_6",
         "rationale": "Mental-health system capacity.",
         "reason_selected": "Psychiatrist density selected as a working mental-health workforce capacity proxy; the broader total workforce series returned no observations.",
-        "alternatives": ["MH_21: broad total workforce but OData data endpoint returned no observations.", "MH_7: mental-health nurses.", "MH_9: psychologists."],
-        "warnings": ["Narrower than total mental-health workforce; likely requires special handling."],
+        "alternatives": [
+            "MH_21: broad total workforce but OData data endpoint returned no observations.",
+            "MH_7: mental-health nurses.",
+            "MH_9: psychologists.",
+        ],
+        "warnings": [
+            "Narrower than total mental-health workforce; likely requires special handling."
+        ],
         "data_filter": "SpatialDimType eq 'COUNTRY'",
     },
     {
@@ -466,7 +490,9 @@ TARGETS: list[dict[str, Any]] = [
         "indicator_id": "RS_198",
         "rationale": "External-cause injury mortality.",
         "reason_selected": "Estimated road traffic death rate with country-year observations; the SDGROADAGE data endpoint returned no observations.",
-        "alternatives": ["SDGROADAGE: age-standardized SDG road-traffic mortality title but OData data endpoint returned no observations."],
+        "alternatives": [
+            "SDGROADAGE: age-standardized SDG road-traffic mortality title but OData data endpoint returned no observations."
+        ],
         "warnings": ["Estimated mortality rate, not the age-standardized SDGROADAGE series."],
         "data_filter": "SpatialDimType eq 'COUNTRY'",
     },
@@ -512,7 +538,7 @@ def write_snapshot(path: Path, raw: bytes, force: bool = False) -> tuple[Path, s
             return path, digest, "reused_identical"
         if not force:
             versioned = path.with_name(
-                f"{path.stem}_{datetime.now(timezone.utc).date().isoformat()}_{digest[:12]}{path.suffix}"
+                f"{path.stem}_{datetime.now(UTC).date().isoformat()}_{digest[:12]}{path.suffix}"
             )
             versioned.write_bytes(raw)
             return versioned, digest, "created_versioned_snapshot"
@@ -551,7 +577,11 @@ def selected_targets(args: argparse.Namespace) -> list[dict[str, Any]]:
 
 
 def summarize_records(records: list[dict[str, Any]]) -> dict[str, Any]:
-    countries = {r.get("SpatialDim") for r in records if r.get("SpatialDimType") == "COUNTRY" and r.get("SpatialDim")}
+    countries = {
+        r.get("SpatialDim")
+        for r in records
+        if r.get("SpatialDimType") == "COUNTRY" and r.get("SpatialDim")
+    }
     geos = {r.get("SpatialDim") for r in records if r.get("SpatialDim")}
     years = sorted({r.get("TimeDim") for r in records if isinstance(r.get("TimeDim"), int)})
     sex = sorted({r.get("Dim1") for r in records if r.get("Dim1Type") == "SEX" and r.get("Dim1")})
@@ -567,7 +597,14 @@ def summarize_records(records: list[dict[str, Any]]) -> dict[str, Any]:
         {
             r.get(dim)
             for r in records
-            for dim in ("Dim1Type", "Dim2Type", "Dim3Type", "DataSourceDimType", "SpatialDimType", "TimeDimType")
+            for dim in (
+                "Dim1Type",
+                "Dim2Type",
+                "Dim3Type",
+                "DataSourceDimType",
+                "SpatialDimType",
+                "TimeDimType",
+            )
             if r.get(dim)
         }
     )
@@ -584,7 +621,9 @@ def summarize_records(records: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def suitability(summary: dict[str, Any], dimensions: list[dict[str, Any]], target: dict[str, Any]) -> str:
+def suitability(
+    summary: dict[str, Any], dimensions: list[dict[str, Any]], target: dict[str, Any]
+) -> str:
     if target.get("indicator_id") is None:
         return "LOW"
     dim_codes = {d.get("Dimension") for d in dimensions}
@@ -593,8 +632,20 @@ def suitability(summary: dict[str, Any], dimensions: list[dict[str, Any]], targe
     observations = summary.get("observation_count", 0)
     has_annual = "YEAR" in dim_codes and years.get("first") != years.get("last")
     has_country = "COUNTRY" in dim_codes and countries >= 100
-    extra_dims = len([d for d in dim_codes if d not in {"COUNTRY", "REGION", "YEAR", "SEX", "WORLDBANKINCOMEGROUP", "PUBLISHSTATE"}])
-    if has_country and has_annual and observations > 0 and not extra_dims and not target.get("warnings"):
+    extra_dims = len(
+        [
+            d
+            for d in dim_codes
+            if d not in {"COUNTRY", "REGION", "YEAR", "SEX", "WORLDBANKINCOMEGROUP", "PUBLISHSTATE"}
+        ]
+    )
+    if (
+        has_country
+        and has_annual
+        and observations > 0
+        and not extra_dims
+        and not target.get("warnings")
+    ):
         return "HIGH"
     if observations > 0 and has_country:
         return "MEDIUM"
@@ -604,8 +655,14 @@ def suitability(summary: dict[str, Any], dimensions: list[dict[str, Any]], targe
 def list_targets(targets: list[dict[str, Any]], titles: dict[str, str]) -> None:
     for target in targets:
         indicator_id = target.get("indicator_id") or "DEFERRED"
-        title = titles.get(indicator_id, "") if target.get("indicator_id") else target["reason_selected"]
-        print(f"{target['number']:02d} {target['category']} {target['key']} -> {indicator_id} | {title}")
+        title = (
+            titles.get(indicator_id, "")
+            if target.get("indicator_id")
+            else target["reason_selected"]
+        )
+        print(
+            f"{target['number']:02d} {target['category']} {target['key']} -> {indicator_id} | {title}"
+        )
 
 
 def acquire(args: argparse.Namespace) -> int:
@@ -615,7 +672,9 @@ def acquire(args: argparse.Namespace) -> int:
         return 2
 
     index_url = f"{BASE_URL}/Indicator"
-    dimensions_url_template = f"{BASE_URL}/IndicatorDimension?$filter=IndicatorCode%20eq%20%27{{code}}%27"
+    dimensions_url_template = (
+        f"{BASE_URL}/IndicatorDimension?$filter=IndicatorCode%20eq%20%27{{code}}%27"
+    )
 
     if args.dry_run:
         print(index_url)
@@ -623,7 +682,7 @@ def acquire(args: argparse.Namespace) -> int:
             code = target.get("indicator_id")
             if not code:
                 continue
-            print(dimensions_url_template.format(code=quote(code, safe='')))
+            print(dimensions_url_template.format(code=quote(code, safe="")))
             data_url = f"{BASE_URL}/{quote(code, safe='')}"
             if target.get("data_filter"):
                 data_url = f"{data_url}?$filter={quote(target['data_filter'], safe='')}"
@@ -641,7 +700,7 @@ def acquire(args: argparse.Namespace) -> int:
         print("Specify --list or --download.", file=sys.stderr)
         return 2
 
-    retrieval_ts = datetime.now(timezone.utc).isoformat()
+    retrieval_ts = datetime.now(UTC).isoformat()
     metadata_index_path, index_sha, index_status = write_snapshot(
         RAW_ROOT / "metadata" / "Indicator.json", index_raw, force=args.force
     )
@@ -750,12 +809,17 @@ def acquire(args: argparse.Namespace) -> int:
                     "sex_dimensions": summary["sex_dimensions"],
                     "age_dimensions": summary["age_dimensions"],
                     "other_important_dimensions": [
-                        d for d in dim_codes if d not in {"COUNTRY", "REGION", "YEAR", "SEX", "AGEGROUP"}
+                        d
+                        for d in dim_codes
+                        if d not in {"COUNTRY", "REGION", "YEAR", "SEX", "AGEGROUP"}
                     ],
                     "dimensions": dimensions,
                     "geographic_level": "COUNTRY present" if "COUNTRY" in dim_codes else None,
                     "temporal_structure": "YEAR present" if "YEAR" in dim_codes else None,
-                    "whether_country_year_observations_exist": summary["unique_country_level_entities"] > 0
+                    "whether_country_year_observations_exist": summary[
+                        "unique_country_level_entities"
+                    ]
+                    > 0
                     and bool(summary["year_coverage"]),
                     "validation_summary": summary,
                     "integration_suitability": suitability(summary, dimensions, target),
@@ -782,12 +846,20 @@ def acquire(args: argparse.Namespace) -> int:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--list", action="store_true", help="List resolved WHO indicators without downloading.")
+    parser.add_argument(
+        "--list", action="store_true", help="List resolved WHO indicators without downloading."
+    )
     parser.add_argument("--download", action="store_true", help="Download the curated collection.")
-    parser.add_argument("--target", help="Download/list one conceptual target by name, number, or indicator ID.")
+    parser.add_argument(
+        "--target", help="Download/list one conceptual target by name, number, or indicator ID."
+    )
     parser.add_argument("--category", help="Download/list one indicator category.")
-    parser.add_argument("--dry-run", action="store_true", help="Show intended WHO requests without writing files.")
-    parser.add_argument("--force", action="store_true", help="Overwrite existing snapshots rather than versioning.")
+    parser.add_argument(
+        "--dry-run", action="store_true", help="Show intended WHO requests without writing files."
+    )
+    parser.add_argument(
+        "--force", action="store_true", help="Overwrite existing snapshots rather than versioning."
+    )
     return parser.parse_args()
 
 

@@ -2,6 +2,12 @@
 
 Polaris prioritizes variable families that support country-year research while preserving clear units, source provenance, and interpretation limits. This document intentionally avoids exact provider indicator codes unless they are already verified in repository files. Provider-specific codes should be added only during reviewed dataset integration.
 
+## Phase 15 WHO Variables
+
+WHO variables are promoted only through reviewed mappings in `src/polaris/who/mappings.py`. The current default panel includes core health outcomes and system-capacity measures such as life expectancy, HALE, adult mortality, maternal mortality, suicide mortality, health expenditure, doctor and nursing density, hospital beds, DTP3, MCV1, tuberculosis incidence, skilled birth attendance, under-five and neonatal mortality, UHC service coverage, selected NCD/nutrition/environment indicators, water, sanitation, PM2.5, and road-traffic mortality.
+
+HIGH-suitability indicators form the core. MEDIUM indicators are integrated only where actual local schemas support deterministic filters, such as explicit both-sexes, total residence, child age, or adult age categories. LOW indicators remain deferred by default and require separate review before use.
+
 ## Economics and Development
 
 | Variable family | Likely provider | Conceptual role | Likely analytical use | Unit or comparability concerns | Annual country-level coverage expected |

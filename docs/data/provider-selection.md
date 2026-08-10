@@ -1,6 +1,15 @@
 # Provider Selection Strategy
 
-Polaris selects real-world datasets for deterministic, provenance-first country-year research. A selected provider is not the same as a downloaded, validated, harmonized, or fully integrated dataset. Phase 10 implements acquisition infrastructure and built-in adapters for the first three providers: World Bank WDI, WHO GHO, and UNESCO UIS. Phase 11 validates WDI end to end. Phase 12 validates a narrow WDI plus WHO life-expectancy country-year harmonization example.
+Polaris selects real-world datasets for deterministic, provenance-first country-year research. A selected provider is not the same as a downloaded, validated, harmonized, or fully integrated dataset. Phase 10 implements acquisition infrastructure and built-in adapters for the first three providers: World Bank WDI, WHO GHO, and UNESCO UIS. Phase 11 validates WDI end to end. Phase 12 validates a narrow WDI plus WHO life-expectancy country-year harmonization example. Phase 15 integrates a curated subset of locally downloaded official WHO GHO snapshots into a reviewed WHOHealthPanel.
+
+## Phase 15 WHO Status
+
+WHO GHO status is tracked as four separate states:
+
+- Acquired: 41 official WHO GHO OData snapshots are present under `data/raw/who/gho`.
+- Profiled: each downloaded snapshot can be profiled by `src/polaris/who/profiling.py` against the acquisition catalog.
+- Integrated: 28 reviewed indicators are promoted into the default WHOHealthPanel with explicit country/year, dimension, unit, and provenance rules.
+- Deferred: 14 targets remain machine-readable deferrals because they are unresolved, LOW suitability, projection-prone, aggregate-only, sparse, or require additional dimension review.
 
 ## Selection Criteria
 

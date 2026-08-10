@@ -1,0 +1,141 @@
+{
+  "dataset_id": "harmonized_country_year_4fcc46d36c5dac35",
+  "title": "Phase 12 Harmonized Country-Year Dataset",
+  "provider": "Polaris derived harmonization",
+  "source_url": "derived:polaris-harmonization",
+  "access_url": "examples/who/wdi_who_phase15_harmonized.csv",
+  "description": "Derived country-year artifact produced by Phase 12 harmonization. Original provider files are not modified; value-level provenance is retained inside the HarmonizedDataset artifact.",
+  "license": "Derived from input provider licenses; see source manifests.",
+  "status": "reviewed_candidate",
+  "geographic_coverage": {
+    "codes": [
+      "NPL",
+      "PAK"
+    ],
+    "description": "Country-year keys retained by deterministic harmonization."
+  },
+  "temporal_coverage": {
+    "start": 2020,
+    "end": 2021,
+    "label": "Annual country-year records"
+  },
+  "revision_metadata": {
+    "release_date": null,
+    "revision_policy": null,
+    "update_frequency": "derived on request",
+    "source_version": "2026-08-06"
+  },
+  "variables": [
+    {
+      "variable_id": "canonical_country_code",
+      "label": "Canonical country code",
+      "description": null,
+      "unit": null,
+      "data_type": "string",
+      "role": "identifier",
+      "source_field_name": "canonical_country_code",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "canonical_country_name",
+      "label": "Canonical country name",
+      "description": null,
+      "unit": null,
+      "data_type": "string",
+      "role": "identifier",
+      "source_field_name": "canonical_country_name",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "year",
+      "label": "Year",
+      "description": null,
+      "unit": null,
+      "data_type": "integer",
+      "role": "time",
+      "source_field_name": "year",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "wdi_gdp_per_capita_current_usd",
+      "label": "GDP per capita, current US dollars",
+      "description": "World Bank WDI GDP per capita in current US dollars.",
+      "unit": "current US dollars",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "wdi_gdp_per_capita_current_usd",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "who_dtp3_immunization_pct",
+      "label": "who dtp3 immunization pct",
+      "description": "WHO Phase 15 canonical variable who_dtp3_immunization_pct.",
+      "unit": "percent",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "who_dtp3_immunization_pct",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "who_hale_birth_years",
+      "label": "who hale birth years",
+      "description": "WHO Phase 15 canonical variable who_hale_birth_years.",
+      "unit": "years",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "who_hale_birth_years",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "who_health_expenditure_pct_gdp",
+      "label": "who health expenditure pct gdp",
+      "description": "WHO Phase 15 canonical variable who_health_expenditure_pct_gdp.",
+      "unit": "percent of GDP",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "who_health_expenditure_pct_gdp",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "who_life_expectancy_birth_years",
+      "label": "who life expectancy birth years",
+      "description": "WHO Phase 15 canonical variable who_life_expectancy_birth_years.",
+      "unit": "years",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "who_life_expectancy_birth_years",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "who_medical_doctors_per_10000",
+      "label": "who medical doctors per 10000",
+      "description": "WHO Phase 15 canonical variable who_medical_doctors_per_10000.",
+      "unit": "per 10,000 population",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "who_medical_doctors_per_10000",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    }
+  ],
+  "units": [
+    "country-year"
+  ],
+  "frequency": "annual",
+  "methodology_reference": "docs/decisions/015-cross-dataset-country-year-harmonization.md",
+  "comparability_warnings": [],
+  "licensing_warnings": [],
+  "access_restrictions": [],
+  "source_version": "2026-08-06",
+  "retrieval_timestamp": "2026-08-10T22:34:05.044740Z",
+  "checksum": "5abc828b92aa6597cbe585d0de21c3a98423626fe2eb6254019f36ad6d9adfbd",
+  "schema_version": "1.0.0"
+}

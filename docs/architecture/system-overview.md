@@ -65,6 +65,10 @@ Phase 14 adds a local corpus-grounded retrieval layer under `src/polaris/literat
 
 `LiteratureContextArtifact` remains separate from Phase 5 empirical evidence. Phase 8 synthesis receives it as optional context with explicit prompt separation between empirical findings and literature context. Phase 9 reports render a separate Literature Context section with citations, unmatched claims, retrieval facts, and limitations.
 
+## WHO Health Panel
+
+Phase 15 adds a curated WHO integration layer between raw provider snapshots and Phase 3 ingestion. It reads the local WHO GHO acquisition catalog, validates checksums, profiles indicator schemas, applies reviewed dimension filters, excludes aggregates, keeps sex and age dimensions explicit, separates projections from historical observations, and writes `WHOHealthPanel` artifacts. The panel is then exported as a normal Phase 3 dataset and consumed by Phase 12 without WHO-specific harmonization code.
+
 ## Failure Handling
 
 The system must stop or downgrade claims when:

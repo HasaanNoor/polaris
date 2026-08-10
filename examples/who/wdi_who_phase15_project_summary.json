@@ -1,0 +1,28 @@
+{
+  "agent_domains": [
+    "economics",
+    "public_health"
+  ],
+  "analysis_result_id": "analysis_5f6a512478fca829789e00f529a7a9203f6fb6c74ddb0a0e95118fe73e1a0968",
+  "harmonized_dataset_id": "harmonized_country_year_4fcc46d36c5dac35",
+  "harmonized_manifest_id": "harmonized_country_year_4fcc46d36c5dac35",
+  "harmonized_rows": 3,
+  "harmonized_variables": [
+    "wdi_gdp_per_capita_current_usd",
+    "who_dtp3_immunization_pct",
+    "who_hale_birth_years",
+    "who_health_expenditure_pct_gdp",
+    "who_life_expectancy_birth_years",
+    "who_medical_doctors_per_10000"
+  ],
+  "note": "Derived from official local WHO GHO snapshots and the committed local WDI sample; no network access or raw-provider mutation is required.",
+  "panel_id": "who_health_panel_2026-08-10_1.0.0_87b84051d7468549",
+  "project_id": "project_d11a27754b7d84d457344bbfb9b01b2d143830467cfe2887a2bc75b681b95a3e",
+  "project_status": "completed",
+  "report_path": "examples/who/wdi_who_phase15_report.md",
+  "wdi_dataset_id": "world_bank_wdi_phase15_sample_423542248d87",
+  "who_dataset_id": "who_health_panel_2026-08-10_1.0.0_87b84051d7468549",
+  "who_deferred_indicator_count": 14,
+  "who_integrated_indicator_count": 28,
+  "who_panel_rows": 14002
+}
