@@ -6,6 +6,10 @@ Polaris prioritizes variable families that support country-year research while p
 
 WHO variables are promoted only through reviewed mappings in `src/polaris/who/mappings.py`. The current default panel includes core health outcomes and system-capacity measures such as life expectancy, HALE, adult mortality, maternal mortality, suicide mortality, health expenditure, doctor and nursing density, hospital beds, DTP3, MCV1, tuberculosis incidence, skilled birth attendance, under-five and neonatal mortality, UHC service coverage, selected NCD/nutrition/environment indicators, water, sanitation, PM2.5, and road-traffic mortality.
 
+## Phase 16 WGI Variables
+
+WGI variables are promoted only through reviewed mappings in `src/polaris/wgi/mappings.py`. The default governance panel includes six separate canonical variables: `wgi_voice_accountability`, `wgi_political_stability`, `wgi_government_effectiveness`, `wgi_regulatory_quality`, `wgi_rule_of_law`, and `wgi_control_corruption`. The analytical value is the official central governance estimate; standard errors, source counts, absolute scores, and score bounds are preserved separately.
+
 HIGH-suitability indicators form the core. MEDIUM indicators are integrated only where actual local schemas support deterministic filters, such as explicit both-sexes, total residence, child age, or adult age categories. LOW indicators remain deferred by default and require separate review before use.
 
 ## Economics and Development

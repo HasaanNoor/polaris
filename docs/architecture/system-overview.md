@@ -69,6 +69,10 @@ Phase 14 adds a local corpus-grounded retrieval layer under `src/polaris/literat
 
 Phase 15 adds a curated WHO integration layer between raw provider snapshots and Phase 3 ingestion. It reads the local WHO GHO acquisition catalog, validates checksums, profiles indicator schemas, applies reviewed dimension filters, excludes aggregates, keeps sex and age dimensions explicit, separates projections from historical observations, and writes `WHOHealthPanel` artifacts. The panel is then exported as a normal Phase 3 dataset and consumed by Phase 12 without WHO-specific harmonization code.
 
+## WGI Governance Panel
+
+Phase 16 adds a curated WGI integration layer between official World Bank API ZIP snapshots and Phase 3 ingestion. It validates source checksums, profiles the list-format CSV schema, maps the six WGI dimensions to separate canonical variables, uses central governance estimates analytically, preserves standard errors/source counts/absolute scores/score bounds as metadata, excludes aggregates and territories by default, and writes `WGIGovernancePanel` artifacts. The exported governance CSV is consumed by Phase 12 without WGI-specific harmonization code.
+
 ## Failure Handling
 
 The system must stop or downgrade claims when:

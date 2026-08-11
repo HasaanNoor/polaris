@@ -6,6 +6,12 @@ WHO acquisition and WHO integration are separate. Acquisition stores immutable o
 
 The WHO panel enters Phase 12 as a generic provider dataset. Phase 12 does not depend on WHO-specific logic; it receives `DatasetIngestionResult`, `DatasetHarmonizationConfig`, and `VariableMapping` objects as it does for other providers. Example artifacts under `examples/who` demonstrate WDI plus WHO harmonization and a Phase 13 project.
 
+## Phase 16 WGI Panel Integration
+
+WGI acquisition stores official World Bank API CSV ZIP snapshots under `data/raw/world_bank/wgi/`. Integration validates checksums, profiles actual CSV ZIP schemas, selects the official central governance estimate for analysis, preserves uncertainty companion series, excludes aggregates and territories by default, and exports a derived Phase 3-compatible CSV plus metadata.
+
+The WGI panel enters Phase 12 as a generic provider dataset. Phase 12 does not depend on WGI-specific logic; WDI+WGI and WDI+WHO+WGI examples under `examples/wgi` use the same ingestion, harmonization, analysis, evidence, agent, coordination, synthesis, reporting, and project orchestration contracts as other providers.
+
 Phase 10 provides acquisition infrastructure, Phase 11 validated official WDI data through Phases 3-9, and Phase 12 adds deterministic country-year harmonization for reviewed multi-provider subsets. Real-data research integration remains staged because provider files must be selected, snapshotted, validated, reviewed, harmonized where needed, analyzed, and carried through the existing deterministic artifact pipeline before they become reliable Polaris research inputs.
 
 ## Workflow
@@ -47,7 +53,7 @@ Round 1 now has WDI end-to-end validation and a Phase 12 WDI plus WHO life-expec
 Datasets:
 
 - V-Dem
-- Worldwide Governance Indicators
+- Worldwide Governance Indicators (integrated first in Phase 16)
 - Transparency International CPI
 
 Goal: add governance and institutional analysis.

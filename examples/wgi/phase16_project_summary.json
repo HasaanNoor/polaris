@@ -1,0 +1,314 @@
+{
+  "analysis_result_id": "analysis_5aa4b2006b248978ba24e16f415f90dc180dee04ed5f5c4bfbdb34178a966015",
+  "domain_assessments": [
+    "governance",
+    "economics",
+    "public_health"
+  ],
+  "non_causal_language": true,
+  "panel_id": "wgi_governance_panel_dd9cf2bd39cfc790",
+  "panel_quality_summary": {
+    "aggregate_exclusions": 0,
+    "analysis_ready": true,
+    "country_count": 206,
+    "country_year_record_count": 5251,
+    "duplicate_keys": [],
+    "integrated_variable_count": 6,
+    "missingness_by_variable": {
+      "wgi_control_corruption": {
+        "country_year_absent": 108
+      },
+      "wgi_government_effectiveness": {
+        "country_year_absent": 141
+      },
+      "wgi_political_stability": {
+        "country_year_absent": 52
+      },
+      "wgi_regulatory_quality": {
+        "country_year_absent": 140
+      },
+      "wgi_rule_of_law": {
+        "country_year_absent": 5
+      },
+      "wgi_voice_accountability": {
+        "country_year_absent": 22
+      }
+    },
+    "source_coverage": {
+      "wgi_control_corruption": 5143,
+      "wgi_government_effectiveness": 5110,
+      "wgi_political_stability": 5199,
+      "wgi_regulatory_quality": 5111,
+      "wgi_rule_of_law": 5246,
+      "wgi_voice_accountability": 5229
+    },
+    "territory_exclusions": 9360,
+    "uncertainty_availability": {
+      "wgi_control_corruption": {
+        "governance_score": 5143,
+        "number_of_sources": 5143,
+        "percentile_rank": 0,
+        "score_bounds": 5143,
+        "standard_error": 5143
+      },
+      "wgi_government_effectiveness": {
+        "governance_score": 5110,
+        "number_of_sources": 5110,
+        "percentile_rank": 0,
+        "score_bounds": 5110,
+        "standard_error": 5110
+      },
+      "wgi_political_stability": {
+        "governance_score": 5199,
+        "number_of_sources": 5199,
+        "percentile_rank": 0,
+        "score_bounds": 5199,
+        "standard_error": 5199
+      },
+      "wgi_regulatory_quality": {
+        "governance_score": 5111,
+        "number_of_sources": 5111,
+        "percentile_rank": 0,
+        "score_bounds": 5111,
+        "standard_error": 5111
+      },
+      "wgi_rule_of_law": {
+        "governance_score": 5246,
+        "number_of_sources": 5246,
+        "percentile_rank": 0,
+        "score_bounds": 5246,
+        "standard_error": 5246
+      },
+      "wgi_voice_accountability": {
+        "governance_score": 5229,
+        "number_of_sources": 5229,
+        "percentile_rank": 0,
+        "score_bounds": 5229,
+        "standard_error": 5229
+      }
+    },
+    "unmapped_entities": {},
+    "year_range": [
+      1996,
+      2024
+    ]
+  },
+  "project_id": "project_f13f3558b24759dea36526480d2bf5d6726eb2459f547ba2946c53f591105684",
+  "project_status": "completed",
+  "research_question": "How is government effectiveness associated with life expectancy across countries after accounting for GDP per capita?",
+  "schema_profile": {
+    "aggregate_count": 0,
+    "checksum_validated": true,
+    "confidence_bound_indicators": [
+      "GOV_WGI_CC.SC_LB",
+      "GOV_WGI_CC.SC_UB",
+      "GOV_WGI_GE.SC_LB",
+      "GOV_WGI_GE.SC_UB",
+      "GOV_WGI_PV.SC_LB",
+      "GOV_WGI_PV.SC_UB",
+      "GOV_WGI_RL.SC_LB",
+      "GOV_WGI_RL.SC_UB",
+      "GOV_WGI_RQ.SC_LB",
+      "GOV_WGI_RQ.SC_UB",
+      "GOV_WGI_VA.SC_LB",
+      "GOV_WGI_VA.SC_UB"
+    ],
+    "country_count": 206,
+    "country_identifier_field": "Country Code",
+    "country_name_field": "Country Name",
+    "duplicate_key_findings": [],
+    "estimate_field": "Value",
+    "indicator_identifier_field": "Indicator Code",
+    "indicator_title_field": "Indicator Name",
+    "missingness_by_indicator": {
+      "GOV_WGI_CC.EST": 243,
+      "GOV_WGI_CC.SC": 243,
+      "GOV_WGI_CC.SC_LB": 243,
+      "GOV_WGI_CC.SC_UB": 243,
+      "GOV_WGI_CC.SE": 243,
+      "GOV_WGI_CC.SR": 243,
+      "GOV_WGI_GE.EST": 276,
+      "GOV_WGI_GE.SC": 276,
+      "GOV_WGI_GE.SC_LB": 276,
+      "GOV_WGI_GE.SC_UB": 276,
+      "GOV_WGI_GE.SE": 276,
+      "GOV_WGI_GE.SR": 276,
+      "GOV_WGI_PV.EST": 187,
+      "GOV_WGI_PV.SC": 187,
+      "GOV_WGI_PV.SC_LB": 187,
+      "GOV_WGI_PV.SC_UB": 187,
+      "GOV_WGI_PV.SE": 187,
+      "GOV_WGI_PV.SR": 187,
+      "GOV_WGI_RL.EST": 140,
+      "GOV_WGI_RL.SC": 140,
+      "GOV_WGI_RL.SC_LB": 140,
+      "GOV_WGI_RL.SC_UB": 140,
+      "GOV_WGI_RL.SE": 140,
+      "GOV_WGI_RL.SR": 140,
+      "GOV_WGI_RQ.EST": 275,
+      "GOV_WGI_RQ.SC": 275,
+      "GOV_WGI_RQ.SC_LB": 275,
+      "GOV_WGI_RQ.SC_UB": 275,
+      "GOV_WGI_RQ.SE": 275,
+      "GOV_WGI_RQ.SR": 275,
+      "GOV_WGI_VA.EST": 172,
+      "GOV_WGI_VA.SC": 172,
+      "GOV_WGI_VA.SC_LB": 172,
+      "GOV_WGI_VA.SC_UB": 172,
+      "GOV_WGI_VA.SE": 172,
+      "GOV_WGI_VA.SR": 172
+    },
+    "percentile_rank_indicators": [],
+    "row_count": 202176,
+    "schema_findings": [],
+    "source_checksums": {
+      "data/raw/world_bank/wgi/wgi-cc-20260811T141201Z-cfde2a2d92fe.zip": "cfde2a2d92fedebb79448076521f7d886e4cc2a869792d0c20c22aaa9db1231f",
+      "data/raw/world_bank/wgi/wgi-ge-20260811T141201Z-cc17eb05e365.zip": "cc17eb05e365f7c8997714685dadd0b927fec7aba23391714e0cdf0b3a9dcbc3",
+      "data/raw/world_bank/wgi/wgi-pv-20260811T141201Z-3640ae029e39.zip": "3640ae029e392adbb56a9a0d88f8cd0e30702856433458d4bce58dda084d3893",
+      "data/raw/world_bank/wgi/wgi-rl-20260811T141201Z-4b480d3f69cb.zip": "4b480d3f69cbd62f899d5604fcc4481b6fc7f6a8b6b08638a9d252ffff1bde30",
+      "data/raw/world_bank/wgi/wgi-rq-20260811T141201Z-578d4c72ceb6.zip": "578d4c72ceb63f449e0fe974a7ec4d048e22c9992668ee6b74a038b119fe86fe",
+      "data/raw/world_bank/wgi/wgi-va-20260811T141201Z-0f789448af69.zip": "0f789448af697ba4fb8c67283b82457899099c7b3347e44bbb709419c1b3e49b"
+    },
+    "source_count_indicators": [
+      "GOV_WGI_CC.SR",
+      "GOV_WGI_GE.SR",
+      "GOV_WGI_PV.SR",
+      "GOV_WGI_RL.SR",
+      "GOV_WGI_RQ.SR",
+      "GOV_WGI_VA.SR"
+    ],
+    "source_paths": [
+      "data/raw/world_bank/wgi/wgi-cc-20260811T141201Z-cfde2a2d92fe.zip",
+      "data/raw/world_bank/wgi/wgi-ge-20260811T141201Z-cc17eb05e365.zip",
+      "data/raw/world_bank/wgi/wgi-pv-20260811T141201Z-3640ae029e39.zip",
+      "data/raw/world_bank/wgi/wgi-rl-20260811T141201Z-4b480d3f69cb.zip",
+      "data/raw/world_bank/wgi/wgi-rq-20260811T141201Z-578d4c72ceb6.zip",
+      "data/raw/world_bank/wgi/wgi-va-20260811T141201Z-0f789448af69.zip"
+    ],
+    "standard_error_indicators": [
+      "GOV_WGI_CC.SE",
+      "GOV_WGI_GE.SE",
+      "GOV_WGI_PV.SE",
+      "GOV_WGI_RL.SE",
+      "GOV_WGI_RQ.SE",
+      "GOV_WGI_VA.SE"
+    ],
+    "territory_count": 9360,
+    "unknown_entity_count": 0,
+    "year_field": "Year",
+    "year_range": [
+      1996,
+      2024
+    ]
+  },
+  "selected_agents": [
+    "governance",
+    "economics",
+    "public_health"
+  ],
+  "wdi_wgi_harmonized_manifest_id": "harmonized_country_year_c452837f6e71f3e0",
+  "wdi_wgi_quality_summary": {
+    "aggregate_entities_excluded": 336,
+    "analysis_ready": true,
+    "conflict_counts": {},
+    "countries_represented": [
+      "AFG",
+      "ALB",
+      "CHN",
+      "GBR",
+      "IND",
+      "PAK",
+      "USA"
+    ],
+    "duplicate_keys": 0,
+    "input_accepted_record_counts": {
+      "wgi_governance_panel_dd9cf2bd39cfc790": 49,
+      "world_bank_wdi_real_validation_5cee65603562": 1855
+    },
+    "input_dataset_count": 2,
+    "invalid_temporal_records": 0,
+    "join_coverage": {
+      "wgi_governance_panel_dd9cf2bd39cfc790": 49,
+      "world_bank_wdi_real_validation_5cee65603562": 1519
+    },
+    "matched_country_count": 7,
+    "missingness_by_source": {
+      "world_bank_wdi_real_validation_5cee65603562": {
+        "source_value_missing": 43
+      }
+    },
+    "missingness_by_variable": {},
+    "output_country_year_record_count": 49,
+    "transformations_applied": {},
+    "unmapped_geographic_entities": {},
+    "unresolved_issues": [],
+    "variables_represented": [
+      "wdi_gdp_per_capita_current_usd",
+      "wgi_government_effectiveness"
+    ],
+    "years_represented": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021
+    ]
+  },
+  "wdi_who_wgi_harmonized_manifest_id": "harmonized_country_year_610b7b1c05b09044",
+  "wdi_who_wgi_quality_summary": {
+    "aggregate_entities_excluded": 336,
+    "analysis_ready": true,
+    "conflict_counts": {},
+    "countries_represented": [
+      "AFG",
+      "ALB",
+      "CHN",
+      "GBR",
+      "IND",
+      "PAK",
+      "USA"
+    ],
+    "duplicate_keys": 0,
+    "input_accepted_record_counts": {
+      "wgi_governance_panel_dd9cf2bd39cfc790": 49,
+      "who_life_expectancy_phase12_2ae1252400c0": 1295,
+      "world_bank_wdi_real_validation_5cee65603562": 1855
+    },
+    "input_dataset_count": 3,
+    "invalid_temporal_records": 0,
+    "join_coverage": {
+      "wgi_governance_panel_dd9cf2bd39cfc790": 49,
+      "who_life_expectancy_phase12_2ae1252400c0": 1295,
+      "world_bank_wdi_real_validation_5cee65603562": 1519
+    },
+    "matched_country_count": 7,
+    "missingness_by_source": {
+      "world_bank_wdi_real_validation_5cee65603562": {
+        "source_value_missing": 43
+      }
+    },
+    "missingness_by_variable": {},
+    "output_country_year_record_count": 49,
+    "transformations_applied": {},
+    "unmapped_geographic_entities": {},
+    "unresolved_issues": [],
+    "variables_represented": [
+      "wdi_gdp_per_capita_current_usd",
+      "wgi_control_corruption",
+      "wgi_government_effectiveness",
+      "who_life_expectancy_at_birth_both_sexes"
+    ],
+    "years_represented": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021
+    ]
+  },
+  "wgi_manifest_id": "wgi_governance_panel_dd9cf2bd39cfc790"
+}

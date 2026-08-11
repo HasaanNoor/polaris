@@ -144,7 +144,15 @@ Deliverables: WHO acquisition-catalog loading, indicator schema profiling, revie
 
 Verification: `tests/who` covers catalog loading, profiling, mappings, dimensions, country handling, panel determinism, export, Phase 3 ingestion, Phase 12 harmonization, and Phase 13 project execution. The current local WHO panel integrates 28 reviewed indicators and defers 14 catalog targets.
 
-## Phase 16: Statistical Modeling Service
+## Phase 16: Governance Indicator Panel Integration (complete)
+
+Objective: add a deterministic, analysis-ready governance panel from official World Bank Worldwide Governance Indicators.
+
+Deliverables: official WGI API ZIP acquisition, source validation, schema profiling, six reviewed canonical governance variables, exact country/year normalization, central-estimate selection, uncertainty metadata preservation, aggregate and territory exclusions, immutable `WGIGovernanceRecord` and `WGIGovernancePanel` models, value-level provenance, quality summary, deterministic panel identity, Phase 3 export, generic Phase 12 WDI+WGI and WDI+WHO+WGI examples, Phase 13 associational project example, tests, documentation, and ADR-019.
+
+Verification: `tests/wgi` covers acquisition URL shape, mappings, profiling, panel determinism, uncertainty preservation, Phase 3 ingestion, Phase 12 compatibility, and Phase 13 Governance/Economics/Public Health project execution. Local examples under `examples/wgi` use official WGI snapshots when present.
+
+## Phase 17: Statistical Modeling Service
 
 Objective: add deterministic statistical model execution.
 

@@ -1,0 +1,47 @@
+{
+  "project_id": "project_f13f3558b24759dea36526480d2bf5d6726eb2459f547ba2946c53f591105684",
+  "source_dataset_count": 3,
+  "source_checksums": {
+    "wgi_governance_panel_dd9cf2bd39cfc790": "e9d62c4c69556edabb73802fde9d48b60ec5a4f7a58266f03aba5d71594974a5",
+    "who_life_expectancy_phase12_2ae1252400c0": "2ae1252400c02828a9cbc286654255de60ed3e1dfd5416c67f74a22ea8ef0c6c",
+    "world_bank_wdi_real_validation_5cee65603562": "5cee656035626680fbd5298f50037f1ec180743aea78309a74a0e9a85343729e"
+  },
+  "harmonization_used": true,
+  "statistical_method": "ordinary_least_squares",
+  "selected_agents": [
+    "governance",
+    "economics",
+    "public_health"
+  ],
+  "synthesis_mode": "deterministic",
+  "report_format": "markdown",
+  "completed_stages": [
+    "resolve_datasets",
+    "ingest",
+    "harmonize",
+    "analyze",
+    "extract_evidence",
+    "run_agents",
+    "coordinate",
+    "synthesize",
+    "report",
+    "complete"
+  ],
+  "failed_stage": null,
+  "artifact_ids": [
+    "agent_assessment_066cf151e525a0d642492532dedefef2908f85e14a4d8ce3eb42e872e0d343d8",
+    "agent_assessment_6026fa7b83c3dd58b3d3ed2f859e099e6359ad63a88ba33c2e7f980385788e80",
+    "agent_assessment_c1444dc3b8190b0db4af1ff80f07298b67761e710dd20208b94e4a3f2303bdf6",
+    "analysis_5aa4b2006b248978ba24e16f415f90dc180dee04ed5f5c4bfbdb34178a966015",
+    "coordinated_assessment_fa0532643648c33d2535c1e91137a381c8bfb5a165ef17ecc54e69029b6566d1",
+    "evidence_artifact_84b6a15faa958f4edf5dbb772527ed0d0b47b14657aeb9f5ef8f9e5933928521",
+    "harmonized_country_year_42b5ab4803e5f84f",
+    "harmonized_country_year_42b5ab4803e5f84f",
+    "report_ade8b830b8a164fee65642be4b924f0f05312dc8cfe27987af5e4b61146dab65",
+    "synthesis_af8303a46f05357ebd3b352d553b1bd5edb78a2167d4150933ae1d2a44ebdcd9",
+    "wgi_governance_panel_dd9cf2bd39cfc790",
+    "who_life_expectancy_phase12_2ae1252400c0",
+    "world_bank_wdi_real_validation_5cee65603562"
+  ],
+  "reproducibility_ready": true
+}

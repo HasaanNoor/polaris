@@ -1,0 +1,86 @@
+{
+  "aggregate_exclusions": 0,
+  "analysis_ready": true,
+  "country_count": 206,
+  "country_year_record_count": 5251,
+  "duplicate_keys": [],
+  "integrated_variable_count": 6,
+  "missingness_by_variable": {
+    "wgi_control_corruption": {
+      "country_year_absent": 108
+    },
+    "wgi_government_effectiveness": {
+      "country_year_absent": 141
+    },
+    "wgi_political_stability": {
+      "country_year_absent": 52
+    },
+    "wgi_regulatory_quality": {
+      "country_year_absent": 140
+    },
+    "wgi_rule_of_law": {
+      "country_year_absent": 5
+    },
+    "wgi_voice_accountability": {
+      "country_year_absent": 22
+    }
+  },
+  "source_coverage": {
+    "wgi_control_corruption": 5143,
+    "wgi_government_effectiveness": 5110,
+    "wgi_political_stability": 5199,
+    "wgi_regulatory_quality": 5111,
+    "wgi_rule_of_law": 5246,
+    "wgi_voice_accountability": 5229
+  },
+  "territory_exclusions": 9360,
+  "uncertainty_availability": {
+    "wgi_control_corruption": {
+      "governance_score": 5143,
+      "number_of_sources": 5143,
+      "percentile_rank": 0,
+      "score_bounds": 5143,
+      "standard_error": 5143
+    },
+    "wgi_government_effectiveness": {
+      "governance_score": 5110,
+      "number_of_sources": 5110,
+      "percentile_rank": 0,
+      "score_bounds": 5110,
+      "standard_error": 5110
+    },
+    "wgi_political_stability": {
+      "governance_score": 5199,
+      "number_of_sources": 5199,
+      "percentile_rank": 0,
+      "score_bounds": 5199,
+      "standard_error": 5199
+    },
+    "wgi_regulatory_quality": {
+      "governance_score": 5111,
+      "number_of_sources": 5111,
+      "percentile_rank": 0,
+      "score_bounds": 5111,
+      "standard_error": 5111
+    },
+    "wgi_rule_of_law": {
+      "governance_score": 5246,
+      "number_of_sources": 5246,
+      "percentile_rank": 0,
+      "score_bounds": 5246,
+      "standard_error": 5246
+    },
+    "wgi_voice_accountability": {
+      "governance_score": 5229,
+      "number_of_sources": 5229,
+      "percentile_rank": 0,
+      "score_bounds": 5229,
+      "standard_error": 5229
+    }
+  },
+  "unmapped_entities": {},
+  "year_range": [
+    1996,
+    2024
+  ]
+}

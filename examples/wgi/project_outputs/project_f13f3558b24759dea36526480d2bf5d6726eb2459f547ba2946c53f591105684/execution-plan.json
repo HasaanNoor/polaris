@@ -1,0 +1,37 @@
+{
+  "project_id": "project_f13f3558b24759dea36526480d2bf5d6726eb2459f547ba2946c53f591105684",
+  "required_datasets": [
+    "world_bank_wdi_real_validation_5cee65603562",
+    "who_life_expectancy_phase12_2ae1252400c0",
+    "wgi_governance_panel_dd9cf2bd39cfc790"
+  ],
+  "stages": [
+    "resolve_datasets",
+    "ingest",
+    "harmonize",
+    "analyze",
+    "extract_evidence",
+    "run_agents",
+    "coordinate",
+    "synthesize",
+    "report",
+    "complete"
+  ],
+  "ingestion_dataset_ids": [
+    "world_bank_wdi_real_validation_5cee65603562",
+    "who_life_expectancy_phase12_2ae1252400c0",
+    "wgi_governance_panel_dd9cf2bd39cfc790"
+  ],
+  "harmonization_required": true,
+  "statistical_analysis_step": "ordinary_least_squares",
+  "evidence_step": "phase5_extract_evidence",
+  "selected_agents": [
+    "governance",
+    "economics",
+    "public_health"
+  ],
+  "coordination_step": "phase7_coordinate_assessments",
+  "synthesis_step": "deterministic",
+  "report_step": "markdown",
+  "schema_version": "1.0.0"
+}
