@@ -1,0 +1,97 @@
+{
+  "aggregate_exclusions": 0,
+  "analysis_ready": true,
+  "candidate_indicator_count": 2220,
+  "country_count": 213,
+  "country_year_record_count": 8408,
+  "deferred_indicator_count": 2205,
+  "duplicate_findings": [],
+  "integrated_indicator_count": 15,
+  "missingness_by_variable": {
+    "uis_adult_literacy_rate": {
+      "country_year_absent": 7284,
+      "observed": 1124
+    },
+    "uis_education_expenditure_pct_gdp": {
+      "country_year_absent": 3389,
+      "observed": 5019
+    },
+    "uis_education_expenditure_pct_government_expenditure": {
+      "country_year_absent": 3918,
+      "observed": 4490
+    },
+    "uis_lower_secondary_attainment_rate_25plus": {
+      "country_year_absent": 6353,
+      "observed": 2055
+    },
+    "uis_lower_secondary_completion_rate": {
+      "country_year_absent": 7172,
+      "observed": 1236
+    },
+    "uis_out_of_school_rate_lower_secondary_age": {
+      "country_year_absent": 5246,
+      "observed": 3162
+    },
+    "uis_out_of_school_rate_primary_age": {
+      "country_year_absent": 3817,
+      "observed": 4591
+    },
+    "uis_pre_primary_net_enrolment_rate": {
+      "country_year_absent": 5465,
+      "observed": 2943
+    },
+    "uis_primary_completion_rate": {
+      "country_year_absent": 7248,
+      "observed": 1160
+    },
+    "uis_pupil_qualified_teacher_ratio_primary": {
+      "country_year_absent": 7282,
+      "observed": 1126
+    },
+    "uis_pupil_trained_teacher_ratio_primary": {
+      "country_year_absent": 6449,
+      "observed": 1959
+    },
+    "uis_tertiary_gross_enrolment_ratio": {
+      "country_year_absent": 3156,
+      "observed": 5252
+    },
+    "uis_upper_secondary_attainment_rate_25plus": {
+      "country_year_absent": 5986,
+      "observed": 2422
+    },
+    "uis_upper_secondary_completion_rate": {
+      "country_year_absent": 7166,
+      "observed": 1242
+    },
+    "uis_youth_literacy_rate": {
+      "country_year_absent": 7135,
+      "observed": 1273
+    }
+  },
+  "sex_specific_exclusions": 0,
+  "source_coverage": {
+    "CR.1": 158,
+    "CR.2": 161,
+    "CR.3": 165,
+    "EA.2T8.AG25T99": 203,
+    "EA.3T8.AG25T99": 198,
+    "GER.5T8": 198,
+    "LR.AG15T24": 176,
+    "LR.AG15T99": 174,
+    "NER.02.CP": 195,
+    "PTRHC.1.QUALIFIED": 151,
+    "PTRHC.1.TRAINED": 155,
+    "ROFST.1.CP": 210,
+    "ROFST.2.CP": 196,
+    "XGDP.FSGOV": 199,
+    "XGOVEXP.IMF": 199
+  },
+  "subgroup_exclusions": 0,
+  "territory_exclusions": 963,
+  "unknown_entity_exclusions": 0,
+  "year_range": [
+    1970,
+    2025
+  ]
+}

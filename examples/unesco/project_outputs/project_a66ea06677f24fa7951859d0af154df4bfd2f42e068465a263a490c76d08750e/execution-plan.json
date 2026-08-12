@@ -1,0 +1,37 @@
+{
+  "project_id": "project_a66ea06677f24fa7951859d0af154df4bfd2f42e068465a263a490c76d08750e",
+  "required_datasets": [
+    "world_bank_wdi_real_validation_5cee65603562",
+    "who_life_expectancy_phase12_2ae1252400c0",
+    "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04"
+  ],
+  "stages": [
+    "resolve_datasets",
+    "ingest",
+    "harmonize",
+    "analyze",
+    "extract_evidence",
+    "run_agents",
+    "coordinate",
+    "synthesize",
+    "report",
+    "complete"
+  ],
+  "ingestion_dataset_ids": [
+    "world_bank_wdi_real_validation_5cee65603562",
+    "who_life_expectancy_phase12_2ae1252400c0",
+    "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04"
+  ],
+  "harmonization_required": true,
+  "statistical_analysis_step": "ordinary_least_squares",
+  "evidence_step": "phase5_extract_evidence",
+  "selected_agents": [
+    "economics",
+    "education",
+    "public_health"
+  ],
+  "coordination_step": "phase7_coordinate_assessments",
+  "synthesis_step": "deterministic",
+  "report_step": "markdown",
+  "schema_version": "1.0.0"
+}

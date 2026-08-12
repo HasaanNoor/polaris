@@ -1,0 +1,113 @@
+{
+  "dataset_id": "harmonized_country_year_ecc294e73857a6c7",
+  "title": "Phase 12 Harmonized Country-Year Dataset",
+  "provider": "Polaris derived harmonization",
+  "source_url": "derived:polaris-harmonization",
+  "access_url": "examples/unesco/project_outputs/project_83d187b1e93ccd0d8ebebc86bba94deec815a06c1918fb1e43a6cf102635b12d/artifacts/harmonized_country_year.csv",
+  "description": "Derived country-year artifact produced by Phase 12 harmonization. Original provider files are not modified; value-level provenance is retained inside the HarmonizedDataset artifact.",
+  "license": "Derived from input provider licenses; see source manifests.",
+  "status": "reviewed_candidate",
+  "geographic_coverage": {
+    "codes": [
+      "AFG",
+      "ALB",
+      "CHN",
+      "GBR",
+      "IND",
+      "PAK",
+      "USA"
+    ],
+    "description": "Country-year keys retained by deterministic harmonization."
+  },
+  "temporal_coverage": {
+    "start": 2015,
+    "end": 2021,
+    "label": "Annual country-year records"
+  },
+  "revision_metadata": {
+    "release_date": null,
+    "revision_policy": null,
+    "update_frequency": "derived on request",
+    "source_version": "2026-08-06"
+  },
+  "variables": [
+    {
+      "variable_id": "canonical_country_code",
+      "label": "Canonical country code",
+      "description": null,
+      "unit": null,
+      "data_type": "string",
+      "role": "identifier",
+      "source_field_name": "canonical_country_code",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "canonical_country_name",
+      "label": "Canonical country name",
+      "description": null,
+      "unit": null,
+      "data_type": "string",
+      "role": "identifier",
+      "source_field_name": "canonical_country_name",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "year",
+      "label": "Year",
+      "description": null,
+      "unit": null,
+      "data_type": "integer",
+      "role": "time",
+      "source_field_name": "year",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "uis_upper_secondary_attainment_rate_25plus",
+      "label": "UNESCO Educational attainment rate, completed upper secondary education or higher, population 25+ years, both sexes (%)",
+      "description": "Educational attainment rate, completed upper secondary education or higher, population 25+ years, both sexes (%)",
+      "unit": "percent",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "uis_upper_secondary_attainment_rate_25plus",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "wdi_gdp_per_capita_current_usd",
+      "label": "GDP per capita, current US dollars",
+      "description": "WDI GDP per capita in current US dollars.",
+      "unit": "current US dollars",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "wdi_gdp_per_capita_current_usd",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    },
+    {
+      "variable_id": "who_life_expectancy_at_birth_both_sexes",
+      "label": "WHO life expectancy at birth, both sexes",
+      "description": "WHO GHO WHOSIS_000001 life expectancy at birth, both sexes.",
+      "unit": "years",
+      "data_type": "float",
+      "role": "predictor",
+      "source_field_name": "who_life_expectancy_at_birth_both_sexes",
+      "missing_value_representation": [],
+      "comparability_notes": []
+    }
+  ],
+  "units": [
+    "country-year"
+  ],
+  "frequency": "annual",
+  "methodology_reference": "docs/decisions/015-cross-dataset-country-year-harmonization.md",
+  "comparability_warnings": [],
+  "licensing_warnings": [],
+  "access_restrictions": [],
+  "source_version": "2026-08-06",
+  "retrieval_timestamp": "2026-08-12T20:56:07.771165Z",
+  "checksum": "856943986a36f32003482bd681e8108fb4d75a4a6cb94b108437c3ff8897630a",
+  "schema_version": "1.0.0"
+}

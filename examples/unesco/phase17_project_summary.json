@@ -1,0 +1,290 @@
+{
+  "analysis_result_id": "analysis_3706fb4c0e2a2e9c44b8c2f2c092f05474aa243decea5ebea6c523760803863d",
+  "dataset_profiles": {
+    "DEM": {
+      "checksum_sha256": "4f74b668bb0851889e1e06f44bce20c5d36d3479d31ff1ad94de41d553b721b5",
+      "country_field": "COUNTRY_ID",
+      "data_file": "data/raw/unesco/DEM/DEM_DATA_NATIONAL.csv",
+      "indicator_count": 35,
+      "numeric_value_field": "VALUE",
+      "row_count": 329921,
+      "year_field": "YEAR",
+      "year_range": [
+        1970,
+        2025
+      ]
+    },
+    "SCN-SDG": {
+      "checksum_sha256": "6922a28a27308ff8c3baf51e922e5c724a5c86459203e8ba2994558e47b008d2",
+      "country_field": "COUNTRY_ID",
+      "data_file": "data/raw/unesco/SCN-SDG/SCN-SDG_DATA_NATIONAL.csv",
+      "indicator_count": 2,
+      "numeric_value_field": "VALUE",
+      "row_count": 4443,
+      "year_field": "YEAR",
+      "year_range": [
+        1996,
+        2024
+      ]
+    },
+    "SDG": {
+      "checksum_sha256": "3232451b9bc7fb7aeca2f5f7bb1523240b918d613ea7c7c0de3e2659515afaca",
+      "country_field": "COUNTRY_ID",
+      "data_file": "data/raw/unesco/SDG/SDG_DATA_NATIONAL.csv",
+      "indicator_count": 2935,
+      "numeric_value_field": "VALUE",
+      "row_count": 1460179,
+      "year_field": "YEAR",
+      "year_range": [
+        1970,
+        2025
+      ]
+    },
+    "SDG11": {
+      "checksum_sha256": "02efd702a46b4376740b381d03f12c74267a9cdde0ec03a9e6b219b8ac2e4e5d",
+      "country_field": "COUNTRY_ID",
+      "data_file": "data/raw/unesco/SDG11/SDG11_DATA_NATIONAL.csv",
+      "indicator_count": 8,
+      "numeric_value_field": "VALUE",
+      "row_count": 1183,
+      "year_field": "YEAR",
+      "year_range": [
+        2017,
+        2024
+      ]
+    }
+  },
+  "domain_assessments": [
+    "economics",
+    "education",
+    "public_health"
+  ],
+  "multi_domain_manifest_id": "harmonized_country_year_2034776f268ceb6e",
+  "multi_domain_quality_summary": {
+    "aggregate_entities_excluded": 336,
+    "analysis_ready": true,
+    "conflict_counts": {},
+    "countries_represented": [
+      "AFG",
+      "ALB",
+      "CHN",
+      "GBR",
+      "IND",
+      "PAK",
+      "USA"
+    ],
+    "duplicate_keys": 0,
+    "input_accepted_record_counts": {
+      "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04": 49,
+      "wgi_governance_panel_dd9cf2bd39cfc790": 49,
+      "who_life_expectancy_phase12_2ae1252400c0": 1295,
+      "world_bank_wdi_real_validation_5cee65603562": 1855
+    },
+    "input_dataset_count": 4,
+    "invalid_temporal_records": 0,
+    "join_coverage": {
+      "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04": 49,
+      "wgi_governance_panel_dd9cf2bd39cfc790": 49,
+      "who_life_expectancy_phase12_2ae1252400c0": 1295,
+      "world_bank_wdi_real_validation_5cee65603562": 1519
+    },
+    "matched_country_count": 7,
+    "missingness_by_source": {
+      "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04": {
+        "source_value_missing": 21
+      },
+      "world_bank_wdi_real_validation_5cee65603562": {
+        "source_value_missing": 43
+      }
+    },
+    "missingness_by_variable": {
+      "uis_upper_secondary_attainment_rate_25plus": {
+        "join_induced_missing": 21
+      }
+    },
+    "output_country_year_record_count": 49,
+    "transformations_applied": {},
+    "unmapped_geographic_entities": {},
+    "unresolved_issues": [],
+    "variables_represented": [
+      "uis_upper_secondary_attainment_rate_25plus",
+      "wdi_gdp_per_capita_current_usd",
+      "wgi_government_effectiveness",
+      "who_life_expectancy_at_birth_both_sexes"
+    ],
+    "years_represented": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021
+    ]
+  },
+  "non_causal_language": true,
+  "panel_id": "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04",
+  "panel_quality_summary": {
+    "aggregate_exclusions": 0,
+    "analysis_ready": true,
+    "candidate_indicator_count": 2220,
+    "country_count": 213,
+    "country_year_record_count": 8408,
+    "deferred_indicator_count": 2205,
+    "duplicate_findings": [],
+    "integrated_indicator_count": 15,
+    "missingness_by_variable": {
+      "uis_adult_literacy_rate": {
+        "country_year_absent": 7284,
+        "observed": 1124
+      },
+      "uis_education_expenditure_pct_gdp": {
+        "country_year_absent": 3389,
+        "observed": 5019
+      },
+      "uis_education_expenditure_pct_government_expenditure": {
+        "country_year_absent": 3918,
+        "observed": 4490
+      },
+      "uis_lower_secondary_attainment_rate_25plus": {
+        "country_year_absent": 6353,
+        "observed": 2055
+      },
+      "uis_lower_secondary_completion_rate": {
+        "country_year_absent": 7172,
+        "observed": 1236
+      },
+      "uis_out_of_school_rate_lower_secondary_age": {
+        "country_year_absent": 5246,
+        "observed": 3162
+      },
+      "uis_out_of_school_rate_primary_age": {
+        "country_year_absent": 3817,
+        "observed": 4591
+      },
+      "uis_pre_primary_net_enrolment_rate": {
+        "country_year_absent": 5465,
+        "observed": 2943
+      },
+      "uis_primary_completion_rate": {
+        "country_year_absent": 7248,
+        "observed": 1160
+      },
+      "uis_pupil_qualified_teacher_ratio_primary": {
+        "country_year_absent": 7282,
+        "observed": 1126
+      },
+      "uis_pupil_trained_teacher_ratio_primary": {
+        "country_year_absent": 6449,
+        "observed": 1959
+      },
+      "uis_tertiary_gross_enrolment_ratio": {
+        "country_year_absent": 3156,
+        "observed": 5252
+      },
+      "uis_upper_secondary_attainment_rate_25plus": {
+        "country_year_absent": 5986,
+        "observed": 2422
+      },
+      "uis_upper_secondary_completion_rate": {
+        "country_year_absent": 7166,
+        "observed": 1242
+      },
+      "uis_youth_literacy_rate": {
+        "country_year_absent": 7135,
+        "observed": 1273
+      }
+    },
+    "sex_specific_exclusions": 0,
+    "source_coverage": {
+      "CR.1": 158,
+      "CR.2": 161,
+      "CR.3": 165,
+      "EA.2T8.AG25T99": 203,
+      "EA.3T8.AG25T99": 198,
+      "GER.5T8": 198,
+      "LR.AG15T24": 176,
+      "LR.AG15T99": 174,
+      "NER.02.CP": 195,
+      "PTRHC.1.QUALIFIED": 151,
+      "PTRHC.1.TRAINED": 155,
+      "ROFST.1.CP": 210,
+      "ROFST.2.CP": 196,
+      "XGDP.FSGOV": 199,
+      "XGOVEXP.IMF": 199
+    },
+    "subgroup_exclusions": 0,
+    "territory_exclusions": 963,
+    "unknown_entity_exclusions": 0,
+    "year_range": [
+      1970,
+      2025
+    ]
+  },
+  "project_id": "project_a66ea06677f24fa7951859d0af154df4bfd2f42e068465a263a490c76d08750e",
+  "project_status": "completed",
+  "research_question": "How is educational attainment associated with life expectancy after accounting for GDP per capita?",
+  "selected_agents": [
+    "economics",
+    "education",
+    "public_health"
+  ],
+  "unesco_manifest_id": "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04",
+  "wdi_unesco_manifest_id": "harmonized_country_year_9cf1da3adf83a3f5",
+  "wdi_unesco_quality_summary": {
+    "aggregate_entities_excluded": 336,
+    "analysis_ready": true,
+    "conflict_counts": {},
+    "countries_represented": [
+      "AFG",
+      "ALB",
+      "CHN",
+      "GBR",
+      "IND",
+      "PAK",
+      "USA"
+    ],
+    "duplicate_keys": 0,
+    "input_accepted_record_counts": {
+      "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04": 49,
+      "world_bank_wdi_real_validation_5cee65603562": 1855
+    },
+    "input_dataset_count": 2,
+    "invalid_temporal_records": 0,
+    "join_coverage": {
+      "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04": 49,
+      "world_bank_wdi_real_validation_5cee65603562": 1519
+    },
+    "matched_country_count": 7,
+    "missingness_by_source": {
+      "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04": {
+        "source_value_missing": 21
+      },
+      "world_bank_wdi_real_validation_5cee65603562": {
+        "source_value_missing": 43
+      }
+    },
+    "missingness_by_variable": {
+      "uis_upper_secondary_attainment_rate_25plus": {
+        "join_induced_missing": 21
+      }
+    },
+    "output_country_year_record_count": 49,
+    "transformations_applied": {},
+    "unmapped_geographic_entities": {},
+    "unresolved_issues": [],
+    "variables_represented": [
+      "uis_upper_secondary_attainment_rate_25plus",
+      "wdi_gdp_per_capita_current_usd"
+    ],
+    "years_represented": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021
+    ]
+  }
+}

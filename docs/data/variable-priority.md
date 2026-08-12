@@ -12,6 +12,12 @@ WGI variables are promoted only through reviewed mappings in `src/polaris/wgi/ma
 
 HIGH-suitability indicators form the core. MEDIUM indicators are integrated only where actual local schemas support deterministic filters, such as explicit both-sexes, total residence, child age, or adult age categories. LOW indicators remain deferred by default and require separate review before use.
 
+## Phase 17 UNESCO Variables
+
+UNESCO variables are promoted only through reviewed mappings in `src/polaris/unesco/mappings.py`. The default education panel includes adult literacy, youth literacy, primary/lower-secondary/upper-secondary completion, tertiary gross enrolment, pre-primary net enrolment, primary and lower-secondary out-of-school rates, lower- and upper-secondary attainment for ages 25+, primary pupil-qualified and pupil-trained teacher ratios, education expenditure as a percentage of GDP, and education expenditure as a percentage of total government expenditure.
+
+Enrollment, completion, attainment, literacy, expenditure, and teacher-capacity measures remain separate concepts. Gross enrolment, net enrolment, adjusted net enrolment, attendance, and completion are not treated as interchangeable. Sex-specific, location, wealth, disability, parity, and learning-outcome variants remain deferred unless a future reviewed mapping can preserve their dimensions without averaging or aggregation.
+
 ## Economics and Development
 
 | Variable family | Likely provider | Conceptual role | Likely analytical use | Unit or comparability concerns | Annual country-level coverage expected |

@@ -1,0 +1,47 @@
+{
+  "project_id": "project_a66ea06677f24fa7951859d0af154df4bfd2f42e068465a263a490c76d08750e",
+  "source_dataset_count": 3,
+  "source_checksums": {
+    "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04": "47b7961b7b9bcc60aa77268b4e307c4465f0d439dfb01b3d9bd8126d6c021df3",
+    "who_life_expectancy_phase12_2ae1252400c0": "2ae1252400c02828a9cbc286654255de60ed3e1dfd5416c67f74a22ea8ef0c6c",
+    "world_bank_wdi_real_validation_5cee65603562": "5cee656035626680fbd5298f50037f1ec180743aea78309a74a0e9a85343729e"
+  },
+  "harmonization_used": true,
+  "statistical_method": "ordinary_least_squares",
+  "selected_agents": [
+    "economics",
+    "education",
+    "public_health"
+  ],
+  "synthesis_mode": "deterministic",
+  "report_format": "markdown",
+  "completed_stages": [
+    "resolve_datasets",
+    "ingest",
+    "harmonize",
+    "analyze",
+    "extract_evidence",
+    "run_agents",
+    "coordinate",
+    "synthesize",
+    "report",
+    "complete"
+  ],
+  "failed_stage": null,
+  "artifact_ids": [
+    "agent_assessment_484e5c61b94a59e3c87029bc5c997c9e7f340153b1ac57a5468091bf922b3ad0",
+    "agent_assessment_a78dda5f786dd8fd1b1e909fcea9ffb3aa29103c1028c7e07ece729e11e48b98",
+    "agent_assessment_d4edb44e063092a79c53ad0f12efcbcfd8174f4f99097aa55df8d367fbb2733c",
+    "analysis_3706fb4c0e2a2e9c44b8c2f2c092f05474aa243decea5ebea6c523760803863d",
+    "coordinated_assessment_1516d5fe93ffaad941b0148f4f8078b3b66b0cbc417486b4f8eaaa6e725587e2",
+    "evidence_artifact_a62e6e07e229af51bfb879e4d1e2d6e35ab0438fa9c52551676a8f53c0676d5f",
+    "harmonized_country_year_8d093613c7a39a83",
+    "harmonized_country_year_8d093613c7a39a83",
+    "report_38136450db7814e4f067ab49b350c9ba47bfc75093d328c777812cefa78d3423",
+    "synthesis_105857adcd8e4e5572e0531f7508b261083bcae3738b54eb0735ce817c4f79bb",
+    "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04",
+    "who_life_expectancy_phase12_2ae1252400c0",
+    "world_bank_wdi_real_validation_5cee65603562"
+  ],
+  "reproducibility_ready": true
+}

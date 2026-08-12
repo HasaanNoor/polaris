@@ -22,6 +22,7 @@ Every investigation must record:
 - literature corpus ID, source document checksums, source paths, citation metadata, chunking configuration, retrieval mode, retrieval queries, and literature context artifact ID when Phase 14 literature context is used;
 - WHO acquisition catalog path, selected WHO indicator IDs, source snapshot checksums, reviewed mapping ruleset version, dimension filters, aggregate/projection exclusion counts, deferred-indicator registry, and WHOHealthPanel ID when Phase 15 WHO data is used;
 - WGI source snapshot paths, official WGI indicator IDs, source checksums, reviewed mapping ruleset version, country/temporal rules, aggregate/territory exclusion counts, uncertainty metadata availability, and WGIGovernancePanel ID when Phase 16 WGI data is used;
+- UNESCO source file paths, UNESCO indicator IDs, source checksums, reviewed mapping ruleset version, country/temporal rules, dimension filters, aggregate/territory/subgroup exclusion counts, deferred-indicator registry, and UNESCOEducationPanel ID when Phase 17 UNESCO data is used;
 - report generation metadata.
 
 ## Artifact Reproduction
@@ -35,6 +36,8 @@ For Phase 14 literature context, corpus IDs and literature context IDs must be d
 For Phase 15 WHO panels, panel IDs must be derived from stable indicator IDs, source checksums, mapping rules, dimension filters, geographic/temporal scope, schema version, and ruleset version. Creation timestamps may appear in metadata but must not affect identity. Raw WHO snapshots must remain unmodified.
 
 For Phase 16 WGI panels, panel IDs must be derived from source checksums, selected WGI variables, country rules, temporal rules, schema version, and ruleset version. Creation timestamps may appear in metadata but must not affect identity. Raw WGI ZIP snapshots must remain unmodified.
+
+For Phase 17 UNESCO panels, panel IDs must be derived from source checksums, selected UNESCO indicator IDs, mapping rules, dimension filters, geographic/temporal rules, schema version, and ruleset version. Creation timestamps may appear in metadata but must not affect identity. Raw UNESCO files must remain unmodified.
 
 ## Data Publication and Privacy
 

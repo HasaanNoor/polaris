@@ -73,6 +73,10 @@ Phase 15 adds a curated WHO integration layer between raw provider snapshots and
 
 Phase 16 adds a curated WGI integration layer between official World Bank API ZIP snapshots and Phase 3 ingestion. It validates source checksums, profiles the list-format CSV schema, maps the six WGI dimensions to separate canonical variables, uses central governance estimates analytically, preserves standard errors/source counts/absolute scores/score bounds as metadata, excludes aggregates and territories by default, and writes `WGIGovernancePanel` artifacts. The exported governance CSV is consumed by Phase 12 without WGI-specific harmonization code.
 
+## UNESCO Education Panel
+
+Phase 17 adds a curated UNESCO integration layer between local UNESCO UIS files and Phase 3 ingestion. It profiles DEM, SDG, SCN-SDG, and SDG11, promotes only reviewed SDG national education indicators, preserves UNESCO IDs and value-level provenance, excludes aggregates and territories by default, and writes `UNESCOEducationPanel` artifacts. The exported education CSV is consumed by Phase 12 without UNESCO-specific harmonization code.
+
 ## Failure Handling
 
 The system must stop or downgrade claims when:

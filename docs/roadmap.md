@@ -152,7 +152,15 @@ Deliverables: official WGI API ZIP acquisition, source validation, schema profil
 
 Verification: `tests/wgi` covers acquisition URL shape, mappings, profiling, panel determinism, uncertainty preservation, Phase 3 ingestion, Phase 12 compatibility, and Phase 13 Governance/Economics/Public Health project execution. Local examples under `examples/wgi` use official WGI snapshots when present.
 
-## Phase 17: Statistical Modeling Service
+## Phase 17: UNESCO Education Panel Integration (complete)
+
+Objective: convert locally downloaded UNESCO UIS data into a deterministic reviewed education country-year panel.
+
+Deliverables: local UNESCO DEM/SDG/SCN-SDG/SDG11 profiling, reviewed SDG education mappings, dimension parsing, aggregate/territory exclusion, value-level provenance, immutable `UNESCOEducationRecord` and `UNESCOEducationPanel` models, quality summary, deferred-indicator registry, deterministic panel identity, Phase 3 export, generic Phase 12 WDI+UNESCO and WDI+WHO+WGI+UNESCO examples, Phase 13 associational project example, tests, documentation, and ADR-020.
+
+Verification: `tests/unesco` covers catalog loading, profiling, mappings, dimensions, panel determinism, provenance preservation, Phase 3 ingestion, and Phase 12 WDI+UNESCO compatibility. Local examples under `examples/unesco` use existing downloaded UNESCO files only.
+
+## Phase 18: Statistical Modeling Service
 
 Objective: add deterministic statistical model execution.
 
@@ -160,7 +168,7 @@ Deliverables: model specifications, diagnostics, effect estimates, uncertainty o
 
 Verification: tests against known analytical results.
 
-## Phase 17: Additional Deterministic Agents
+## Phase 19: Additional Deterministic Agents
 
 Objective: implement typed agents for coordination, question interpretation, dataset selection, data quality, and statistical analysis.
 
@@ -168,7 +176,7 @@ Deliverables: agent contracts, deterministic strategies, validation failures, an
 
 Verification: contract tests and end-to-end artifact generation.
 
-## Phase 18: Persistent Orchestration Runtime
+## Phase 20: Persistent Orchestration Runtime
 
 Objective: add persistence only if project orchestration later requires durable state beyond the Phase 13 in-process service.
 
@@ -176,7 +184,7 @@ Deliverables: orchestration graph, retry policy, stop conditions, and partial-re
 
 Verification: workflow tests for success, insufficient evidence, and conflicting-source outcomes.
 
-## Phase 19: Evidence Critic and Retrieval-Grounded Synthesis
+## Phase 21: Evidence Critic and Retrieval-Grounded Synthesis
 
 Objective: critique analytical outputs and generate cautious reports from artifacts.
 
@@ -184,7 +192,7 @@ Deliverables: evidence-quality assessment, limitation extraction, conflict repre
 
 Verification: tests preventing unsupported causal or quantitative claims.
 
-## Phase 20: Causal Identification Assessment
+## Phase 22: Causal Identification Assessment
 
 Objective: assess whether a question and dataset support explicit causal interpretation.
 
@@ -192,7 +200,7 @@ Deliverables: identification taxonomy, design checks, assumption records, and un
 
 Verification: fixture tests for descriptive, regression-adjusted, quasi-experimental, and experimental cases.
 
-## Phase 21: Robustness and Sensitivity
+## Phase 23: Robustness and Sensitivity
 
 Objective: evaluate stability of findings under reasonable alternative specifications.
 
@@ -200,7 +208,7 @@ Deliverables: robustness-test registry, sensitivity outputs, and reporting rules
 
 Verification: reproducible robustness results on fixed fixtures.
 
-## Phase 22: Domain Agent Expansion
+## Phase 24: Domain Agent Expansion
 
 Objective: introduce deterministic domain agents incrementally.
 
@@ -210,7 +218,7 @@ Verification: typed outputs and domain-specific warning tests.
 
 Non-goal: implementing every target agent at once.
 
-## Phase 23: Human-Readable Report Renderer
+## Phase 25: Human-Readable Report Renderer
 
 Objective: generate readable reports from research artifacts.
 

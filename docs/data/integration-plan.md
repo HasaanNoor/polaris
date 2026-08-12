@@ -12,6 +12,12 @@ WGI acquisition stores official World Bank API CSV ZIP snapshots under `data/raw
 
 The WGI panel enters Phase 12 as a generic provider dataset. Phase 12 does not depend on WGI-specific logic; WDI+WGI and WDI+WHO+WGI examples under `examples/wgi` use the same ingestion, harmonization, analysis, evidence, agent, coordination, synthesis, reporting, and project orchestration contracts as other providers.
 
+## Phase 17 UNESCO Education Panel Integration
+
+UNESCO acquisition and UNESCO education integration are separate. Phase 17 reads only existing local files under `data/raw/unesco/`, profiles DEM, SDG, SCN-SDG, and SDG11, and integrates only reviewed SDG national education indicators. Raw UNESCO files remain unchanged and excluded from Git.
+
+The UNESCO panel enters Phase 12 as a generic provider dataset. Phase 12 does not depend on UNESCO-specific logic; WDI+UNESCO and WDI+WHO+WGI+UNESCO examples under `examples/unesco` use the same ingestion, harmonization, analysis, evidence, agent, coordination, synthesis, reporting, and project orchestration contracts as other providers. Phase 17 does not average sex categories, combine age cohorts, merge education levels, interpolate missing years, impute values, or create an education index.
+
 Phase 10 provides acquisition infrastructure, Phase 11 validated official WDI data through Phases 3-9, and Phase 12 adds deterministic country-year harmonization for reviewed multi-provider subsets. Real-data research integration remains staged because provider files must be selected, snapshotted, validated, reviewed, harmonized where needed, analyzed, and carried through the existing deterministic artifact pipeline before they become reliable Polaris research inputs.
 
 ## Workflow
@@ -46,7 +52,7 @@ Datasets:
 
 Goal: prove the complete Phase 2-9 pipeline using real economic, education, and health data.
 
-Round 1 now has WDI end-to-end validation and a Phase 12 WDI plus WHO life-expectancy harmonization example. UNESCO UIS and additional WHO files remain staged for reviewed variable mapping before end-to-end claims.
+Round 1 now has WDI end-to-end validation, a Phase 12 WDI plus WHO life-expectancy harmonization example, a curated WHO health panel, and a curated UNESCO education panel. Additional WHO and UNESCO variables remain staged or deferred until reviewed mappings and dimensions are safe.
 
 ### Round 2
 
