@@ -160,13 +160,13 @@ Deliverables: local UNESCO DEM/SDG/SCN-SDG/SDG11 profiling, reviewed SDG educati
 
 Verification: `tests/unesco` covers catalog loading, profiling, mappings, dimensions, panel determinism, provenance preservation, Phase 3 ingestion, and Phase 12 WDI+UNESCO compatibility. Local examples under `examples/unesco` use existing downloaded UNESCO files only.
 
-## Phase 18: Statistical Modeling Service
+## Phase 18: Evidence-Grounded Reasoning Engine (complete)
 
-Objective: add deterministic statistical model execution.
+Objective: add a structured reasoning layer that interprets existing empirical evidence, coordinated domain assessments, and optional literature context without modifying underlying evidence.
 
-Deliverables: model specifications, diagnostics, effect estimates, uncertainty outputs, and multiple-comparison metadata.
+Deliverables: `ReasoningRequest`, `ReasoningStatement`, `ReasoningArtifact`, explicit reasoning taxonomy, epistemic status and support-level categories, mandatory grounding IDs, deterministic fallback reasoning, optional provider-backed structured reasoning, prompt/version provenance, grounding validation, causal-language guardrails, alternative explanations, candidate confounders, plausible mechanisms labeled unproven, contradiction records, limitation reasoning, follow-up hypotheses/questions, Phase 8/9/13 integration, examples, tests, documentation, and ADR-021.
 
-Verification: tests against known analytical results.
+Verification: `tests/reasoning` covers strict/frozen models, deterministic IDs, grounding rejection, causal guardrails, mechanisms, alternatives/confounders, contradictions, provider-backed fake-provider behavior, deterministic fallback, synthesis/report/project integration, and network-free operation.
 
 ## Phase 19: Additional Deterministic Agents
 

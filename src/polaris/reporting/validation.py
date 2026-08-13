@@ -34,6 +34,14 @@ def validate_report_request(request: ReportRequest) -> None:
         raise ReportCompatibilityError("synthesis provenance does not match evidence artifact")
     if synthesis.provenance.source_analysis_result_id != analysis.result_id:
         raise ReportCompatibilityError("synthesis provenance does not match analysis result")
+    if request.reasoning_artifact is not None:
+        reasoning = request.reasoning_artifact
+        if reasoning.evidence_artifact_id != evidence.artifact_id:
+            raise ReportCompatibilityError("reasoning artifact does not match evidence artifact")
+        if reasoning.coordinated_assessment_id != coordinated.coordinated_assessment_id:
+            raise ReportCompatibilityError(
+                "reasoning artifact does not match coordinated assessment"
+            )
 
     if coordinated.source_evidence_artifact_id != evidence.artifact_id:
         raise ReportCompatibilityError("coordinated assessment does not reference evidence input")
@@ -63,6 +71,7 @@ def validate_report_request(request: ReportRequest) -> None:
         coordinated=coordinated,
         evidence=evidence,
         synthesis=synthesis,
+        reasoning=request.reasoning_artifact,
     )
 
 
@@ -84,6 +93,11 @@ def _require_schema_compatibility(request: ReportRequest) -> None:
     )
     if any(version != expected for version in versions):
         raise ReportCompatibilityError("Phase 9 requires compatible 1.0.0 upstream schemas")
+    if (
+        request.reasoning_artifact is not None
+        and request.reasoning_artifact.schema_version != expected
+    ):
+        raise ReportCompatibilityError("Phase 9 requires compatible Phase 18 schema")
 
 
 def _validate_source_references(
@@ -91,6 +105,7 @@ def _validate_source_references(
     coordinated: CoordinatedAssessment,
     evidence: EvidenceArtifact,
     synthesis: SynthesisArtifact,
+    reasoning,
 ) -> None:
     evidence_ids = {record.evidence_id for record in evidence.evidence_records}
     claim_ids = {claim.claim_id for claim in evidence.claim_candidates}
@@ -127,6 +142,12 @@ def _validate_source_references(
         raise ReportReferenceError("synthesis references missing evidence IDs")
     if not set(synthesis.referenced_claim_ids) <= claim_ids:
         raise ReportReferenceError("synthesis references missing claim IDs")
+    if synthesis.referenced_reasoning_statement_ids:
+        if reasoning is None:
+            raise ReportReferenceError("synthesis references reasoning without reasoning artifact")
+        reasoning_ids = {item.statement_id for item in reasoning.reasoning_statements}
+        if not set(synthesis.referenced_reasoning_statement_ids) <= reasoning_ids:
+            raise ReportReferenceError("synthesis references missing reasoning statement IDs")
     for item in synthesis.cross_domain_findings:
         if not set(item.referenced_agreement_ids) <= agreement_ids:
             raise ReportReferenceError("synthesis references missing agreement IDs")
@@ -155,6 +176,11 @@ def _validate_report_references(report: ResearchReport, request: ReportRequest) 
             *request.coordinated_assessment.domain_gaps,
         )
     }
+    reasoning_ids = (
+        {item.statement_id for item in request.reasoning_artifact.reasoning_statements}
+        if request.reasoning_artifact is not None
+        else set()
+    )
 
     for claim in report.evidence_section.claim_candidates:
         if not set(claim.supporting_evidence_ids) <= evidence_ids:
@@ -174,6 +200,8 @@ def _validate_report_references(report: ResearchReport, request: ReportRequest) 
             raise ReportReferenceError("report contains fabricated divergence reference")
         if kind == "gap" and reference_id not in gap_ids:
             raise ReportReferenceError("report contains fabricated gap reference")
+        if kind == "reasoning_statement" and reference_id not in reasoning_ids:
+            raise ReportReferenceError("report contains fabricated reasoning reference")
 
 
 def _validate_preservation(report: ResearchReport, request: ReportRequest) -> None:
@@ -231,4 +259,16 @@ def _report_text_parts(report: ResearchReport) -> tuple[str, ...]:
     ]
     parts.extend(summary["summary"] for summary in report.synthesis_section.domain_summaries)
     parts.extend(item["summary"] for item in report.synthesis_section.cross_domain_findings)
+    if report.evidence_grounded_interpretation_section is not None:
+        section = report.evidence_grounded_interpretation_section
+        for rows in (
+            section.main_interpretations,
+            section.cross_domain_patterns,
+            section.plausible_mechanisms,
+            section.alternative_explanations,
+            section.limitations,
+            section.follow_up_hypotheses,
+            section.follow_up_research_questions,
+        ):
+            parts.extend(row.get("text", "") for row in rows)
     return tuple(parts)

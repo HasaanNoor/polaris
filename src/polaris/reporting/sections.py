@@ -11,6 +11,8 @@ from polaris.analysis.models import (
 from polaris.coordination.models import DOMAIN_ORDER, CoordinatedAssessment
 from polaris.evidence.models import EvidenceArtifact, LimitationCode
 from polaris.ingestion.models import DatasetIngestionResult
+from polaris.reasoning.models import ReasoningArtifact
+from polaris.reasoning.taxonomy import ReasoningCategory
 from polaris.reporting.models import (
     ClaimSummary,
     CrossDomainSection,
@@ -18,6 +20,7 @@ from polaris.reporting.models import (
     DomainAssessmentsSection,
     DomainAssessmentSummary,
     EvidenceAndClaimsSection,
+    EvidenceGroundedInterpretationSection,
     EvidenceRecordSummary,
     GapsSection,
     LimitationsSection,
@@ -341,6 +344,44 @@ def synthesis_section(synthesis_artifact: SynthesisArtifact) -> SynthesisSection
     )
 
 
+def evidence_grounded_interpretation_section(
+    reasoning_artifact: ReasoningArtifact | None,
+) -> EvidenceGroundedInterpretationSection | None:
+    if reasoning_artifact is None:
+        return None
+
+    def select(*categories: ReasoningCategory) -> tuple[dict[str, Any], ...]:
+        allowed = set(categories)
+        return tuple(
+            statement.model_dump(mode="json")
+            for statement in reasoning_artifact.reasoning_statements
+            if statement.category in allowed
+        )
+
+    return EvidenceGroundedInterpretationSection(
+        reasoning_id=reasoning_artifact.reasoning_id,
+        mode=reasoning_artifact.mode.value,
+        main_interpretations=select(ReasoningCategory.EMPIRICAL_INTERPRETATION),
+        cross_domain_patterns=select(ReasoningCategory.CROSS_DOMAIN_SYNTHESIS),
+        plausible_mechanisms=select(ReasoningCategory.PLAUSIBLE_MECHANISM),
+        alternative_explanations=select(ReasoningCategory.ALTERNATIVE_EXPLANATION),
+        potential_confounders=tuple(
+            item.model_dump(mode="json") for item in reasoning_artifact.candidate_confounders
+        ),
+        contradictions=tuple(
+            item.model_dump(mode="json") for item in reasoning_artifact.contradictions
+        ),
+        limitations=select(ReasoningCategory.LIMITATION, ReasoningCategory.UNCERTAINTY),
+        follow_up_hypotheses=tuple(
+            item.model_dump(mode="json") for item in reasoning_artifact.follow_up_hypotheses
+        ),
+        follow_up_research_questions=tuple(
+            item.model_dump(mode="json") for item in reasoning_artifact.follow_up_research_questions
+        ),
+        grounding_summary=reasoning_artifact.grounding_summary.model_dump(mode="json"),
+    )
+
+
 def literature_context_section(literature_context) -> LiteratureContextSection:
     if literature_context is None:
         return LiteratureContextSection(
@@ -457,6 +498,7 @@ def provenance_section(
     analysis_result: AnalysisResult,
     evidence_artifact: EvidenceArtifact,
     coordinated_assessment: CoordinatedAssessment,
+    reasoning_artifact: ReasoningArtifact | None = None,
     synthesis_artifact: SynthesisArtifact,
     report_id: str,
     generation_timestamp,
@@ -471,6 +513,9 @@ def provenance_section(
         claim_ids=tuple(sorted(claim.claim_id for claim in evidence_artifact.claim_candidates)),
         agent_assessment_ids=coordinated_assessment.source_assessment_ids,
         coordinated_assessment_id=coordinated_assessment.coordinated_assessment_id,
+        reasoning_artifact_id=(
+            reasoning_artifact.reasoning_id if reasoning_artifact is not None else None
+        ),
         synthesis_artifact_id=synthesis_artifact.synthesis_id,
         report_id=report_id,
         schema_versions={
@@ -478,6 +523,11 @@ def provenance_section(
             "phase4": analysis_result.schema_version,
             "phase5": evidence_artifact.schema_version,
             "phase7": coordinated_assessment.schema_version,
+            **(
+                {"phase18": reasoning_artifact.schema_version}
+                if reasoning_artifact is not None
+                else {}
+            ),
             "phase8": synthesis_artifact.schema_version,
         },
         software_version=synthesis_artifact.provenance.software_version,
@@ -487,7 +537,9 @@ def provenance_section(
 
 
 def executive_summary(
-    synthesis_artifact: SynthesisArtifact, coordinated: CoordinatedAssessment
+    synthesis_artifact: SynthesisArtifact,
+    coordinated: CoordinatedAssessment,
+    reasoning_artifact: ReasoningArtifact | None = None,
 ) -> str:
     parts = [synthesis_artifact.overall_summary]
     parts.append(
@@ -495,6 +547,10 @@ def executive_summary(
     )
     if coordinated.missing_domains:
         parts.append("Domain coverage is incomplete.")
+    if reasoning_artifact is not None:
+        parts.append(
+            "Evidence-grounded interpretation is supplied as a separate reasoning artifact."
+        )
     parts.append("No external literature or outside contextual evidence has been integrated.")
     if any(
         item.finding_code.value == "FALLBACK_USED" for item in synthesis_artifact.grounding_findings

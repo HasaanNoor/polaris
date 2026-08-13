@@ -23,6 +23,7 @@ Every investigation must record:
 - WHO acquisition catalog path, selected WHO indicator IDs, source snapshot checksums, reviewed mapping ruleset version, dimension filters, aggregate/projection exclusion counts, deferred-indicator registry, and WHOHealthPanel ID when Phase 15 WHO data is used;
 - WGI source snapshot paths, official WGI indicator IDs, source checksums, reviewed mapping ruleset version, country/temporal rules, aggregate/territory exclusion counts, uncertainty metadata availability, and WGIGovernancePanel ID when Phase 16 WGI data is used;
 - UNESCO source file paths, UNESCO indicator IDs, source checksums, reviewed mapping ruleset version, country/temporal rules, dimension filters, aggregate/territory/subgroup exclusion counts, deferred-indicator registry, and UNESCOEducationPanel ID when Phase 17 UNESCO data is used;
+- reasoning mode, requested reasoning categories, grounding source IDs, strictness configuration, provider metadata when used, prompt version, validation findings, grounding summary, and ReasoningArtifact ID when Phase 18 reasoning is used;
 - report generation metadata.
 
 ## Artifact Reproduction
@@ -38,6 +39,8 @@ For Phase 15 WHO panels, panel IDs must be derived from stable indicator IDs, so
 For Phase 16 WGI panels, panel IDs must be derived from source checksums, selected WGI variables, country rules, temporal rules, schema version, and ruleset version. Creation timestamps may appear in metadata but must not affect identity. Raw WGI ZIP snapshots must remain unmodified.
 
 For Phase 17 UNESCO panels, panel IDs must be derived from source checksums, selected UNESCO indicator IDs, mapping rules, dimension filters, geographic/temporal rules, schema version, and ruleset version. Creation timestamps may appear in metadata but must not affect identity. Raw UNESCO files must remain unmodified.
+
+For Phase 18 reasoning artifacts, reasoning IDs must be derived from stable upstream artifact IDs, research question, mode, requested categories, strictness-relevant configuration, content digest, schema version, and ruleset version. Creation timestamps may appear in metadata but must not affect identity. Reasoning must not mutate evidence, reread raw datasets, persist hidden chain-of-thought, fabricate citations, or accept unsupported causal claims.
 
 ## Data Publication and Privacy
 

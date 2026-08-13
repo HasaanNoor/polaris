@@ -21,6 +21,7 @@ from polaris.reporting.sections import (
     cross_domain_section,
     dataset_section,
     domain_assessments_section,
+    evidence_grounded_interpretation_section,
     evidence_section,
     executive_summary,
     gaps_section,
@@ -89,7 +90,9 @@ def build_research_report(
         subtitle=request.report_subtitle,
         report_metadata=metadata,
         executive_summary=executive_summary(
-            request.synthesis_artifact, request.coordinated_assessment
+            request.synthesis_artifact,
+            request.coordinated_assessment,
+            request.reasoning_artifact,
         ),
         research_question_section=research_question_section(request.research_question),
         dataset_section=dataset_section(
@@ -110,6 +113,9 @@ def build_research_report(
             coordinated_assessment=request.coordinated_assessment,
             synthesis_artifact=request.synthesis_artifact,
         ),
+        evidence_grounded_interpretation_section=evidence_grounded_interpretation_section(
+            request.reasoning_artifact
+        ),
         synthesis_section=synthesis_section(request.synthesis_artifact),
         literature_context_section=literature_context_section(request.literature_context),
         limitations_section=limitations_section(
@@ -127,6 +133,7 @@ def build_research_report(
             analysis_result=request.analysis_result,
             evidence_artifact=request.evidence_artifact,
             coordinated_assessment=request.coordinated_assessment,
+            reasoning_artifact=request.reasoning_artifact,
             synthesis_artifact=request.synthesis_artifact,
             report_id=report_id,
             generation_timestamp=timestamp,
@@ -136,6 +143,7 @@ def build_research_report(
             evidence_artifact=request.evidence_artifact,
             coordinated_assessment=request.coordinated_assessment,
             literature_context=request.literature_context,
+            reasoning_artifact=request.reasoning_artifact,
             source_artifact_ids=source_ids,
         ),
         source_artifact_ids=source_ids,
@@ -196,6 +204,11 @@ def _source_artifact_ids(request: ReportRequest) -> tuple[str, ...]:
                 *(
                     (request.literature_context.literature_context_id,)
                     if request.literature_context is not None
+                    else ()
+                ),
+                *(
+                    (request.reasoning_artifact.reasoning_id,)
+                    if request.reasoning_artifact is not None
                     else ()
                 ),
             }

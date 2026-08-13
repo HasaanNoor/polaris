@@ -1,0 +1,645 @@
+{
+  "reasoning_id": "reasoning_d2aab456a29928a0e1410bfa93653482c790adce914d6d50cb6d1f26a808be63",
+  "research_question": "How is x associated with y?",
+  "mode": "deterministic",
+  "evidence_artifact_id": "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a",
+  "coordinated_assessment_id": "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00",
+  "literature_context_id": null,
+  "reasoning_statements": [
+    {
+      "statement_id": "reasoning_statement_36ff601533d16df676f8af7d0689aef8a9f668cc31e67a3a0c9b50af66d96ecc",
+      "category": "empirical_interpretation",
+      "text": "y is associated with x in the positive direction within the specified pearson_correlation model, accounting for x, y. This is an empirical interpretation of a non-causal claim candidate.",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "supported_interpretation",
+      "causal_status": "non_causal",
+      "limitations": [
+        "OBSERVATIONAL_ASSOCIATION",
+        "UNSUPPORTED_GENERALIZATION"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_4ef706e9759dd3253784a46cf3dc144fef1ab091dbdad53b0e9d9291d4baec2c",
+      "category": "follow_up_research_question",
+      "text": "Do candidate controls such as x, y attenuate the association between y and x?",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "follow-up question, not an established conclusion"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_5271236feaea2f8e2be3328129e78b81dc70daf33d8215a020d34194e8c2a370",
+      "category": "potential_confounder",
+      "text": "healthcare access is a potential confounder or candidate control: It could be related to both the exposure and outcome in an observational cross-country association.",
+      "evidence_ids": [],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "candidate confounder status not established"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_5c70a586a29b45e31cffdc2e0e7324a8b7cfc82d541d571976640188b5afabc3",
+      "category": "follow_up_hypothesis",
+      "text": "The association between y and x may differ across countries with different levels of candidate controls represented in the project.",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "exploratory follow-up hypothesis"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_650a8c36f028526e70e16f8fd04e4b52a295297929a8a7625034c9f8f1da8818",
+      "category": "limitation",
+      "text": "Limitation OBSERVATIONAL_ASSOCIATION constrains interpretation; the current evidence supports descriptive or associational conclusions only.",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "strong",
+      "epistemic_status": "directly_supported",
+      "causal_status": "non_causal",
+      "limitations": [
+        "OBSERVATIONAL_ASSOCIATION"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_76d55fd5820eb0f8618cb24d15947a7135e61bb1b5223f4dbbda2e91f7d7b349",
+      "category": "potential_confounder",
+      "text": "education is a potential confounder or candidate control: It could be related to both the exposure and outcome in an observational cross-country association.",
+      "evidence_ids": [],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "education"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "candidate confounder status not established"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_89fdebe30c84d7039aa0bf3828f61fd7d97a8eea0ed98a6fe6a865f063c6761c",
+      "category": "limitation",
+      "text": "Limitation UNSUPPORTED_GENERALIZATION constrains interpretation; the current evidence supports descriptive or associational conclusions only.",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "strong",
+      "epistemic_status": "directly_supported",
+      "causal_status": "non_causal",
+      "limitations": [
+        "UNSUPPORTED_GENERALIZATION"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_a54b508e1c45c50ea3b675c40e54ee979e8a148bcb68a8df7310c619e5ad520b",
+      "category": "follow_up_research_question",
+      "text": "Is the association between y and x stable across alternative model specifications using currently available Polaris variables?",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "follow-up question, not an established conclusion"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_bf15c20d0a7f0ada2702a4c52391e9136696109d2ae4238b59efb391f76254d6",
+      "category": "potential_confounder",
+      "text": "institutional capacity is a potential confounder or candidate control: It could be related to both the exposure and outcome in an observational cross-country association.",
+      "evidence_ids": [],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "governance"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "candidate confounder status not established"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_c61451f6fd25c1feff4ac2b90b16e9ab484a5bd8057ee5119741d71968de1121",
+      "category": "alternative_explanation",
+      "text": "An omitted variable related to economic resources, institutional capacity, health-system capacity, education, demographic structure, or regional composition could partly account for the observed association. This is an alternative explanation, not an established finding.",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "alternative explanation not directly tested"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_d1ec3113084dca353baa1fd2a3be54326286d744de18c35eab063d030bfeee9d",
+      "category": "alternative_explanation",
+      "text": "Reverse ordering or simultaneous relationships could account for the observed association involving y and x. This is an alternative explanation, not an established finding.",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "alternative explanation not directly tested"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_d692d246c9caeef46ac1e1382c820b518411606913feb0cd7e1cf1891f69ba57",
+      "category": "plausible_mechanism",
+      "text": "One plausible mechanism is that y may plausibly contribute to conditions related to x, but the mechanism was not directly tested and causality is not established.",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "mechanism not directly tested"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_dfcd8f987dc6934d6cce2a9d869db172064f6b56221d4238eb2e9dc4decdd006",
+      "category": "potential_confounder",
+      "text": "GDP per capita is a potential confounder or candidate control: It could be related to both the exposure and outcome in an observational cross-country association.",
+      "evidence_ids": [],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "candidate confounder status not established"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    }
+  ],
+  "contradictions": [],
+  "candidate_confounders": [
+    {
+      "confounder_id": "confounder_25710bf1d4b2dd657348875820c233e2fc2b0b921dc9be7daffd15384257958f",
+      "variable_or_concept": "education",
+      "reason_it_may_matter": "It could be related to both the exposure and outcome in an observational cross-country association.",
+      "currently_measured": false,
+      "currently_controlled": false,
+      "related_domains": [
+        "education"
+      ],
+      "supporting_source_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ]
+    },
+    {
+      "confounder_id": "confounder_b61a85468843dd31b1bf15518f82dc8985563be40e39313ac12bf4d3e6772018",
+      "variable_or_concept": "GDP per capita",
+      "reason_it_may_matter": "It could be related to both the exposure and outcome in an observational cross-country association.",
+      "currently_measured": false,
+      "currently_controlled": false,
+      "related_domains": [
+        "economics"
+      ],
+      "supporting_source_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ]
+    },
+    {
+      "confounder_id": "confounder_b6c3d734fc31d4e98d6edab015dd120863b8860ea35be8920572ab3a01003616",
+      "variable_or_concept": "healthcare access",
+      "reason_it_may_matter": "It could be related to both the exposure and outcome in an observational cross-country association.",
+      "currently_measured": false,
+      "currently_controlled": false,
+      "related_domains": [
+        "public_health"
+      ],
+      "supporting_source_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ]
+    },
+    {
+      "confounder_id": "confounder_c5347eb5d0da43d57d6e3f86def95c272cd808b2ff9b5f3f4a19d9ed7960db2c",
+      "variable_or_concept": "institutional capacity",
+      "reason_it_may_matter": "It could be related to both the exposure and outcome in an observational cross-country association.",
+      "currently_measured": false,
+      "currently_controlled": false,
+      "related_domains": [
+        "governance"
+      ],
+      "supporting_source_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ]
+    }
+  ],
+  "follow_up_hypotheses": [
+    {
+      "statement_id": "reasoning_statement_5c70a586a29b45e31cffdc2e0e7324a8b7cfc82d541d571976640188b5afabc3",
+      "category": "follow_up_hypothesis",
+      "text": "The association between y and x may differ across countries with different levels of candidate controls represented in the project.",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "exploratory follow-up hypothesis"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    }
+  ],
+  "follow_up_research_questions": [
+    {
+      "statement_id": "reasoning_statement_4ef706e9759dd3253784a46cf3dc144fef1ab091dbdad53b0e9d9291d4baec2c",
+      "category": "follow_up_research_question",
+      "text": "Do candidate controls such as x, y attenuate the association between y and x?",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "follow-up question, not an established conclusion"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_a54b508e1c45c50ea3b675c40e54ee979e8a148bcb68a8df7310c619e5ad520b",
+      "category": "follow_up_research_question",
+      "text": "Is the association between y and x stable across alternative model specifications using currently available Polaris variables?",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "limited",
+      "epistemic_status": "plausible_but_unproven",
+      "causal_status": "not_established",
+      "limitations": [
+        "follow-up question, not an established conclusion"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    }
+  ],
+  "limitations": [
+    {
+      "statement_id": "reasoning_statement_650a8c36f028526e70e16f8fd04e4b52a295297929a8a7625034c9f8f1da8818",
+      "category": "limitation",
+      "text": "Limitation OBSERVATIONAL_ASSOCIATION constrains interpretation; the current evidence supports descriptive or associational conclusions only.",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "strong",
+      "epistemic_status": "directly_supported",
+      "causal_status": "non_causal",
+      "limitations": [
+        "OBSERVATIONAL_ASSOCIATION"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    },
+    {
+      "statement_id": "reasoning_statement_89fdebe30c84d7039aa0bf3828f61fd7d97a8eea0ed98a6fe6a865f063c6761c",
+      "category": "limitation",
+      "text": "Limitation UNSUPPORTED_GENERALIZATION constrains interpretation; the current evidence supports descriptive or associational conclusions only.",
+      "evidence_ids": [
+        "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+      ],
+      "claim_ids": [
+        "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+      ],
+      "agent_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "literature_evidence_ids": [],
+      "domains": [
+        "economics",
+        "public_health"
+      ],
+      "support_level": "strong",
+      "epistemic_status": "directly_supported",
+      "causal_status": "non_causal",
+      "limitations": [
+        "UNSUPPORTED_GENERALIZATION"
+      ],
+      "provenance": {
+        "ruleset_version": "evidence_grounded_phase18_v1"
+      },
+      "schema_version": "1.0.0"
+    }
+  ],
+  "grounding_summary": {
+    "total_statements": 13,
+    "fully_grounded_statements": 13,
+    "statements_with_literature_support": 0,
+    "statements_based_only_on_empirical_evidence": 13,
+    "plausible_or_unproven_statements": 10,
+    "contradiction_count": 0,
+    "potential_confounder_count": 4,
+    "follow_up_hypothesis_count": 1,
+    "follow_up_research_question_count": 2,
+    "rejected_provider_statements": 0,
+    "unsupported_grounding_attempts": 0,
+    "causal_guard_violations": 0
+  },
+  "validation_findings": [],
+  "provider_metadata": {},
+  "prompt_version": "phase18_grounded_reasoning_json_v1",
+  "deterministic_fallback_used": false,
+  "provenance": {
+    "source_evidence_artifact_id": "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a",
+    "source_coordinated_assessment_id": "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00",
+    "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+    "dataset_id": "single_project_dataset",
+    "source_checksum_sha256": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86",
+    "source_assessment_ids": [
+      "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+      "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+    ],
+    "literature_context_id": null,
+    "reasoning_mode_requested": "deterministic",
+    "reasoning_mode_used": "deterministic",
+    "provider": null,
+    "model_identifier": null,
+    "prompt_version": "phase18_grounded_reasoning_json_v1",
+    "ruleset_version": "evidence_grounded_phase18_v1",
+    "content_digest_sha256": "599dd9367f7e9dcade87f4f174b25dd88510cf49c201758ff6f95a1cc659a8ed",
+    "reasoning_timestamp": "2026-08-13T14:57:09.950071Z",
+    "software_version": "polaris-0.1.0",
+    "phase5_schema_version": "1.0.0",
+    "phase7_schema_version": "1.0.0",
+    "phase14_schema_version": null,
+    "phase18_schema_version": "1.0.0"
+  },
+  "creation_timestamp": "2026-08-13T14:57:09.950071Z",
+  "schema_version": "1.0.0"
+}

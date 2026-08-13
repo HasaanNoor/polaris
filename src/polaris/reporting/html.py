@@ -54,6 +54,14 @@ def _markdown_subset_to_html(markdown: str) -> str:
             html_lines.append(f"<h2>{escape(line[3:])}</h2>")
             index += 1
             continue
+        if line.startswith("### "):
+            html_lines.append(f"<h3>{escape(line[4:])}</h3>")
+            index += 1
+            continue
+        if line.startswith("- "):
+            html_lines.append(f"<p>{escape(line)}</p>")
+            index += 1
+            continue
         if line.startswith("| "):
             table_lines = []
             while index < len(lines) and lines[index].startswith("| "):

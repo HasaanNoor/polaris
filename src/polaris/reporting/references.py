@@ -10,6 +10,7 @@ def build_reference_index(
     evidence_artifact: EvidenceArtifact,
     coordinated_assessment: CoordinatedAssessment,
     literature_context=None,
+    reasoning_artifact=None,
     source_artifact_ids: tuple[str, ...],
 ) -> tuple[ReferenceIndexEntry, ...]:
     entries: list[ReferenceIndexEntry] = []
@@ -146,4 +147,20 @@ def build_reference_index(
                         },
                     )
                 )
+    if reasoning_artifact is not None:
+        for statement in reasoning_artifact.reasoning_statements:
+            entries.append(
+                ReferenceIndexEntry(
+                    reference_id=statement.statement_id,
+                    reference_kind=ReferenceKind.REASONING_STATEMENT,
+                    label=f"Reasoning statement: {statement.category.value}",
+                    metadata={
+                        "category": statement.category.value,
+                        "epistemic_status": statement.epistemic_status.value,
+                        "support_level": statement.support_level.value,
+                        "evidence_ids": list(statement.evidence_ids),
+                        "claim_ids": list(statement.claim_ids),
+                    },
+                )
+            )
     return tuple(sorted(entries, key=lambda item: (item.reference_kind.value, item.reference_id)))

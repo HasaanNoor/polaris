@@ -35,7 +35,9 @@ flowchart TD
   CI --> EC[Evidence Critic Agent]
   LC[Local literature corpus] --> LR[Phase 14 literature retrieval]
   EC --> LR
-  LR --> S
+  LR --> R18[Phase 18 evidence-grounded reasoning]
+  EC --> R18
+  R18 --> S
   EC --> S[Research Synthesis Agent]
   S --> ART[Versioned research artifact]
   S --> REP[Human-readable report]
@@ -55,7 +57,7 @@ Phase 12 adds a deterministic layer between validated provider ingestion and ana
 
 ## Research Project Orchestration
 
-Phase 13 adds a lightweight synchronous orchestration layer under `src/polaris/projects`. A `ResearchProjectRequest` explicitly names datasets or artifacts, optional harmonization configuration, a `StatisticalSpecification`, selected domain agents, synthesis settings, report settings, and optional literature configuration. `plan_research_project(...)` produces an inspectable deterministic execution plan. `run_research_project(...)` executes explicit stages: dataset resolution, ingestion, optional harmonization, analysis, evidence extraction, selected agents, coordination, optional literature retrieval, synthesis, reporting, and completion.
+Phase 13 adds a lightweight synchronous orchestration layer under `src/polaris/projects`. A `ResearchProjectRequest` explicitly names datasets or artifacts, optional harmonization configuration, a `StatisticalSpecification`, selected domain agents, optional reasoning settings, synthesis settings, report settings, and optional literature configuration. `plan_research_project(...)` produces an inspectable deterministic execution plan. `run_research_project(...)` executes explicit stages: dataset resolution, ingestion, optional harmonization, analysis, evidence extraction, selected agents, coordination, optional literature retrieval, optional reasoning, synthesis, reporting, and completion.
 
 The orchestrator coordinates but does not analyze. It reuses existing Phase 3 ingestion, Phase 12 harmonization, Phase 4 analysis, Phase 5 evidence, Phase 6 agents, Phase 7 coordination, Phase 8 synthesis, and Phase 9 reporting services. Multiple datasets require explicit harmonization mappings. Statistical specifications are never generated from the research question. Agent selection is explicit and stored in deterministic order.
 
@@ -64,6 +66,14 @@ The orchestrator coordinates but does not analyze. It reuses existing Phase 3 in
 Phase 14 adds a local corpus-grounded retrieval layer under `src/polaris/literature`. It ingests explicitly supplied TXT, Markdown, and structured JSON sources, computes source checksums, preserves citation metadata, normalizes text without mutating raw files, chunks deterministically, and indexes chunks with a deterministic BM25-style lexical retriever. Literature retrieval follows empirical evidence and coordination. It answers what supplied literature is relevant to Polaris claim IDs; it does not decide what the data should say, alter statistics, generate citations, or browse the web.
 
 `LiteratureContextArtifact` remains separate from Phase 5 empirical evidence. Phase 8 synthesis receives it as optional context with explicit prompt separation between empirical findings and literature context. Phase 9 reports render a separate Literature Context section with citations, unmatched claims, retrieval facts, and limitations.
+
+## Evidence-Grounded Reasoning
+
+Phase 18 adds an optional reasoning layer under `src/polaris/reasoning`. It consumes structured Phase 5 evidence and claims, Phase 7 coordination, and optional Phase 14 literature context. It does not inspect raw datasets, select new datasets, run new statistics, or mutate evidence.
+
+`ReasoningStatement` records distinguish empirical interpretations from cross-domain synthesis, plausible mechanisms, alternative explanations, candidate confounders, contradictions, limitations, uncertainty, follow-up hypotheses, follow-up research questions, literature alignment, and literature contrast. Every statement must cite upstream evidence, claim, assessment, or literature evidence IDs. Mechanisms are labeled unproven with `causal_status=not_established`; causal conclusions remain prohibited without future upstream causal identification.
+
+Deterministic reasoning is the default offline baseline. Provider-backed reasoning is optional and must return structured output that passes grounding, causal-language, fabricated-citation, policy, and medical guardrails. Phase 8 can summarize a supplied `ReasoningArtifact`, and Phase 9 can render it as an Evidence-Grounded Interpretation section.
 
 ## WHO Health Panel
 

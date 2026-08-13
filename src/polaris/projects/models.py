@@ -27,6 +27,8 @@ from polaris.harmonization.models import (
 )
 from polaris.ingestion.models import DatasetIngestionResult, IngestionConfiguration
 from polaris.literature.models import LiteratureContextArtifact, LiteratureProjectConfig
+from polaris.reasoning.models import ReasoningArtifact, ReasoningProviderConfig, ReasoningStrictness
+from polaris.reasoning.taxonomy import ReasoningCategory, ReasoningMode
 from polaris.reporting.models import GeneratedReport, ReportFormat
 from polaris.schemas.common import (
     AwareDatetime,
@@ -134,6 +136,23 @@ class ProjectSynthesisConfig(FrozenPolarisBaseModel):
     max_synthesis_length: int | None = Field(default=None, gt=0)
 
 
+class ReasoningProjectConfig(FrozenPolarisBaseModel):
+    enabled: bool = False
+    mode: ReasoningMode = ReasoningMode.DETERMINISTIC
+    categories: tuple[ReasoningCategory, ...] = Field(
+        default_factory=lambda: tuple(ReasoningCategory)
+    )
+    max_statements: int | None = Field(default=None, gt=0)
+    provider_config: ReasoningProviderConfig | None = None
+    model_identifier: NonEmptyStr | None = None
+    strictness: ReasoningStrictness = Field(default_factory=ReasoningStrictness)
+
+    @field_validator("categories")
+    @classmethod
+    def sort_categories(cls, value: tuple[ReasoningCategory, ...]) -> tuple[ReasoningCategory, ...]:
+        return tuple(sorted(set(value), key=lambda item: item.value))
+
+
 class ProjectReportConfig(FrozenPolarisBaseModel):
     output_format: ReportFormat = ReportFormat.MARKDOWN
     report_title: NonEmptyStr | None = None
@@ -148,6 +167,7 @@ class ResearchProjectRequest(FrozenPolarisBaseModel):
     dataset_inputs: tuple[DatasetInput, ...] = Field(min_length=1)
     statistical_specification: StatisticalSpecification
     selected_agents: tuple[AgentDomain, ...] = Field(min_length=1)
+    reasoning: ReasoningProjectConfig = Field(default_factory=ReasoningProjectConfig)
     synthesis: ProjectSynthesisConfig = Field(default_factory=ProjectSynthesisConfig)
     report: ProjectReportConfig = Field(default_factory=ProjectReportConfig)
     literature: LiteratureProjectConfig | None = None
@@ -187,6 +207,7 @@ class ResearchStage(StrEnum):
     RUN_AGENTS = "run_agents"
     COORDINATE = "coordinate"
     RETRIEVE_LITERATURE = "retrieve_literature"
+    REASON = "reason"
     SYNTHESIZE = "synthesize"
     REPORT = "report"
     COMPLETE = "complete"
@@ -214,6 +235,7 @@ class ProjectArtifactKind(StrEnum):
     AGENT_ASSESSMENT = "agent_assessment"
     COORDINATED_ASSESSMENT = "coordinated_assessment"
     LITERATURE_CONTEXT = "literature_context"
+    REASONING_ARTIFACT = "reasoning_artifact"
     SYNTHESIS_ARTIFACT = "synthesis_artifact"
     RESEARCH_REPORT = "research_report"
 
@@ -279,6 +301,7 @@ class ProjectProvenance(FrozenPolarisBaseModel):
     agent_assessment_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
     coordination_id: NonEmptyStr | None = None
     literature_context_id: NonEmptyStr | None = None
+    reasoning_id: NonEmptyStr | None = None
     synthesis_id: NonEmptyStr | None = None
     report_id: NonEmptyStr | None = None
     software_version: NonEmptyStr = f"polaris-{__version__}"
@@ -315,6 +338,7 @@ class ResearchProjectResult(FrozenPolarisBaseModel):
     domain_assessments: tuple[AgentAssessment, ...] = Field(default_factory=tuple)
     coordinated_assessment: CoordinatedAssessment | None = None
     literature_context: LiteratureContextArtifact | None = None
+    reasoning_artifact: ReasoningArtifact | None = None
     synthesis_artifact: object | None = None
     research_report: GeneratedReport | None = None
     project_provenance: ProjectProvenance

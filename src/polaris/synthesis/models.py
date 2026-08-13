@@ -15,6 +15,7 @@ from polaris.coordination.models import (
 )
 from polaris.evidence.models import EVIDENCE_SCHEMA_VERSION, EvidenceArtifact, LimitationCode
 from polaris.literature.models import LiteratureContextArtifact
+from polaris.reasoning.models import ReasoningArtifact
 from polaris.schemas.common import (
     AwareDatetime,
     DatasetId,
@@ -67,6 +68,7 @@ class SynthesisRequest(FrozenPolarisBaseModel):
     mode: SynthesisMode = SynthesisMode.DETERMINISTIC
     evidence_artifact: EvidenceArtifact | None = None
     literature_context: LiteratureContextArtifact | None = None
+    reasoning_artifact: ReasoningArtifact | None = None
     provider_config: SynthesisProviderConfig | None = None
     model_identifier: NonEmptyStr | None = None
     allow_deterministic_fallback: bool = True
@@ -86,6 +88,13 @@ class SynthesisRequest(FrozenPolarisBaseModel):
         )
         if any(mismatches):
             raise ValueError("evidence artifact must match coordinated assessment lineage")
+        if self.reasoning_artifact is not None:
+            reasoning = self.reasoning_artifact
+            if (
+                reasoning.evidence_artifact_id != coordinated.source_evidence_artifact_id
+                or reasoning.coordinated_assessment_id != coordinated.coordinated_assessment_id
+            ):
+                raise ValueError("reasoning artifact must match coordinated assessment lineage")
         return self
 
 
@@ -204,6 +213,7 @@ class SynthesisArtifact(FrozenPolarisBaseModel):
     referenced_claim_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
     referenced_evidence_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
     referenced_assessment_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
+    referenced_reasoning_statement_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
     grounding_findings: tuple[SynthesisFinding, ...] = Field(default_factory=tuple)
     provenance: SynthesisProvenance
     schema_version: SchemaVersion = SYNTHESIS_SCHEMA_VERSION

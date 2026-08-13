@@ -16,6 +16,7 @@ from polaris.coordination.models import (
 from polaris.evidence.models import EvidenceArtifact, LimitationCode
 from polaris.ingestion.models import DatasetIngestionResult
 from polaris.literature.models import LiteratureContextArtifact
+from polaris.reasoning.models import ReasoningArtifact
 from polaris.schemas.common import (
     AwareDatetime,
     DatasetId,
@@ -52,6 +53,7 @@ class ReportRequest(FrozenPolarisBaseModel):
     ingestion_result: DatasetIngestionResult
     research_question: ResearchQuestion | None = None
     literature_context: LiteratureContextArtifact | None = None
+    reasoning_artifact: ReasoningArtifact | None = None
     dataset_manifest: DatasetManifest | None = None
     output_format: ReportFormat = ReportFormat.JSON
     report_title: NonEmptyStr | None = None
@@ -240,6 +242,21 @@ class SynthesisSection(FrozenPolarisBaseModel):
     referenced_evidence_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
 
 
+class EvidenceGroundedInterpretationSection(FrozenPolarisBaseModel):
+    reasoning_id: NonEmptyStr
+    mode: NonEmptyStr
+    main_interpretations: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    cross_domain_patterns: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    plausible_mechanisms: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    alternative_explanations: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    potential_confounders: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    contradictions: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    limitations: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    follow_up_hypotheses: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    follow_up_research_questions: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    grounding_summary: dict[str, Any] = Field(default_factory=dict)
+
+
 class LiteratureContextSection(FrozenPolarisBaseModel):
     status: SectionStatus
     literature_context_id: NonEmptyStr | None = None
@@ -277,6 +294,7 @@ class ProvenanceSection(FrozenPolarisBaseModel):
     claim_ids: tuple[NonEmptyStr, ...]
     agent_assessment_ids: tuple[NonEmptyStr, ...]
     coordinated_assessment_id: NonEmptyStr
+    reasoning_artifact_id: NonEmptyStr | None = None
     synthesis_artifact_id: NonEmptyStr
     report_id: NonEmptyStr
     schema_versions: dict[str, str]
@@ -294,6 +312,7 @@ class ReferenceKind(StrEnum):
     GAP = "gap"
     SOURCE_ARTIFACT = "source_artifact"
     LITERATURE = "literature"
+    REASONING_STATEMENT = "reasoning_statement"
 
 
 class ReferenceIndexEntry(FrozenPolarisBaseModel):
@@ -316,6 +335,7 @@ class ResearchReport(FrozenPolarisBaseModel):
     evidence_section: EvidenceAndClaimsSection
     domain_assessments_section: DomainAssessmentsSection
     cross_domain_section: CrossDomainSection
+    evidence_grounded_interpretation_section: EvidenceGroundedInterpretationSection | None = None
     synthesis_section: SynthesisSection
     literature_context_section: LiteratureContextSection | None = None
     limitations_section: LimitationsSection

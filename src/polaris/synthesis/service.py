@@ -42,6 +42,7 @@ def synthesize_assessment(
         return deterministic_synthesis_artifact(
             request.coordinated_assessment,
             literature_context=request.literature_context,
+            reasoning_artifact=request.reasoning_artifact,
             requested_mode=request.mode,
             synthesis_timestamp=synthesis_timestamp,
         )
@@ -118,6 +119,7 @@ def _fallback_or_raise(
     return deterministic_synthesis_artifact(
         request.coordinated_assessment,
         literature_context=request.literature_context,
+        reasoning_artifact=request.reasoning_artifact,
         requested_mode=request.mode,
         synthesis_timestamp=synthesis_timestamp,
         extra_findings=(*findings, fallback_finding),
@@ -239,6 +241,11 @@ def _artifact_from_response(
         referenced_claim_ids=referenced_claim_ids,
         referenced_evidence_ids=referenced_evidence_ids,
         referenced_assessment_ids=coordinated.source_assessment_ids,
+        referenced_reasoning_statement_ids=(
+            tuple(item.statement_id for item in request.reasoning_artifact.reasoning_statements)
+            if request.reasoning_artifact is not None
+            else ()
+        ),
         grounding_findings=validation_findings,
         provenance=provenance,
     )

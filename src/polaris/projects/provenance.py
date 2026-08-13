@@ -31,6 +31,7 @@ def build_project_provenance(
     synthesis_artifact,
     research_report,
     literature_context=None,
+    reasoning_artifact=None,
 ) -> ProjectProvenance:
     source_checksums = {
         result.dataset_manifest.dataset_id: result.checksum_sha256 for result in ingestion_artifacts
@@ -66,6 +67,7 @@ def build_project_provenance(
         literature_context_id=(
             literature_context.literature_context_id if literature_context is not None else None
         ),
+        reasoning_id=reasoning_artifact.reasoning_id if reasoning_artifact is not None else None,
         synthesis_id=synthesis_artifact.synthesis_id if synthesis_artifact is not None else None,
         report_id=research_report.report.report_id if research_report is not None else None,
         execution_timestamp=datetime.now(UTC),

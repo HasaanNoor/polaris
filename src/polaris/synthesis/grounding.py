@@ -6,6 +6,7 @@ from polaris.agents.models import AgentDomain
 from polaris.coordination.models import CoordinatedAssessment, CoordinationCoverageStatus
 from polaris.evidence.models import EvidenceArtifact
 from polaris.literature.models import LiteratureContextArtifact
+from polaris.reasoning.models import ReasoningArtifact
 from polaris.synthesis.models import GroundingPayload
 
 
@@ -14,6 +15,7 @@ def build_grounding_payload(
     *,
     evidence_artifact: EvidenceArtifact | None = None,
     literature_context: LiteratureContextArtifact | None = None,
+    reasoning_artifact: ReasoningArtifact | None = None,
 ) -> GroundingPayload:
     """Build deterministic JSON-compatible synthesis grounding from Phase 7 state."""
 
@@ -173,6 +175,26 @@ def build_grounding_payload(
                     ],
                 }
                 for record in literature_context.literature_evidence
+            ],
+        }
+    if reasoning_artifact is not None:
+        payload["reasoning_artifact"] = {
+            "instruction": (
+                "Reasoning statements are validated Phase 18 interpretations. Summarize them "
+                "without treating them as new empirical evidence or changing grounding IDs."
+            ),
+            "reasoning_id": reasoning_artifact.reasoning_id,
+            "mode": reasoning_artifact.mode.value,
+            "grounding_summary": reasoning_artifact.grounding_summary.model_dump(mode="json"),
+            "statements": [
+                statement.model_dump(mode="json")
+                for statement in reasoning_artifact.reasoning_statements
+            ],
+            "contradictions": [
+                item.model_dump(mode="json") for item in reasoning_artifact.contradictions
+            ],
+            "candidate_confounders": [
+                item.model_dump(mode="json") for item in reasoning_artifact.candidate_confounders
             ],
         }
     return payload

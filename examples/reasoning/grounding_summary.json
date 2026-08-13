@@ -1,0 +1,14 @@
+{
+  "total_statements": 13,
+  "fully_grounded_statements": 13,
+  "statements_with_literature_support": 0,
+  "statements_based_only_on_empirical_evidence": 13,
+  "plausible_or_unproven_statements": 10,
+  "contradiction_count": 0,
+  "potential_confounder_count": 4,
+  "follow_up_hypothesis_count": 1,
+  "follow_up_research_question_count": 2,
+  "rejected_provider_statements": 0,
+  "unsupported_grounding_attempts": 0,
+  "causal_guard_violations": 0
+}

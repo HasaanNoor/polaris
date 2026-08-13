@@ -195,6 +195,7 @@ def render_report_markdown(report: ResearchReport) -> str:
                     "",
                 ]
             )
+        lines.extend(_evidence_grounded_interpretation(report))
         lines.extend(
             [
                 "## Phase 8 Synthesis",
@@ -362,6 +363,59 @@ def _literature_context(report: ResearchReport) -> list[str]:
         "the empirical findings.",
         "",
     ]
+
+
+def _evidence_grounded_interpretation(report: ResearchReport) -> list[str]:
+    section = report.evidence_grounded_interpretation_section
+    if section is None:
+        return []
+    lines = ["## Evidence-Grounded Interpretation", ""]
+    groups = (
+        ("Main interpretation", section.main_interpretations),
+        ("Cross-domain patterns", section.cross_domain_patterns),
+        ("Plausible mechanisms", section.plausible_mechanisms),
+        ("Alternative explanations", section.alternative_explanations),
+        ("Potential confounders", section.potential_confounders),
+        ("Contradictions", section.contradictions),
+        ("Limitations", section.limitations),
+        ("Follow-up hypotheses", section.follow_up_hypotheses),
+        ("Follow-up research questions", section.follow_up_research_questions),
+    )
+    for title, rows in groups:
+        if not rows:
+            continue
+        lines.extend([f"### {title}", ""])
+        for row in rows:
+            if "text" in row:
+                label = row.get("category", title)
+                status = row.get("epistemic_status", "")
+                text = row["text"]
+                ids = ", ".join(
+                    [
+                        *row.get("claim_ids", ()),
+                        *row.get("evidence_ids", ()),
+                        *row.get("literature_evidence_ids", ()),
+                    ]
+                )
+                lines.append(f"- **{_md(str(label))}** ({_md(str(status))}): {_md(text)}")
+                if ids:
+                    lines.append(f"  References: {_md(ids)}")
+            elif "variable_or_concept" in row:
+                lines.append(
+                    "- **"
+                    + _md(row["variable_or_concept"])
+                    + "**: "
+                    + _md(row["reason_it_may_matter"])
+                )
+            elif "nature_of_conflict" in row:
+                lines.append(
+                    "- **Unresolved conflict**: "
+                    + _md(row["nature_of_conflict"])
+                    + " "
+                    + _md(row["possible_explanation"])
+                )
+        lines.append("")
+    return lines
 
 
 def _statistical_results(report: ResearchReport) -> list[str]:

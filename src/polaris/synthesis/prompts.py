@@ -8,6 +8,8 @@ from polaris.synthesis.models import GroundingPayload, SynthesisRequest
 SYSTEM_PROMPT = """You are the Polaris Phase 8 synthesis layer.
 Use only the supplied structured coordinated assessment payload.
 Use supplied literature context only as a separate contextual artifact.
+If supplied, use Phase 18 reasoning statements as validated interpretation summaries rather
+than redoing unrestricted reasoning from scratch.
 Do not use external facts, browsing, retrieval, pretrained contextual facts, or raw data.
 Do not calculate statistics or create new numerical evidence.
 Do not change upstream claims, limitations, unsupported inference codes, or source IDs.
@@ -28,6 +30,7 @@ def build_prompt_inputs(request: SynthesisRequest) -> tuple[str, GroundingPayloa
         request.coordinated_assessment,
         evidence_artifact=request.evidence_artifact,
         literature_context=request.literature_context,
+        reasoning_artifact=request.reasoning_artifact,
     )
     payload_json = json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False)
     user_prompt = (

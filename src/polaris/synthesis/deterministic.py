@@ -27,6 +27,7 @@ def deterministic_synthesis_artifact(
     coordinated: CoordinatedAssessment,
     *,
     literature_context: LiteratureContextArtifact | None = None,
+    reasoning_artifact=None,
     requested_mode: SynthesisMode = SynthesisMode.DETERMINISTIC,
     synthesis_timestamp: datetime | None = None,
     extra_findings: tuple[SynthesisFinding, ...] = (),
@@ -51,13 +52,22 @@ def deterministic_synthesis_artifact(
     )
     uncertainty = _uncertainty(coordinated)
     findings = tuple(extra_findings) + _deterministic_findings(coordinated)
-    overall = _overall_summary(coordinated, literature_context=literature_context)
+    overall = _overall_summary(
+        coordinated,
+        literature_context=literature_context,
+        reasoning_artifact=reasoning_artifact,
+    )
     limitations_summary = _limitations_summary(coordinated)
     gaps_summary = _gaps_summary(coordinated)
     digest_payload = {
         "overall_summary": overall,
         "domain_summaries": [summary.model_dump(mode="json") for summary in domain_summaries],
         "cross_domain_findings": [item.model_dump(mode="json") for item in cross_domain_findings],
+        "reasoning_statement_ids": (
+            [item.statement_id for item in reasoning_artifact.reasoning_statements]
+            if reasoning_artifact is not None
+            else []
+        ),
         "limitations_summary": limitations_summary,
         "evidence_gaps_summary": gaps_summary,
         "unsupported": [code.value for code in unsupported],
@@ -104,6 +114,11 @@ def deterministic_synthesis_artifact(
         referenced_claim_ids=referenced_claim_ids,
         referenced_evidence_ids=referenced_evidence_ids,
         referenced_assessment_ids=coordinated.source_assessment_ids,
+        referenced_reasoning_statement_ids=(
+            tuple(item.statement_id for item in reasoning_artifact.reasoning_statements)
+            if reasoning_artifact is not None
+            else ()
+        ),
         grounding_findings=findings,
         provenance=provenance,
     )
@@ -113,6 +128,7 @@ def _overall_summary(
     coordinated: CoordinatedAssessment,
     *,
     literature_context: LiteratureContextArtifact | None = None,
+    reasoning_artifact=None,
 ) -> str:
     participating = _domain_list(coordinated.participating_domains)
     missing = _domain_list(coordinated.missing_domains)
@@ -130,6 +146,12 @@ def _overall_summary(
         sentence += (
             " Literature context was retrieved from a supplied local corpus and is reported "
             "separately from the empirical findings."
+        )
+    if reasoning_artifact is not None:
+        sentence += (
+            f" Phase 18 supplied {len(reasoning_artifact.reasoning_statements)} validated "
+            "evidence-grounded reasoning statements; synthesis summarizes those statements "
+            "without changing the underlying evidence."
         )
     return sentence
 

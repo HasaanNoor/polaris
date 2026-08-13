@@ -37,6 +37,9 @@ from polaris.projects.provenance import (
     build_project_provenance,
     build_reproducibility_summary,
 )
+from polaris.reasoning.models import ReasoningRequest
+from polaris.reasoning.provider import ReasoningProvider
+from polaris.reasoning.service import build_reasoning_artifact
 from polaris.registry import DatasetRegistry
 from polaris.reporting.models import ReportRequest
 from polaris.reporting.service import generate_report
@@ -49,6 +52,7 @@ def run_research_project(
     request: ResearchProjectRequest,
     *,
     registry: DatasetRegistry | None = None,
+    reasoning_provider: ReasoningProvider | None = None,
     synthesis_provider: SynthesisProvider | None = None,
 ) -> ResearchProjectResult:
     """Execute an explicit research project through existing Polaris phase services."""
@@ -63,7 +67,12 @@ def run_research_project(
             continue
         started = datetime.now(UTC)
         try:
-            _run_stage(stage, context=context, synthesis_provider=synthesis_provider)
+            _run_stage(
+                stage,
+                context=context,
+                reasoning_provider=reasoning_provider,
+                synthesis_provider=synthesis_provider,
+            )
             completed = datetime.now(UTC)
             stage_results.append(
                 ResearchStageResult(
@@ -113,6 +122,7 @@ def run_research_project(
         domain_assessments=context.domain_assessments,
         coordinated_assessment=context.coordinated_assessment,
         literature_context=context.literature_context,
+        reasoning_artifact=context.reasoning_artifact,
         synthesis_artifact=context.synthesis_artifact,
         research_report=context.research_report,
     )
@@ -137,6 +147,7 @@ def run_research_project(
         domain_assessments=context.domain_assessments,
         coordinated_assessment=context.coordinated_assessment,
         literature_context=context.literature_context,
+        reasoning_artifact=context.reasoning_artifact,
         synthesis_artifact=context.synthesis_artifact,
         research_report=context.research_report,
         project_provenance=provenance,
@@ -169,6 +180,7 @@ class _ExecutionContext:
         self.domain_assessments = ()
         self.coordinated_assessment = None
         self.literature_context = None
+        self.reasoning_artifact = None
         self.synthesis_artifact = None
         self.research_report = None
         self.artifact_references: tuple[ArtifactReference, ...] = ()
@@ -209,6 +221,26 @@ class _ExecutionContext:
                 tuple(
                     item
                     for item in (
+                        self.coordinated_assessment.coordinated_assessment_id
+                        if self.coordinated_assessment is not None
+                        else None,
+                        self.literature_context.literature_context_id
+                        if self.literature_context is not None
+                        else None,
+                        self.reasoning_artifact.reasoning_id
+                        if self.reasoning_artifact is not None
+                        else None,
+                    )
+                    if item is not None
+                )
+            ),
+            ResearchStage.REASON: (
+                tuple(
+                    item
+                    for item in (
+                        self.evidence_artifact.artifact_id
+                        if self.evidence_artifact is not None
+                        else None,
                         self.coordinated_assessment.coordinated_assessment_id
                         if self.coordinated_assessment is not None
                         else None,
@@ -268,6 +300,11 @@ class _ExecutionContext:
                 if self.literature_context is not None
                 else ()
             ),
+            ResearchStage.REASON: (
+                (self.reasoning_artifact.reasoning_id,)
+                if self.reasoning_artifact is not None
+                else ()
+            ),
             ResearchStage.SYNTHESIZE: (
                 (self.synthesis_artifact.synthesis_id,)
                 if self.synthesis_artifact is not None
@@ -288,6 +325,7 @@ def _run_stage(
     stage: ResearchStage,
     *,
     context: _ExecutionContext,
+    reasoning_provider: ReasoningProvider | None,
     synthesis_provider: SynthesisProvider | None,
 ) -> None:
     handlers: dict[ResearchStage, Callable[[], None]] = {
@@ -299,6 +337,10 @@ def _run_stage(
         ResearchStage.RUN_AGENTS: lambda: _run_agents(context),
         ResearchStage.COORDINATE: lambda: _coordinate(context),
         ResearchStage.RETRIEVE_LITERATURE: lambda: _retrieve_literature(context),
+        ResearchStage.REASON: lambda: _reason(
+            context,
+            reasoning_provider=reasoning_provider,
+        ),
         ResearchStage.SYNTHESIZE: lambda: _synthesize(
             context,
             synthesis_provider=synthesis_provider,
@@ -516,6 +558,33 @@ def _retrieve_literature(context: _ExecutionContext) -> None:
     )
 
 
+def _reason(
+    context: _ExecutionContext,
+    *,
+    reasoning_provider: ReasoningProvider | None,
+) -> None:
+    if context.evidence_artifact is None or context.coordinated_assessment is None:
+        raise DatasetResolutionError("evidence and coordination are required before reasoning")
+    config = context.request.reasoning
+    reasoning = build_reasoning_artifact(
+        request=ReasoningRequest(
+            research_question=context.request.research_question.raw_text,
+            evidence_artifact=context.evidence_artifact,
+            coordinated_assessment=context.coordinated_assessment,
+            literature_context=context.literature_context,
+            mode=config.mode,
+            requested_categories=config.categories,
+            max_statement_count=config.max_statements,
+            provider_config=config.provider_config,
+            model_identifier=config.model_identifier,
+            strictness=config.strictness,
+        ),
+        provider=reasoning_provider,
+    )
+    context.reasoning_artifact = reasoning
+    context.add_artifact(reasoning.reasoning_id, ProjectArtifactKind.REASONING_ARTIFACT)
+
+
 def _synthesize(
     context: _ExecutionContext,
     *,
@@ -529,6 +598,7 @@ def _synthesize(
             coordinated_assessment=context.coordinated_assessment,
             evidence_artifact=context.evidence_artifact,
             literature_context=context.literature_context,
+            reasoning_artifact=context.reasoning_artifact,
             mode=config.mode,
             provider_config=config.provider_config,
             model_identifier=config.model_identifier,
@@ -560,6 +630,7 @@ def _report(context: _ExecutionContext) -> None:
             ingestion_result=context.analysis_ingestion,
             research_question=context.request.research_question,
             literature_context=context.literature_context,
+            reasoning_artifact=context.reasoning_artifact,
             dataset_manifest=context.analysis_ingestion.dataset_manifest,
             output_format=config.output_format,
             report_title=config.report_title,
@@ -592,6 +663,7 @@ def _write_outputs(result: ResearchProjectResult) -> None:
                 "evidence_artifact",
                 "domain_assessments",
                 "coordinated_assessment",
+                "reasoning_artifact",
                 "synthesis_artifact",
                 "research_report",
             },

@@ -1,0 +1,635 @@
+{
+  "project_id": "project_dad5237dbcf479aa35d9ea64718787c4ee86faadb33c00985d44a12e5c7b1c6e",
+  "request": {
+    "project_name": "Phase 18 reasoning example",
+    "research_question": {
+      "question_id": "rq_project_test",
+      "raw_text": "How is x associated with y?",
+      "normalized_text": null,
+      "category": "correlational",
+      "outcome_variables": [
+        {
+          "variable_id": "y",
+          "label": null
+        }
+      ],
+      "exposure_variables": [
+        {
+          "variable_id": "x",
+          "label": null
+        }
+      ],
+      "covariates": [],
+      "population": "Test country-year rows",
+      "geographic_scope": {
+        "codes": [
+          "TEST"
+        ],
+        "description": null
+      },
+      "temporal_scope": {
+        "start": 2020,
+        "end": 2021,
+        "label": null
+      },
+      "unit_of_analysis": "country-year",
+      "requested_evidence_level": "limited",
+      "requested_analytical_methods": [
+        "pearson_correlation"
+      ],
+      "assumptions": [],
+      "exclusions": [],
+      "required_metadata": [],
+      "validation_warnings": [],
+      "created_at": "2026-08-07T00:00:00Z",
+      "schema_version": "1.0.0"
+    },
+    "dataset_inputs": [
+      {
+        "kind": "manifest",
+        "manifest": {
+          "dataset_id": "single_project_dataset",
+          "title": "Test Dataset",
+          "provider": "Test Provider",
+          "source_url": "https://example.test/source",
+          "access_url": null,
+          "description": null,
+          "license": null,
+          "status": "candidate",
+          "geographic_coverage": {
+            "codes": [
+              "TEST"
+            ],
+            "description": null
+          },
+          "temporal_coverage": {
+            "start": 2020,
+            "end": 2021,
+            "label": null
+          },
+          "revision_metadata": {
+            "release_date": null,
+            "revision_policy": null,
+            "update_frequency": null,
+            "source_version": null
+          },
+          "variables": [
+            {
+              "variable_id": "country",
+              "label": "Country",
+              "description": null,
+              "unit": null,
+              "data_type": "string",
+              "role": "identifier",
+              "source_field_name": null,
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "year",
+              "label": "Year",
+              "description": null,
+              "unit": null,
+              "data_type": "integer",
+              "role": "time",
+              "source_field_name": null,
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "x",
+              "label": "X",
+              "description": null,
+              "unit": null,
+              "data_type": "float",
+              "role": "exposure",
+              "source_field_name": null,
+              "missing_value_representation": [],
+              "comparability_notes": []
+            },
+            {
+              "variable_id": "y",
+              "label": "Y",
+              "description": null,
+              "unit": null,
+              "data_type": "float",
+              "role": "outcome",
+              "source_field_name": null,
+              "missing_value_representation": [],
+              "comparability_notes": []
+            }
+          ],
+          "units": [],
+          "frequency": null,
+          "methodology_reference": null,
+          "comparability_warnings": [],
+          "licensing_warnings": [],
+          "access_restrictions": [],
+          "source_version": null,
+          "retrieval_timestamp": null,
+          "checksum": null,
+          "schema_version": "1.0.0"
+        },
+        "source_path": "examples/reasoning/_work/single.csv",
+        "expected_checksum": null,
+        "ingestion_configuration": {
+          "delimiter": ",",
+          "encoding": "utf-8",
+          "header": true,
+          "null_value_tokens": [
+            "",
+            "null",
+            "NULL",
+            "NA",
+            "N/A"
+          ],
+          "unexpected_column_mode": "strict",
+          "allow_type_coercion": true,
+          "max_validation_error_samples": 50,
+          "require_source_checksum": false
+        }
+      }
+    ],
+    "statistical_specification": {
+      "specification_id": "spec_project_pearson_correlation",
+      "investigation_id": "investigation_project_test",
+      "analysis_type": "correlation",
+      "model_family": "none",
+      "procedure": "pearson_correlation",
+      "outcome_variable": {
+        "variable_id": "y",
+        "label": null
+      },
+      "exposure_variables": [
+        {
+          "variable_id": "x",
+          "label": null
+        }
+      ],
+      "covariates": [],
+      "grouping_variables": [],
+      "fixed_effects": [],
+      "time_variable": null,
+      "unit_of_analysis": "country-year",
+      "sample_restrictions": [],
+      "missing_data_strategy": {
+        "strategy": "complete_case",
+        "rationale": "project orchestration test",
+        "affected_variables": []
+      },
+      "transformations": [],
+      "weighting": null,
+      "standard_error_strategy": null,
+      "multiple_comparison_strategy": null,
+      "confidence_level": 0.95,
+      "robustness_checks_requested": [],
+      "causal_identification_claim_level": "associational",
+      "assumptions": [],
+      "schema_version": "1.0.0"
+    },
+    "selected_agents": [
+      "economics",
+      "public_health"
+    ],
+    "reasoning": {
+      "enabled": true,
+      "mode": "deterministic",
+      "categories": [
+        "empirical_interpretation",
+        "cross_domain_synthesis",
+        "plausible_mechanism",
+        "alternative_explanation",
+        "potential_confounder",
+        "contradiction",
+        "limitation",
+        "uncertainty",
+        "follow_up_hypothesis",
+        "follow_up_research_question",
+        "literature_alignment",
+        "literature_contrast"
+      ],
+      "max_statements": null,
+      "provider_config": null,
+      "model_identifier": null,
+      "strictness": {
+        "reject_ungrounded_statements": true,
+        "reject_unsupported_causal_language": true,
+        "reject_policy_recommendations": true,
+        "reject_medical_recommendations": true,
+        "allow_provider_fallback": true
+      }
+    },
+    "synthesis": {
+      "mode": "deterministic",
+      "provider_config": null,
+      "model_identifier": null,
+      "allow_deterministic_fallback": true,
+      "max_synthesis_length": null
+    },
+    "report": {
+      "output_format": "markdown",
+      "report_title": null,
+      "report_subtitle": null,
+      "author": null,
+      "organization": null
+    },
+    "literature": null,
+    "harmonization": null,
+    "geographic_scope": null,
+    "temporal_scope": null,
+    "execution_settings": {
+      "analysis_execution_settings": {
+        "missing_data_policy": "complete_case",
+        "include_intercept": true,
+        "pairwise_correlation": false
+      },
+      "significance_threshold": null,
+      "confidence_level": null,
+      "write_outputs": true,
+      "raise_on_failure": false
+    },
+    "output_directory": null,
+    "schema_version": "1.0.0"
+  },
+  "execution_plan": {
+    "project_id": "project_dad5237dbcf479aa35d9ea64718787c4ee86faadb33c00985d44a12e5c7b1c6e",
+    "required_datasets": [
+      "single_project_dataset"
+    ],
+    "stages": [
+      "resolve_datasets",
+      "ingest",
+      "analyze",
+      "extract_evidence",
+      "run_agents",
+      "coordinate",
+      "reason",
+      "synthesize",
+      "report",
+      "complete"
+    ],
+    "ingestion_dataset_ids": [
+      "single_project_dataset"
+    ],
+    "harmonization_required": false,
+    "statistical_analysis_step": "pearson_correlation",
+    "evidence_step": "phase5_extract_evidence",
+    "selected_agents": [
+      "economics",
+      "public_health"
+    ],
+    "coordination_step": "phase7_coordinate_assessments",
+    "synthesis_step": "deterministic",
+    "report_step": "markdown",
+    "schema_version": "1.0.0"
+  },
+  "overall_status": "completed",
+  "stage_results": [
+    {
+      "stage": "resolve_datasets",
+      "status": "completed",
+      "started_at": "2026-08-13T14:57:09.940947Z",
+      "completed_at": "2026-08-13T14:57:09.940954Z",
+      "input_artifact_ids": [],
+      "output_artifact_ids": [
+        "single_project_dataset"
+      ],
+      "warnings": [],
+      "error": null,
+      "provenance_references": [
+        "single_project_dataset"
+      ]
+    },
+    {
+      "stage": "ingest",
+      "status": "completed",
+      "started_at": "2026-08-13T14:57:09.940969Z",
+      "completed_at": "2026-08-13T14:57:09.941491Z",
+      "input_artifact_ids": [
+        "single_project_dataset"
+      ],
+      "output_artifact_ids": [
+        "single_project_dataset"
+      ],
+      "warnings": [],
+      "error": null,
+      "provenance_references": [
+        "single_project_dataset",
+        "single_project_dataset"
+      ]
+    },
+    {
+      "stage": "analyze",
+      "status": "completed",
+      "started_at": "2026-08-13T14:57:09.941508Z",
+      "completed_at": "2026-08-13T14:57:09.948911Z",
+      "input_artifact_ids": [
+        "single_project_dataset"
+      ],
+      "output_artifact_ids": [
+        "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c"
+      ],
+      "warnings": [],
+      "error": null,
+      "provenance_references": [
+        "single_project_dataset",
+        "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c"
+      ]
+    },
+    {
+      "stage": "extract_evidence",
+      "status": "completed",
+      "started_at": "2026-08-13T14:57:09.948924Z",
+      "completed_at": "2026-08-13T14:57:09.949082Z",
+      "input_artifact_ids": [
+        "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c"
+      ],
+      "output_artifact_ids": [
+        "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a"
+      ],
+      "warnings": [],
+      "error": null,
+      "provenance_references": [
+        "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+        "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a"
+      ]
+    },
+    {
+      "stage": "run_agents",
+      "status": "completed",
+      "started_at": "2026-08-13T14:57:09.949093Z",
+      "completed_at": "2026-08-13T14:57:09.949306Z",
+      "input_artifact_ids": [
+        "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a"
+      ],
+      "output_artifact_ids": [
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce",
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c"
+      ],
+      "warnings": [],
+      "error": null,
+      "provenance_references": [
+        "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce",
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c"
+      ]
+    },
+    {
+      "stage": "coordinate",
+      "status": "completed",
+      "started_at": "2026-08-13T14:57:09.949317Z",
+      "completed_at": "2026-08-13T14:57:09.949568Z",
+      "input_artifact_ids": [
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce",
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c"
+      ],
+      "output_artifact_ids": [
+        "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00"
+      ],
+      "warnings": [],
+      "error": null,
+      "provenance_references": [
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce",
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00"
+      ]
+    },
+    {
+      "stage": "reason",
+      "status": "completed",
+      "started_at": "2026-08-13T14:57:09.949580Z",
+      "completed_at": "2026-08-13T14:57:09.950430Z",
+      "input_artifact_ids": [
+        "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a",
+        "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00"
+      ],
+      "output_artifact_ids": [
+        "reasoning_d2aab456a29928a0e1410bfa93653482c790adce914d6d50cb6d1f26a808be63"
+      ],
+      "warnings": [],
+      "error": null,
+      "provenance_references": [
+        "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a",
+        "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00",
+        "reasoning_d2aab456a29928a0e1410bfa93653482c790adce914d6d50cb6d1f26a808be63"
+      ]
+    },
+    {
+      "stage": "synthesize",
+      "status": "completed",
+      "started_at": "2026-08-13T14:57:09.950442Z",
+      "completed_at": "2026-08-13T14:57:09.950567Z",
+      "input_artifact_ids": [
+        "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00",
+        "reasoning_d2aab456a29928a0e1410bfa93653482c790adce914d6d50cb6d1f26a808be63"
+      ],
+      "output_artifact_ids": [
+        "synthesis_3ff32c87e0dbe2d7711006863d6166a63b88b8b7095675cc35ff2c43d694ea8c"
+      ],
+      "warnings": [],
+      "error": null,
+      "provenance_references": [
+        "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00",
+        "reasoning_d2aab456a29928a0e1410bfa93653482c790adce914d6d50cb6d1f26a808be63",
+        "synthesis_3ff32c87e0dbe2d7711006863d6166a63b88b8b7095675cc35ff2c43d694ea8c"
+      ]
+    },
+    {
+      "stage": "report",
+      "status": "completed",
+      "started_at": "2026-08-13T14:57:09.950577Z",
+      "completed_at": "2026-08-13T14:57:09.952490Z",
+      "input_artifact_ids": [],
+      "output_artifact_ids": [
+        "report_a93335e584f2e2fe25e7553624ab75d6f6c8e4423cdcb5622d6c0ee057393e10"
+      ],
+      "warnings": [],
+      "error": null,
+      "provenance_references": [
+        "report_a93335e584f2e2fe25e7553624ab75d6f6c8e4423cdcb5622d6c0ee057393e10"
+      ]
+    },
+    {
+      "stage": "complete",
+      "status": "completed",
+      "started_at": "2026-08-13T14:57:09.952503Z",
+      "completed_at": "2026-08-13T14:57:09.952504Z",
+      "input_artifact_ids": [],
+      "output_artifact_ids": [
+        "project_dad5237dbcf479aa35d9ea64718787c4ee86faadb33c00985d44a12e5c7b1c6e"
+      ],
+      "warnings": [],
+      "error": null,
+      "provenance_references": [
+        "project_dad5237dbcf479aa35d9ea64718787c4ee86faadb33c00985d44a12e5c7b1c6e"
+      ]
+    }
+  ],
+  "resolved_datasets": [
+    {
+      "dataset_id": "single_project_dataset",
+      "input_kind": "manifest",
+      "manifest": {
+        "dataset_id": "single_project_dataset",
+        "title": "Test Dataset",
+        "provider": "Test Provider",
+        "source_url": "https://example.test/source",
+        "access_url": null,
+        "description": null,
+        "license": null,
+        "status": "candidate",
+        "geographic_coverage": {
+          "codes": [
+            "TEST"
+          ],
+          "description": null
+        },
+        "temporal_coverage": {
+          "start": 2020,
+          "end": 2021,
+          "label": null
+        },
+        "revision_metadata": {
+          "release_date": null,
+          "revision_policy": null,
+          "update_frequency": null,
+          "source_version": null
+        },
+        "variables": [
+          {
+            "variable_id": "country",
+            "label": "Country",
+            "description": null,
+            "unit": null,
+            "data_type": "string",
+            "role": "identifier",
+            "source_field_name": null,
+            "missing_value_representation": [],
+            "comparability_notes": []
+          },
+          {
+            "variable_id": "year",
+            "label": "Year",
+            "description": null,
+            "unit": null,
+            "data_type": "integer",
+            "role": "time",
+            "source_field_name": null,
+            "missing_value_representation": [],
+            "comparability_notes": []
+          },
+          {
+            "variable_id": "x",
+            "label": "X",
+            "description": null,
+            "unit": null,
+            "data_type": "float",
+            "role": "exposure",
+            "source_field_name": null,
+            "missing_value_representation": [],
+            "comparability_notes": []
+          },
+          {
+            "variable_id": "y",
+            "label": "Y",
+            "description": null,
+            "unit": null,
+            "data_type": "float",
+            "role": "outcome",
+            "source_field_name": null,
+            "missing_value_representation": [],
+            "comparability_notes": []
+          }
+        ],
+        "units": [],
+        "frequency": null,
+        "methodology_reference": null,
+        "comparability_warnings": [],
+        "licensing_warnings": [],
+        "access_restrictions": [],
+        "source_version": null,
+        "retrieval_timestamp": null,
+        "checksum": null,
+        "schema_version": "1.0.0"
+      },
+      "source_path": "examples/reasoning/_work/single.csv",
+      "expected_checksum": null,
+      "source_checksum_sha256": null,
+      "ingestion_result": null,
+      "harmonized_dataset": null
+    }
+  ],
+  "harmonized_dataset": null,
+  "literature_context": null,
+  "project_provenance": {
+    "project_id": "project_dad5237dbcf479aa35d9ea64718787c4ee86faadb33c00985d44a12e5c7b1c6e",
+    "dataset_ids": [
+      "single_project_dataset"
+    ],
+    "source_checksums": {
+      "single_project_dataset": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86"
+    },
+    "manifest_ids": [
+      "single_project_dataset"
+    ],
+    "harmonization_artifact_id": null,
+    "analysis_artifact_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+    "evidence_artifact_id": "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a",
+    "agent_assessment_ids": [
+      "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+      "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+    ],
+    "coordination_id": "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00",
+    "literature_context_id": null,
+    "reasoning_id": "reasoning_d2aab456a29928a0e1410bfa93653482c790adce914d6d50cb6d1f26a808be63",
+    "synthesis_id": "synthesis_3ff32c87e0dbe2d7711006863d6166a63b88b8b7095675cc35ff2c43d694ea8c",
+    "report_id": "report_a93335e584f2e2fe25e7553624ab75d6f6c8e4423cdcb5622d6c0ee057393e10",
+    "software_version": "polaris-0.1.0",
+    "orchestration_schema_version": "1.0.0",
+    "execution_timestamp": "2026-08-13T14:57:09.952518Z"
+  },
+  "reproducibility_summary": {
+    "project_id": "project_dad5237dbcf479aa35d9ea64718787c4ee86faadb33c00985d44a12e5c7b1c6e",
+    "source_dataset_count": 1,
+    "source_checksums": {
+      "single_project_dataset": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86"
+    },
+    "harmonization_used": false,
+    "statistical_method": "pearson_correlation",
+    "selected_agents": [
+      "economics",
+      "public_health"
+    ],
+    "synthesis_mode": "deterministic",
+    "report_format": "markdown",
+    "completed_stages": [
+      "resolve_datasets",
+      "ingest",
+      "analyze",
+      "extract_evidence",
+      "run_agents",
+      "coordinate",
+      "reason",
+      "synthesize",
+      "report",
+      "complete"
+    ],
+    "failed_stage": null,
+    "artifact_ids": [
+      "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+      "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce",
+      "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+      "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00",
+      "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a",
+      "reasoning_d2aab456a29928a0e1410bfa93653482c790adce914d6d50cb6d1f26a808be63",
+      "report_a93335e584f2e2fe25e7553624ab75d6f6c8e4423cdcb5622d6c0ee057393e10",
+      "single_project_dataset",
+      "synthesis_3ff32c87e0dbe2d7711006863d6166a63b88b8b7095675cc35ff2c43d694ea8c"
+    ],
+    "reproducibility_ready": true
+  },
+  "warnings": [],
+  "execution_metadata": {
+    "orchestrator": "phase13_in_process"
+  }
+}

@@ -1,0 +1,506 @@
+{
+  "research_question": "How is x associated with y?",
+  "evidence_artifact": {
+    "artifact_id": "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a",
+    "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+    "dataset_id": "single_project_dataset",
+    "source_checksum_sha256": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86",
+    "evidence_records": [
+      {
+        "evidence_id": "evidence_06bb9b1f0d2387efd2be1f534f1a04a3f5e21667afb54ef2b832823ed92a1b22",
+        "evidence_type": "sample_quality",
+        "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+        "dataset_id": "single_project_dataset",
+        "source_checksum_sha256": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86",
+        "statistical_procedure": "pearson_correlation",
+        "sample_size": 4,
+        "diagnostic_flags": [],
+        "limitation_codes": [],
+        "schema_version": "1.0.0",
+        "provenance": {
+          "dataset_id": "single_project_dataset",
+          "source_checksum_sha256": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86",
+          "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+          "statistical_procedure": "pearson_correlation",
+          "phase4_schema_version": "1.0.0",
+          "phase5_schema_version": "1.0.0",
+          "extraction_timestamp": "2026-08-13T14:57:19.388256Z",
+          "software_version": "polaris-0.1.0",
+          "extraction_settings": [
+            "deterministic_phase5_v1"
+          ]
+        },
+        "required_variable_ids": [
+          "x",
+          "y"
+        ],
+        "original_accepted_record_count": 4,
+        "final_analysis_sample_size": 4,
+        "excluded_row_count": 0,
+        "exclusion_reason_counts": [],
+        "missing_value_exclusion_count": 0,
+        "accepted_records_used_percentage": 100.0,
+        "included_row_numbers": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "excluded_row_numbers": []
+      },
+      {
+        "evidence_id": "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7",
+        "evidence_type": "correlation",
+        "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+        "dataset_id": "single_project_dataset",
+        "source_checksum_sha256": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86",
+        "statistical_procedure": "pearson_correlation",
+        "sample_size": 4,
+        "diagnostic_flags": [],
+        "limitation_codes": [],
+        "schema_version": "1.0.0",
+        "provenance": {
+          "dataset_id": "single_project_dataset",
+          "source_checksum_sha256": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86",
+          "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+          "statistical_procedure": "pearson_correlation",
+          "phase4_schema_version": "1.0.0",
+          "phase5_schema_version": "1.0.0",
+          "extraction_timestamp": "2026-08-13T14:57:19.388256Z",
+          "software_version": "polaris-0.1.0",
+          "extraction_settings": [
+            "deterministic_phase5_v1"
+          ]
+        },
+        "variable_id_1": "y",
+        "variable_id_2": "x",
+        "method": "pearson",
+        "correlation_coefficient": 0.975900072948533,
+        "p_value": 0.02409992705146702,
+        "observation_count": 4,
+        "defined": true,
+        "direction": "positive",
+        "excluded_row_numbers": [],
+        "missing_exclusion_count": 0
+      }
+    ],
+    "claim_candidates": [
+      {
+        "claim_id": "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b",
+        "claim_type": "association",
+        "subject_variable": "y",
+        "outcome_variable": "x",
+        "related_variables": [
+          "x",
+          "y"
+        ],
+        "direction": "positive",
+        "statistical_procedure": "pearson_correlation",
+        "supporting_evidence_ids": [
+          "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+        ],
+        "limitation_codes": [
+          "OBSERVATIONAL_ASSOCIATION",
+          "UNSUPPORTED_GENERALIZATION"
+        ],
+        "causal": false,
+        "generalization_scope": "analysis_sample",
+        "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+        "dataset_id": "single_project_dataset",
+        "schema_version": "1.0.0",
+        "provenance": {
+          "dataset_id": "single_project_dataset",
+          "source_checksum_sha256": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86",
+          "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+          "statistical_procedure": "pearson_correlation",
+          "phase4_schema_version": "1.0.0",
+          "phase5_schema_version": "1.0.0",
+          "extraction_timestamp": "2026-08-13T14:57:19.388256Z",
+          "software_version": "polaris-0.1.0",
+          "extraction_settings": [
+            "deterministic_phase5_v1"
+          ]
+        },
+        "p_value_below_threshold": null,
+        "confidence_interval_crosses_zero": null
+      }
+    ],
+    "extraction_findings": [
+      {
+        "code": "evidence_extracted",
+        "message": "structured evidence records were extracted deterministically",
+        "evidence_ids": [
+          "evidence_06bb9b1f0d2387efd2be1f534f1a04a3f5e21667afb54ef2b832823ed92a1b22",
+          "evidence_f896bdc523bb8ed6d40d3d96757c85f3fbdc2d14037f2512b2ff2351b7b07dd7"
+        ],
+        "claim_ids": []
+      },
+      {
+        "code": "claim_generated",
+        "message": "bounded claim candidates were generated deterministically",
+        "evidence_ids": [],
+        "claim_ids": [
+          "claim_b6e95514f1b1c82b3da369f7b9e8055413b2396d9bf6dd0de78b01a726b51e4b"
+        ]
+      }
+    ],
+    "provenance": {
+      "dataset_id": "single_project_dataset",
+      "source_checksum_sha256": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86",
+      "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+      "statistical_procedure": "pearson_correlation",
+      "phase4_schema_version": "1.0.0",
+      "phase5_schema_version": "1.0.0",
+      "extraction_timestamp": "2026-08-13T14:57:19.388256Z",
+      "software_version": "polaris-0.1.0",
+      "extraction_settings": [
+        "deterministic_phase5_v1"
+      ]
+    },
+    "extraction_timestamp": "2026-08-13T14:57:19.388256Z",
+    "software_version": "polaris-0.1.0",
+    "schema_version": "1.0.0"
+  },
+  "coordinated_assessment": {
+    "coordinated_assessment_id": "coordinated_assessment_8c7c1585598d76a7e24c561ac83b57c3061199116b3df881066ca831136fbc00",
+    "source_evidence_artifact_id": "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a",
+    "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+    "dataset_id": "single_project_dataset",
+    "source_checksum_sha256": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86",
+    "participating_domains": [
+      "economics",
+      "public_health"
+    ],
+    "missing_domains": [
+      "governance",
+      "education"
+    ],
+    "source_assessment_ids": [
+      "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+      "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+    ],
+    "domain_coverage": [
+      {
+        "domain": "governance",
+        "assessment_supplied": false,
+        "assessment_id": null,
+        "relevant_evidence_count": 0,
+        "relevant_claim_count": 0,
+        "direct_domain_variable_count": 0,
+        "cross_domain_claim_count": 0,
+        "inherited_limitation_count": 0,
+        "domain_concern_count": 0,
+        "coverage_status": "assessment_missing"
+      },
+      {
+        "domain": "economics",
+        "assessment_supplied": true,
+        "assessment_id": "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce",
+        "relevant_evidence_count": 0,
+        "relevant_claim_count": 0,
+        "direct_domain_variable_count": 0,
+        "cross_domain_claim_count": 0,
+        "inherited_limitation_count": 0,
+        "domain_concern_count": 1,
+        "coverage_status": "no_relevant_evidence"
+      },
+      {
+        "domain": "education",
+        "assessment_supplied": false,
+        "assessment_id": null,
+        "relevant_evidence_count": 0,
+        "relevant_claim_count": 0,
+        "direct_domain_variable_count": 0,
+        "cross_domain_claim_count": 0,
+        "inherited_limitation_count": 0,
+        "domain_concern_count": 0,
+        "coverage_status": "assessment_missing"
+      },
+      {
+        "domain": "public_health",
+        "assessment_supplied": true,
+        "assessment_id": "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "relevant_evidence_count": 0,
+        "relevant_claim_count": 0,
+        "direct_domain_variable_count": 0,
+        "cross_domain_claim_count": 0,
+        "inherited_limitation_count": 0,
+        "domain_concern_count": 1,
+        "coverage_status": "no_relevant_evidence"
+      }
+    ],
+    "evidence_domain_map": [],
+    "claim_domain_map": [],
+    "agreements": [
+      {
+        "agreement_id": "coordination_agreement_8ec5a17ee34823ac8b545855ac8bfecad1d96dd6f426e028a83bd9dc393e2a16",
+        "agreement_type": "shared_domain_concern",
+        "source_ids": [],
+        "limitation_codes": [],
+        "unsupported_inference_codes": [],
+        "domain_concern_codes": [
+          "DOMAIN_CONTEXT_NOT_MEASURED"
+        ],
+        "participating_domains": [
+          "economics",
+          "public_health"
+        ]
+      },
+      {
+        "agreement_id": "coordination_agreement_19bac76da4d19a4bb4ea96a0d41ed1aebdf26ba8515f1a9589fa2a03a0cdff3c",
+        "agreement_type": "shared_unsupported_inference",
+        "source_ids": [],
+        "limitation_codes": [],
+        "unsupported_inference_codes": [
+          "intervention_recommendation"
+        ],
+        "domain_concern_codes": [],
+        "participating_domains": [
+          "economics",
+          "public_health"
+        ]
+      },
+      {
+        "agreement_id": "coordination_agreement_2177966a2f8b828b7a1f8f2c33f9694161ab030a75d073ca48a171cbbca649fa",
+        "agreement_type": "shared_unsupported_inference",
+        "source_ids": [],
+        "limitation_codes": [],
+        "unsupported_inference_codes": [
+          "mechanism"
+        ],
+        "domain_concern_codes": [],
+        "participating_domains": [
+          "economics",
+          "public_health"
+        ]
+      },
+      {
+        "agreement_id": "coordination_agreement_79032f40c3bc03717ea6c93c3f1e6f61c92cbd83026f83463b44f557f5207d36",
+        "agreement_type": "shared_unsupported_inference",
+        "source_ids": [],
+        "limitation_codes": [],
+        "unsupported_inference_codes": [
+          "causality"
+        ],
+        "domain_concern_codes": [],
+        "participating_domains": [
+          "economics",
+          "public_health"
+        ]
+      },
+      {
+        "agreement_id": "coordination_agreement_7eb1ed2b3a25663ea9107b0ac1077120945a8d9d93b506b795695f7707c14383",
+        "agreement_type": "shared_unsupported_inference",
+        "source_ids": [],
+        "limitation_codes": [],
+        "unsupported_inference_codes": [
+          "policy_effectiveness"
+        ],
+        "domain_concern_codes": [],
+        "participating_domains": [
+          "economics",
+          "public_health"
+        ]
+      },
+      {
+        "agreement_id": "coordination_agreement_ae2dc1491f99c147b5eeac9db293f3d31c3366243b0587a461feaa69f0a02f76",
+        "agreement_type": "shared_unsupported_inference",
+        "source_ids": [],
+        "limitation_codes": [],
+        "unsupported_inference_codes": [
+          "temporal_prediction"
+        ],
+        "domain_concern_codes": [],
+        "participating_domains": [
+          "economics",
+          "public_health"
+        ]
+      }
+    ],
+    "divergences": [
+      {
+        "divergence_id": "coordination_divergence_5f3b8f69c2465b9497e517801aab17fe9d5736953c5082aadb23018dafdf8a6f",
+        "divergence_type": "domain_specific_unsupported_inference",
+        "domains_involved": [
+          "public_health"
+        ],
+        "source_ids": [],
+        "limitation_codes": [],
+        "unsupported_inference_codes": [
+          "medical_conclusion"
+        ],
+        "domain_concern_codes": [],
+        "factual_basis": "unsupported-inference code appears in some supplied domains only"
+      }
+    ],
+    "shared_limitations": [],
+    "shared_unsupported_inferences": [
+      {
+        "inference_code": "causality",
+        "domains": [
+          "economics",
+          "public_health"
+        ],
+        "all_participating_agents": true,
+        "relevant_claim_ids": []
+      },
+      {
+        "inference_code": "intervention_recommendation",
+        "domains": [
+          "economics",
+          "public_health"
+        ],
+        "all_participating_agents": true,
+        "relevant_claim_ids": []
+      },
+      {
+        "inference_code": "mechanism",
+        "domains": [
+          "economics",
+          "public_health"
+        ],
+        "all_participating_agents": true,
+        "relevant_claim_ids": []
+      },
+      {
+        "inference_code": "medical_conclusion",
+        "domains": [
+          "public_health"
+        ],
+        "all_participating_agents": false,
+        "relevant_claim_ids": []
+      },
+      {
+        "inference_code": "policy_effectiveness",
+        "domains": [
+          "economics",
+          "public_health"
+        ],
+        "all_participating_agents": true,
+        "relevant_claim_ids": []
+      },
+      {
+        "inference_code": "temporal_prediction",
+        "domains": [
+          "economics",
+          "public_health"
+        ],
+        "all_participating_agents": true,
+        "relevant_claim_ids": []
+      }
+    ],
+    "evidence_gaps": [],
+    "domain_gaps": [
+      {
+        "gap_id": "coordination_domain_gap_2cda4ca8f7436f9f2c37185bda78a91223f6045f01a8d2a1090a39c37ae6b12f",
+        "gap_type": "domain_not_represented",
+        "domain": "governance",
+        "assessment_supplied": false,
+        "coverage_status": "assessment_missing"
+      },
+      {
+        "gap_id": "coordination_domain_gap_0a06202762211928311eaa46c7b7312d6b9d95b35f2c6a6e860773c25d7b2af3",
+        "gap_type": "domain_has_no_relevant_evidence",
+        "domain": "economics",
+        "assessment_supplied": true,
+        "coverage_status": "no_relevant_evidence"
+      },
+      {
+        "gap_id": "coordination_domain_gap_6dfe7972acbb582af0493c5f46d83f4e3889a6e76542b35463ba65e833d82d51",
+        "gap_type": "domain_not_represented",
+        "domain": "education",
+        "assessment_supplied": false,
+        "coverage_status": "assessment_missing"
+      },
+      {
+        "gap_id": "coordination_domain_gap_9a78b7ee700a1420beba6a9c6f04b429021aebdf54ff4ce4f1d6b170f88f7d1a",
+        "gap_type": "domain_has_no_relevant_evidence",
+        "domain": "public_health",
+        "assessment_supplied": true,
+        "coverage_status": "no_relevant_evidence"
+      }
+    ],
+    "coordination_findings": [
+      {
+        "finding_code": "all_agents_empty",
+        "severity": "medium",
+        "source_ids": [],
+        "domains": [
+          "economics",
+          "public_health"
+        ]
+      },
+      {
+        "finding_code": "broad_unsupported_causality_warning",
+        "severity": "high",
+        "source_ids": [],
+        "domains": [
+          "economics",
+          "public_health"
+        ]
+      },
+      {
+        "finding_code": "incomplete_domain_set",
+        "severity": "info",
+        "source_ids": [],
+        "domains": [
+          "governance",
+          "education"
+        ]
+      }
+    ],
+    "provenance": {
+      "source_evidence_artifact_id": "evidence_artifact_e76d2da03e293cb56455c4e20ed77126dcf6044bde59126731aa8668bc6bcb6a",
+      "source_assessment_ids": [
+        "agent_assessment_494de28b135e6bb104c226f72f54d1e13c4dbbea158e61dac36ebaaa5f8a049c",
+        "agent_assessment_7c205b8b287b7fe4cb3e7c896ec0b8efbc5e9088428d14370001fe9dcb986dce"
+      ],
+      "source_analysis_result_id": "analysis_90fd091e0a3e15f7ef5a6e39e2826190c413c8975aa792d101c27dea3657565c",
+      "dataset_id": "single_project_dataset",
+      "source_checksum_sha256": "39425cfb01c0c908b69f3a6c2be5d98a9704146bae48fc54c715112fa25afa86",
+      "participating_domains": [
+        "economics",
+        "public_health"
+      ],
+      "missing_domains": [
+        "governance",
+        "education"
+      ],
+      "coordination_ruleset_version": "deterministic_phase7_v1",
+      "coordination_timestamp": "2026-08-13T14:57:19.388940Z",
+      "software_version": "polaris-0.1.0",
+      "phase5_schema_version": "1.0.0",
+      "phase6_schema_version": "1.0.0",
+      "phase7_schema_version": "1.0.0"
+    },
+    "schema_version": "1.0.0"
+  },
+  "literature_context": null,
+  "mode": "deterministic",
+  "requested_categories": [
+    "empirical_interpretation",
+    "cross_domain_synthesis",
+    "plausible_mechanism",
+    "alternative_explanation",
+    "potential_confounder",
+    "contradiction",
+    "limitation",
+    "uncertainty",
+    "follow_up_hypothesis",
+    "follow_up_research_question",
+    "literature_alignment",
+    "literature_contrast"
+  ],
+  "domain_focus": [],
+  "max_statement_count": null,
+  "provider_config": null,
+  "model_identifier": null,
+  "strictness": {
+    "reject_ungrounded_statements": true,
+    "reject_unsupported_causal_language": true,
+    "reject_policy_recommendations": true,
+    "reject_medical_recommendations": true,
+    "allow_provider_fallback": true
+  },
+  "schema_version": "1.0.0"
+}

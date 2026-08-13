@@ -32,6 +32,7 @@ def plan_research_project(
         ResearchStage.RUN_AGENTS,
         ResearchStage.COORDINATE,
         *(() if request.literature is None else (ResearchStage.RETRIEVE_LITERATURE,)),
+        *(() if not request.reasoning.enabled else (ResearchStage.REASON,)),
         ResearchStage.SYNTHESIZE,
         ResearchStage.REPORT,
         ResearchStage.COMPLETE,
@@ -48,6 +49,7 @@ def plan_research_project(
             ),
             "statistical_specification": request.statistical_specification.model_dump(mode="json"),
             "selected_agents": [agent.value for agent in request.selected_agents],
+            "reasoning": request.reasoning.model_dump(mode="json"),
             "synthesis": request.synthesis.model_dump(mode="json"),
             "report": request.report.model_dump(mode="json"),
             "literature": (
