@@ -75,6 +75,19 @@ Phase 18 adds an optional reasoning layer under `src/polaris/reasoning`. It cons
 
 Deterministic reasoning is the default offline baseline. Provider-backed reasoning is optional and must return structured output that passes grounding, causal-language, fabricated-citation, policy, and medical guardrails. Phase 8 can summarize a supplied `ReasoningArtifact`, and Phase 9 can render it as an Evidence-Grounded Interpretation section.
 
+## Reasoning Evaluation
+
+Phase 19 adds a separate evaluation path under `src/polaris/evaluation`:
+
+`BenchmarkCase -> Evidence/Coordination/Literature fixtures -> reasoning mode -> ReasoningArtifact -> evaluation rules -> ReasoningEvaluationResult -> BenchmarkSuiteResult -> benchmark report`
+
+Evaluation is not part of normal Phase 13 project execution by default. It is a benchmark
+or post-project workflow that reads existing artifacts without mutating them. Evaluation
+reports remain separate from research reports and summarize grounding, evidence fidelity,
+causal restraint, epistemic calibration, contradiction handling, limitation propagation,
+literature separation, structural validity, reproducibility, and deterministic/provider
+comparison behavior.
+
 ## WHO Health Panel
 
 Phase 15 adds a curated WHO integration layer between raw provider snapshots and Phase 3 ingestion. It reads the local WHO GHO acquisition catalog, validates checksums, profiles indicator schemas, applies reviewed dimension filters, excludes aggregates, keeps sex and age dimensions explicit, separates projections from historical observations, and writes `WHOHealthPanel` artifacts. The panel is then exported as a normal Phase 3 dataset and consumed by Phase 12 without WHO-specific harmonization code.

@@ -67,6 +67,9 @@ Conflicting: credible sources point in different directions or use incompatible 
 - Phase 18 mechanism hypotheses, alternative explanations, and candidate confounders must remain plausible but unproven unless directly tested by upstream evidence. They must not be presented as empirical findings.
 - Phase 18 literature-aware reasoning may describe alignment or contrast with retrieved local-corpus sources, but literature remains contextual and must not be treated as statistical validation of Polaris findings.
 - Phase 18 causal guardrails prohibit unsupported causal conclusions, policy recommendations, medical recommendations, and external factual additions from model memory.
+- Phase 19 reasoning evaluation must remain separate from reasoning generation. It checks grounding, evidence direction, uncertainty, conditionality, causal restraint, epistemic labels, contradiction handling, material limitation propagation, literature separation, structural validity, and reproducibility without modifying reasoning artifacts.
+- Phase 19 benchmark metrics are dimension summaries, not a single quality score. Evaluation may compare deterministic and provider-backed reasoning on the same dimensions, but it must not present provider output as universally superior based on one aggregate.
+- Phase 19 adversarial fixtures must remain transparent and may include fabricated grounding, fabricated citations, causal traps, literature disagreement, limitation loss, contradiction omission, and mechanism-as-fact cases.
 - Correlation and OLS claim candidates must remain non-causal unless a later causal-identification phase explicitly supports stronger claims.
 - Multiple comparisons must be disclosed and, where appropriate, adjusted or treated as exploratory.
 - Robustness and sensitivity analysis are required when model choices, missingness, variable definitions, or source selection materially affect interpretation.
