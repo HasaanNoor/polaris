@@ -1,0 +1,21 @@
+{
+  "list_datasets": {
+    "datasets": [
+      {
+        "dataset_id": "world_bank_wgi",
+        "provider": "World Bank",
+        "resource_uri": "polaris://datasets/world_bank_wgi"
+      }
+    ]
+  },
+  "run_research_project": {
+    "project_id": "project_<sha256>",
+    "status": "completed",
+    "artifact_ids": {
+      "analysis_result_id": "analysis_<sha256>",
+      "report_id": "report_<sha256>",
+      "reasoning_id": null,
+      "provenance_reference": "polaris://provenance/project_<sha256>"
+    }
+  }
+}

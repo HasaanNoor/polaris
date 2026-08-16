@@ -1,0 +1,12 @@
+{
+  "dataset_discovery": "polaris://datasets",
+  "wgi_manifest": "polaris://datasets/world_bank_wgi/manifest",
+  "wgi_variables": "polaris://datasets/world_bank_wgi/variables",
+  "who_catalog": "polaris://catalogs/who/variables",
+  "wgi_catalog": "polaris://catalogs/wgi/variables",
+  "unesco_catalog": "polaris://catalogs/unesco/variables",
+  "wdi_catalog": "polaris://catalogs/wdi/variables",
+  "project": "polaris://projects/<project_id>",
+  "report": "polaris://reports/<report_id>",
+  "provenance": "polaris://provenance/<artifact_id>"
+}

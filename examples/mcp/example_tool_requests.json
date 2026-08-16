@@ -1,0 +1,28 @@
+{
+  "list_datasets": {
+    "provider": "World Bank",
+    "research_domain": "governance"
+  },
+  "inspect_dataset": {
+    "dataset_id": "world_bank_wgi"
+  },
+  "retrieve_literature": {
+    "corpus_id": "<local_corpus_id>",
+    "corpus_path": "examples/literature/corpus",
+    "query": "government effectiveness life expectancy GDP per capita",
+    "top_k": 3
+  },
+  "run_research_project": {
+    "project_request": {
+      "project_name": "Governance Health Association",
+      "research_question": "<explicit ResearchQuestion JSON>",
+      "dataset_inputs": ["<explicit dataset inputs>"],
+      "harmonization": "<explicit mappings and join configuration>",
+      "statistical_specification": "<explicit StatisticalSpecification JSON>",
+      "selected_agents": ["economics", "governance", "public_health"],
+      "synthesis": {"mode": "deterministic"},
+      "report": {"output_format": "markdown"},
+      "output_directory": "outputs"
+    }
+  }
+}

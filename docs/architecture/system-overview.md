@@ -88,6 +88,29 @@ causal restraint, epistemic calibration, contradiction handling, limitation prop
 literature separation, structural validity, reproducibility, and deterministic/provider
 comparison behavior.
 
+## MCP Research Interface
+
+Phase 20 adds an optional local integration boundary under `src/polaris/mcp`:
+
+`External MCP client -> Polaris MCP server -> typed MCP adapters -> existing Polaris public APIs`
+
+MCP resources are read-only views over dataset discovery, manifests, provider variable
+catalogs, derived artifacts, reports, reasoning artifacts, evaluations, and provenance.
+MCP tools are reserved for execution: listing or inspecting datasets, running an explicit
+`StatisticalSpecification`, harmonizing datasets from explicit mappings and join rules,
+running a complete `ResearchProjectRequest`, retrieving local literature from configured
+corpora, building a `ReasoningArtifact`, evaluating reasoning, and retrieving reports.
+
+The MCP layer does not contain analytical methodology. It does not select datasets,
+variables, statistical models, agents, mappings, causal assumptions, recommendations, or
+research plans. It validates JSON into existing Pydantic models and then calls the same
+Phase 2, 4, 12, 13, 14, 18, and 19 public APIs used by non-MCP workflows.
+
+Stdio is the default transport for local clients. Resource access is limited to configured
+catalog, derived artifact, project-output, and literature roots. Raw provider files,
+arbitrary filesystem paths, shell execution, secrets, environment variables, and network
+browsing are outside the MCP boundary.
+
 ## WHO Health Panel
 
 Phase 15 adds a curated WHO integration layer between raw provider snapshots and Phase 3 ingestion. It reads the local WHO GHO acquisition catalog, validates checksums, profiles indicator schemas, applies reviewed dimension filters, excludes aggregates, keeps sex and age dimensions explicit, separates projections from historical observations, and writes `WHOHealthPanel` artifacts. The panel is then exported as a normal Phase 3 dataset and consumed by Phase 12 without WHO-specific harmonization code.
@@ -118,6 +141,10 @@ The system must stop or downgrade claims when:
 Every dataset, transformation, model output, and narrative claim must link to provenance records. Reports are generated from artifacts, not from untracked agent memory.
 
 Project-level provenance aggregates upstream identifiers and source checksums into one traceable chain from report back to source datasets. It references upstream provenance rather than replacing it.
+
+MCP provenance resources expose stable artifact IDs, artifact types, source dataset IDs,
+checksums, schema/software versions, generation mode, provider/model metadata where present,
+and timestamps without exposing raw files or secrets.
 
 ## Technology Position
 

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "polaris": {
+      "command": "python",
+      "args": ["-m", "polaris.mcp"],
+      "env": {}
+    }
+  }
+}

@@ -176,7 +176,15 @@ Deliverables: `BenchmarkCase`, `ExpectedReasoningBehavior`, `BenchmarkSuite`, `R
 
 Verification: `tests/evaluation` covers deterministic benchmark reproducibility, adversarial fabricated grounding and citation detection, causal overclaims, evidence direction mismatch, contradiction omission, material limitation loss, literature separation, fake-provider comparison, and benchmark report rendering. Default tests are network-free and require no provider secrets.
 
-## Phase 20: Additional Deterministic Agents
+## Phase 20: MCP Research Interface (complete)
+
+Objective: expose selected Polaris research capabilities to compatible local Model Context Protocol clients without coupling MCP to the deterministic analytical core.
+
+Deliverables: optional `polaris.mcp` package, strict server configuration, read-only dataset/catalog/artifact/provenance/report resources, validated analysis/harmonization/project/literature/reasoning/evaluation tools, deterministic serialization, stdio server entry point, example client configuration, tests, documentation, and ADR-023.
+
+Verification: `tests/mcp` covers resource discovery, variable catalogs, artifact and provenance resources, safe path rejection, tool validation, explicit-methodology enforcement, local literature retrieval, reasoning/evaluation delegation, and server registration without requiring an external MCP client or network access.
+
+## Phase 21: Additional Deterministic Agents
 
 Objective: implement typed agents for coordination, question interpretation, dataset selection, data quality, and statistical analysis.
 
@@ -184,7 +192,7 @@ Deliverables: agent contracts, deterministic strategies, validation failures, an
 
 Verification: contract tests and end-to-end artifact generation.
 
-## Phase 21: Persistent Orchestration Runtime
+## Phase 22: Persistent Orchestration Runtime
 
 Objective: add persistence only if project orchestration later requires durable state beyond the Phase 13 in-process service.
 
@@ -192,7 +200,7 @@ Deliverables: orchestration graph, retry policy, stop conditions, and partial-re
 
 Verification: workflow tests for success, insufficient evidence, and conflicting-source outcomes.
 
-## Phase 22: Evidence Critic and Retrieval-Grounded Synthesis
+## Phase 23: Evidence Critic and Retrieval-Grounded Synthesis
 
 Objective: critique analytical outputs and generate cautious reports from artifacts.
 
@@ -200,7 +208,7 @@ Deliverables: evidence-quality assessment, limitation extraction, conflict repre
 
 Verification: tests preventing unsupported causal or quantitative claims.
 
-## Phase 23: Causal Identification Assessment
+## Phase 24: Causal Identification Assessment
 
 Objective: assess whether a question and dataset support explicit causal interpretation.
 
@@ -208,7 +216,7 @@ Deliverables: identification taxonomy, design checks, assumption records, and un
 
 Verification: fixture tests for descriptive, regression-adjusted, quasi-experimental, and experimental cases.
 
-## Phase 24: Robustness and Sensitivity
+## Phase 25: Robustness and Sensitivity
 
 Objective: evaluate stability of findings under reasonable alternative specifications.
 
@@ -216,7 +224,7 @@ Deliverables: robustness-test registry, sensitivity outputs, and reporting rules
 
 Verification: reproducible robustness results on fixed fixtures.
 
-## Phase 25: Domain Agent Expansion
+## Phase 26: Domain Agent Expansion
 
 Objective: introduce deterministic domain agents incrementally.
 
@@ -226,7 +234,7 @@ Verification: typed outputs and domain-specific warning tests.
 
 Non-goal: implementing every target agent at once.
 
-## Phase 26: Human-Readable Report Renderer
+## Phase 27: Human-Readable Report Renderer
 
 Objective: generate readable reports from research artifacts.
 
@@ -234,7 +242,7 @@ Deliverables: report templates, citations, tables, figures, limitations, and rep
 
 Verification: snapshot tests and manual report review.
 
-## Phase 27: Frontend Research Workspace
+## Phase 28: Frontend Research Workspace
 
 Objective: provide a usable interface for submitting questions and reviewing artifacts.
 
@@ -242,7 +250,7 @@ Deliverables: question form, investigation status, dataset views, evidence panel
 
 Verification: browser tests for primary workflows.
 
-## Phase 28: Evidence-Grounded LLM Evaluation
+## Phase 29: Evidence-Grounded LLM Evaluation
 
 Objective: evaluate whether selected agents benefit from LLM strategies.
 
@@ -250,7 +258,7 @@ Deliverables: candidate tasks, grounding constraints, evaluation set, refusal be
 
 Verification: LLM outputs cannot alter deterministic analytical results or add unsupported claims.
 
-## Phase 29: Controlled LLM Enhancement
+## Phase 30: Controlled LLM Enhancement
 
 Objective: add evidence-grounded LLM strategies only where Phase 25 justifies them.
 
@@ -258,7 +266,7 @@ Deliverables: strategy adapters, prompt/version records, grounding checks, and f
 
 Verification: regression tests for unsupported evidence, uncertainty concealment, and contract stability.
 
-## Phase 30: Deployment Baseline
+## Phase 31: Deployment Baseline
 
 Objective: package a minimal deployable system after core workflows exist.
 
@@ -266,7 +274,7 @@ Deliverables: deployment decision record, runtime configuration, persistence con
 
 Verification: reproducible deployment in the selected environment.
 
-## Phase 31: Observability and Governance
+## Phase 32: Observability and Governance
 
 Objective: monitor investigations, failures, provenance, and methodological policy enforcement.
 
@@ -274,7 +282,7 @@ Deliverables: structured logs, metrics, audit views, and review queues.
 
 Verification: traceability tests from report claims to artifacts and logs.
 
-## Phase 32: Public Demo and Documentation Hardening
+## Phase 33: Public Demo and Documentation Hardening
 
 Objective: publish a constrained public demonstration using reviewed datasets and documented limitations.
 

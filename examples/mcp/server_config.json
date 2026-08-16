@@ -1,0 +1,11 @@
+{
+  "catalog_directory": "catalog/datasets",
+  "allowed_artifact_roots": ["examples", "outputs"],
+  "allowed_project_output_directory": "outputs",
+  "allowed_literature_corpus_roots": ["examples/literature/corpus"],
+  "maximum_tool_output_bytes": 65536,
+  "provider_backed_reasoning_enabled": false,
+  "evaluation_enabled": true,
+  "enabled_resources": ["*"],
+  "enabled_tools": ["*"]
+}

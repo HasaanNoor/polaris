@@ -25,6 +25,7 @@ Every investigation must record:
 - UNESCO source file paths, UNESCO indicator IDs, source checksums, reviewed mapping ruleset version, country/temporal rules, dimension filters, aggregate/territory/subgroup exclusion counts, deferred-indicator registry, and UNESCOEducationPanel ID when Phase 17 UNESCO data is used;
 - reasoning mode, requested reasoning categories, grounding source IDs, strictness configuration, provider metadata when used, prompt version, validation findings, grounding summary, and ReasoningArtifact ID when Phase 18 reasoning is used;
 - benchmark case ID, expected reasoning behavior, benchmark tags, evaluator version, dimension results, findings, metrics, reasoning modes, suite ID, and BenchmarkSuiteResult ID-equivalent payload when Phase 19 evaluation is used;
+- MCP resource URI, tool name, validated request payload, artifact references, configured resource roots, server configuration, transport, and safe error payload when Phase 20 MCP is used;
 - report generation metadata.
 
 ## Artifact Reproduction
@@ -51,6 +52,14 @@ not affect deterministic identity. Regression benchmarks should detect grounding
 drops, causal overclaims, missed contradictions, lost limitations, literature/evidence
 mixing, fabricated citations, and unintended deterministic reasoning changes without
 requiring exact prose equality except for intentional deterministic fixtures.
+
+For Phase 20 MCP access, reproducibility depends on the same underlying Polaris artifacts
+and public APIs used outside MCP. MCP responses must serialize deterministically, return
+artifact references for large outputs, preserve provenance resources, and record validation
+or execution errors without stack traces or secrets. MCP clients must supply explicit
+methodological inputs; the server must not infer datasets, variables, mappings, models,
+agents, causal claims, or recommendations. Raw provider files and arbitrary filesystem paths
+remain outside the reproducibility package exposed by MCP.
 
 ## Data Publication and Privacy
 
