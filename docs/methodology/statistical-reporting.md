@@ -32,6 +32,16 @@ Correlation results report coefficients, p-values where supported, observation c
 
 OLS results report coefficients, standard errors, test statistics, p-values, confidence intervals, threshold comparisons only when an explicit threshold is provided, fit statistics, residual and fitted-value summaries, diagnostics, and warnings. Diagnostics report calculated facts or not-applicable statuses; they do not automatically modify the requested model.
 
+## Phase 21 Panel Analysis Boundary
+
+Panel results are Phase 4-compatible analytical artifacts for longitudinal data. Supported procedures are entity fixed effects, entity plus time fixed effects, and first differences. Every panel specification must declare entity and time variables, predictors, controls, fixed effects, clustered-standard-error configuration, and any lags explicitly.
+
+Entity fixed effects estimate conditional associations using within-entity variation while accounting for stable entity-specific differences. Two-way fixed effects add common time effects. First differences estimate associations between consecutive within-entity changes. None of these procedures alone proves causality.
+
+Panel reporting must include entity count, time-period count, included and excluded rows, balanced or unbalanced status, min/max observations per entity, year range, lag-induced exclusions, missing-data exclusions, singleton entity exclusions where relevant, cluster count, effective model sample, clustered standard errors, confidence intervals, within-model fit, transformed condition number, and within/between variation summaries. Intercepts are not reported for transformed fixed-effects models because they are not substantively interpretable.
+
+Lagged predictors are generated within entity only. Polaris does not allow lag values to cross entity boundaries, does not automatically search lag lengths, and does not treat a two-year gap as a one-year lag.
+
 ## Phase 5 Structured Evidence Boundary
 
 Phase 5 converts Phase 4 results into typed evidence records and bounded claim candidates. Evidence records preserve numerical facts, sample construction, diagnostics, warnings, source checksums, result IDs, and provenance. Claim candidates reference supporting evidence IDs and carry propagated limitation codes.

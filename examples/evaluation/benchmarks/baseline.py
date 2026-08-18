@@ -183,6 +183,37 @@ def baseline_suite() -> BenchmarkSuite:
                 expected_candidate_confounders=("education",),
             ),
         ),
+        _case(
+            "case_k_panel_fixed_effects_causal_trap",
+            title="Panel fixed effects causal trap",
+            description=(
+                "A panel fixed-effects association should be interpreted as longitudinal "
+                "and non-causal."
+            ),
+            exposure="government_effectiveness",
+            outcome="life_expectancy",
+            covariates=("gdp_per_capita",),
+            direction=Direction.POSITIVE,
+            procedure=StatisticalProcedure.PANEL_TWO_WAY_FE,
+            limitations=(
+                LimitationCode.OBSERVATIONAL_ASSOCIATION,
+                LimitationCode.LOW_CLUSTER_COUNT,
+            ),
+            tags=(
+                BenchmarkTag.ADVERSARIAL,
+                BenchmarkTag.CAUSAL_TRAP,
+                BenchmarkTag.CONDITIONAL_ASSOCIATION,
+            ),
+            expected=ExpectedReasoningBehavior(
+                required_statement_categories=(
+                    ReasoningCategory.EMPIRICAL_INTERPRETATION,
+                    ReasoningCategory.LIMITATION,
+                ),
+                expected_causal_status=CausalStatus.NON_CAUSAL,
+                expected_direction=Direction.POSITIVE,
+                expected_limitations=("OBSERVATIONAL_ASSOCIATION", "LOW_CLUSTER_COUNT"),
+            ),
+        ),
     )
     title = POLARIS_REASONING_BASELINE_V1
     return BenchmarkSuite(
@@ -217,6 +248,7 @@ def _case(
     significant: bool = True,
     sample_size: int = 42,
     limitations: tuple[LimitationCode, ...] = (LimitationCode.OBSERVATIONAL_ASSOCIATION,),
+    procedure: StatisticalProcedure = StatisticalProcedure.ORDINARY_LEAST_SQUARES,
 ) -> BenchmarkCase:
     evidence, coordination = _artifacts(
         case_id=case_id,
@@ -227,6 +259,7 @@ def _case(
         significant=significant,
         sample_size=sample_size,
         limitations=limitations,
+        procedure=procedure,
     )
     return BenchmarkCase(
         case_id=case_id,
@@ -339,6 +372,7 @@ def _artifacts(
     significant: bool = True,
     sample_size: int = 42,
     limitations: tuple[LimitationCode, ...] = (LimitationCode.OBSERVATIONAL_ASSOCIATION,),
+    procedure: StatisticalProcedure = StatisticalProcedure.ORDINARY_LEAST_SQUARES,
 ) -> tuple[EvidenceArtifact, CoordinatedAssessment]:
     evidence_records = []
     claims = []
@@ -346,7 +380,7 @@ def _artifacts(
         if item_direction is None:
             continue
         suffix = f"{case_id}_{index}"
-        provenance = _evidence_provenance(suffix)
+        provenance = _evidence_provenance(suffix, procedure=procedure)
         evidence_id = f"{suffix}_evidence"
         estimate = 1.2 if item_direction is Direction.POSITIVE else -1.2
         if not significant:
@@ -357,7 +391,7 @@ def _artifacts(
                 source_analysis_result_id=f"{suffix}_analysis",
                 dataset_id=f"{case_id}_dataset",
                 source_checksum_sha256=f"{case_id}_checksum",
-                statistical_procedure=StatisticalProcedure.ORDINARY_LEAST_SQUARES,
+                statistical_procedure=procedure,
                 sample_size=sample_size,
                 limitation_codes=limitations,
                 provenance=provenance,
@@ -389,7 +423,7 @@ def _artifacts(
                 outcome_variable=outcome,
                 related_variables=covariates,
                 direction=item_direction,
-                statistical_procedure=StatisticalProcedure.ORDINARY_LEAST_SQUARES,
+                statistical_procedure=procedure,
                 supporting_evidence_ids=(evidence_id,),
                 limitation_codes=limitations,
                 source_analysis_result_id=f"{suffix}_analysis",
@@ -406,7 +440,7 @@ def _artifacts(
         source_checksum_sha256=f"{case_id}_checksum",
         evidence_records=tuple(evidence_records),
         claim_candidates=tuple(claims),
-        provenance=_evidence_provenance(case_id),
+        provenance=_evidence_provenance(case_id, procedure=procedure),
         extraction_timestamp=_TIMESTAMP,
         software_version=_SOFTWARE,
     )
@@ -414,12 +448,16 @@ def _artifacts(
     return artifact, coordination
 
 
-def _evidence_provenance(identifier: str) -> EvidenceProvenance:
+def _evidence_provenance(
+    identifier: str,
+    *,
+    procedure: StatisticalProcedure = StatisticalProcedure.ORDINARY_LEAST_SQUARES,
+) -> EvidenceProvenance:
     return EvidenceProvenance(
         dataset_id=f"{identifier}_dataset",
         source_checksum_sha256=f"{identifier}_checksum",
         source_analysis_result_id=f"{identifier}_analysis",
-        statistical_procedure=StatisticalProcedure.ORDINARY_LEAST_SQUARES,
+        statistical_procedure=procedure,
         phase4_schema_version="1.0.0",
         extraction_timestamp=_TIMESTAMP,
         software_version=_SOFTWARE,

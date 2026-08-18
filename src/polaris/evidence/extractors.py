@@ -9,6 +9,7 @@ from polaris.analysis.models import (
     CorrelationAnalysisResult,
     DescriptiveAnalysisResult,
     OLSRegressionResult,
+    PanelRegressionResult,
 )
 from polaris.evidence.limitations import (
     limitations_from_diagnostic,
@@ -50,7 +51,7 @@ def extract_evidence_records(
         records.extend(_descriptive_evidence(analysis_result, method_result, provenance))
     elif isinstance(method_result, CorrelationAnalysisResult):
         records.extend(_correlation_evidence(analysis_result, method_result, provenance))
-    elif isinstance(method_result, OLSRegressionResult):
+    elif isinstance(method_result, OLSRegressionResult | PanelRegressionResult):
         records.extend(_regression_evidence(analysis_result, method_result, provenance))
 
     records.extend(
@@ -203,8 +204,12 @@ def _regression_evidence(analysis_result, method_result, provenance):
             provenance=provenance,
             dependent_variable_id=method_result.dependent_variable_id,
             predictor_variable_ids=tuple(sorted(method_result.predictor_variable_ids)),
-            r_squared=method_result.r_squared,
-            adjusted_r_squared=method_result.adjusted_r_squared,
+            r_squared=getattr(method_result, "r_squared", None)
+            if isinstance(method_result, OLSRegressionResult)
+            else method_result.fit.within_r_squared,
+            adjusted_r_squared=getattr(method_result, "adjusted_r_squared", None)
+            if isinstance(method_result, OLSRegressionResult)
+            else method_result.fit.adjusted_within_r_squared,
             residual_degrees_of_freedom=method_result.residual_degrees_of_freedom,
             model_degrees_of_freedom=method_result.model_degrees_of_freedom,
             residual_sum_of_squares=method_result.residual_sum_of_squares,

@@ -21,6 +21,13 @@ _FINDING_LIMITATIONS: dict[AnalysisFindingCode, LimitationCode] = {
     AnalysisFindingCode.UNDEFINED_STATISTIC: LimitationCode.UNDEFINED_DIAGNOSTIC,
     AnalysisFindingCode.DIAGNOSTIC_NOT_APPLICABLE: LimitationCode.UNDEFINED_DIAGNOSTIC,
     AnalysisFindingCode.PERFECT_CORRELATION: LimitationCode.PERFECT_CORRELATION,
+    AnalysisFindingCode.UNBALANCED_PANEL: LimitationCode.PANEL_UNBALANCED,
+    AnalysisFindingCode.LOW_CLUSTER_COUNT: LimitationCode.LOW_CLUSTER_COUNT,
+    AnalysisFindingCode.LOW_WITHIN_VARIATION: LimitationCode.LOW_WITHIN_VARIATION,
+    AnalysisFindingCode.SERIAL_CORRELATION_CAUTION: LimitationCode.SERIAL_CORRELATION_CAUTION,
+    AnalysisFindingCode.CROSS_SECTIONAL_DEPENDENCE_LIMITATION: (
+        LimitationCode.CROSS_SECTIONAL_DEPENDENCE_LIMITATION
+    ),
 }
 
 

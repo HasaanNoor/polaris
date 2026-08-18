@@ -21,6 +21,12 @@ from polaris.analysis.models import (
     AnalysisResult,
     AnalysisSampleSummary,
 )
+from polaris.analysis.panel_compatibility import (
+    is_panel_procedure,
+    validate_panel_compatibility,
+)
+from polaris.analysis.panel_models import fit_panel_regression
+from polaris.analysis.panel_sample import build_panel_sample
 from polaris.analysis.regression import fit_ols
 from polaris.analysis.sample import build_analysis_sample
 from polaris.schemas.common import StatisticalProcedure
@@ -35,10 +41,39 @@ def run_analysis(*, request: AnalysisRequest) -> AnalysisResult:
         )
     specification = request.statistical_specification
     procedure = resolve_procedure(specification)
-    variable_ids, compatibility_findings = validate_compatibility(
-        ingestion, specification, procedure
-    )
-    sample, sample_findings = build_analysis_sample(ingestion, variable_ids)
+    predictor_ids: tuple[str, ...] = ()
+    if is_panel_procedure(procedure):
+        variable_ids, predictor_ids, compatibility_findings = validate_panel_compatibility(
+            ingestion, specification, procedure
+        )
+        entity_id = specification.entity_variable.variable_id  # type: ignore[union-attr]
+        time_id = specification.time_variable.variable_id  # type: ignore[union-attr]
+        sample, lag_operations, sample_findings = build_panel_sample(
+            ingestion,
+            variable_ids=tuple(
+                dict.fromkeys(
+                    (
+                        specification.outcome_variable.variable_id,
+                        *(
+                            variable.variable_id
+                            for variable in (
+                                *specification.exposure_variables,
+                                *specification.covariates,
+                            )
+                        ),
+                        *(lag.source_variable.variable_id for lag in specification.lags),
+                    )
+                )
+            ),
+            entity_variable_id=entity_id,
+            time_variable_id=time_id,
+            lags=tuple(specification.lags),
+        )
+    else:
+        variable_ids, compatibility_findings = validate_compatibility(
+            ingestion, specification, procedure
+        )
+        sample, sample_findings = build_analysis_sample(ingestion, variable_ids)
 
     diagnostics = ()
     if procedure is StatisticalProcedure.DESCRIPTIVE_STATISTICS:
@@ -61,6 +96,28 @@ def run_analysis(*, request: AnalysisRequest) -> AnalysisResult:
             significance_threshold=request.significance_threshold,
         )
         diagnostics = ols_diagnostics(sample, method_result)
+    elif is_panel_procedure(procedure):
+        method_result = fit_panel_regression(
+            sample,
+            procedure=procedure,
+            dependent_variable_id=specification.outcome_variable.variable_id,
+            predictor_variable_ids=predictor_ids,
+            entity_variable_id=specification.entity_variable.variable_id,  # type: ignore[union-attr]
+            time_variable_id=specification.time_variable.variable_id,  # type: ignore[union-attr]
+            standard_error_strategy=specification.standard_error_strategy,
+            lag_operations=lag_operations,
+            confidence_level=request.effective_confidence_level,
+            significance_threshold=request.significance_threshold,
+        )
+        diagnostics = (
+            *diagnostics,
+            *(
+                diagnostic
+                for diagnostic in (
+                    _panel_condition_diagnostic(method_result.transformed_condition_number),
+                )
+            ),
+        )
     else:
         raise UnsupportedAnalysisMethodError(
             f'unsupported analysis procedure "{procedure.value}"',
@@ -129,3 +186,19 @@ def _library_versions() -> tuple[str, ...]:
         except PackageNotFoundError:
             values.append(f"{library}-unknown")
     return tuple(values)
+
+
+def _panel_condition_diagnostic(condition_number: float | None):
+    from polaris.analysis.models import AnalysisFindingCode, DiagnosticResult, DiagnosticStatus
+
+    return DiagnosticResult(
+        name="transformed_condition_number",
+        status=DiagnosticStatus.CALCULATED
+        if condition_number is not None
+        else DiagnosticStatus.UNDEFINED,
+        statistic=condition_number,
+        warning_codes=()
+        if condition_number is not None
+        else (AnalysisFindingCode.UNDEFINED_STATISTIC,),
+        explanation="Condition number was calculated from the transformed panel design matrix.",
+    )

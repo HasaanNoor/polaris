@@ -36,6 +36,7 @@ Causal wording is not allowed based only on:
 
 - temporal ordering;
 - regression adjustment;
+- fixed effects, first differences, lagged predictors, or clustered standard errors without a separate identification design;
 - predictive accuracy;
 - statistical significance;
 - Phase 5 evidence extraction or claim-candidate generation;
@@ -43,6 +44,14 @@ Causal wording is not allowed based only on:
 - Phase 7 coordination, agreement, divergence, evidence-gap, or domain-gap records;
 - Phase 8 synthesis artifacts, domain summaries, cross-domain findings, grounding findings, and fallback prose;
 - an LLM-generated explanation.
+
+## Panel Language
+
+Pooled OLS may be described as a cross-row or cross-country conditional association. Entity fixed effects may be described as a within-entity longitudinal conditional association. Two-way fixed effects may be described as a within-entity longitudinal conditional association accounting for common time effects.
+
+Allowed: "Higher government effectiveness is associated with higher life expectancy within countries over time under the specified fixed-effects model."
+
+Disallowed: "Improving government effectiveness increases life expectancy" or "fixed effects prove that governance caused life expectancy changes."
 
 ## Required Stop Conditions
 

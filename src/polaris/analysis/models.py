@@ -49,6 +49,15 @@ class AnalysisFindingCode(StrEnum):
     DIAGNOSTIC_NOT_APPLICABLE = "diagnostic_not_applicable"
     CAUSAL_INTERPRETATION_UNSUPPORTED = "causal_interpretation_unsupported"
     UNDEFINED_STATISTIC = "undefined_statistic"
+    DUPLICATE_PANEL_KEY = "duplicate_panel_key"
+    INSUFFICIENT_PANEL_DATA = "insufficient_panel_data"
+    LOW_CLUSTER_COUNT = "low_cluster_count"
+    LAG_EXCLUDED_ROWS = "lag_excluded_rows"
+    TIME_INVARIANT_PREDICTOR = "time_invariant_predictor"
+    UNBALANCED_PANEL = "unbalanced_panel"
+    LOW_WITHIN_VARIATION = "low_within_variation"
+    SERIAL_CORRELATION_CAUTION = "serial_correlation_caution"
+    CROSS_SECTIONAL_DEPENDENCE_LIMITATION = "cross_sectional_dependence_limitation"
 
 
 class DiagnosticStatus(StrEnum):
@@ -190,6 +199,8 @@ class RegressionCoefficient(FrozenPolarisBaseModel):
     confidence_interval_low: float | None
     confidence_interval_high: float | None
     below_significance_threshold: bool | None = None
+    standard_error_type: str | None = None
+    cluster_count: int | None = Field(default=None, ge=0)
 
 
 class RegressionSummary(FrozenPolarisBaseModel):
@@ -228,6 +239,88 @@ class OLSRegressionResult(FrozenPolarisBaseModel):
     warnings: tuple[AnalysisFinding, ...] = Field(default_factory=tuple)
 
 
+class PanelFixedEffectsConfig(FrozenPolarisBaseModel):
+    entity_variable_id: VariableId
+    time_variable_id: VariableId
+    entity_fixed_effects: bool
+    time_fixed_effects: bool
+    intercept_reported: bool = False
+    intercept_explanation: NonEmptyStr
+
+
+class PanelClusterConfig(FrozenPolarisBaseModel):
+    strategy: NonEmptyStr
+    cluster_variable_id: VariableId | None = None
+    cluster_count: int = Field(ge=0)
+    warning: NonEmptyStr | None = None
+
+
+class PanelLagOperation(FrozenPolarisBaseModel):
+    source_variable_id: VariableId
+    generated_variable_id: VariableId
+    lag_periods: int = Field(gt=0)
+    require_consecutive_time: bool = True
+    rows_lost: int = Field(ge=0)
+    excluded_row_numbers: tuple[int, ...] = Field(default_factory=tuple)
+    missing_lag_reasons: tuple[tuple[int, NonEmptyStr], ...] = Field(default_factory=tuple)
+
+
+class PanelSampleSummary(FrozenPolarisBaseModel):
+    input_rows: int = Field(ge=0)
+    included_rows: int = Field(ge=0)
+    excluded_rows: int = Field(ge=0)
+    entity_count: int = Field(ge=0)
+    time_period_count: int = Field(ge=0)
+    min_observations_per_entity: int | None = Field(default=None, ge=0)
+    max_observations_per_entity: int | None = Field(default=None, ge=0)
+    balanced: bool
+    year_range: tuple[int | float, int | float] | None = None
+    lag_induced_exclusions: int = Field(ge=0)
+    missing_data_exclusions: int = Field(ge=0)
+    singleton_entity_exclusions: int = Field(ge=0)
+    cluster_count: int = Field(ge=0)
+    effective_model_sample: int = Field(ge=0)
+
+
+class PanelVariableVariation(FrozenPolarisBaseModel):
+    variable_id: VariableId
+    overall_mean: float | None = None
+    overall_standard_deviation: float | None = None
+    within_entity_standard_deviation: float | None = None
+    between_entity_standard_deviation: float | None = None
+    low_within_variation: bool = False
+
+
+class PanelFitMetrics(FrozenPolarisBaseModel):
+    within_r_squared: float | None = None
+    between_r_squared: float | None = None
+    overall_r_squared: float | None = None
+    adjusted_within_r_squared: float | None = None
+
+
+class PanelRegressionResult(FrozenPolarisBaseModel):
+    result_type: Literal["panel_regression"] = "panel_regression"
+    procedure: StatisticalProcedure
+    dependent_variable_id: VariableId
+    predictor_variable_ids: tuple[VariableId, ...]
+    sample_size: int = Field(ge=0)
+    coefficients: tuple[RegressionCoefficient, ...]
+    fixed_effects: PanelFixedEffectsConfig
+    cluster: PanelClusterConfig
+    panel_sample: PanelSampleSummary
+    lag_operations: tuple[PanelLagOperation, ...] = Field(default_factory=tuple)
+    variation: tuple[PanelVariableVariation, ...] = Field(default_factory=tuple)
+    fit: PanelFitMetrics
+    residual_degrees_of_freedom: float
+    model_degrees_of_freedom: float
+    residual_sum_of_squares: float | None
+    mean_squared_error: float | None
+    fitted_value_summary: RegressionSummary
+    residual_summary: RegressionSummary
+    transformed_condition_number: float | None = None
+    warnings: tuple[AnalysisFinding, ...] = Field(default_factory=tuple)
+
+
 class AnalysisProvenance(FrozenPolarisBaseModel):
     dataset_id: DatasetId
     source_checksum_sha256: str
@@ -249,7 +342,12 @@ class AnalysisResult(FrozenPolarisBaseModel):
     dataset_id: DatasetId
     source_checksum_sha256: str
     analysis_sample: AnalysisSampleSummary
-    method_result: DescriptiveAnalysisResult | CorrelationAnalysisResult | OLSRegressionResult
+    method_result: (
+        DescriptiveAnalysisResult
+        | CorrelationAnalysisResult
+        | OLSRegressionResult
+        | PanelRegressionResult
+    )
     diagnostics: tuple[DiagnosticResult, ...] = Field(default_factory=tuple)
     findings: tuple[AnalysisFinding, ...] = Field(default_factory=tuple)
     analysis_timestamp: AwareDatetime = Field(default_factory=lambda: datetime.now(UTC))

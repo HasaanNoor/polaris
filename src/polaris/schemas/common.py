@@ -196,6 +196,9 @@ class StatisticalProcedure(StrEnum):
     PEARSON_CORRELATION = "pearson_correlation"
     SPEARMAN_CORRELATION = "spearman_correlation"
     ORDINARY_LEAST_SQUARES = "ordinary_least_squares"
+    PANEL_ENTITY_FE = "panel_entity_fe"
+    PANEL_TWO_WAY_FE = "panel_two_way_fe"
+    FIRST_DIFFERENCE = "first_difference"
     BINARY_LOGISTIC_REGRESSION = "binary_logistic_regression"
 
 

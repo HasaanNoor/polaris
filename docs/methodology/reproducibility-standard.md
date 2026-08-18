@@ -26,6 +26,7 @@ Every investigation must record:
 - reasoning mode, requested reasoning categories, grounding source IDs, strictness configuration, provider metadata when used, prompt version, validation findings, grounding summary, and ReasoningArtifact ID when Phase 18 reasoning is used;
 - benchmark case ID, expected reasoning behavior, benchmark tags, evaluator version, dimension results, findings, metrics, reasoning modes, suite ID, and BenchmarkSuiteResult ID-equivalent payload when Phase 19 evaluation is used;
 - MCP resource URI, tool name, validated request payload, artifact references, configured resource roots, server configuration, transport, and safe error payload when Phase 20 MCP is used;
+- panel procedure, entity variable, time variable, fixed-effect configuration, cluster variable, lag specifications, panel sample summary, within/between variation, transformed diagnostics, and lag exclusions when Phase 21 panel analysis is used;
 - report generation metadata.
 
 ## Artifact Reproduction
@@ -60,6 +61,13 @@ or execution errors without stack traces or secrets. MCP clients must supply exp
 methodological inputs; the server must not infer datasets, variables, mappings, models,
 agents, causal claims, or recommendations. Raw provider files and arbitrary filesystem paths
 remain outside the reproducibility package exposed by MCP.
+
+For Phase 21 panel analysis, analysis IDs must be derived from the source checksum,
+statistical specification, entity/time variables, fixed-effect configuration, clustering,
+lag configuration, and schema version. Analysis timestamps may appear in provenance but
+must not affect identity. Lags must be reproducible from sorted entity-time records and
+must not cross entity boundaries. Missing periods, unbalanced coverage, low cluster counts,
+and time-invariant predictors must remain visible in result metadata or validation errors.
 
 ## Data Publication and Privacy
 

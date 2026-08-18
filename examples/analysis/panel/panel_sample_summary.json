@@ -1,0 +1,19 @@
+{
+  "input_rows": 49,
+  "included_rows": 49,
+  "excluded_rows": 0,
+  "entity_count": 7,
+  "time_period_count": 7,
+  "min_observations_per_entity": 7,
+  "max_observations_per_entity": 7,
+  "balanced": true,
+  "year_range": [
+    2015.0,
+    2021.0
+  ],
+  "lag_induced_exclusions": 0,
+  "missing_data_exclusions": 0,
+  "singleton_entity_exclusions": 0,
+  "cluster_count": 7,
+  "effective_model_sample": 49
+}

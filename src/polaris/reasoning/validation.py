@@ -17,6 +17,7 @@ from polaris.schemas.common import WarningSeverity
 
 _BLOCKED_CAUSAL_PATTERNS = (
     re.compile(r"\bcauses?\b", re.IGNORECASE),
+    re.compile(r"\bcaused\b", re.IGNORECASE),
     re.compile(r"\bcaused\s+by\b", re.IGNORECASE),
     re.compile(r"\bleads?\s+to\b", re.IGNORECASE),
     re.compile(r"\bresults?\s+in\b", re.IGNORECASE),

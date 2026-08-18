@@ -50,3 +50,31 @@ class RegressionExecutionError(StatisticalAnalysisError):
 
 class DiagnosticExecutionError(StatisticalAnalysisError):
     """Raised when diagnostic execution fails unexpectedly."""
+
+
+class PanelSpecificationError(AnalysisCompatibilityError):
+    """Raised when a panel specification is malformed."""
+
+
+class DuplicatePanelKeyError(PanelSpecificationError):
+    """Raised when entity-time keys are duplicated."""
+
+
+class InsufficientPanelDataError(PanelSpecificationError):
+    """Raised when repeated panel observations are insufficient."""
+
+
+class TimeInvariantPredictorError(PanelSpecificationError):
+    """Raised when fixed effects make a requested predictor non-estimable."""
+
+
+class PanelRankDeficiencyError(PanelSpecificationError):
+    """Raised when the transformed panel design is rank deficient."""
+
+
+class InvalidLagError(PanelSpecificationError):
+    """Raised when requested lag construction is invalid."""
+
+
+class InsufficientClustersError(PanelSpecificationError):
+    """Raised when clustered inference has too few clusters."""

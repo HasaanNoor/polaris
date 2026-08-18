@@ -8,6 +8,7 @@ from polaris.analysis.models import (
     CorrelationAnalysisResult,
     DescriptiveAnalysisResult,
     OLSRegressionResult,
+    PanelRegressionResult,
 )
 from polaris.evidence.claims import generate_claim_candidates
 from polaris.evidence.extractors import extract_evidence_records
@@ -62,7 +63,10 @@ def extract_evidence(*, analysis_result: AnalysisResult) -> EvidenceArtifact:
 def _validate_supported_result(analysis_result: AnalysisResult) -> None:
     if not isinstance(
         analysis_result.method_result,
-        DescriptiveAnalysisResult | CorrelationAnalysisResult | OLSRegressionResult,
+        DescriptiveAnalysisResult
+        | CorrelationAnalysisResult
+        | OLSRegressionResult
+        | PanelRegressionResult,
     ):
         # The current AnalysisResult union should make this unreachable. The branch is
         # deliberately explicit so future Phase 4 result types cannot be ignored.

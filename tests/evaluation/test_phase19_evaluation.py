@@ -81,7 +81,7 @@ def test_baseline_suite_is_deterministic_and_structurally_clean():
         reasoning_modes=(ReasoningMode.DETERMINISTIC,),
     )
 
-    assert len(suite.benchmark_cases) == 11
+    assert len(suite.benchmark_cases) == 12
     assert result_a.failure_counts_by_code == {}
     assert [item.evaluation_id for item in result_a.case_results] == [
         item.evaluation_id for item in result_b.case_results

@@ -47,6 +47,10 @@ flowchart TD
 
 Data transformations, statistical calculations, causal estimates, diagnostics, and reproducible results remain deterministic. Agent strategies may vary internally, but external contracts must remain typed and structured.
 
+Phase 21 extends the Phase 4 analytical core with panel regression methods for longitudinal country-year data. Harmonized data still enters through normal ingestion or project orchestration, then an explicit `StatisticalSpecification` declares entity/time keys, fixed effects, clustered standard errors, and lags. Results still leave through `AnalysisResult`, so evidence extraction, agents, reasoning, reports, project orchestration, and MCP do not need a separate panel pipeline.
+
+Panel methods estimate non-causal longitudinal associations. Entity fixed effects account for stable entity differences; year fixed effects account for common period shocks; entity clustering represents repeated observations in uncertainty estimates. Cross-sectional dependence corrections and causal designs remain outside Phase 21.
+
 ## Dataset Acquisition
 
 Provider access is an explicit pre-ingestion step. Polaris downloads or copies a provider file once, stores it under `data/raw/<provider>/`, records source URL, original filename, timestamp, byte size, format, and SHA-256 checksum, and generates a normal `DatasetManifest` under `data/manifests/`. Registry, ingestion, analysis, evidence, coordination, synthesis, and reporting operate from those local artifacts and do not require provider access after acquisition.

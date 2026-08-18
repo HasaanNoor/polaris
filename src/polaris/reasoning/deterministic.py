@@ -35,6 +35,7 @@ from polaris.reasoning.taxonomy import (
     ReasoningMode,
     SupportLevel,
 )
+from polaris.schemas.common import StatisticalProcedure
 
 
 def deterministic_reasoning_artifact(
@@ -189,10 +190,11 @@ def _empirical_interpretation(
         relation = "is conditionally associated with"
     direction = _direction_text(claim.direction)
     controls = _controls_text(claim)
+    scope = _model_scope_text(claim.statistical_procedure)
     text = (
         f"{claim.subject_variable or 'The modeled term'} {relation} "
         f"{claim.outcome_variable or 'the outcome'} in the {direction} direction "
-        f"within the specified {claim.statistical_procedure.value} model{controls}. "
+        f"within the specified {claim.statistical_procedure.value} model{controls}{scope}. "
         "This is an empirical interpretation of a non-causal claim candidate."
     )
     return _statement(
@@ -206,6 +208,18 @@ def _empirical_interpretation(
         epistemic_status=EpistemicStatus.SUPPORTED_INTERPRETATION,
         limitations=tuple(code.value for code in claim.limitation_codes),
     )
+
+
+def _model_scope_text(procedure: StatisticalProcedure) -> str:
+    if procedure is StatisticalProcedure.PANEL_ENTITY_FE:
+        return ", using within-entity longitudinal variation and entity fixed effects"
+    if procedure is StatisticalProcedure.PANEL_TWO_WAY_FE:
+        return (
+            ", using within-entity longitudinal variation while accounting for common time effects"
+        )
+    if procedure is StatisticalProcedure.FIRST_DIFFERENCE:
+        return ", using consecutive within-entity changes"
+    return ""
 
 
 def _cross_domain_statements(request: ReasoningRequest) -> tuple[ReasoningStatement, ...]:

@@ -37,6 +37,13 @@ class StandardErrorSpec(PolarisBaseModel):
     cluster_variables: list[VariableReference] = Field(default_factory=list)
 
 
+class LagSpec(PolarisBaseModel):
+    source_variable: VariableReference
+    lag_periods: int = Field(gt=0)
+    generated_variable_id: NonEmptyStr | None = None
+    require_consecutive_time: bool = True
+
+
 class StatisticalSpecification(PolarisBaseModel):
     """Requested analytical procedure, without calculated results."""
 
@@ -49,12 +56,14 @@ class StatisticalSpecification(PolarisBaseModel):
     exposure_variables: list[VariableReference] = Field(default_factory=list)
     covariates: list[VariableReference] = Field(default_factory=list)
     grouping_variables: list[VariableReference] = Field(default_factory=list)
+    entity_variable: VariableReference | None = None
     fixed_effects: list[VariableReference] = Field(default_factory=list)
     time_variable: VariableReference | None = None
     unit_of_analysis: NonEmptyStr
     sample_restrictions: list[NonEmptyStr] = Field(default_factory=list)
     missing_data_strategy: MissingDataStrategy
     transformations: list[TransformationSpec] = Field(default_factory=list)
+    lags: list[LagSpec] = Field(default_factory=list)
     weighting: WeightingSpec | None = None
     standard_error_strategy: StandardErrorSpec | None = None
     multiple_comparison_strategy: NonEmptyStr | None = None
@@ -73,6 +82,10 @@ class StatisticalSpecification(PolarisBaseModel):
             StatisticalAnalysisType.QUASI_EXPERIMENTAL,
             StatisticalAnalysisType.EXPERIMENTAL,
         }
-        if self.analysis_type in relationship_types and not self.exposure_variables:
+        if (
+            self.analysis_type in relationship_types
+            and not self.exposure_variables
+            and not self.lags
+        ):
             raise ValueError("relationship analyses require exposure or predictor variables")
         return self

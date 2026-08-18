@@ -184,13 +184,13 @@ Deliverables: optional `polaris.mcp` package, strict server configuration, read-
 
 Verification: `tests/mcp` covers resource discovery, variable catalogs, artifact and provenance resources, safe path rejection, tool validation, explicit-methodology enforcement, local literature retrieval, reasoning/evaluation delegation, and server registration without requiring an external MCP client or network access.
 
-## Phase 21: Additional Deterministic Agents
+## Phase 21: Longitudinal and Panel Data Analysis (complete)
 
-Objective: implement typed agents for coordination, question interpretation, dataset selection, data quality, and statistical analysis.
+Objective: extend the deterministic Phase 4 analytical core with explicit panel-data methods for longitudinal country-year data.
 
-Deliverables: agent contracts, deterministic strategies, validation failures, and contribution records.
+Deliverables: backward-compatible statistical specification extensions, entity/time panel validation, deterministic entity indexing, entity fixed effects, entity plus year fixed effects, first differences, entity-clustered standard errors, explicit lagged predictors, unbalanced-panel support, panel sample summaries, within/between variation diagnostics, transformed-matrix diagnostics, compatible `AnalysisResult` outputs, Phase 5 evidence extraction, Phase 13 orchestration, Phase 18 reasoning wording, Phase 19 causal-overclaim tests, Phase 20 MCP compatibility, real WDI/WHO/WGI and UNESCO examples, documentation, and ADR-024.
 
-Verification: contract tests and end-to-end artifact generation.
+Verification: `tests/analysis/panel` covers fixed effects, clustering, lagging, unbalanced panels, rejected malformed specifications, evidence extraction, project orchestration, reasoning, evaluation, and MCP compatibility. Fixed-effects outputs remain non-causal longitudinal associations.
 
 ## Phase 22: Persistent Orchestration Runtime
 

@@ -1,0 +1,113 @@
+{
+  "question": "Within countries over time, how is government effectiveness associated with life expectancy after accounting for GDP per capita and common year effects?",
+  "results": [
+    {
+      "coefficient": {
+        "below_significance_threshold": null,
+        "cluster_count": null,
+        "confidence_interval_high": 8.537148480097798,
+        "confidence_interval_low": 5.859057370751095,
+        "estimate": 7.198102925424446,
+        "p_value": 3.1246374968805495e-14,
+        "standard_error": 0.6652334852300256,
+        "standard_error_type": null,
+        "term": "wgi_government_effectiveness",
+        "test_statistic": 10.820415816764656,
+        "variable_id": "wgi_government_effectiveness"
+      },
+      "fit": {
+        "adjusted_r_squared": 0.8237486375128878,
+        "r_squared": 0.8310924442831842
+      },
+      "procedure": "ordinary_least_squares",
+      "sample": {
+        "observations": 49
+      },
+      "specification": "pooled"
+    },
+    {
+      "coefficient": {
+        "below_significance_threshold": null,
+        "cluster_count": 7,
+        "confidence_interval_high": 6.59139308769411,
+        "confidence_interval_low": 1.0091395994437526,
+        "estimate": 3.8002663435689312,
+        "p_value": 0.008833350625778332,
+        "standard_error": 1.3820599754978828,
+        "standard_error_type": "cluster_robust_entity",
+        "term": "wgi_government_effectiveness",
+        "test_statistic": 2.749711597863108,
+        "variable_id": "wgi_government_effectiveness"
+      },
+      "fit": {
+        "adjusted_within_r_squared": 0.26115322775444183,
+        "between_r_squared": -110.65509014054513,
+        "overall_r_squared": -109.6099610560731,
+        "within_r_squared": 0.36890171537358574
+      },
+      "procedure": "panel_entity_fe",
+      "sample": {
+        "balanced": true,
+        "cluster_count": 7,
+        "effective_model_sample": 49,
+        "entity_count": 7,
+        "excluded_rows": 0,
+        "included_rows": 49,
+        "input_rows": 49,
+        "lag_induced_exclusions": 0,
+        "max_observations_per_entity": 7,
+        "min_observations_per_entity": 7,
+        "missing_data_exclusions": 0,
+        "singleton_entity_exclusions": 0,
+        "time_period_count": 7,
+        "year_range": [
+          2015.0,
+          2021.0
+        ]
+      },
+      "specification": "entity"
+    },
+    {
+      "coefficient": {
+        "below_significance_threshold": null,
+        "cluster_count": 7,
+        "confidence_interval_high": 5.666333582207248,
+        "confidence_interval_low": 1.3337498968967743,
+        "estimate": 3.500041739552011,
+        "p_value": 0.0023537201792779407,
+        "standard_error": 1.0670821055914328,
+        "standard_error_type": "cluster_robust_entity",
+        "term": "wgi_government_effectiveness",
+        "test_statistic": 3.28001165159836,
+        "variable_id": "wgi_government_effectiveness"
+      },
+      "fit": {
+        "adjusted_within_r_squared": 0.05883021418974621,
+        "between_r_squared": -110.00761284486218,
+        "overall_r_squared": -108.96862883957505,
+        "within_r_squared": 0.3137303645133567
+      },
+      "procedure": "panel_two_way_fe",
+      "sample": {
+        "balanced": true,
+        "cluster_count": 7,
+        "effective_model_sample": 49,
+        "entity_count": 7,
+        "excluded_rows": 0,
+        "included_rows": 49,
+        "input_rows": 49,
+        "lag_induced_exclusions": 0,
+        "max_observations_per_entity": 7,
+        "min_observations_per_entity": 7,
+        "missing_data_exclusions": 0,
+        "singleton_entity_exclusions": 0,
+        "time_period_count": 7,
+        "year_range": [
+          2015.0,
+          2021.0
+        ]
+      },
+      "specification": "twoway"
+    }
+  ]
+}
