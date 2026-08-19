@@ -121,6 +121,7 @@ def render_report_markdown(report: ResearchReport) -> str:
             ]
         )
         lines.extend(_statistical_results(report))
+        lines.extend(_causal_design(report))
         lines.extend(
             [
                 "## Evidence and Claims",
@@ -363,6 +364,61 @@ def _literature_context(report: ResearchReport) -> list[str]:
         "the empirical findings.",
         "",
     ]
+
+
+def _causal_design(report: ResearchReport) -> list[str]:
+    section = report.causal_design_section
+    if section is None or section.status.value != "available":
+        return []
+    lines = [
+        "## Causal Design",
+        "",
+        _table(
+            ("Field", "Value"),
+            (
+                ("Research design", section.research_design),
+                ("Treatment", section.treatment),
+                ("Comparison group", section.comparison_group),
+                ("Treatment timing", section.treatment_timing),
+                ("Outcome", section.outcome),
+                ("Estimand", section.estimand),
+                ("Model", section.model),
+                ("Treatment effect", section.treatment_effect),
+                ("Clustered uncertainty", section.clustered_uncertainty),
+            ),
+        ),
+        "",
+        "### Identifying Assumptions",
+        "",
+        _table(
+            ("Assumption", "Status", "Diagnostic Evidence", "Limitation"),
+            (
+                (
+                    item.get("assumption_code"),
+                    item.get("status"),
+                    item.get("diagnostic_evidence"),
+                    item.get("limitation"),
+                )
+                for item in section.identifying_assumptions
+            ),
+        ),
+        "",
+        "### Causal Diagnostics",
+        "",
+        _table(
+            ("Diagnostic", "Status", "Summary"),
+            (
+                (
+                    item.get("diagnostic_type"),
+                    item.get("status"),
+                    item.get("diagnostic_summary"),
+                )
+                for item in section.diagnostics
+            ),
+        ),
+        "",
+    ]
+    return lines
 
 
 def _evidence_grounded_interpretation(report: ResearchReport) -> list[str]:

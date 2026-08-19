@@ -153,3 +153,7 @@ and timestamps without exposing raw files or secrets.
 ## Technology Position
 
 Candidate technologies are listed in [Technology Decisions](technology-decisions.md). Phase 0 does not commit to a production stack.
+
+## Phase 22 Causal Path
+
+Phase 22 inserts an explicit causal-design path after validated or harmonized panels: `CausalSpecification` -> design validation -> treatment/control construction -> pre-treatment diagnostics -> DiD/event-study estimation -> `CausalAnalysisResult` -> evidence/reasoning/reporting. This path is opt-in and separate from ordinary `StatisticalSpecification` execution.

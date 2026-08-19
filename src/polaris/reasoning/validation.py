@@ -36,6 +36,10 @@ _ALLOWED_CAUSAL_CONTEXTS = (
     "does not establish causation",
     "not causal proof",
     "causal_status = not_established",
+    "under the difference-in-differences design and its identifying assumptions",
+    "under the event-study design and its identifying assumptions",
+    "under the stated identifying assumptions",
+    "conditional causal-design estimate",
 )
 _POLICY_PATTERNS = (
     re.compile(r"\bpolicy should\b", re.IGNORECASE),
@@ -151,6 +155,11 @@ def validate_statement(
 
 def causal_language_violation(statement: ReasoningStatement) -> str | None:
     scrubbed = statement.text.lower()
+    if statement.causal_status is CausalStatus.CONDITIONAL_CAUSAL_DESIGN:
+        prohibited = ("definitely caused", "proves", "proved", "causal proof")
+        if any(item in scrubbed for item in prohibited):
+            return "Reasoning overstated a conditional causal-design estimate."
+        return None
     for allowed in _ALLOWED_CAUSAL_CONTEXTS:
         scrubbed = scrubbed.replace(allowed, "")
     if (

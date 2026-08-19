@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from examples.evaluation.benchmarks.baseline import baseline_suite
+from examples.evaluation.benchmarks.causal import causal_suite
 from polaris.evaluation import (
     benchmark_result_to_json,
     benchmark_result_to_markdown,
@@ -87,6 +88,22 @@ def test_baseline_suite_is_deterministic_and_structurally_clean():
         item.evaluation_id for item in result_b.case_results
     ]
     assert all(item.metrics.deterministic_reproducibility_pass for item in result_a.case_results)
+
+
+def test_phase22_causal_suite_penalizes_overclaim_and_runs_deterministically():
+    suite = causal_suite()
+    result = run_benchmark_suite(
+        suite=suite,
+        reasoning_modes=(ReasoningMode.DETERMINISTIC,),
+    )
+
+    assert len(suite.benchmark_cases) == 12
+    assert all(
+        case.expected_behavior.expected_causal_status
+        in {CausalStatus.CONDITIONAL_CAUSAL_DESIGN, CausalStatus.NON_CAUSAL}
+        for case in suite.benchmark_cases
+    )
+    assert result.failure_counts_by_code == {}
 
 
 def test_fabricated_grounding_is_detected():

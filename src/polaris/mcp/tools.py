@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from polaris.analysis.causal.service import run_causal_analysis as core_run_causal_analysis
 from polaris.analysis.service import run_analysis as core_run_analysis
 from polaris.evaluation.service import evaluate_reasoning as core_evaluate_reasoning
 from polaris.harmonization.service import harmonize_datasets
@@ -17,6 +18,7 @@ from polaris.mcp.adapters import (
     ListDatasetsRequest,
     RetrieveLiteratureRequest,
     RunAnalysisRequest,
+    RunCausalAnalysisRequest,
     RunReasoningRequest,
     RunResearchProjectRequest,
     artifact_reference,
@@ -33,6 +35,7 @@ TOOL_NAMES = (
     "list_datasets",
     "inspect_dataset",
     "run_analysis",
+    "run_causal_analysis",
     "integrate_datasets",
     "run_research_project",
     "retrieve_literature",
@@ -108,6 +111,28 @@ class MCPToolService:
                 "analysis_method": result.analysis_method.value,
                 "sample_size": result.analysis_sample.sample_size,
                 "finding_count": len(result.findings),
+            },
+        )
+        return {
+            "artifact": json_compatible(reference),
+            "result": bounded_payload(result, max_bytes=self.config.maximum_tool_output_bytes),
+        }
+
+    def run_causal_analysis(self, arguments: dict[str, Any]) -> dict[str, Any]:
+        request = RunCausalAnalysisRequest.model_validate(arguments)
+        result = core_run_causal_analysis(request=request.to_core())
+        reference = artifact_reference(
+            artifact_id=result.causal_analysis_id,
+            artifact_type="causal_analysis_result",
+            resource_uri=f"polaris://provenance/{result.causal_analysis_id}",
+            schema_version=result.schema_version,
+            summary={
+                "dataset_id": result.dataset_id,
+                "causal_method": result.method.value,
+                "estimator": result.estimator.value,
+                "estimand": result.estimand.value,
+                "treated_entities": result.sample_summary.treated_entity_count,
+                "control_entities": result.sample_summary.control_entity_count,
             },
         )
         return {

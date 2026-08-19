@@ -48,6 +48,11 @@ def plan_research_project(
                 request.harmonization.model_dump(mode="json") if request.harmonization else None
             ),
             "statistical_specification": request.statistical_specification.model_dump(mode="json"),
+            "causal_specification": (
+                request.causal_specification.model_dump(mode="json")
+                if request.causal_specification is not None
+                else None
+            ),
             "selected_agents": [agent.value for agent in request.selected_agents],
             "reasoning": request.reasoning.model_dump(mode="json"),
             "synthesis": request.synthesis.model_dump(mode="json"),

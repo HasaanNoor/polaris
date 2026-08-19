@@ -9,11 +9,18 @@ from polaris.analysis.models import (
     OLSRegressionResult,
 )
 from polaris.coordination.models import DOMAIN_ORDER, CoordinatedAssessment
-from polaris.evidence.models import EvidenceArtifact, LimitationCode
+from polaris.evidence.models import (
+    CausalAssumptionEvidenceRecord,
+    CausalDiagnosticEvidenceRecord,
+    CausalTreatmentEffectEvidenceRecord,
+    EvidenceArtifact,
+    LimitationCode,
+)
 from polaris.ingestion.models import DatasetIngestionResult
 from polaris.reasoning.models import ReasoningArtifact
 from polaris.reasoning.taxonomy import ReasoningCategory
 from polaris.reporting.models import (
+    CausalDesignSection,
     ClaimSummary,
     CrossDomainSection,
     DatasetSection,
@@ -193,6 +200,57 @@ def statistical_results_section(analysis_result: AnalysisResult) -> StatisticalR
         regression_results=regression,
         diagnostics=tuple(item.model_dump(mode="json") for item in analysis_result.diagnostics),
         findings=tuple(item.model_dump(mode="json") for item in analysis_result.findings),
+    )
+
+
+def causal_design_section(evidence_artifact: EvidenceArtifact) -> CausalDesignSection | None:
+    effects = [
+        record
+        for record in evidence_artifact.evidence_records
+        if isinstance(record, CausalTreatmentEffectEvidenceRecord)
+    ]
+    if not effects:
+        return None
+    effect = sorted(effects, key=lambda item: item.evidence_id)[0]
+    assumptions = tuple(
+        record.model_dump(mode="json")
+        for record in evidence_artifact.evidence_records
+        if isinstance(record, CausalAssumptionEvidenceRecord)
+    )
+    diagnostics = tuple(
+        record.model_dump(mode="json")
+        for record in evidence_artifact.evidence_records
+        if isinstance(record, CausalDiagnosticEvidenceRecord)
+    )
+    return CausalDesignSection(
+        status=SectionStatus.AVAILABLE,
+        research_design=effect.causal_method,
+        treatment=effect.treatment_variable_id,
+        comparison_group="explicit never-treated comparison group",
+        treatment_timing="explicit treatment timing supplied in CausalSpecification",
+        outcome=effect.outcome_variable_id,
+        estimand=effect.estimand,
+        model=effect.estimator,
+        treatment_effect={
+            "estimate": effect.estimate,
+            "p_value": effect.p_value,
+            "confidence_interval_low": effect.confidence_interval_low,
+            "confidence_interval_high": effect.confidence_interval_high,
+        },
+        clustered_uncertainty={
+            "standard_error": effect.standard_error,
+            "cluster_count": effect.cluster_count,
+        },
+        event_study_results=tuple(
+            item.event_study_plot_data
+            for item in evidence_artifact.evidence_records
+            if isinstance(item, CausalDiagnosticEvidenceRecord)
+        )[0]
+        if diagnostics
+        else (),
+        identifying_assumptions=assumptions,
+        diagnostics=diagnostics,
+        limitations=tuple(code.value for code in effect.limitation_codes),
     )
 
 

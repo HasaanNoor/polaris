@@ -56,3 +56,7 @@ Future phases should adopt a technology only when:
 - reproducibility and auditability are preserved;
 - tests can verify the behavior introduced;
 - the decision is recorded in an ADR when it changes architecture.
+
+## Phase 22 Causal Estimation
+
+Phase 22 adds narrow deterministic DiD and event-study estimators using existing NumPy/SciPy and Phase 21 panel covariance utilities. It does not add pandas, statsmodels, scikit-learn, a broad causal-inference package, or autonomous treatment discovery.

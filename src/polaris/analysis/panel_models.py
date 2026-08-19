@@ -80,6 +80,38 @@ def fit_panel_regression(
     )
 
 
+def fit_panel_design_matrix(
+    sample: AnalysisSample,
+    *,
+    dependent_variable_id: str,
+    predictor_variable_ids: tuple[str, ...],
+    entity_variable_id: str,
+    time_variable_id: str,
+    entity_fixed_effects: bool,
+    time_fixed_effects: bool,
+    standard_error_strategy: StandardErrorSpec | None,
+    confidence_level: float,
+    significance_threshold: float | None,
+    procedure: StatisticalProcedure = StatisticalProcedure.PANEL_TWO_WAY_FE,
+) -> PanelRegressionResult:
+    """Fit an explicit panel design while reusing Phase 21 FE and cluster logic."""
+
+    return _fit_fixed_effects(
+        sample,
+        procedure=procedure,
+        dependent_variable_id=dependent_variable_id,
+        predictor_variable_ids=predictor_variable_ids,
+        entity_variable_id=entity_variable_id,
+        time_variable_id=time_variable_id,
+        entity_fe=entity_fixed_effects,
+        time_fe=time_fixed_effects,
+        standard_error_strategy=standard_error_strategy,
+        lag_operations=(),
+        confidence_level=confidence_level,
+        significance_threshold=significance_threshold,
+    )
+
+
 def _fit_fixed_effects(
     sample: AnalysisSample,
     *,

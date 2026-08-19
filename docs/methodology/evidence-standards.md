@@ -88,3 +88,7 @@ Institutions differ in evidence-rating systems. Education evidence frameworks ma
 - OECD, [Recommendation of the Council on Good Statistical Practice](https://legalinstruments.oecd.org/public/doc/331/body-text.en.html).
 - Pew Research Center, [U.S. Survey Methodology](https://www.pewresearch.org/u-s-survey-methodology/).
 - WHO, [Data Quality Assurance](https://www.who.int/data/data-collection-tools/health-service-data/data-quality-assurance-dqa).
+
+## Phase 22 Causal Evidence
+
+Phase 22 adds causal-design evidence for explicit DiD and event-study designs. These records preserve the estimand, treatment effect, uncertainty, treatment/control counts, assumption records, diagnostics, and limitations. Evidence taxonomy distinguishes OLS/correlation association, panel FE longitudinal association, and DiD/event-study conditional causal-design estimates.

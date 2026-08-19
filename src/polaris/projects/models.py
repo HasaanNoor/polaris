@@ -13,6 +13,7 @@ from pydantic import Field, field_validator, model_validator
 
 from polaris import __version__
 from polaris.agents.models import AgentAssessment, AgentDomain
+from polaris.analysis.causal.models import CausalAnalysisResult, CausalSpecification
 from polaris.analysis.models import AnalysisExecutionSettings, AnalysisResult
 from polaris.coordination.models import DOMAIN_ORDER, CoordinatedAssessment
 from polaris.evidence.models import EvidenceArtifact
@@ -166,6 +167,7 @@ class ResearchProjectRequest(FrozenPolarisBaseModel):
     research_question: ResearchQuestion
     dataset_inputs: tuple[DatasetInput, ...] = Field(min_length=1)
     statistical_specification: StatisticalSpecification
+    causal_specification: CausalSpecification | None = None
     selected_agents: tuple[AgentDomain, ...] = Field(min_length=1)
     reasoning: ReasoningProjectConfig = Field(default_factory=ReasoningProjectConfig)
     synthesis: ProjectSynthesisConfig = Field(default_factory=ProjectSynthesisConfig)
@@ -231,6 +233,7 @@ class ProjectArtifactKind(StrEnum):
     INGESTION_RESULT = "ingestion_result"
     HARMONIZED_DATASET = "harmonized_dataset"
     ANALYSIS_RESULT = "analysis_result"
+    CAUSAL_ANALYSIS_RESULT = "causal_analysis_result"
     EVIDENCE_ARTIFACT = "evidence_artifact"
     AGENT_ASSESSMENT = "agent_assessment"
     COORDINATED_ASSESSMENT = "coordinated_assessment"
@@ -297,6 +300,7 @@ class ProjectProvenance(FrozenPolarisBaseModel):
     manifest_ids: tuple[DatasetId, ...] = Field(default_factory=tuple)
     harmonization_artifact_id: NonEmptyStr | None = None
     analysis_artifact_id: NonEmptyStr | None = None
+    causal_analysis_artifact_id: NonEmptyStr | None = None
     evidence_artifact_id: NonEmptyStr | None = None
     agent_assessment_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
     coordination_id: NonEmptyStr | None = None
@@ -334,6 +338,7 @@ class ResearchProjectResult(FrozenPolarisBaseModel):
     ingestion_artifacts: tuple[DatasetIngestionResult, ...] = Field(default_factory=tuple)
     harmonized_dataset: HarmonizedDataset | None = None
     analysis_result: AnalysisResult | None = None
+    causal_analysis_result: CausalAnalysisResult | None = None
     evidence_artifact: EvidenceArtifact | None = None
     domain_assessments: tuple[AgentAssessment, ...] = Field(default_factory=tuple)
     coordinated_assessment: CoordinatedAssessment | None = None

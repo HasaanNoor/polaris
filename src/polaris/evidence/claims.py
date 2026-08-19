@@ -3,9 +3,11 @@
 from collections.abc import Iterable
 from datetime import datetime
 
+from polaris.analysis.causal.models import CausalAnalysisResult
 from polaris.analysis.models import AnalysisResult
 from polaris.evidence.extractors import merge_limitations
 from polaris.evidence.models import (
+    CausalTreatmentEffectEvidenceRecord,
     ClaimCandidate,
     ClaimType,
     CorrelationEvidenceRecord,
@@ -22,7 +24,7 @@ from polaris.evidence.provenance import claim_id, evidence_provenance
 
 
 def generate_claim_candidates(
-    analysis_result: AnalysisResult,
+    analysis_result: AnalysisResult | CausalAnalysisResult,
     evidence_records: Iterable[EvidenceRecord],
     *,
     extraction_timestamp: datetime | None = None,
@@ -50,9 +52,19 @@ def generate_claim_candidates(
         elif isinstance(record, DiagnosticEvidenceRecord | ModelFitEvidenceRecord):
             if record.limitation_codes:
                 claims.append(_limitation_claim(record, analysis_result, provenance))
+        elif isinstance(record, CausalTreatmentEffectEvidenceRecord):
+            claims.append(_causal_claim(record, analysis_result, provenance, global_limitations))
 
     deduplicated = {claim.claim_id: claim for claim in claims}
     return tuple(sorted(deduplicated.values(), key=lambda claim: claim.claim_id))
+
+
+def _source_result_id(analysis_result: AnalysisResult | CausalAnalysisResult) -> str:
+    return (
+        analysis_result.result_id
+        if isinstance(analysis_result, AnalysisResult)
+        else analysis_result.causal_analysis_id
+    )
 
 
 def _descriptive_claim(record, analysis_result, provenance) -> ClaimCandidate:
@@ -67,10 +79,10 @@ def _descriptive_claim(record, analysis_result, provenance) -> ClaimCandidate:
         claim_type=ClaimType.DESCRIPTIVE_OBSERVATION,
         subject_variable=record.variable_id,
         direction=Direction.NOT_APPLICABLE,
-        statistical_procedure=analysis_result.analysis_method,
+        statistical_procedure=record.statistical_procedure,
         supporting_evidence_ids=(record.evidence_id,),
         limitation_codes=record.limitation_codes,
-        source_analysis_result_id=analysis_result.result_id,
+        source_analysis_result_id=_source_result_id(analysis_result),
         dataset_id=analysis_result.dataset_id,
         provenance=provenance,
     )
@@ -104,10 +116,10 @@ def _correlation_claim(
         outcome_variable=record.variable_id_2,
         related_variables=(record.variable_id_1, record.variable_id_2),
         direction=record.direction,
-        statistical_procedure=analysis_result.analysis_method,
+        statistical_procedure=record.statistical_procedure,
         supporting_evidence_ids=(record.evidence_id,),
         limitation_codes=limitations,
-        source_analysis_result_id=analysis_result.result_id,
+        source_analysis_result_id=_source_result_id(analysis_result),
         dataset_id=analysis_result.dataset_id,
         provenance=provenance,
     )
@@ -146,7 +158,7 @@ def _regression_claim(
         statistical_procedure=analysis_result.analysis_method,
         supporting_evidence_ids=(record.evidence_id,),
         limitation_codes=limitations,
-        source_analysis_result_id=analysis_result.result_id,
+        source_analysis_result_id=_source_result_id(analysis_result),
         dataset_id=analysis_result.dataset_id,
         provenance=provenance,
         p_value_below_threshold=record.below_significance_threshold,
@@ -174,7 +186,7 @@ def _uncertainty_claim(record, analysis_result, provenance) -> ClaimCandidate:
         statistical_procedure=analysis_result.analysis_method,
         supporting_evidence_ids=(record.evidence_id,),
         limitation_codes=record.limitation_codes,
-        source_analysis_result_id=analysis_result.result_id,
+        source_analysis_result_id=_source_result_id(analysis_result),
         dataset_id=analysis_result.dataset_id,
         provenance=provenance,
         p_value_below_threshold=record.below_significance_threshold,
@@ -201,10 +213,65 @@ def _limitation_claim(record, analysis_result, provenance) -> ClaimCandidate:
         statistical_procedure=analysis_result.analysis_method,
         supporting_evidence_ids=(record.evidence_id,),
         limitation_codes=record.limitation_codes,
-        source_analysis_result_id=analysis_result.result_id,
+        source_analysis_result_id=_source_result_id(analysis_result),
         dataset_id=analysis_result.dataset_id,
         provenance=provenance,
     )
+
+
+def _causal_claim(
+    record: CausalTreatmentEffectEvidenceRecord,
+    analysis_result: AnalysisResult | CausalAnalysisResult,
+    provenance,
+    global_limitations,
+) -> ClaimCandidate:
+    limitations = merge_limitations(
+        record.limitation_codes,
+        global_limitations,
+        (
+            LimitationCode.CONDITIONAL_CAUSAL_DESIGN,
+            LimitationCode.IDENTIFICATION_ASSUMPTION_LIMITATION,
+            LimitationCode.UNSUPPORTED_GENERALIZATION,
+        ),
+    )
+    payload = {
+        "claim_type": ClaimType.CAUSAL_DESIGN_ESTIMATE,
+        "supporting_evidence_ids": (record.evidence_id, *record.assumption_ids),
+        "subject_variable": record.treatment_variable_id,
+        "outcome_variable": record.outcome_variable_id,
+        "direction": direction_from_estimate(record.estimate),
+    }
+    return ClaimCandidate(
+        claim_id=claim_id(payload),
+        claim_type=ClaimType.CAUSAL_DESIGN_ESTIMATE,
+        subject_variable=record.treatment_variable_id,
+        outcome_variable=record.outcome_variable_id,
+        related_variables=(record.treatment_variable_id,),
+        direction=direction_from_estimate(record.estimate),
+        statistical_procedure=record.statistical_procedure,
+        supporting_evidence_ids=(record.evidence_id, *record.assumption_ids),
+        limitation_codes=limitations,
+        causal=True,
+        source_analysis_result_id=_source_result_id(analysis_result),
+        dataset_id=analysis_result.dataset_id,
+        provenance=provenance,
+        p_value_below_threshold=None,
+        confidence_interval_crosses_zero=(
+            None
+            if record.confidence_interval_low is None or record.confidence_interval_high is None
+            else record.confidence_interval_low <= 0 <= record.confidence_interval_high
+        ),
+    )
+
+
+def direction_from_estimate(value: float | None) -> Direction:
+    if value is None:
+        return Direction.UNDEFINED
+    if value > 0:
+        return Direction.POSITIVE
+    if value < 0:
+        return Direction.NEGATIVE
+    return Direction.ZERO
 
 
 def _has_uncertainty(record: RegressionCoefficientEvidenceRecord) -> bool:

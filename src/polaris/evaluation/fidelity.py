@@ -24,7 +24,12 @@ def evaluate_evidence_fidelity(
     association_claims = [
         claim
         for claim in case.evidence_artifact.claim_candidates
-        if claim.claim_type in {ClaimType.ASSOCIATION, ClaimType.CONDITIONAL_ASSOCIATION}
+        if claim.claim_type
+        in {
+            ClaimType.ASSOCIATION,
+            ClaimType.CONDITIONAL_ASSOCIATION,
+            ClaimType.CAUSAL_DESIGN_ESTIMATE,
+        }
     ]
     empirical_statements = [
         item

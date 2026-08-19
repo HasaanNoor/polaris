@@ -29,6 +29,9 @@ class EvidenceType(StrEnum):
     MODEL_DIAGNOSTIC = "model_diagnostic"
     SAMPLE_QUALITY = "sample_quality"
     ANALYSIS_WARNING = "analysis_warning"
+    CAUSAL_TREATMENT_EFFECT = "causal_treatment_effect"
+    CAUSAL_ASSUMPTION = "causal_assumption"
+    CAUSAL_DIAGNOSTIC = "causal_diagnostic"
 
 
 class Direction(StrEnum):
@@ -45,6 +48,7 @@ class ClaimType(StrEnum):
     CONDITIONAL_ASSOCIATION = "conditional_association"
     STATISTICAL_UNCERTAINTY = "statistical_uncertainty"
     MODEL_LIMITATION = "model_limitation"
+    CAUSAL_DESIGN_ESTIMATE = "causal_design_estimate"
 
 
 class LimitationCode(StrEnum):
@@ -65,6 +69,12 @@ class LimitationCode(StrEnum):
     LOW_WITHIN_VARIATION = "LOW_WITHIN_VARIATION"
     SERIAL_CORRELATION_CAUTION = "SERIAL_CORRELATION_CAUTION"
     CROSS_SECTIONAL_DEPENDENCE_LIMITATION = "CROSS_SECTIONAL_DEPENDENCE_LIMITATION"
+    CONDITIONAL_CAUSAL_DESIGN = "CONDITIONAL_CAUSAL_DESIGN"
+    IDENTIFICATION_ASSUMPTION_LIMITATION = "IDENTIFICATION_ASSUMPTION_LIMITATION"
+    PRE_TREND_CONCERN = "PRE_TREND_CONCERN"
+    INSUFFICIENT_PRE_TREATMENT_DATA = "INSUFFICIENT_PRE_TREATMENT_DATA"
+    LOW_TREATED_COUNT = "LOW_TREATED_COUNT"
+    BAD_CONTROL_CAUTION = "BAD_CONTROL_CAUTION"
 
 
 class ExtractionFindingCode(StrEnum):
@@ -220,6 +230,45 @@ class AnalysisWarningEvidenceRecord(EvidenceRecordBase):
     source_row_numbers: tuple[int, ...] = Field(default_factory=tuple)
 
 
+class CausalTreatmentEffectEvidenceRecord(EvidenceRecordBase):
+    evidence_type: Literal[EvidenceType.CAUSAL_TREATMENT_EFFECT] = (
+        EvidenceType.CAUSAL_TREATMENT_EFFECT
+    )
+    causal_method: NonEmptyStr
+    estimator: NonEmptyStr
+    estimand: NonEmptyStr
+    outcome_variable_id: VariableId
+    treatment_variable_id: VariableId
+    estimate: float | None
+    standard_error: float | None = None
+    p_value: float | None = None
+    confidence_interval_low: float | None = None
+    confidence_interval_high: float | None = None
+    cluster_count: int | None = Field(default=None, ge=0)
+    treated_entity_count: int = Field(ge=0)
+    control_entity_count: int = Field(ge=0)
+    assumption_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
+
+
+class CausalAssumptionEvidenceRecord(EvidenceRecordBase):
+    evidence_type: Literal[EvidenceType.CAUSAL_ASSUMPTION] = EvidenceType.CAUSAL_ASSUMPTION
+    assumption_code: NonEmptyStr
+    status: NonEmptyStr
+    description: NonEmptyStr
+    diagnostic_evidence: NonEmptyStr | None = None
+    limitation: NonEmptyStr | None = None
+    empirically_testable: bool
+
+
+class CausalDiagnosticEvidenceRecord(EvidenceRecordBase):
+    evidence_type: Literal[EvidenceType.CAUSAL_DIAGNOSTIC] = EvidenceType.CAUSAL_DIAGNOSTIC
+    diagnostic_type: NonEmptyStr
+    status: NonEmptyStr
+    pre_treatment_period_count: int = Field(ge=0)
+    diagnostic_summary: NonEmptyStr
+    event_study_plot_data: tuple[dict[str, object], ...] = Field(default_factory=tuple)
+
+
 EvidenceRecord = Annotated[
     DescriptiveEvidenceRecord
     | CorrelationEvidenceRecord
@@ -227,7 +276,10 @@ EvidenceRecord = Annotated[
     | ModelFitEvidenceRecord
     | DiagnosticEvidenceRecord
     | SampleQualityEvidenceRecord
-    | AnalysisWarningEvidenceRecord,
+    | AnalysisWarningEvidenceRecord
+    | CausalTreatmentEffectEvidenceRecord
+    | CausalAssumptionEvidenceRecord
+    | CausalDiagnosticEvidenceRecord,
     Field(discriminator="evidence_type"),
 ]
 
@@ -242,7 +294,7 @@ class ClaimCandidate(FrozenPolarisBaseModel):
     statistical_procedure: StatisticalProcedure
     supporting_evidence_ids: tuple[NonEmptyStr, ...] = Field(min_length=1)
     limitation_codes: tuple[LimitationCode, ...] = Field(default_factory=tuple)
-    causal: Literal[False] = False
+    causal: bool = False
     generalization_scope: Literal["analysis_sample"] = "analysis_sample"
     source_analysis_result_id: NonEmptyStr
     dataset_id: DatasetId
@@ -271,9 +323,11 @@ class ClaimCandidate(FrozenPolarisBaseModel):
         return tuple(sorted(set(value), key=lambda item: item.value))
 
     @model_validator(mode="after")
-    def prohibit_causal_claims(self) -> "ClaimCandidate":
-        if self.causal is not False:
-            raise ValueError("Phase 5 claim candidates must be non-causal")
+    def prohibit_unsupported_causal_claims(self) -> "ClaimCandidate":
+        if self.causal and self.claim_type is not ClaimType.CAUSAL_DESIGN_ESTIMATE:
+            raise ValueError("causal claims require claim_type=causal_design_estimate")
+        if self.claim_type is ClaimType.CAUSAL_DESIGN_ESTIMATE and not self.causal:
+            raise ValueError("causal-design estimate claims must be marked causal")
         return self
 
 

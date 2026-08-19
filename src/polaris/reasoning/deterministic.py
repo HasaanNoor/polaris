@@ -5,6 +5,7 @@ from datetime import UTC, datetime
 
 from polaris.agents.models import AgentDomain
 from polaris.evidence.models import (
+    CausalTreatmentEffectEvidenceRecord,
     ClaimCandidate,
     ClaimType,
     Direction,
@@ -159,6 +160,11 @@ def _statements(request: ReasoningRequest) -> list[ReasoningStatement]:
     claims = sorted(request.evidence_artifact.claim_candidates, key=lambda item: item.claim_id)
     for claim in claims:
         if (
+            claim.claim_type is ClaimType.CAUSAL_DESIGN_ESTIMATE
+            and ReasoningCategory.EMPIRICAL_INTERPRETATION in categories
+        ):
+            statements.append(_causal_interpretation(claim, request))
+        if (
             claim.claim_type in {ClaimType.ASSOCIATION, ClaimType.CONDITIONAL_ASSOCIATION}
             and ReasoningCategory.EMPIRICAL_INTERPRETATION in categories
         ):
@@ -180,6 +186,50 @@ def _statements(request: ReasoningRequest) -> list[ReasoningStatement]:
     if request.literature_context is not None:
         statements.extend(_literature_statements(request))
     return sorted(statements, key=lambda item: item.statement_id)
+
+
+def _causal_interpretation(claim: ClaimCandidate, request: ReasoningRequest) -> ReasoningStatement:
+    effect_record = next(
+        (
+            record
+            for record in request.evidence_artifact.evidence_records
+            if isinstance(record, CausalTreatmentEffectEvidenceRecord)
+            and record.evidence_id in claim.supporting_evidence_ids
+        ),
+        None,
+    )
+    estimator = effect_record.estimator if effect_record is not None else "causal design"
+    estimand = effect_record.estimand.upper() if effect_record is not None else "ATT"
+    estimate = effect_record.estimate if effect_record is not None else None
+    direction = _direction_text(claim.direction)
+    uncertainty = ""
+    if effect_record is not None and effect_record.confidence_interval_low is not None:
+        uncertainty = (
+            f" with confidence interval [{effect_record.confidence_interval_low}, "
+            f"{effect_record.confidence_interval_high}]"
+        )
+    text = (
+        "Under the difference-in-differences design and its identifying assumptions, "
+        f"the {estimator} estimated {estimand} for {claim.subject_variable or 'the treatment'} on "
+        f"{claim.outcome_variable or 'the outcome'} is {estimate}{uncertainty}, "
+        f"in the {direction} direction. "
+        "This remains a conditional causal-design estimate with assumptions and limitations "
+        "attached to the evidence artifact."
+    )
+    return _statement(
+        request,
+        ReasoningCategory.EMPIRICAL_INTERPRETATION,
+        text,
+        claim_ids=(claim.claim_id,),
+        evidence_ids=claim.supporting_evidence_ids,
+        domains=_domains_for_claim(request, claim.claim_id),
+        support_level=SupportLevel.LIMITED
+        if claim.confidence_interval_crosses_zero
+        else SupportLevel.MODERATE,
+        epistemic_status=EpistemicStatus.SUPPORTED_INTERPRETATION,
+        causal_status=CausalStatus.CONDITIONAL_CAUSAL_DESIGN,
+        limitations=tuple(code.value for code in claim.limitation_codes),
+    )
 
 
 def _empirical_interpretation(
@@ -686,7 +736,12 @@ def _primary_claim(evidence: EvidenceArtifact) -> ClaimCandidate | None:
     claims = [
         claim
         for claim in evidence.claim_candidates
-        if claim.claim_type in {ClaimType.ASSOCIATION, ClaimType.CONDITIONAL_ASSOCIATION}
+        if claim.claim_type
+        in {
+            ClaimType.ASSOCIATION,
+            ClaimType.CONDITIONAL_ASSOCIATION,
+            ClaimType.CAUSAL_DESIGN_ESTIMATE,
+        }
     ]
     return sorted(claims, key=lambda item: item.claim_id)[0] if claims else None
 

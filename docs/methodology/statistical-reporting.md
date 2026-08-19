@@ -74,3 +74,7 @@ Cross-country statistics require checks for harmonized definitions, coverage, co
 - Pew Research Center, [U.S. Survey Methodology](https://www.pewresearch.org/u-s-survey-methodology/).
 - What Works Clearinghouse, [Procedures and Standards Handbooks](https://ies.ed.gov/ncee/wwc/Handbooks).
 - OECD, [Recommendation of the Council on Good Statistical Practice](https://legalinstruments.oecd.org/public/doc/331/body-text.en.html).
+
+## Phase 22 Causal Reporting
+
+Causal reporting has a dedicated causal-design section when causal evidence exists. It reports treatment, comparison group, treatment timing, outcome, estimand, model, treatment effect, clustered uncertainty, event-study output, identifying assumptions, diagnostics, and limitations separately from generic model limitations.

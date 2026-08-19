@@ -289,3 +289,7 @@ Objective: publish a constrained public demonstration using reviewed datasets an
 Deliverables: demo investigation set, public documentation, limitation notices, and reproducibility packages.
 
 Verification: public workflows reproduce expected artifacts and reports.
+
+## Phase 22 Completed: Causal Inference Foundations
+
+Phase 22 adds explicit `CausalSpecification`, DiD, TWFE DiD for common treatment timing, event-study estimation, treatment/control validation, pre-trend diagnostics, assumption records, causal evidence extraction, conditional causal reasoning, reporting, project orchestration, MCP compatibility, and synthetic validation. IV, RDD, synthetic control, matching, IPW, causal forests, DML, mediation, Granger/VAR, dynamic panel GMM, Bayesian causal inference, and automatic treatment discovery remain deferred.

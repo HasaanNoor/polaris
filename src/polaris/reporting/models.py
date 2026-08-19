@@ -181,7 +181,7 @@ class ClaimSummary(FrozenPolarisBaseModel):
     statistical_procedure: StatisticalProcedure
     supporting_evidence_ids: tuple[NonEmptyStr, ...]
     limitation_codes: tuple[LimitationCode, ...] = Field(default_factory=tuple)
-    causal: Literal[False] = False
+    causal: bool = False
     generalization_scope: Literal["analysis_sample"] = "analysis_sample"
 
     @field_validator("supporting_evidence_ids", "related_variables")
@@ -198,6 +198,23 @@ class ClaimSummary(FrozenPolarisBaseModel):
 class EvidenceAndClaimsSection(FrozenPolarisBaseModel):
     evidence_records: tuple[EvidenceRecordSummary, ...]
     claim_candidates: tuple[ClaimSummary, ...]
+
+
+class CausalDesignSection(FrozenPolarisBaseModel):
+    status: SectionStatus
+    research_design: NonEmptyStr | None = None
+    treatment: VariableId | None = None
+    comparison_group: NonEmptyStr | None = None
+    treatment_timing: NonEmptyStr | None = None
+    outcome: VariableId | None = None
+    estimand: NonEmptyStr | None = None
+    model: NonEmptyStr | None = None
+    treatment_effect: dict[str, Any] | None = None
+    clustered_uncertainty: dict[str, Any] | None = None
+    event_study_results: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    identifying_assumptions: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    diagnostics: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    limitations: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
 
 
 class DomainAssessmentSummary(FrozenPolarisBaseModel):
@@ -332,6 +349,7 @@ class ResearchReport(FrozenPolarisBaseModel):
     dataset_section: DatasetSection
     methodology_section: MethodologySection
     statistical_results_section: StatisticalResultsSection
+    causal_design_section: CausalDesignSection | None = None
     evidence_section: EvidenceAndClaimsSection
     domain_assessments_section: DomainAssessmentsSection
     cross_domain_section: CrossDomainSection

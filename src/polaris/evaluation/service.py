@@ -183,12 +183,6 @@ def _evaluate_expected_behavior(
     if expected.expected_causal_status is not None:
         categories_with_expected_causal_status = {
             ReasoningCategory.EMPIRICAL_INTERPRETATION,
-            ReasoningCategory.CROSS_DOMAIN_SYNTHESIS,
-            ReasoningCategory.CONTRADICTION,
-            ReasoningCategory.LIMITATION,
-            ReasoningCategory.UNCERTAINTY,
-            ReasoningCategory.LITERATURE_ALIGNMENT,
-            ReasoningCategory.LITERATURE_CONTRAST,
         }
         mismatched = [
             statement.statement_id

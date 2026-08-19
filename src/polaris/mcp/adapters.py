@@ -6,6 +6,7 @@ from typing import Any, Literal
 
 from pydantic import Field, model_validator
 
+from polaris.analysis.causal.models import CausalAnalysisRequest, CausalSpecification
 from polaris.analysis.models import AnalysisExecutionSettings, AnalysisRequest
 from polaris.evaluation.models import BenchmarkCase
 from polaris.harmonization.models import HarmonizationRequest
@@ -72,6 +73,44 @@ class RunAnalysisRequest(FrozenPolarisBaseModel):
                 self.statistical_specification
             ),
             execution_settings=AnalysisExecutionSettings.model_validate(self.execution_settings),
+            significance_threshold=self.significance_threshold,
+            confidence_level=self.confidence_level,
+        )
+
+
+class RunCausalAnalysisRequest(FrozenPolarisBaseModel):
+    ingestion_result: dict[str, Any]
+    causal_specification: dict[str, Any]
+    significance_threshold: float | None = Field(default=None, gt=0, lt=1)
+    confidence_level: float | None = Field(default=None, gt=0, lt=1)
+
+    @model_validator(mode="after")
+    def require_explicit_causal_design(self) -> RunCausalAnalysisRequest:
+        required = (
+            "method",
+            "entity_variable",
+            "time_variable",
+            "outcome_variable",
+            "treatment",
+            "treated_group_description",
+            "comparison_group_description",
+            "pre_treatment_window",
+            "post_treatment_window",
+            "estimand",
+            "standard_error_strategy",
+        )
+        missing = [key for key in required if key not in self.causal_specification]
+        if missing:
+            raise ValueError(
+                "run_causal_analysis requires explicit causal specification fields: "
+                + ", ".join(missing)
+            )
+        return self
+
+    def to_core(self) -> CausalAnalysisRequest:
+        return CausalAnalysisRequest(
+            ingestion_result=DatasetIngestionResult.model_validate(self.ingestion_result),
+            causal_specification=CausalSpecification.model_validate(self.causal_specification),
             significance_threshold=self.significance_threshold,
             confidence_level=self.confidence_level,
         )

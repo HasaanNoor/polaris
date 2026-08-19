@@ -3,6 +3,8 @@
 from collections import Counter
 from datetime import datetime
 
+from polaris.analysis.causal.event_study import event_study_plot_data
+from polaris.analysis.causal.models import CausalAnalysisResult
 from polaris.analysis.models import (
     AnalysisFinding,
     AnalysisResult,
@@ -18,6 +20,9 @@ from polaris.evidence.limitations import (
 )
 from polaris.evidence.models import (
     AnalysisWarningEvidenceRecord,
+    CausalAssumptionEvidenceRecord,
+    CausalDiagnosticEvidenceRecord,
+    CausalTreatmentEffectEvidenceRecord,
     CorrelationEvidenceRecord,
     DescriptiveEvidenceRecord,
     DiagnosticEvidenceRecord,
@@ -33,11 +38,14 @@ from polaris.evidence.provenance import evidence_id, evidence_provenance
 
 
 def extract_evidence_records(
-    analysis_result: AnalysisResult,
+    analysis_result: AnalysisResult | CausalAnalysisResult,
     *,
     extraction_timestamp: datetime | None = None,
 ) -> tuple[EvidenceRecord, ...]:
     provenance = evidence_provenance(analysis_result, extraction_timestamp=extraction_timestamp)
+    if isinstance(analysis_result, CausalAnalysisResult):
+        return _causal_evidence(analysis_result, provenance)
+
     records: list[EvidenceRecord] = [
         _sample_quality_evidence(analysis_result, provenance),
         *[
@@ -57,6 +65,110 @@ def extract_evidence_records(
     records.extend(
         _diagnostic_evidence(analysis_result, diagnostic, provenance)
         for diagnostic in analysis_result.diagnostics
+    )
+    return tuple(sorted(records, key=lambda record: record.evidence_id))
+
+
+def _causal_evidence(
+    analysis_result: CausalAnalysisResult, provenance
+) -> tuple[EvidenceRecord, ...]:
+    records: list[EvidenceRecord] = [
+        _causal_sample_quality(analysis_result, provenance),
+        *[
+            _causal_warning_evidence(analysis_result, finding, provenance)
+            for finding in analysis_result.findings
+        ],
+    ]
+    assumption_records = []
+    for assumption in analysis_result.assumptions:
+        payload = _causal_identity_payload(
+            analysis_result,
+            EvidenceType.CAUSAL_ASSUMPTION,
+            assumption_code=assumption.assumption_code.value,
+        )
+        limitation_codes = (LimitationCode.IDENTIFICATION_ASSUMPTION_LIMITATION,)
+        if assumption.status.value == "concern":
+            limitation_codes = (*limitation_codes, LimitationCode.PRE_TREND_CONCERN)
+        if assumption.status.value == "insufficient_information":
+            limitation_codes = (
+                *limitation_codes,
+                LimitationCode.INSUFFICIENT_PRE_TREATMENT_DATA,
+            )
+        record = CausalAssumptionEvidenceRecord(
+            evidence_id=evidence_id(payload),
+            source_analysis_result_id=analysis_result.causal_analysis_id,
+            dataset_id=analysis_result.dataset_id,
+            source_checksum_sha256=analysis_result.source_checksum_sha256,
+            statistical_procedure=provenance.statistical_procedure,
+            sample_size=analysis_result.sample_summary.included_rows,
+            limitation_codes=limitation_codes,
+            provenance=provenance,
+            assumption_code=assumption.assumption_code.value,
+            status=assumption.status.value,
+            description=assumption.description,
+            diagnostic_evidence=assumption.diagnostic_evidence,
+            limitation=assumption.limitation,
+            empirically_testable=assumption.empirically_testable,
+        )
+        assumption_records.append(record)
+        records.append(record)
+    effect_payload = _causal_identity_payload(
+        analysis_result,
+        EvidenceType.CAUSAL_TREATMENT_EFFECT,
+        estimator=analysis_result.estimator.value,
+        estimand=analysis_result.estimand.value,
+    )
+    effect = analysis_result.treatment_effect
+    records.append(
+        CausalTreatmentEffectEvidenceRecord(
+            evidence_id=evidence_id(effect_payload),
+            source_analysis_result_id=analysis_result.causal_analysis_id,
+            dataset_id=analysis_result.dataset_id,
+            source_checksum_sha256=analysis_result.source_checksum_sha256,
+            statistical_procedure=provenance.statistical_procedure,
+            sample_size=analysis_result.sample_summary.included_rows,
+            limitation_codes=_causal_limitations(analysis_result),
+            provenance=provenance,
+            causal_method=analysis_result.method.value,
+            estimator=analysis_result.estimator.value,
+            estimand=analysis_result.estimand.value,
+            outcome_variable_id=analysis_result.causal_specification.outcome_variable.variable_id,
+            treatment_variable_id=(
+                analysis_result.causal_specification.treatment.treatment_variable.variable_id
+            ),
+            estimate=effect.estimate,
+            standard_error=effect.standard_error,
+            p_value=effect.p_value,
+            confidence_interval_low=effect.confidence_interval_low,
+            confidence_interval_high=effect.confidence_interval_high,
+            cluster_count=effect.cluster_count,
+            treated_entity_count=analysis_result.sample_summary.treated_entity_count,
+            control_entity_count=analysis_result.sample_summary.control_entity_count,
+            assumption_ids=tuple(record.evidence_id for record in assumption_records),
+        )
+    )
+    diagnostic = analysis_result.diagnostics.parallel_trends
+    diagnostic_payload = _causal_identity_payload(
+        analysis_result,
+        EvidenceType.CAUSAL_DIAGNOSTIC,
+        diagnostic_type="parallel_trends",
+    )
+    records.append(
+        CausalDiagnosticEvidenceRecord(
+            evidence_id=evidence_id(diagnostic_payload),
+            source_analysis_result_id=analysis_result.causal_analysis_id,
+            dataset_id=analysis_result.dataset_id,
+            source_checksum_sha256=analysis_result.source_checksum_sha256,
+            statistical_procedure=provenance.statistical_procedure,
+            sample_size=analysis_result.sample_summary.included_rows,
+            limitation_codes=_causal_limitations(analysis_result),
+            provenance=provenance,
+            diagnostic_type="parallel_trends",
+            status=diagnostic.status.value,
+            pre_treatment_period_count=diagnostic.pre_treatment_period_count,
+            diagnostic_summary=diagnostic.trend_summary,
+            event_study_plot_data=event_study_plot_data(analysis_result.event_study_results),
+        )
     )
     return tuple(sorted(records, key=lambda record: record.evidence_id))
 
@@ -351,6 +463,81 @@ def _warning_evidence(
     )
 
 
+def _causal_sample_quality(analysis_result: CausalAnalysisResult, provenance):
+    sample = analysis_result.analysis_sample
+    payload = _causal_identity_payload(
+        analysis_result,
+        EvidenceType.SAMPLE_QUALITY,
+        required_variable_ids=tuple(sorted(sample.required_variable_ids)),
+    )
+    return SampleQualityEvidenceRecord(
+        evidence_id=evidence_id(payload),
+        source_analysis_result_id=analysis_result.causal_analysis_id,
+        dataset_id=analysis_result.dataset_id,
+        source_checksum_sha256=analysis_result.source_checksum_sha256,
+        statistical_procedure=provenance.statistical_procedure,
+        sample_size=sample.sample_size,
+        limitation_codes=_causal_limitations(analysis_result),
+        provenance=provenance,
+        required_variable_ids=tuple(sorted(sample.required_variable_ids)),
+        original_accepted_record_count=analysis_result.sample_summary.input_rows,
+        final_analysis_sample_size=sample.sample_size,
+        excluded_row_count=analysis_result.sample_summary.excluded_rows,
+        exclusion_reason_counts=(),
+        missing_value_exclusion_count=analysis_result.sample_summary.excluded_rows,
+        accepted_records_used_percentage=(
+            None
+            if analysis_result.sample_summary.input_rows == 0
+            else sample.sample_size / analysis_result.sample_summary.input_rows * 100.0
+        ),
+        included_row_numbers=tuple(sorted(sample.included_row_numbers)),
+        excluded_row_numbers=tuple(sorted(sample.excluded_row_numbers)),
+    )
+
+
+def _causal_warning_evidence(analysis_result: CausalAnalysisResult, finding, provenance):
+    payload = _causal_identity_payload(
+        analysis_result,
+        EvidenceType.ANALYSIS_WARNING,
+        finding_code=finding.code,
+        method=finding.method,
+    )
+    return AnalysisWarningEvidenceRecord(
+        evidence_id=evidence_id(payload),
+        source_analysis_result_id=analysis_result.causal_analysis_id,
+        dataset_id=analysis_result.dataset_id,
+        source_checksum_sha256=analysis_result.source_checksum_sha256,
+        statistical_procedure=provenance.statistical_procedure,
+        sample_size=analysis_result.sample_summary.included_rows,
+        diagnostic_flags=(finding.code,),
+        limitation_codes=_causal_limitations(analysis_result),
+        provenance=provenance,
+        finding_code=finding.code,
+        severity=finding.severity.value,
+        variable_ids=finding.variable_ids,
+        method=finding.method,
+        statistic=finding.statistic,
+        threshold=finding.threshold,
+        source_row_numbers=finding.source_row_numbers,
+    )
+
+
+def _causal_limitations(analysis_result: CausalAnalysisResult) -> tuple[LimitationCode, ...]:
+    values = [LimitationCode.CONDITIONAL_CAUSAL_DESIGN]
+    status = analysis_result.diagnostics.parallel_trends.status.value
+    if "concern" in status:
+        values.append(LimitationCode.PRE_TREND_CONCERN)
+    if "insufficient" in status:
+        values.append(LimitationCode.INSUFFICIENT_PRE_TREATMENT_DATA)
+    if analysis_result.sample_summary.treated_entity_count < 3:
+        values.append(LimitationCode.LOW_TREATED_COUNT)
+    if analysis_result.sample_summary.cluster_count < 20:
+        values.append(LimitationCode.LOW_CLUSTER_COUNT)
+    if any("post-treatment" in item for item in analysis_result.limitations):
+        values.append(LimitationCode.BAD_CONTROL_CAUTION)
+    return tuple(sorted(set(values), key=lambda item: item.value))
+
+
 def merge_limitations(*groups: tuple[LimitationCode, ...]) -> tuple[LimitationCode, ...]:
     return ordered_limitations(item for group in groups for item in group)
 
@@ -364,5 +551,18 @@ def _identity_payload(
         "source_analysis_result_id": analysis_result.result_id,
         "evidence_type": evidence_type,
         "statistical_procedure": analysis_result.analysis_method,
+        **extra,
+    }
+
+
+def _causal_identity_payload(
+    analysis_result: CausalAnalysisResult,
+    evidence_type: EvidenceType,
+    **extra,
+) -> dict[str, object]:
+    return {
+        "source_analysis_result_id": analysis_result.causal_analysis_id,
+        "evidence_type": evidence_type.value,
+        "dataset_id": analysis_result.dataset_id,
         **extra,
     }

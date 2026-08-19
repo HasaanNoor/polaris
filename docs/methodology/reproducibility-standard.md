@@ -82,3 +82,7 @@ Artifact versions must be immutable. Later corrections must create a new version
 - World Bank DIME, [Reproducible Research](https://dimewiki.worldbank.org/Reproducible_Research).
 - World Bank DIME, [Reproducibility](https://dimewiki.worldbank.org/Reproducibility).
 - United Nations Statistics Division, [United Nations National Quality Assurance Frameworks Manual for Official Statistics](https://unstats.un.org/unsd/methodology/dataquality/un-nqaf/).
+
+## Phase 22 Causal Identifiers
+
+Causal analysis identifiers include source checksums, the full `CausalSpecification`, treatment assignment, treatment timing, event window, covariates, fixed-effects configuration, clustering configuration, schema version, and ruleset version. Timestamps are retained in provenance but excluded from deterministic IDs.

@@ -8,6 +8,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from polaris.agents.service import run_domain_agent
+from polaris.analysis.causal.models import CausalAnalysisRequest
+from polaris.analysis.causal.service import run_causal_analysis
 from polaris.analysis.models import AnalysisRequest
 from polaris.analysis.service import run_analysis
 from polaris.coordination.service import coordinate_assessments
@@ -118,6 +120,7 @@ def run_research_project(
         ingestion_artifacts=context.ingestion_artifacts,
         harmonized_dataset=context.harmonized_dataset,
         analysis_result=context.analysis_result,
+        causal_analysis_result=context.causal_analysis_result,
         evidence_artifact=context.evidence_artifact,
         domain_assessments=context.domain_assessments,
         coordinated_assessment=context.coordinated_assessment,
@@ -143,6 +146,7 @@ def run_research_project(
         ingestion_artifacts=context.ingestion_artifacts,
         harmonized_dataset=context.harmonized_dataset,
         analysis_result=context.analysis_result,
+        causal_analysis_result=context.causal_analysis_result,
         evidence_artifact=context.evidence_artifact,
         domain_assessments=context.domain_assessments,
         coordinated_assessment=context.coordinated_assessment,
@@ -176,6 +180,7 @@ class _ExecutionContext:
         self.harmonized_dataset = None
         self.analysis_ingestion: DatasetIngestionResult | None = None
         self.analysis_result = None
+        self.causal_analysis_result = None
         self.evidence_artifact = None
         self.domain_assessments = ()
         self.coordinated_assessment = None
@@ -209,7 +214,9 @@ class _ExecutionContext:
                 else ()
             ),
             ResearchStage.EXTRACT_EVIDENCE: (
-                (self.analysis_result.result_id,) if self.analysis_result is not None else ()
+                (self.causal_analysis_result.causal_analysis_id,)
+                if self.causal_analysis_result is not None
+                else ((self.analysis_result.result_id,) if self.analysis_result is not None else ())
             ),
             ResearchStage.RUN_AGENTS: (
                 (self.evidence_artifact.artifact_id,) if self.evidence_artifact is not None else ()
@@ -282,7 +289,18 @@ class _ExecutionContext:
                 else ()
             ),
             ResearchStage.ANALYZE: (
-                (self.analysis_result.result_id,) if self.analysis_result is not None else ()
+                tuple(
+                    item
+                    for item in (
+                        self.analysis_result.result_id
+                        if self.analysis_result is not None
+                        else None,
+                        self.causal_analysis_result.causal_analysis_id
+                        if self.causal_analysis_result is not None
+                        else None,
+                    )
+                    if item is not None
+                )
             ),
             ResearchStage.EXTRACT_EVIDENCE: (
                 (self.evidence_artifact.artifact_id,) if self.evidence_artifact is not None else ()
@@ -501,12 +519,27 @@ def _analyze(context: _ExecutionContext) -> None:
     )
     context.analysis_result = analysis
     context.add_artifact(analysis.result_id, ProjectArtifactKind.ANALYSIS_RESULT)
+    if context.request.causal_specification is not None:
+        causal = run_causal_analysis(
+            request=CausalAnalysisRequest(
+                ingestion_result=context.analysis_ingestion,
+                causal_specification=context.request.causal_specification,
+                significance_threshold=settings.significance_threshold,
+                confidence_level=settings.confidence_level,
+            )
+        )
+        context.causal_analysis_result = causal
+        context.add_artifact(
+            causal.causal_analysis_id,
+            ProjectArtifactKind.CAUSAL_ANALYSIS_RESULT,
+        )
 
 
 def _extract(context: _ExecutionContext) -> None:
-    if context.analysis_result is None:
+    if context.analysis_result is None and context.causal_analysis_result is None:
         raise DatasetResolutionError("analysis result is required before evidence extraction")
-    evidence = extract_evidence(analysis_result=context.analysis_result)
+    evidence_source = context.causal_analysis_result or context.analysis_result
+    evidence = extract_evidence(analysis_result=evidence_source)
     context.evidence_artifact = evidence
     context.add_artifact(evidence.artifact_id, ProjectArtifactKind.EVIDENCE_ARTIFACT)
 

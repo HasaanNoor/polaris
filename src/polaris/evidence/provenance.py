@@ -8,12 +8,14 @@ from enum import Enum
 from typing import Any
 
 from polaris import __version__
+from polaris.analysis.causal.models import CausalAnalysisResult
 from polaris.analysis.models import AnalysisResult
 from polaris.evidence.models import EVIDENCE_SCHEMA_VERSION, EvidenceProvenance
+from polaris.schemas.common import StatisticalProcedure
 
 
 def evidence_provenance(
-    analysis_result: AnalysisResult,
+    analysis_result: AnalysisResult | CausalAnalysisResult,
     *,
     extraction_timestamp: datetime | None = None,
 ) -> EvidenceProvenance:
@@ -21,12 +23,28 @@ def evidence_provenance(
     return EvidenceProvenance(
         dataset_id=analysis_result.dataset_id,
         source_checksum_sha256=analysis_result.source_checksum_sha256,
-        source_analysis_result_id=analysis_result.result_id,
-        statistical_procedure=analysis_result.analysis_method,
+        source_analysis_result_id=_source_result_id(analysis_result),
+        statistical_procedure=_procedure(analysis_result),
         phase4_schema_version=analysis_result.schema_version,
         extraction_timestamp=timestamp,
         software_version=f"polaris-{__version__}",
     )
+
+
+def _source_result_id(analysis_result: AnalysisResult | CausalAnalysisResult) -> str:
+    return (
+        analysis_result.result_id
+        if isinstance(analysis_result, AnalysisResult)
+        else analysis_result.causal_analysis_id
+    )
+
+
+def _procedure(analysis_result: AnalysisResult | CausalAnalysisResult) -> StatisticalProcedure:
+    if isinstance(analysis_result, AnalysisResult):
+        return analysis_result.analysis_method
+    if analysis_result.method.value == "event_study":
+        return StatisticalProcedure.EVENT_STUDY
+    return StatisticalProcedure.DIFFERENCE_IN_DIFFERENCES
 
 
 def deterministic_id(prefix: str, payload: dict[str, Any]) -> str:

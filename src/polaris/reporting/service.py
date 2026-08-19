@@ -18,6 +18,7 @@ from polaris.reporting.models import (
 )
 from polaris.reporting.references import build_reference_index
 from polaris.reporting.sections import (
+    causal_design_section,
     cross_domain_section,
     dataset_section,
     domain_assessments_section,
@@ -107,6 +108,7 @@ def build_research_report(
             synthesis_artifact=request.synthesis_artifact,
         ),
         statistical_results_section=statistical_results_section(request.analysis_result),
+        causal_design_section=causal_design_section(request.evidence_artifact),
         evidence_section=evidence_section(request.evidence_artifact),
         domain_assessments_section=domain_assessments_section(request.coordinated_assessment),
         cross_domain_section=cross_domain_section(

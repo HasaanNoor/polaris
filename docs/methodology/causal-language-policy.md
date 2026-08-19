@@ -62,3 +62,7 @@ The Causal Identification Agent must mark causal interpretation unsupported when
 - What Works Clearinghouse, [Procedures and Standards Handbooks](https://ies.ed.gov/ncee/wwc/Handbooks).
 - World Bank DIME, [DIME Research](https://www.worldbank.org/en/about/unit/unit-dec/impactevaluation/dime-research).
 - World Bank DIME, [Experimental Methods](https://dimewiki.worldbank.org/Experimental_Methods).
+
+## Phase 22 Causal-Design Language
+
+Phase 22 permits causal wording only for explicit causal-design evidence produced from a validated `CausalSpecification`. Acceptable wording is conditional, such as: "Under the Difference-in-Differences design and its identifying assumptions, the estimated ATT is ...". Ordinary OLS, correlations, panel fixed effects, and first differences remain associational or longitudinal-associational evidence and must not be described as proving causality.

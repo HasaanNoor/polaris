@@ -3,6 +3,7 @@
 from datetime import UTC, datetime
 
 from polaris import __version__
+from polaris.analysis.causal.models import CausalAnalysisResult
 from polaris.analysis.models import (
     AnalysisResult,
     CorrelationAnalysisResult,
@@ -21,7 +22,7 @@ from polaris.evidence.models import (
 from polaris.evidence.provenance import artifact_id, evidence_provenance
 
 
-def extract_evidence(*, analysis_result: AnalysisResult) -> EvidenceArtifact:
+def extract_evidence(*, analysis_result: AnalysisResult | CausalAnalysisResult) -> EvidenceArtifact:
     """Convert a supported Phase 4 analysis result into evidence and claims."""
 
     _validate_supported_result(analysis_result)
@@ -46,8 +47,8 @@ def extract_evidence(*, analysis_result: AnalysisResult) -> EvidenceArtifact:
         ),
     )
     return EvidenceArtifact(
-        artifact_id=artifact_id(analysis_result.result_id),
-        source_analysis_result_id=analysis_result.result_id,
+        artifact_id=artifact_id(_source_result_id(analysis_result)),
+        source_analysis_result_id=_source_result_id(analysis_result),
         dataset_id=analysis_result.dataset_id,
         source_checksum_sha256=analysis_result.source_checksum_sha256,
         evidence_records=evidence_records,
@@ -61,6 +62,8 @@ def extract_evidence(*, analysis_result: AnalysisResult) -> EvidenceArtifact:
 
 
 def _validate_supported_result(analysis_result: AnalysisResult) -> None:
+    if isinstance(analysis_result, CausalAnalysisResult):
+        return
     if not isinstance(
         analysis_result.method_result,
         DescriptiveAnalysisResult
@@ -74,5 +77,13 @@ def _validate_supported_result(analysis_result: AnalysisResult) -> None:
 
         raise UnsupportedEvidenceSourceError(
             "Phase 5 does not support this Phase 4 result type",
-            analysis_result_id=analysis_result.result_id,
+            analysis_result_id=_source_result_id(analysis_result),
         )
+
+
+def _source_result_id(analysis_result: AnalysisResult | CausalAnalysisResult) -> str:
+    return (
+        analysis_result.result_id
+        if isinstance(analysis_result, AnalysisResult)
+        else analysis_result.causal_analysis_id
+    )

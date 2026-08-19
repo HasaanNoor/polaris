@@ -25,6 +25,7 @@ def build_project_provenance(
     ingestion_artifacts,
     harmonized_dataset,
     analysis_result,
+    causal_analysis_result=None,
     evidence_artifact,
     domain_assessments,
     coordinated_assessment,
@@ -53,6 +54,11 @@ def build_project_provenance(
             harmonized_dataset.harmonized_dataset_id if harmonized_dataset is not None else None
         ),
         analysis_artifact_id=analysis_result.result_id if analysis_result is not None else None,
+        causal_analysis_artifact_id=(
+            causal_analysis_result.causal_analysis_id
+            if causal_analysis_result is not None
+            else None
+        ),
         evidence_artifact_id=(
             evidence_artifact.artifact_id if evidence_artifact is not None else None
         ),

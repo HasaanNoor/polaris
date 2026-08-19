@@ -43,4 +43,5 @@ class SupportLevel(StrEnum):
 class CausalStatus(StrEnum):
     NON_CAUSAL = "non_causal"
     NOT_ESTABLISHED = "not_established"
+    CONDITIONAL_CAUSAL_DESIGN = "conditional_causal_design"
     CAUSAL_CLAIM_REJECTED = "causal_claim_rejected"
