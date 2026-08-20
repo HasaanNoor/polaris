@@ -147,6 +147,7 @@ def run_causal_analysis(*, request: CausalAnalysisRequest) -> CausalAnalysisResu
         time_variable_id=specification.time_variable.variable_id,
         outcome_variable_id=specification.outcome_variable.variable_id,
         covariate_ids=tuple(item.variable_id for item in specification.covariates),
+        registry_provenance=specification.registry_provenance,
         included_row_numbers=included_rows,
         excluded_row_numbers=excluded_rows,
         analysis_timestamp=timestamp,

@@ -214,6 +214,7 @@ class CausalDesignSection(FrozenPolarisBaseModel):
     event_study_results: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
     identifying_assumptions: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
     diagnostics: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    registry_provenance: dict[str, str] = Field(default_factory=dict)
     limitations: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
 
 

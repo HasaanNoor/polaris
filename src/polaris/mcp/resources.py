@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from polaris.causal_studies.readiness import assess_design_readiness
+from polaris.causal_studies.registry import load_causal_study_registry
 from polaris.mcp.config import MCPServerConfig
 from polaris.mcp.errors import MCPNotFoundError, MCPSafetyError
 from polaris.mcp.serialization import json_compatible
@@ -19,6 +21,7 @@ RESOURCE_URIS = (
     "polaris://catalogs/wgi/variables",
     "polaris://catalogs/unesco/variables",
     "polaris://catalogs/wdi/variables",
+    "polaris://causal-studies",
 )
 
 
@@ -42,6 +45,10 @@ class MCPResourceStore:
                 ]
             )
         dynamic.extend(_artifact_resource_uris(self.config))
+        causal_registry = load_causal_study_registry()
+        for study in causal_registry.list_studies():
+            dynamic.append(f"polaris://causal-studies/{study.study_id}")
+            dynamic.append(f"polaris://causal-studies/{study.study_id}/readiness")
         return tuple(sorted((*RESOURCE_URIS, *dynamic)))
 
     def read_resource(self, uri: str) -> dict[str, Any]:
@@ -51,6 +58,8 @@ class MCPResourceStore:
             return self._dataset_resource(uri)
         if uri.startswith("polaris://catalogs/"):
             return self._catalog_resource(uri)
+        if uri.startswith("polaris://causal-studies"):
+            return self._causal_study_resource(uri)
         if uri.startswith("polaris://reports/"):
             return self._artifact_file_resource(uri, kind="reports")
         if uri.startswith("polaris://projects/"):
@@ -62,6 +71,28 @@ class MCPResourceStore:
         if uri.startswith("polaris://provenance/"):
             return self._provenance_resource(uri)
         raise MCPNotFoundError(f"unknown Polaris MCP resource URI: {uri}")
+
+    def _causal_study_resource(self, uri: str) -> dict[str, Any]:
+        registry = load_causal_study_registry()
+        if uri == "polaris://causal-studies":
+            return {
+                "studies": [
+                    {
+                        "study_id": study.study_id,
+                        "title": study.title,
+                        "intervention_id": study.intervention.intervention_id,
+                        "review_status": study.review_status.value,
+                    }
+                    for study in registry.list_studies()
+                ]
+            }
+        parts = uri.removeprefix("polaris://causal-studies/").split("/")
+        study = registry.get_study(parts[0])
+        if len(parts) == 1:
+            return json_compatible(study)
+        if len(parts) == 2 and parts[1] == "readiness":
+            return json_compatible(assess_design_readiness(study, registry=self.registry))
+        raise MCPNotFoundError(f"unknown causal-study resource URI: {uri}")
 
     def _dataset_resource(self, uri: str) -> dict[str, Any]:
         parts = uri.removeprefix("polaris://datasets/").split("/")

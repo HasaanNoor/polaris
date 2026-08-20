@@ -130,6 +130,7 @@ class CausalSpecification(FrozenPolarisBaseModel):
     strict_covariate_timing: bool = True
     acknowledged_post_treatment_covariates: tuple[VariableId, ...] = Field(default_factory=tuple)
     assumptions: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
+    registry_provenance: dict[str, str] = Field(default_factory=dict)
     schema_version: SchemaVersion = CAUSAL_SCHEMA_VERSION
 
     @field_validator("covariates")
@@ -274,6 +275,7 @@ class CausalProvenance(FrozenPolarisBaseModel):
     time_variable_id: VariableId
     outcome_variable_id: VariableId
     covariate_ids: tuple[VariableId, ...] = Field(default_factory=tuple)
+    registry_provenance: dict[str, str] = Field(default_factory=dict)
     included_row_numbers: tuple[int, ...] = Field(default_factory=tuple)
     excluded_row_numbers: tuple[int, ...] = Field(default_factory=tuple)
     analysis_timestamp: AwareDatetime

@@ -167,6 +167,7 @@ class ResearchProjectRequest(FrozenPolarisBaseModel):
     research_question: ResearchQuestion
     dataset_inputs: tuple[DatasetInput, ...] = Field(min_length=1)
     statistical_specification: StatisticalSpecification
+    causal_study_id: NonEmptyStr | None = None
     causal_specification: CausalSpecification | None = None
     selected_agents: tuple[AgentDomain, ...] = Field(min_length=1)
     reasoning: ReasoningProjectConfig = Field(default_factory=ReasoningProjectConfig)

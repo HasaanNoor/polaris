@@ -48,6 +48,7 @@ def plan_research_project(
                 request.harmonization.model_dump(mode="json") if request.harmonization else None
             ),
             "statistical_specification": request.statistical_specification.model_dump(mode="json"),
+            "causal_study_id": request.causal_study_id,
             "causal_specification": (
                 request.causal_specification.model_dump(mode="json")
                 if request.causal_specification is not None

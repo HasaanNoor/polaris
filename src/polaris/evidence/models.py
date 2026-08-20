@@ -248,6 +248,7 @@ class CausalTreatmentEffectEvidenceRecord(EvidenceRecordBase):
     treated_entity_count: int = Field(ge=0)
     control_entity_count: int = Field(ge=0)
     assumption_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
+    registry_provenance: dict[str, str] = Field(default_factory=dict)
 
 
 class CausalAssumptionEvidenceRecord(EvidenceRecordBase):

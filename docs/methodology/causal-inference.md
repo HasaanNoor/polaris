@@ -15,3 +15,9 @@ Supported methods are simple Difference-in-Differences component means, TWFE DiD
 Parallel trends, no anticipation, stable treatment definition, comparison-group appropriateness, contamination/spillover, outcome measurement consistency, and compositional stability are recorded as structured assumptions. Diagnostics can flag concerns or insufficient data, but they do not prove identifying assumptions.
 
 Staggered adoption is rejected in Phase 22 unless all treated entities share one treatment start. Post-treatment covariates produce a structured caution because bad controls can bias causal estimates.
+
+Phase 23 adds reviewed treatment-metadata readiness before estimation. A causal-study definition may preserve intervention dates, treatment assignments, source references, annual timing rules, proposed outcome/covariate variable IDs, comparison policy, and review status. The workflow is:
+
+Reviewed external intervention sources -> `CausalStudyRegistry` -> `DesignReadinessAssessment` -> human-approved `CausalSpecification` -> Phase 22 -> `CausalAnalysisResult`.
+
+Design-ready does not mean causally valid. It means Polaris has enough explicit treatment metadata and compatible data structure to attempt the specified design. Treatment dates are never inferred from outcome changes, statistical breakpoints, correlations, LLM suggestions, vague descriptions, undocumented dates, or external facts without preserved sources. Announcement, adoption, effective, and implementation dates are distinct, and annual mappings such as `effective_date=2012-07-01` to `analysis_treatment_year=2013` must be explicit.

@@ -92,3 +92,7 @@ Institutions differ in evidence-rating systems. Education evidence frameworks ma
 ## Phase 22 Causal Evidence
 
 Phase 22 adds causal-design evidence for explicit DiD and event-study designs. These records preserve the estimand, treatment effect, uncertainty, treatment/control counts, assumption records, diagnostics, and limitations. Evidence taxonomy distinguishes OLS/correlation association, panel FE longitudinal association, and DiD/event-study conditional causal-design estimates.
+
+## Phase 23 Treatment Sources
+
+`TreatmentSource` records establish where treatment metadata came from. They are separate from `LiteratureEvidence`, which contextualizes prior research, and empirical evidence, which comes from Polaris analysis. Source documentation can support treatment timing and assignment metadata, but it does not validate identifying assumptions or prove causal effects.

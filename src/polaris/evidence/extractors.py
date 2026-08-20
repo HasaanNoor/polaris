@@ -145,6 +145,7 @@ def _causal_evidence(
             treated_entity_count=analysis_result.sample_summary.treated_entity_count,
             control_entity_count=analysis_result.sample_summary.control_entity_count,
             assumption_ids=tuple(record.evidence_id for record in assumption_records),
+            registry_provenance=analysis_result.causal_specification.registry_provenance,
         )
     )
     diagnostic = analysis_result.diagnostics.parallel_trends

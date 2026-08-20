@@ -60,3 +60,7 @@ Future phases should adopt a technology only when:
 ## Phase 22 Causal Estimation
 
 Phase 22 adds narrow deterministic DiD and event-study estimators using existing NumPy/SciPy and Phase 21 panel covariance utilities. It does not add pandas, statsmodels, scikit-learn, a broad causal-inference package, or autonomous treatment discovery.
+
+## Phase 23 Causal-Study Registry
+
+Phase 23 adds a standard-library JSON-backed metadata registry using existing Pydantic models, deterministic SHA-256 IDs, local dataset manifests, and optional ingestion artifacts for coverage checks. It adds no database, web client, crawler, estimator, matching library, or workflow engine. MCP additions are read-only list/inspect/readiness surfaces over the same local registry.

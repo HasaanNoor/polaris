@@ -6,6 +6,16 @@ from typing import Any
 
 from polaris.analysis.causal.service import run_causal_analysis as core_run_causal_analysis
 from polaris.analysis.service import run_analysis as core_run_analysis
+from polaris.causal_studies.models import CausalStudySearchQuery
+from polaris.causal_studies.service import (
+    assess_causal_study_readiness as core_assess_causal_study_readiness,
+)
+from polaris.causal_studies.service import (
+    inspect_causal_study as core_inspect_causal_study,
+)
+from polaris.causal_studies.service import (
+    list_causal_studies as core_list_causal_studies,
+)
 from polaris.evaluation.service import evaluate_reasoning as core_evaluate_reasoning
 from polaris.harmonization.service import harmonize_datasets
 from polaris.literature.ingestion import ingest_literature_corpus
@@ -36,6 +46,9 @@ TOOL_NAMES = (
     "inspect_dataset",
     "run_analysis",
     "run_causal_analysis",
+    "list_causal_studies",
+    "inspect_causal_study",
+    "assess_causal_study_readiness",
     "integrate_datasets",
     "run_research_project",
     "retrieve_literature",
@@ -138,6 +151,44 @@ class MCPToolService:
         return {
             "artifact": json_compatible(reference),
             "result": bounded_payload(result, max_bytes=self.config.maximum_tool_output_bytes),
+        }
+
+    def list_causal_studies(self, arguments: dict[str, Any]) -> dict[str, Any]:
+        query = CausalStudySearchQuery.model_validate(arguments)
+        return {"studies": json_compatible(core_list_causal_studies(query=query))}
+
+    def inspect_causal_study(self, arguments: dict[str, Any]) -> dict[str, Any]:
+        study_id = arguments.get("study_id")
+        if not isinstance(study_id, str) or not study_id.strip():
+            raise ValueError("inspect_causal_study requires study_id")
+        return {"study": json_compatible(core_inspect_causal_study(study_id))}
+
+    def assess_causal_study_readiness(self, arguments: dict[str, Any]) -> dict[str, Any]:
+        study_id = arguments.get("study_id")
+        if not isinstance(study_id, str) or not study_id.strip():
+            raise ValueError("assess_causal_study_readiness requires study_id")
+        assessment = core_assess_causal_study_readiness(
+            study_id,
+            dataset_registry=self.resources.registry,
+        )
+        return {
+            "artifact": json_compatible(
+                artifact_reference(
+                    artifact_id=assessment.assessment_id,
+                    artifact_type="causal_study_readiness",
+                    resource_uri=f"polaris://causal-studies/{study_id}/readiness",
+                    schema_version=assessment.schema_version,
+                    summary={
+                        "study_id": study_id,
+                        "readiness_status": assessment.readiness_status.value,
+                        "blocking_findings": len(assessment.blocking_findings),
+                    },
+                )
+            ),
+            "assessment": bounded_payload(
+                assessment,
+                max_bytes=self.config.maximum_tool_output_bytes,
+            ),
         }
 
     def integrate_datasets(self, arguments: dict[str, Any]) -> dict[str, Any]:

@@ -385,6 +385,7 @@ def _causal_design(report: ResearchReport) -> list[str]:
                 ("Model", section.model),
                 ("Treatment effect", section.treatment_effect),
                 ("Clustered uncertainty", section.clustered_uncertainty),
+                ("Registry provenance", section.registry_provenance or None),
             ),
         ),
         "",

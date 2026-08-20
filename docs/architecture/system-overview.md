@@ -157,3 +157,7 @@ Candidate technologies are listed in [Technology Decisions](technology-decisions
 ## Phase 22 Causal Path
 
 Phase 22 inserts an explicit causal-design path after validated or harmonized panels: `CausalSpecification` -> design validation -> treatment/control construction -> pre-treatment diagnostics -> DiD/event-study estimation -> `CausalAnalysisResult` -> evidence/reasoning/reporting. This path is opt-in and separate from ordinary `StatisticalSpecification` execution.
+
+## Phase 23 Causal-Study Metadata Path
+
+Phase 23 adds a metadata path before Phase 22: reviewed external intervention sources -> `CausalStudyRegistry` -> `DesignReadinessAssessment` -> human-approved `CausalSpecification` -> Phase 22 -> `CausalAnalysisResult`. The registry is file-backed, deterministic, and Git-tracked. It preserves intervention definitions, source records, treatment assignments, timing roles, annual timing mappings, reviewed variable references, comparison policy, findings, and provenance. It does not browse, infer treatments, select controls, choose methods, or estimate effects.

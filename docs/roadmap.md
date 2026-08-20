@@ -293,3 +293,7 @@ Verification: public workflows reproduce expected artifacts and reports.
 ## Phase 22 Completed: Causal Inference Foundations
 
 Phase 22 adds explicit `CausalSpecification`, DiD, TWFE DiD for common treatment timing, event-study estimation, treatment/control validation, pre-trend diagnostics, assumption records, causal evidence extraction, conditional causal reasoning, reporting, project orchestration, MCP compatibility, and synthetic validation. IV, RDD, synthetic control, matching, IPW, causal forests, DML, mediation, Granger/VAR, dynamic panel GMM, Bayesian causal inference, and automatic treatment discovery remain deferred.
+
+## Phase 23 Completed: Real-World Causal Study Registry and Treatment Metadata
+
+Phase 23 adds `CausalStudyDefinition`, `InterventionDefinition`, `TreatmentAssignment`, `TreatmentSource`, deterministic registry loading, structured validation findings, dataset compatibility checks, pre/post coverage diagnostics, candidate-control diagnostics, staggered-treatment detection, `DesignReadinessAssessment`, strict conversion to Phase 22 `CausalSpecification`, read-only MCP exposure, Phase 13 study references, report provenance rendering, example templates, and ADR-026. Phase 23 does not estimate causal effects, discover interventions, infer treatment timing, select controls, substitute variables, or make causal claims.

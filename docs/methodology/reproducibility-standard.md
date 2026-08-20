@@ -86,3 +86,7 @@ Artifact versions must be immutable. Later corrections must create a new version
 ## Phase 22 Causal Identifiers
 
 Causal analysis identifiers include source checksums, the full `CausalSpecification`, treatment assignment, treatment timing, event window, covariates, fixed-effects configuration, clustering configuration, schema version, and ruleset version. Timestamps are retained in provenance but excluded from deterministic IDs.
+
+## Phase 23 Causal-Study Identifiers
+
+Causal-study, intervention, and readiness identifiers are derived from stable metadata: intervention definition, assignment records, source IDs and source metadata, treatment timing rule, variable references, schema version, and ruleset version. Retrieval or execution timestamps may appear in provenance but must not define identity. Registry-built `CausalSpecification` objects preserve study ID, intervention ID, treatment source IDs, assignment source IDs, review status, schema version, and ruleset version so Phase 22 results remain traceable to treatment metadata.

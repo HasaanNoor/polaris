@@ -250,6 +250,7 @@ def causal_design_section(evidence_artifact: EvidenceArtifact) -> CausalDesignSe
         else (),
         identifying_assumptions=assumptions,
         diagnostics=diagnostics,
+        registry_provenance=effect.registry_provenance,
         limitations=tuple(code.value for code in effect.limitation_codes),
     )
 

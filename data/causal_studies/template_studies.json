@@ -1,0 +1,257 @@
+[
+  {
+    "study_id": "study_template_public_health_annual_country_v1",
+    "title": "Template: country-level public-health intervention and WHO outcomes",
+    "research_question": "Template only: does a reviewed public-health intervention align with annual WHO health outcomes?",
+    "intervention": {
+      "intervention_id": "intervention_template_public_health_v1",
+      "name": "Template public-health intervention",
+      "description": "Placeholder metadata template. This is not a reviewed real-world intervention.",
+      "intervention_type": "health_policy",
+      "jurisdiction_level": "country",
+      "treatment_definition": "A human reviewer must replace this template with an explicitly sourced treatment definition.",
+      "effective_date": "2012-07-01",
+      "treated_entities": ["BRA"],
+      "potentially_unaffected_entities": ["ARG", "CHL"],
+      "geographic_scope": "Country-year ISO-3 template scope",
+      "temporal_scope": "Annual panel template scope",
+      "treatment_persistence": "absorbing",
+      "treatment_reversibility": "unknown",
+      "notes": "Template demonstrates explicit annual timing mapping; it must not be used for real causal claims.",
+      "source_ids": ["source_template_public_health"],
+      "review_status": "blocked"
+    },
+    "treatment_assignments": [
+      {
+        "entity_id": "ARG",
+        "treatment_status": "never_treated",
+        "assignment_source_ids": ["source_template_public_health"],
+        "assignment_notes": "Template comparison entity for human review.",
+        "review_status": "draft"
+      },
+      {
+        "entity_id": "BRA",
+        "treatment_status": "treated",
+        "treatment_start": 2013,
+        "assignment_source_ids": ["source_template_public_health"],
+        "assignment_notes": "Template treatment start derived from explicit annual timing rule.",
+        "review_status": "draft"
+      },
+      {
+        "entity_id": "CHL",
+        "treatment_status": "never_treated",
+        "assignment_source_ids": ["source_template_public_health"],
+        "assignment_notes": "Template comparison entity for human review.",
+        "review_status": "draft"
+      }
+    ],
+    "treatment_timing_rule": {
+      "date_role": "effective_date",
+      "analysis_treatment_year": 2013,
+      "rule": "Template rule: first full annual exposure is the year after a mid-year effective date.",
+      "source_ids": ["source_template_public_health"]
+    },
+    "sources": [
+      {
+        "source_id": "source_template_public_health",
+        "title": "Template source placeholder for public-health treatment metadata",
+        "publisher": "Polaris examples",
+        "source_type": "other",
+        "quality_category": "other",
+        "notes": "Not an external factual source. Replace with official or reviewed sources before real use."
+      }
+    ],
+    "proposed_outcomes": [
+      {
+        "variable_id": "who_life_expectancy_birth_years",
+        "dataset_id": "who_health_panel_2026-08-10_1.0.0_87b84051d7468549",
+        "role": "outcome",
+        "label": "WHO life expectancy at birth",
+        "provider": "WHO",
+        "unit": "years"
+      }
+    ],
+    "proposed_covariates": [
+      {
+        "variable_id": "who_health_expenditure_per_capita_usd",
+        "dataset_id": "who_health_panel_2026-08-10_1.0.0_87b84051d7468549",
+        "role": "covariate",
+        "label": "WHO health expenditure per capita",
+        "provider": "WHO",
+        "unit": "USD",
+        "post_treatment_concern": true,
+        "notes": "Template flags potential post-treatment concern for human review."
+      }
+    ],
+    "candidate_dataset_ids": ["who_health_panel_2026-08-10_1.0.0_87b84051d7468549"],
+    "entity_variable": {"variable_id": "country_code", "label": "ISO-3 country code"},
+    "time_variable": {"variable_id": "year", "label": "Year"},
+    "estimand": "att",
+    "supported_methods": ["difference_in_differences", "event_study"],
+    "pre_period_requirements": 2,
+    "post_period_requirements": 2,
+    "event_study_window": {"min_event_time": -2, "max_event_time": 2, "reference_event_time": -1},
+    "comparison_group_policy": "explicit_only",
+    "explicit_comparison_entities": ["ARG", "CHL"],
+    "identifying_assumptions": [
+      "Template only: parallel trends must be justified separately.",
+      "Template only: no anticipation must be assessed separately."
+    ],
+    "known_threats": ["Template metadata is not source-reviewed."],
+    "source_ids": ["source_template_public_health"],
+    "review_status": "blocked"
+  },
+  {
+    "study_id": "study_template_education_annual_country_v1",
+    "title": "Template: country-level education reform and UNESCO outcomes",
+    "research_question": "Template only: does a reviewed education reform align with UNESCO annual education outcomes?",
+    "intervention": {
+      "intervention_id": "intervention_template_education_v1",
+      "name": "Template education reform",
+      "description": "Placeholder metadata template. This is not a reviewed real-world intervention.",
+      "intervention_type": "education_policy",
+      "jurisdiction_level": "country",
+      "treatment_definition": "A human reviewer must supply exact reform scope, timing, treated country, and sources.",
+      "implementation_date": "2010-01-01",
+      "treated_entities": ["GHA"],
+      "potentially_unaffected_entities": ["KEN"],
+      "geographic_scope": "Country-year ISO-3 template scope",
+      "temporal_scope": "Annual panel template scope",
+      "treatment_persistence": "absorbing",
+      "treatment_reversibility": "unknown",
+      "source_ids": ["source_template_education"],
+      "review_status": "draft"
+    },
+    "treatment_assignments": [
+      {
+        "entity_id": "GHA",
+        "treatment_status": "treated",
+        "treatment_start": 2010,
+        "assignment_source_ids": ["source_template_education"],
+        "review_status": "draft"
+      },
+      {
+        "entity_id": "KEN",
+        "treatment_status": "never_treated",
+        "assignment_source_ids": ["source_template_education"],
+        "review_status": "draft"
+      }
+    ],
+    "treatment_timing_rule": {
+      "date_role": "implementation_date",
+      "analysis_treatment_year": 2010,
+      "rule": "Template rule: implementation date falls at the start of the annual period.",
+      "source_ids": ["source_template_education"]
+    },
+    "sources": [
+      {
+        "source_id": "source_template_education",
+        "title": "Template source placeholder for education treatment metadata",
+        "publisher": "Polaris examples",
+        "source_type": "other",
+        "quality_category": "other",
+        "notes": "Not an external factual source. Replace with official or reviewed sources before real use."
+      }
+    ],
+    "proposed_outcomes": [
+      {
+        "variable_id": "uis_primary_completion_rate",
+        "dataset_id": "unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04",
+        "role": "outcome",
+        "label": "UNESCO primary completion rate",
+        "provider": "UNESCO",
+        "unit": "percent"
+      }
+    ],
+    "candidate_dataset_ids": ["unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04"],
+    "entity_variable": {"variable_id": "country_code", "label": "ISO-3 country code"},
+    "time_variable": {"variable_id": "year", "label": "Year"},
+    "estimand": "att",
+    "supported_methods": ["difference_in_differences"],
+    "pre_period_requirements": 2,
+    "post_period_requirements": 2,
+    "comparison_group_policy": "explicit_only",
+    "explicit_comparison_entities": ["KEN"],
+    "identifying_assumptions": ["Template only: assumptions require separate evidence."],
+    "known_threats": ["Template metadata is not source-reviewed."],
+    "source_ids": ["source_template_education"],
+    "review_status": "draft"
+  },
+  {
+    "study_id": "study_template_governance_annual_country_v1",
+    "title": "Template: country-level governance reform and WGI outcomes",
+    "research_question": "Template only: does a reviewed institutional reform align with WGI annual governance outcomes?",
+    "intervention": {
+      "intervention_id": "intervention_template_governance_v1",
+      "name": "Template governance reform",
+      "description": "Placeholder metadata template. This is not a reviewed real-world intervention.",
+      "intervention_type": "governance_reform",
+      "jurisdiction_level": "country",
+      "treatment_definition": "A human reviewer must replace this placeholder with reviewed treatment metadata.",
+      "adoption_date": "2005-01-01",
+      "treated_entities": ["GEO"],
+      "potentially_unaffected_entities": ["ARM"],
+      "geographic_scope": "Country-year ISO-3 template scope",
+      "temporal_scope": "Annual panel template scope",
+      "treatment_persistence": "absorbing",
+      "treatment_reversibility": "unknown",
+      "source_ids": ["source_template_governance"],
+      "review_status": "draft"
+    },
+    "treatment_assignments": [
+      {
+        "entity_id": "ARM",
+        "treatment_status": "never_treated",
+        "assignment_source_ids": ["source_template_governance"],
+        "review_status": "draft"
+      },
+      {
+        "entity_id": "GEO",
+        "treatment_status": "treated",
+        "treatment_start": 2005,
+        "assignment_source_ids": ["source_template_governance"],
+        "review_status": "draft"
+      }
+    ],
+    "treatment_timing_rule": {
+      "date_role": "adoption_date",
+      "analysis_treatment_year": 2005,
+      "rule": "Template rule: adoption year is treated as first annual treatment year.",
+      "source_ids": ["source_template_governance"]
+    },
+    "sources": [
+      {
+        "source_id": "source_template_governance",
+        "title": "Template source placeholder for governance treatment metadata",
+        "publisher": "Polaris examples",
+        "source_type": "other",
+        "quality_category": "other",
+        "notes": "Not an external factual source. Replace with official or reviewed sources before real use."
+      }
+    ],
+    "proposed_outcomes": [
+      {
+        "variable_id": "wgi_rule_of_law",
+        "dataset_id": "wgi_governance_panel_dd9cf2bd39cfc790",
+        "role": "outcome",
+        "label": "WGI rule of law",
+        "provider": "World Bank WGI",
+        "unit": "score"
+      }
+    ],
+    "candidate_dataset_ids": ["wgi_governance_panel_dd9cf2bd39cfc790"],
+    "entity_variable": {"variable_id": "country_code", "label": "ISO-3 country code"},
+    "time_variable": {"variable_id": "year", "label": "Year"},
+    "estimand": "att",
+    "supported_methods": ["difference_in_differences", "event_study"],
+    "pre_period_requirements": 2,
+    "post_period_requirements": 2,
+    "event_study_window": {"min_event_time": -2, "max_event_time": 2, "reference_event_time": -1},
+    "comparison_group_policy": "explicit_only",
+    "explicit_comparison_entities": ["ARM"],
+    "identifying_assumptions": ["Template only: assumptions require separate evidence."],
+    "known_threats": ["Template metadata is not source-reviewed."],
+    "source_ids": ["source_template_governance"],
+    "review_status": "draft"
+  }
+]
