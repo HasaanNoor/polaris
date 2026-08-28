@@ -28,6 +28,7 @@ def plan_research_project(
         ResearchStage.INGEST,
         *(() if not harmonization_required else (ResearchStage.HARMONIZE,)),
         ResearchStage.ANALYZE,
+        *(() if not request.robustness.enabled else (ResearchStage.ROBUSTNESS,)),
         ResearchStage.EXTRACT_EVIDENCE,
         ResearchStage.RUN_AGENTS,
         ResearchStage.COORDINATE,
@@ -54,6 +55,7 @@ def plan_research_project(
                 if request.causal_specification is not None
                 else None
             ),
+            "robustness": request.robustness.model_dump(mode="json"),
             "selected_agents": [agent.value for agent in request.selected_agents],
             "reasoning": request.reasoning.model_dump(mode="json"),
             "synthesis": request.synthesis.model_dump(mode="json"),

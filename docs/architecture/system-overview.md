@@ -161,3 +161,15 @@ Phase 22 inserts an explicit causal-design path after validated or harmonized pa
 ## Phase 23 Causal-Study Metadata Path
 
 Phase 23 adds a metadata path before Phase 22: reviewed external intervention sources -> `CausalStudyRegistry` -> `DesignReadinessAssessment` -> human-approved `CausalSpecification` -> Phase 22 -> `CausalAnalysisResult`. The registry is file-backed, deterministic, and Git-tracked. It preserves intervention definitions, source records, treatment assignments, timing roles, annual timing mappings, reviewed variable references, comparison policy, findings, and provenance. It does not browse, infer treatments, select controls, choose methods, or estimate effects.
+
+## Phase 24 Causal Robustness Path
+
+Phase 24 adds a downstream robustness path after Phase 22:
+`CausalAnalysisResult` -> `RobustnessSpecification` -> explicit variants -> Phase 22 reruns ->
+`RobustnessAnalysisResult` -> evidence, reasoning, reporting, orchestration, and MCP.
+
+Robustness is opt-in and separate from the estimator. It records estimate ranges, sign and
+significance stability, confidence-interval overlap, leave-one-out results, placebo diagnostics,
+event-study comparison records, pre-trend summaries, failed variants, assumptions, treatment
+provenance, and plotting-ready table rows. It characterizes sensitivity and does not prove
+identifying assumptions.

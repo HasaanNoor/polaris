@@ -116,6 +116,23 @@ class RunCausalAnalysisRequest(FrozenPolarisBaseModel):
         )
 
 
+class RunRobustnessAnalysisRequest(FrozenPolarisBaseModel):
+    ingestion_result: dict[str, Any]
+    baseline_result: dict[str, Any]
+    robustness_specification: dict[str, Any]
+    significance_threshold: float | None = Field(default=None, gt=0, lt=1)
+
+    @model_validator(mode="after")
+    def require_explicit_robustness_design(self) -> RunRobustnessAnalysisRequest:
+        required = ("baseline_analysis_id", "baseline_specification", "variants")
+        missing = [key for key in required if key not in self.robustness_specification]
+        if missing:
+            raise ValueError(
+                "run_robustness_analysis requires explicit robustness fields: " + ", ".join(missing)
+            )
+        return self
+
+
 class IntegrateDatasetsRequest(FrozenPolarisBaseModel):
     harmonization_request: dict[str, Any]
 

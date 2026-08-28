@@ -5,6 +5,7 @@ from datetime import UTC, datetime
 
 from polaris.agents.models import AgentDomain
 from polaris.evidence.models import (
+    CausalRobustnessEvidenceRecord,
     CausalTreatmentEffectEvidenceRecord,
     ClaimCandidate,
     ClaimType,
@@ -169,6 +170,8 @@ def _statements(request: ReasoningRequest) -> list[ReasoningStatement]:
             and ReasoningCategory.EMPIRICAL_INTERPRETATION in categories
         ):
             statements.append(_empirical_interpretation(claim, request))
+    if ReasoningCategory.EMPIRICAL_INTERPRETATION in categories:
+        statements.extend(_robustness_interpretations(request))
     if ReasoningCategory.CROSS_DOMAIN_SYNTHESIS in categories:
         statements.extend(_cross_domain_statements(request))
     if ReasoningCategory.PLAUSIBLE_MECHANISM in categories:
@@ -186,6 +189,43 @@ def _statements(request: ReasoningRequest) -> list[ReasoningStatement]:
     if request.literature_context is not None:
         statements.extend(_literature_statements(request))
     return sorted(statements, key=lambda item: item.statement_id)
+
+
+def _robustness_interpretations(request: ReasoningRequest) -> list[ReasoningStatement]:
+    records = [
+        record
+        for record in request.evidence_artifact.evidence_records
+        if isinstance(record, CausalRobustnessEvidenceRecord)
+    ]
+    statements = []
+    for record in records:
+        text = (
+            "The causal robustness artifact reports "
+            f"{record.successful_variant_count} successful and "
+            f"{record.failed_variant_count} failed "
+            f"reviewed specifications, with estimates ranging from {record.minimum_estimate} "
+            f"to {record.maximum_estimate}. The robustness status is {record.robustness_status}; "
+            "these checks contextualize the baseline estimate but the result does not resolve "
+            "the identifying "
+            "assumptions."
+        )
+        statements.append(
+            _statement(
+                request,
+                ReasoningCategory.EMPIRICAL_INTERPRETATION,
+                text,
+                evidence_ids=(record.evidence_id,),
+                domains=tuple(request.coordinated_assessment.participating_domains),
+                support_level=SupportLevel.LIMITED
+                if record.robustness_status.endswith("sensitive")
+                or record.robustness_status.endswith("insufficient")
+                else SupportLevel.MODERATE,
+                epistemic_status=EpistemicStatus.SUPPORTED_INTERPRETATION,
+                causal_status=CausalStatus.CONDITIONAL_CAUSAL_DESIGN,
+                limitations=tuple(code.value for code in record.limitation_codes),
+            )
+        )
+    return statements
 
 
 def _causal_interpretation(claim: ClaimCandidate, request: ReasoningRequest) -> ReasoningStatement:

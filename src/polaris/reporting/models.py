@@ -9,6 +9,7 @@ from pydantic import Field, field_validator, model_validator
 from polaris import __version__
 from polaris.agents.models import AgentDomain, DomainConcernCode, UnsupportedInferenceCode
 from polaris.analysis.models import AnalysisResult
+from polaris.analysis.robustness.models import RobustnessAnalysisResult
 from polaris.coordination.models import (
     CoordinatedAssessment,
     CoordinationCoverageStatus,
@@ -54,6 +55,7 @@ class ReportRequest(FrozenPolarisBaseModel):
     research_question: ResearchQuestion | None = None
     literature_context: LiteratureContextArtifact | None = None
     reasoning_artifact: ReasoningArtifact | None = None
+    robustness_result: RobustnessAnalysisResult | None = None
     dataset_manifest: DatasetManifest | None = None
     output_format: ReportFormat = ReportFormat.JSON
     report_title: NonEmptyStr | None = None
@@ -218,6 +220,24 @@ class CausalDesignSection(FrozenPolarisBaseModel):
     limitations: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
 
 
+class RobustnessSection(FrozenPolarisBaseModel):
+    status: SectionStatus
+    robustness_analysis_id: NonEmptyStr
+    baseline_analysis_id: NonEmptyStr
+    baseline_specification: dict[str, Any]
+    variants_tested: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    treatment_effect_comparison: dict[str, Any] = Field(default_factory=dict)
+    time_window_sensitivity: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    control_group_sensitivity: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    covariate_sensitivity: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    leave_one_out_analysis: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    placebo_analysis: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    event_study_sensitivity: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    pre_trend_diagnostics: dict[str, Any] = Field(default_factory=dict)
+    failed_variants: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+    limitations: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
+
+
 class DomainAssessmentSummary(FrozenPolarisBaseModel):
     domain: AgentDomain
     assessment_supplied: bool
@@ -351,6 +371,7 @@ class ResearchReport(FrozenPolarisBaseModel):
     methodology_section: MethodologySection
     statistical_results_section: StatisticalResultsSection
     causal_design_section: CausalDesignSection | None = None
+    robustness_section: RobustnessSection | None = None
     evidence_section: EvidenceAndClaimsSection
     domain_assessments_section: DomainAssessmentsSection
     cross_domain_section: CrossDomainSection

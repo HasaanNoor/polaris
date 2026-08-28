@@ -11,6 +11,7 @@ from polaris.agents.service import run_domain_agent
 from polaris.analysis.causal.models import CausalAnalysisRequest
 from polaris.analysis.causal.service import run_causal_analysis
 from polaris.analysis.models import AnalysisRequest
+from polaris.analysis.robustness.service import analyze_robustness
 from polaris.analysis.service import run_analysis
 from polaris.coordination.service import coordinate_assessments
 from polaris.evidence.service import extract_evidence
@@ -121,6 +122,7 @@ def run_research_project(
         harmonized_dataset=context.harmonized_dataset,
         analysis_result=context.analysis_result,
         causal_analysis_result=context.causal_analysis_result,
+        robustness_result=context.robustness_result,
         evidence_artifact=context.evidence_artifact,
         domain_assessments=context.domain_assessments,
         coordinated_assessment=context.coordinated_assessment,
@@ -147,6 +149,7 @@ def run_research_project(
         harmonized_dataset=context.harmonized_dataset,
         analysis_result=context.analysis_result,
         causal_analysis_result=context.causal_analysis_result,
+        robustness_result=context.robustness_result,
         evidence_artifact=context.evidence_artifact,
         domain_assessments=context.domain_assessments,
         coordinated_assessment=context.coordinated_assessment,
@@ -181,6 +184,7 @@ class _ExecutionContext:
         self.analysis_ingestion: DatasetIngestionResult | None = None
         self.analysis_result = None
         self.causal_analysis_result = None
+        self.robustness_result = None
         self.evidence_artifact = None
         self.domain_assessments = ()
         self.coordinated_assessment = None
@@ -213,10 +217,27 @@ class _ExecutionContext:
                 if self.analysis_ingestion is not None
                 else ()
             ),
-            ResearchStage.EXTRACT_EVIDENCE: (
+            ResearchStage.ROBUSTNESS: (
                 (self.causal_analysis_result.causal_analysis_id,)
                 if self.causal_analysis_result is not None
-                else ((self.analysis_result.result_id,) if self.analysis_result is not None else ())
+                else ()
+            ),
+            ResearchStage.EXTRACT_EVIDENCE: (
+                tuple(
+                    item
+                    for item in (
+                        self.robustness_result.robustness_analysis_id
+                        if self.robustness_result is not None
+                        else None,
+                        self.causal_analysis_result.causal_analysis_id
+                        if self.causal_analysis_result is not None
+                        else None,
+                        self.analysis_result.result_id
+                        if self.analysis_result is not None
+                        else None,
+                    )
+                    if item is not None
+                )
             ),
             ResearchStage.RUN_AGENTS: (
                 (self.evidence_artifact.artifact_id,) if self.evidence_artifact is not None else ()
@@ -302,6 +323,11 @@ class _ExecutionContext:
                     if item is not None
                 )
             ),
+            ResearchStage.ROBUSTNESS: (
+                (self.robustness_result.robustness_analysis_id,)
+                if self.robustness_result is not None
+                else ()
+            ),
             ResearchStage.EXTRACT_EVIDENCE: (
                 (self.evidence_artifact.artifact_id,) if self.evidence_artifact is not None else ()
             ),
@@ -351,6 +377,7 @@ def _run_stage(
         ResearchStage.INGEST: lambda: _ingest_inputs(context),
         ResearchStage.HARMONIZE: lambda: _harmonize(context),
         ResearchStage.ANALYZE: lambda: _analyze(context),
+        ResearchStage.ROBUSTNESS: lambda: _robustness(context),
         ResearchStage.EXTRACT_EVIDENCE: lambda: _extract(context),
         ResearchStage.RUN_AGENTS: lambda: _run_agents(context),
         ResearchStage.COORDINATE: lambda: _coordinate(context),
@@ -535,11 +562,32 @@ def _analyze(context: _ExecutionContext) -> None:
         )
 
 
+def _robustness(context: _ExecutionContext) -> None:
+    if context.analysis_ingestion is None or context.causal_analysis_result is None:
+        raise DatasetResolutionError("causal analysis is required before robustness analysis")
+    if context.request.robustness.specification is None:
+        raise DatasetResolutionError("robustness requires an explicit specification")
+    result = analyze_robustness(
+        ingestion_result=context.analysis_ingestion,
+        baseline_result=context.causal_analysis_result,
+        specification=context.request.robustness.specification,
+        significance_threshold=context.request.execution_settings.significance_threshold,
+    )
+    context.robustness_result = result
+    context.add_artifact(
+        result.robustness_analysis_id,
+        ProjectArtifactKind.ROBUSTNESS_ANALYSIS_RESULT,
+    )
+
+
 def _extract(context: _ExecutionContext) -> None:
     if context.analysis_result is None and context.causal_analysis_result is None:
         raise DatasetResolutionError("analysis result is required before evidence extraction")
     evidence_source = context.causal_analysis_result or context.analysis_result
-    evidence = extract_evidence(analysis_result=evidence_source)
+    evidence = extract_evidence(
+        analysis_result=evidence_source,
+        robustness_result=context.robustness_result,
+    )
     context.evidence_artifact = evidence
     context.add_artifact(evidence.artifact_id, ProjectArtifactKind.EVIDENCE_ARTIFACT)
 
@@ -664,6 +712,7 @@ def _report(context: _ExecutionContext) -> None:
             research_question=context.request.research_question,
             literature_context=context.literature_context,
             reasoning_artifact=context.reasoning_artifact,
+            robustness_result=context.robustness_result,
             dataset_manifest=context.analysis_ingestion.dataset_manifest,
             output_format=config.output_format,
             report_title=config.report_title,

@@ -31,6 +31,7 @@ from polaris.reporting.sections import (
     methodology_section,
     provenance_section,
     research_question_section,
+    robustness_section,
     statistical_results_section,
     synthesis_section,
     unsupported_inferences_section,
@@ -109,6 +110,7 @@ def build_research_report(
         ),
         statistical_results_section=statistical_results_section(request.analysis_result),
         causal_design_section=causal_design_section(request.evidence_artifact),
+        robustness_section=robustness_section(request.robustness_result),
         evidence_section=evidence_section(request.evidence_artifact),
         domain_assessments_section=domain_assessments_section(request.coordinated_assessment),
         cross_domain_section=cross_domain_section(
@@ -211,6 +213,11 @@ def _source_artifact_ids(request: ReportRequest) -> tuple[str, ...]:
                 *(
                     (request.reasoning_artifact.reasoning_id,)
                     if request.reasoning_artifact is not None
+                    else ()
+                ),
+                *(
+                    (request.robustness_result.robustness_analysis_id,)
+                    if request.robustness_result is not None
                     else ()
                 ),
             }

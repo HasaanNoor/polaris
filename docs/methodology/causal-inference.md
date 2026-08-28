@@ -21,3 +21,20 @@ Phase 23 adds reviewed treatment-metadata readiness before estimation. A causal-
 Reviewed external intervention sources -> `CausalStudyRegistry` -> `DesignReadinessAssessment` -> human-approved `CausalSpecification` -> Phase 22 -> `CausalAnalysisResult`.
 
 Design-ready does not mean causally valid. It means Polaris has enough explicit treatment metadata and compatible data structure to attempt the specified design. Treatment dates are never inferred from outcome changes, statistical breakpoints, correlations, LLM suggestions, vague descriptions, undocumented dates, or external facts without preserved sources. Announcement, adoption, effective, and implementation dates are distinct, and annual mappings such as `effective_date=2012-07-01` to `analysis_treatment_year=2013` must be explicit.
+
+Phase 24 robustness analysis is opt-in and downstream of Phase 22 estimation. A
+`RobustnessSpecification` must name one baseline causal analysis and explicit variants for
+alternative windows, controls, covariates, leave-one-out checks, placebo timing or assignment, and
+event-study windows. Polaris does not search all possible specifications, choose controls by
+significance, rank variants, or compute a robustness score.
+
+```text
+Causal estimate
+Robustness checks
+Sensitivity characterization
+!=
+Proof of causality
+```
+
+Placebo and pre-trend diagnostics are warnings or supporting diagnostics, not automatic proof or
+disproof. Stable estimates remain conditional on identifying assumptions.

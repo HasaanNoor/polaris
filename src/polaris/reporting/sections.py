@@ -8,6 +8,7 @@ from polaris.analysis.models import (
     DescriptiveAnalysisResult,
     OLSRegressionResult,
 )
+from polaris.analysis.robustness.models import RobustnessAnalysisResult, RobustnessVariantType
 from polaris.coordination.models import DOMAIN_ORDER, CoordinatedAssessment
 from polaris.evidence.models import (
     CausalAssumptionEvidenceRecord,
@@ -35,6 +36,7 @@ from polaris.reporting.models import (
     MethodologySection,
     ProvenanceSection,
     ResearchQuestionSection,
+    RobustnessSection,
     SectionStatus,
     StatisticalResultsSection,
     SynthesisSection,
@@ -253,6 +255,64 @@ def causal_design_section(evidence_artifact: EvidenceArtifact) -> CausalDesignSe
         registry_provenance=effect.registry_provenance,
         limitations=tuple(code.value for code in effect.limitation_codes),
     )
+
+
+def robustness_section(
+    robustness_result: RobustnessAnalysisResult | None,
+) -> RobustnessSection | None:
+    if robustness_result is None:
+        return None
+    variant_rows = tuple(
+        {
+            "variant_id": item.variant_id,
+            "variant_type": item.variant_type.value,
+            "estimate": item.analysis_result.treatment_effect.estimate,
+            "standard_error": item.analysis_result.treatment_effect.standard_error,
+            "p_value": item.analysis_result.treatment_effect.p_value,
+            "sample_size": item.analysis_result.sample_summary.included_rows,
+            "cluster_count": item.analysis_result.sample_summary.cluster_count,
+            "difference_from_baseline": item.estimate_difference_from_baseline,
+        }
+        for item in robustness_result.variant_results
+    )
+    return RobustnessSection(
+        status=SectionStatus.AVAILABLE,
+        robustness_analysis_id=robustness_result.robustness_analysis_id,
+        baseline_analysis_id=robustness_result.baseline.baseline_analysis_id,
+        baseline_specification=robustness_result.baseline.model_dump(mode="json"),
+        variants_tested=tuple(item.model_dump(mode="json") for item in robustness_result.variants),
+        treatment_effect_comparison={
+            "stability": robustness_result.treatment_effect_stability.model_dump(mode="json"),
+            "significance": robustness_result.significance_stability.model_dump(mode="json"),
+            "status": robustness_result.robustness_evidence_status.value,
+            "variant_estimates": variant_rows,
+        },
+        time_window_sensitivity=_variant_rows(
+            variant_rows, RobustnessVariantType.ALTERNATIVE_TIME_WINDOW
+        ),
+        control_group_sensitivity=_variant_rows(
+            variant_rows, RobustnessVariantType.ALTERNATIVE_CONTROL_GROUP
+        ),
+        covariate_sensitivity=_variant_rows(variant_rows, RobustnessVariantType.COVARIATE_SET),
+        leave_one_out_analysis=tuple(
+            item.model_dump(mode="json") for item in robustness_result.leave_one_out_results
+        ),
+        placebo_analysis=tuple(
+            item.model_dump(mode="json") for item in robustness_result.placebo_results
+        ),
+        event_study_sensitivity=tuple(
+            item.model_dump(mode="json") for item in robustness_result.event_study_comparison
+        ),
+        pre_trend_diagnostics=robustness_result.pre_trend_diagnostics.model_dump(mode="json"),
+        failed_variants=tuple(
+            item.model_dump(mode="json") for item in robustness_result.failed_variants
+        ),
+        limitations=robustness_result.limitations,
+    )
+
+
+def _variant_rows(rows, variant_type: RobustnessVariantType) -> tuple[dict[str, Any], ...]:
+    return tuple(row for row in rows if row["variant_type"] == variant_type.value)
 
 
 def evidence_section(evidence_artifact: EvidenceArtifact) -> EvidenceAndClaimsSection:

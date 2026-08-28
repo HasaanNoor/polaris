@@ -11,6 +11,7 @@ from polaris.analysis.models import (
     OLSRegressionResult,
     PanelRegressionResult,
 )
+from polaris.analysis.robustness.models import RobustnessAnalysisResult
 from polaris.evidence.claims import generate_claim_candidates
 from polaris.evidence.extractors import extract_evidence_records
 from polaris.evidence.models import (
@@ -22,13 +23,21 @@ from polaris.evidence.models import (
 from polaris.evidence.provenance import artifact_id, evidence_provenance
 
 
-def extract_evidence(*, analysis_result: AnalysisResult | CausalAnalysisResult) -> EvidenceArtifact:
+def extract_evidence(
+    *,
+    analysis_result: AnalysisResult | CausalAnalysisResult,
+    robustness_result: RobustnessAnalysisResult | None = None,
+) -> EvidenceArtifact:
     """Convert a supported Phase 4 analysis result into evidence and claims."""
 
     _validate_supported_result(analysis_result)
     timestamp = datetime.now(UTC)
     provenance = evidence_provenance(analysis_result, extraction_timestamp=timestamp)
-    evidence_records = extract_evidence_records(analysis_result, extraction_timestamp=timestamp)
+    evidence_records = extract_evidence_records(
+        analysis_result,
+        robustness_result=robustness_result,
+        extraction_timestamp=timestamp,
+    )
     claim_candidates = generate_claim_candidates(
         analysis_result,
         evidence_records,

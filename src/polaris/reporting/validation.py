@@ -3,7 +3,11 @@
 from collections.abc import Iterable
 
 from polaris.coordination.models import CoordinatedAssessment
-from polaris.evidence.models import EvidenceArtifact, LimitationCode
+from polaris.evidence.models import (
+    CausalTreatmentEffectEvidenceRecord,
+    EvidenceArtifact,
+    LimitationCode,
+)
 from polaris.reporting.errors import (
     ReportCompatibilityError,
     ReportReferenceError,
@@ -32,7 +36,7 @@ def validate_report_request(request: ReportRequest) -> None:
         raise ReportCompatibilityError("synthesis provenance does not match coordinated input")
     if synthesis.provenance.source_evidence_artifact_id != evidence.artifact_id:
         raise ReportCompatibilityError("synthesis provenance does not match evidence artifact")
-    if synthesis.provenance.source_analysis_result_id != analysis.result_id:
+    if synthesis.provenance.source_analysis_result_id != evidence.source_analysis_result_id:
         raise ReportCompatibilityError("synthesis provenance does not match analysis result")
     if request.reasoning_artifact is not None:
         reasoning = request.reasoning_artifact
@@ -45,7 +49,7 @@ def validate_report_request(request: ReportRequest) -> None:
 
     if coordinated.source_evidence_artifact_id != evidence.artifact_id:
         raise ReportCompatibilityError("coordinated assessment does not reference evidence input")
-    if coordinated.source_analysis_result_id != analysis.result_id:
+    if coordinated.source_analysis_result_id != evidence.source_analysis_result_id:
         raise ReportCompatibilityError("coordinated assessment does not reference analysis result")
     if coordinated.dataset_id != ingestion.dataset_manifest.dataset_id:
         raise ReportCompatibilityError("coordinated dataset ID does not match ingestion result")
@@ -54,8 +58,13 @@ def validate_report_request(request: ReportRequest) -> None:
             "coordinated source checksum does not match ingestion result"
         )
 
-    if evidence.source_analysis_result_id != analysis.result_id:
-        raise ReportCompatibilityError("evidence artifact does not reference analysis result")
+    if evidence.source_analysis_result_id != analysis.result_id and not any(
+        isinstance(record, CausalTreatmentEffectEvidenceRecord)
+        for record in evidence.evidence_records
+    ):
+        raise ReportCompatibilityError(
+            "non-causal evidence artifact does not reference analysis result"
+        )
     if evidence.dataset_id != ingestion.dataset_manifest.dataset_id:
         raise ReportCompatibilityError("evidence dataset ID does not match ingestion result")
     if evidence.source_checksum_sha256 != ingestion.checksum_sha256:

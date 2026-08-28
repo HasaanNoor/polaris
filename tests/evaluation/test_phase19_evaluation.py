@@ -97,7 +97,7 @@ def test_phase22_causal_suite_penalizes_overclaim_and_runs_deterministically():
         reasoning_modes=(ReasoningMode.DETERMINISTIC,),
     )
 
-    assert len(suite.benchmark_cases) == 12
+    assert len(suite.benchmark_cases) == 22
     assert all(
         case.expected_behavior.expected_causal_status
         in {CausalStatus.CONDITIONAL_CAUSAL_DESIGN, CausalStatus.NON_CAUSAL}

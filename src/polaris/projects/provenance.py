@@ -26,6 +26,7 @@ def build_project_provenance(
     harmonized_dataset,
     analysis_result,
     causal_analysis_result=None,
+    robustness_result=None,
     evidence_artifact,
     domain_assessments,
     coordinated_assessment,
@@ -58,6 +59,9 @@ def build_project_provenance(
             causal_analysis_result.causal_analysis_id
             if causal_analysis_result is not None
             else None
+        ),
+        robustness_analysis_artifact_id=(
+            robustness_result.robustness_analysis_id if robustness_result is not None else None
         ),
         evidence_artifact_id=(
             evidence_artifact.artifact_id if evidence_artifact is not None else None

@@ -297,3 +297,18 @@ Phase 22 adds explicit `CausalSpecification`, DiD, TWFE DiD for common treatment
 ## Phase 23 Completed: Real-World Causal Study Registry and Treatment Metadata
 
 Phase 23 adds `CausalStudyDefinition`, `InterventionDefinition`, `TreatmentAssignment`, `TreatmentSource`, deterministic registry loading, structured validation findings, dataset compatibility checks, pre/post coverage diagnostics, candidate-control diagnostics, staggered-treatment detection, `DesignReadinessAssessment`, strict conversion to Phase 22 `CausalSpecification`, read-only MCP exposure, Phase 13 study references, report provenance rendering, example templates, and ADR-026. Phase 23 does not estimate causal effects, discover interventions, infer treatment timing, select controls, substitute variables, or make causal claims.
+
+## Phase 24 Completed: Real Causal Case Studies and Robustness Analysis
+
+Phase 24 adds `src/polaris/analysis/robustness` with frozen typed
+`RobustnessSpecification`, explicit `RobustnessVariant` records, baseline snapshots,
+`RobustnessAnalysisResult`, failed-variant retention, estimate/significance stability summaries,
+leave-one-out diagnostics, placebo timing and assignment diagnostics, event-study comparison
+records, pre-trend robustness summaries, plotting-ready CSV-shaped artifacts, Phase 5 robustness
+evidence, Phase 18 grounded robustness interpretation, Phase 19 robustness adversarial benchmarks,
+Phase 9 report sections, Phase 13 optional `ROBUSTNESS` stage, MCP `run_robustness_analysis`, and
+ADR-027.
+
+The current Phase 23 registry contains templates and draft or blocked studies, so Phase 24 refuses
+real causal execution from those records. Synthetic validation is used instead. The workflow is
+causal estimate -> robustness checks -> sensitivity characterization, not proof of causality.

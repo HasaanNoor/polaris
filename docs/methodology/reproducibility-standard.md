@@ -90,3 +90,10 @@ Causal analysis identifiers include source checksums, the full `CausalSpecificat
 ## Phase 23 Causal-Study Identifiers
 
 Causal-study, intervention, and readiness identifiers are derived from stable metadata: intervention definition, assignment records, source IDs and source metadata, treatment timing rule, variable references, schema version, and ruleset version. Retrieval or execution timestamps may appear in provenance but must not define identity. Registry-built `CausalSpecification` objects preserve study ID, intervention ID, treatment source IDs, assignment source IDs, review status, schema version, and ruleset version so Phase 22 results remain traceable to treatment metadata.
+
+## Phase 24 Robustness Reproducibility
+
+For causal robustness analysis, the reproducible artifact includes the baseline causal
+specification, study ID, intervention ID, treatment provenance, every explicit variant, excluded
+observations and entities, estimator version, schema version, ruleset version, software version, and
+all failed variants. Raw provider data remains ignored and unmodified.

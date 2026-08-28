@@ -15,6 +15,7 @@ from polaris import __version__
 from polaris.agents.models import AgentAssessment, AgentDomain
 from polaris.analysis.causal.models import CausalAnalysisResult, CausalSpecification
 from polaris.analysis.models import AnalysisExecutionSettings, AnalysisResult
+from polaris.analysis.robustness.models import RobustnessAnalysisResult, RobustnessSpecification
 from polaris.coordination.models import DOMAIN_ORDER, CoordinatedAssessment
 from polaris.evidence.models import EvidenceArtifact
 from polaris.harmonization.models import (
@@ -154,6 +155,17 @@ class ReasoningProjectConfig(FrozenPolarisBaseModel):
         return tuple(sorted(set(value), key=lambda item: item.value))
 
 
+class RobustnessProjectConfig(FrozenPolarisBaseModel):
+    enabled: bool = False
+    specification: RobustnessSpecification | None = None
+
+    @model_validator(mode="after")
+    def require_explicit_specification(self) -> RobustnessProjectConfig:
+        if self.enabled and self.specification is None:
+            raise ValueError("enabled robustness requires an explicit RobustnessSpecification")
+        return self
+
+
 class ProjectReportConfig(FrozenPolarisBaseModel):
     output_format: ReportFormat = ReportFormat.MARKDOWN
     report_title: NonEmptyStr | None = None
@@ -170,6 +182,7 @@ class ResearchProjectRequest(FrozenPolarisBaseModel):
     causal_study_id: NonEmptyStr | None = None
     causal_specification: CausalSpecification | None = None
     selected_agents: tuple[AgentDomain, ...] = Field(min_length=1)
+    robustness: RobustnessProjectConfig = Field(default_factory=RobustnessProjectConfig)
     reasoning: ReasoningProjectConfig = Field(default_factory=ReasoningProjectConfig)
     synthesis: ProjectSynthesisConfig = Field(default_factory=ProjectSynthesisConfig)
     report: ProjectReportConfig = Field(default_factory=ProjectReportConfig)
@@ -198,6 +211,8 @@ class ResearchProjectRequest(FrozenPolarisBaseModel):
             raise ValueError("multi-dataset projects require explicit harmonization configuration")
         if len(self.dataset_inputs) == 1 and self.harmonization is not None:
             raise ValueError("single-dataset projects must not include harmonization configuration")
+        if self.robustness.enabled and self.causal_specification is None:
+            raise ValueError("robustness requires causal_specification")
         return self
 
 
@@ -206,6 +221,7 @@ class ResearchStage(StrEnum):
     INGEST = "ingest"
     HARMONIZE = "harmonize"
     ANALYZE = "analyze"
+    ROBUSTNESS = "robustness"
     EXTRACT_EVIDENCE = "extract_evidence"
     RUN_AGENTS = "run_agents"
     COORDINATE = "coordinate"
@@ -235,6 +251,7 @@ class ProjectArtifactKind(StrEnum):
     HARMONIZED_DATASET = "harmonized_dataset"
     ANALYSIS_RESULT = "analysis_result"
     CAUSAL_ANALYSIS_RESULT = "causal_analysis_result"
+    ROBUSTNESS_ANALYSIS_RESULT = "robustness_analysis_result"
     EVIDENCE_ARTIFACT = "evidence_artifact"
     AGENT_ASSESSMENT = "agent_assessment"
     COORDINATED_ASSESSMENT = "coordinated_assessment"
@@ -302,6 +319,7 @@ class ProjectProvenance(FrozenPolarisBaseModel):
     harmonization_artifact_id: NonEmptyStr | None = None
     analysis_artifact_id: NonEmptyStr | None = None
     causal_analysis_artifact_id: NonEmptyStr | None = None
+    robustness_analysis_artifact_id: NonEmptyStr | None = None
     evidence_artifact_id: NonEmptyStr | None = None
     agent_assessment_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
     coordination_id: NonEmptyStr | None = None
@@ -340,6 +358,7 @@ class ResearchProjectResult(FrozenPolarisBaseModel):
     harmonized_dataset: HarmonizedDataset | None = None
     analysis_result: AnalysisResult | None = None
     causal_analysis_result: CausalAnalysisResult | None = None
+    robustness_result: RobustnessAnalysisResult | None = None
     evidence_artifact: EvidenceArtifact | None = None
     domain_assessments: tuple[AgentAssessment, ...] = Field(default_factory=tuple)
     coordinated_assessment: CoordinatedAssessment | None = None

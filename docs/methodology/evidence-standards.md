@@ -96,3 +96,12 @@ Phase 22 adds causal-design evidence for explicit DiD and event-study designs. T
 ## Phase 23 Treatment Sources
 
 `TreatmentSource` records establish where treatment metadata came from. They are separate from `LiteratureEvidence`, which contextualizes prior research, and empirical evidence, which comes from Polaris analysis. Source documentation can support treatment timing and assignment metadata, but it does not validate identifying assumptions or prove causal effects.
+
+## Phase 24 Robustness Evidence
+
+Causal robustness evidence is separate from baseline causal treatment-effect evidence. It may
+reference estimate ranges, median estimates, sign consistency, confidence-interval overlap,
+significance changes, failed variants, placebo concerns, leave-one-out sensitivity, and pre-trend
+robustness. Deterministic labels such as `ROBUSTNESS_CONSISTENT`, `ROBUSTNESS_MIXED`,
+`ROBUSTNESS_SENSITIVE`, and `ROBUSTNESS_INSUFFICIENT` summarize diagnostics only; they do not
+certify causal validity.

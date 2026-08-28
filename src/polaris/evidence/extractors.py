@@ -13,6 +13,7 @@ from polaris.analysis.models import (
     OLSRegressionResult,
     PanelRegressionResult,
 )
+from polaris.analysis.robustness.models import RobustnessAnalysisResult
 from polaris.evidence.limitations import (
     limitations_from_diagnostic,
     limitations_from_findings,
@@ -22,6 +23,7 @@ from polaris.evidence.models import (
     AnalysisWarningEvidenceRecord,
     CausalAssumptionEvidenceRecord,
     CausalDiagnosticEvidenceRecord,
+    CausalRobustnessEvidenceRecord,
     CausalTreatmentEffectEvidenceRecord,
     CorrelationEvidenceRecord,
     DescriptiveEvidenceRecord,
@@ -40,11 +42,15 @@ from polaris.evidence.provenance import evidence_id, evidence_provenance
 def extract_evidence_records(
     analysis_result: AnalysisResult | CausalAnalysisResult,
     *,
+    robustness_result: RobustnessAnalysisResult | None = None,
     extraction_timestamp: datetime | None = None,
 ) -> tuple[EvidenceRecord, ...]:
     provenance = evidence_provenance(analysis_result, extraction_timestamp=extraction_timestamp)
     if isinstance(analysis_result, CausalAnalysisResult):
-        return _causal_evidence(analysis_result, provenance)
+        records = list(_causal_evidence(analysis_result, provenance))
+        if robustness_result is not None:
+            records.append(_robustness_evidence(analysis_result, robustness_result, provenance))
+        return tuple(sorted(records, key=lambda record: record.evidence_id))
 
     records: list[EvidenceRecord] = [
         _sample_quality_evidence(analysis_result, provenance),
@@ -67,6 +73,58 @@ def extract_evidence_records(
         for diagnostic in analysis_result.diagnostics
     )
     return tuple(sorted(records, key=lambda record: record.evidence_id))
+
+
+def _robustness_evidence(
+    analysis_result: CausalAnalysisResult,
+    robustness_result: RobustnessAnalysisResult,
+    provenance,
+) -> CausalRobustnessEvidenceRecord:
+    stability = robustness_result.treatment_effect_stability
+    significance = robustness_result.significance_stability
+    loo_changes = [
+        abs(item.difference_from_baseline)
+        for item in robustness_result.leave_one_out_results
+        if item.difference_from_baseline is not None
+    ]
+    payload = _causal_identity_payload(
+        analysis_result,
+        EvidenceType.CAUSAL_ROBUSTNESS,
+        robustness_analysis_id=robustness_result.robustness_analysis_id,
+    )
+    return CausalRobustnessEvidenceRecord(
+        evidence_id=evidence_id(payload),
+        source_analysis_result_id=analysis_result.causal_analysis_id,
+        dataset_id=analysis_result.dataset_id,
+        source_checksum_sha256=analysis_result.source_checksum_sha256,
+        statistical_procedure=provenance.statistical_procedure,
+        sample_size=analysis_result.sample_summary.included_rows,
+        limitation_codes=_robustness_limitations(robustness_result),
+        provenance=provenance,
+        robustness_analysis_id=robustness_result.robustness_analysis_id,
+        baseline_causal_analysis_id=analysis_result.causal_analysis_id,
+        robustness_status=robustness_result.robustness_evidence_status.value,
+        baseline_estimate=stability.baseline_estimate,
+        minimum_estimate=stability.minimum_estimate,
+        maximum_estimate=stability.maximum_estimate,
+        median_estimate=stability.median_estimate,
+        successful_variant_count=stability.successful_variant_count,
+        failed_variant_count=len(robustness_result.failed_variants),
+        number_positive=stability.number_positive,
+        number_negative=stability.number_negative,
+        number_crossing_zero=stability.number_crossing_zero,
+        significant_variant_count=significance.significant_variant_count,
+        nonsignificant_variant_count=significance.nonsignificant_variant_count,
+        changed_significance_count=significance.changed_relative_to_baseline_count,
+        placebo_finding_count=len(robustness_result.placebo_results),
+        leave_one_out_count=len(robustness_result.leave_one_out_results),
+        largest_leave_one_out_change=max(loo_changes) if loo_changes else None,
+        pretrend_status=robustness_result.pre_trend_diagnostics.status.value,
+        diagnostic_summary=(
+            "Robustness contextualizes the baseline causal estimate; it does not prove "
+            "the identifying assumptions."
+        ),
+    )
 
 
 def _causal_evidence(
@@ -536,6 +594,29 @@ def _causal_limitations(analysis_result: CausalAnalysisResult) -> tuple[Limitati
         values.append(LimitationCode.LOW_CLUSTER_COUNT)
     if any("post-treatment" in item for item in analysis_result.limitations):
         values.append(LimitationCode.BAD_CONTROL_CAUTION)
+    return tuple(sorted(set(values), key=lambda item: item.value))
+
+
+def _robustness_limitations(
+    robustness_result: RobustnessAnalysisResult,
+) -> tuple[LimitationCode, ...]:
+    values = [LimitationCode.CONDITIONAL_CAUSAL_DESIGN]
+    if robustness_result.robustness_evidence_status.value.endswith("sensitive"):
+        values.append(LimitationCode.ROBUSTNESS_SENSITIVE)
+    if robustness_result.robustness_evidence_status.value.endswith("insufficient"):
+        values.append(LimitationCode.ROBUSTNESS_INSUFFICIENT)
+    if any(
+        "warning" in item.diagnostic_interpretation for item in robustness_result.placebo_results
+    ):
+        values.append(LimitationCode.PLACEBO_CONCERN)
+    if any(
+        item.difference_from_baseline is not None
+        and robustness_result.treatment_effect_stability.baseline_estimate is not None
+        and abs(item.difference_from_baseline)
+        > abs(robustness_result.treatment_effect_stability.baseline_estimate)
+        for item in robustness_result.leave_one_out_results
+    ):
+        values.append(LimitationCode.LEAVE_ONE_OUT_SENSITIVITY)
     return tuple(sorted(set(values), key=lambda item: item.value))
 
 

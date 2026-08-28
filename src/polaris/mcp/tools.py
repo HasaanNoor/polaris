@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from polaris.analysis.causal.service import run_causal_analysis as core_run_causal_analysis
+from polaris.analysis.robustness.service import analyze_robustness as core_analyze_robustness
 from polaris.analysis.service import run_analysis as core_run_analysis
 from polaris.causal_studies.models import CausalStudySearchQuery
 from polaris.causal_studies.service import (
@@ -31,6 +32,7 @@ from polaris.mcp.adapters import (
     RunCausalAnalysisRequest,
     RunReasoningRequest,
     RunResearchProjectRequest,
+    RunRobustnessAnalysisRequest,
     artifact_reference,
 )
 from polaris.mcp.config import MCPServerConfig
@@ -46,6 +48,7 @@ TOOL_NAMES = (
     "inspect_dataset",
     "run_analysis",
     "run_causal_analysis",
+    "run_robustness_analysis",
     "list_causal_studies",
     "inspect_causal_study",
     "assess_causal_study_readiness",
@@ -146,6 +149,35 @@ class MCPToolService:
                 "estimand": result.estimand.value,
                 "treated_entities": result.sample_summary.treated_entity_count,
                 "control_entities": result.sample_summary.control_entity_count,
+            },
+        )
+        return {
+            "artifact": json_compatible(reference),
+            "result": bounded_payload(result, max_bytes=self.config.maximum_tool_output_bytes),
+        }
+
+    def run_robustness_analysis(self, arguments: dict[str, Any]) -> dict[str, Any]:
+        request = RunRobustnessAnalysisRequest.model_validate(arguments)
+        from polaris.analysis.causal.models import CausalAnalysisResult
+        from polaris.analysis.robustness.models import RobustnessSpecification
+        from polaris.ingestion.models import DatasetIngestionResult
+
+        result = core_analyze_robustness(
+            ingestion_result=DatasetIngestionResult.model_validate(request.ingestion_result),
+            baseline_result=CausalAnalysisResult.model_validate(request.baseline_result),
+            specification=RobustnessSpecification.model_validate(request.robustness_specification),
+            significance_threshold=request.significance_threshold,
+        )
+        reference = artifact_reference(
+            artifact_id=result.robustness_analysis_id,
+            artifact_type="robustness_analysis_result",
+            resource_uri=f"polaris://provenance/{result.robustness_analysis_id}",
+            schema_version=result.schema_version,
+            summary={
+                "baseline_analysis_id": result.baseline.baseline_analysis_id,
+                "successful_variants": len(result.variant_results),
+                "failed_variants": len(result.failed_variants),
+                "robustness_status": result.robustness_evidence_status.value,
             },
         )
         return {

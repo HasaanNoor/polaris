@@ -122,6 +122,7 @@ def render_report_markdown(report: ResearchReport) -> str:
         )
         lines.extend(_statistical_results(report))
         lines.extend(_causal_design(report))
+        lines.extend(_robustness(report))
         lines.extend(
             [
                 "## Evidence and Claims",
@@ -420,6 +421,146 @@ def _causal_design(report: ResearchReport) -> list[str]:
         "",
     ]
     return lines
+
+
+def _robustness(report: ResearchReport) -> list[str]:
+    section = report.robustness_section
+    if section is None or section.status.value != "available":
+        return []
+    stability = section.treatment_effect_comparison.get("stability", {})
+    significance = section.treatment_effect_comparison.get("significance", {})
+    return [
+        "## Robustness and Sensitivity Analysis",
+        "",
+        _table(
+            ("Field", "Value"),
+            (
+                ("Robustness analysis ID", section.robustness_analysis_id),
+                ("Baseline analysis ID", section.baseline_analysis_id),
+                ("Status", section.treatment_effect_comparison.get("status")),
+                ("Baseline estimate", stability.get("baseline_estimate")),
+                (
+                    "Estimate range",
+                    (
+                        stability.get("minimum_estimate"),
+                        stability.get("maximum_estimate"),
+                    ),
+                ),
+                ("Median estimate", stability.get("median_estimate")),
+                ("Positive variants", stability.get("number_positive")),
+                ("Negative variants", stability.get("number_negative")),
+                ("CI crossing zero variants", stability.get("number_crossing_zero")),
+                ("Significant variants", significance.get("significant_variant_count")),
+                ("Nonsignificant variants", significance.get("nonsignificant_variant_count")),
+                ("Changed significance", significance.get("changed_relative_to_baseline_count")),
+            ),
+        ),
+        "",
+        "### Variants Tested",
+        "",
+        _table(
+            ("Variant ID", "Type", "Rationale", "Purpose"),
+            (
+                (
+                    item.get("variant_id"),
+                    item.get("variant_type"),
+                    item.get("methodological_rationale"),
+                    item.get("expected_diagnostic_purpose"),
+                )
+                for item in section.variants_tested
+            ),
+        ),
+        "",
+        "### Treatment-Effect Comparison",
+        "",
+        _table(
+            ("Variant ID", "Type", "Estimate", "SE", "p-value", "Rows", "Clusters"),
+            (
+                (
+                    item.get("variant_id"),
+                    item.get("variant_type"),
+                    item.get("estimate"),
+                    item.get("standard_error"),
+                    item.get("p_value"),
+                    item.get("sample_size"),
+                    item.get("cluster_count"),
+                )
+                for item in section.treatment_effect_comparison.get("variant_estimates", ())
+            ),
+        ),
+        "",
+        "### Leave-One-Out Analysis",
+        "",
+        _table(
+            ("Variant ID", "Omitted", "Role", "Estimate", "Difference", "Clusters"),
+            (
+                (
+                    item.get("variant_id"),
+                    item.get("omitted_entity"),
+                    item.get("omitted_role"),
+                    item.get("treatment_estimate"),
+                    item.get("difference_from_baseline"),
+                    item.get("cluster_count"),
+                )
+                for item in section.leave_one_out_analysis
+            ),
+        ),
+        "",
+        "### Placebo Analysis",
+        "",
+        _table(
+            ("Variant ID", "Placebo year", "Estimate", "p-value", "Interpretation"),
+            (
+                (
+                    item.get("variant_id"),
+                    item.get("placebo_year"),
+                    item.get("estimate"),
+                    item.get("p_value"),
+                    item.get("diagnostic_interpretation"),
+                )
+                for item in section.placebo_analysis
+            ),
+        ),
+        "",
+        "### Event-Study Sensitivity",
+        "",
+        _table(
+            ("Variant ID", "Event time", "Estimate", "SE", "Reference", "Status"),
+            (
+                (
+                    item.get("variant_id"),
+                    item.get("event_time"),
+                    item.get("estimate"),
+                    item.get("standard_error"),
+                    item.get("omitted_reference_period"),
+                    item.get("pre_post_status"),
+                )
+                for item in section.event_study_sensitivity
+            ),
+        ),
+        "",
+        "### Pre-Trend Diagnostics",
+        "",
+        _md(section.pre_trend_diagnostics.get("interpretation", "")),
+        "",
+        "### Failed Variants",
+        "",
+        _table(
+            ("Variant ID", "Type", "Error", "Implication"),
+            (
+                (
+                    item.get("variant_id"),
+                    item.get("variant_type"),
+                    item.get("error_type"),
+                    item.get("methodological_implication"),
+                )
+                for item in section.failed_variants
+            ),
+        ),
+        "",
+        "Robustness checks characterize sensitivity; they do not prove causality.",
+        "",
+    ]
 
 
 def _evidence_grounded_interpretation(report: ResearchReport) -> list[str]:

@@ -32,6 +32,7 @@ class EvidenceType(StrEnum):
     CAUSAL_TREATMENT_EFFECT = "causal_treatment_effect"
     CAUSAL_ASSUMPTION = "causal_assumption"
     CAUSAL_DIAGNOSTIC = "causal_diagnostic"
+    CAUSAL_ROBUSTNESS = "causal_robustness"
 
 
 class Direction(StrEnum):
@@ -75,6 +76,10 @@ class LimitationCode(StrEnum):
     INSUFFICIENT_PRE_TREATMENT_DATA = "INSUFFICIENT_PRE_TREATMENT_DATA"
     LOW_TREATED_COUNT = "LOW_TREATED_COUNT"
     BAD_CONTROL_CAUTION = "BAD_CONTROL_CAUTION"
+    ROBUSTNESS_SENSITIVE = "ROBUSTNESS_SENSITIVE"
+    ROBUSTNESS_INSUFFICIENT = "ROBUSTNESS_INSUFFICIENT"
+    PLACEBO_CONCERN = "PLACEBO_CONCERN"
+    LEAVE_ONE_OUT_SENSITIVITY = "LEAVE_ONE_OUT_SENSITIVITY"
 
 
 class ExtractionFindingCode(StrEnum):
@@ -270,6 +275,30 @@ class CausalDiagnosticEvidenceRecord(EvidenceRecordBase):
     event_study_plot_data: tuple[dict[str, object], ...] = Field(default_factory=tuple)
 
 
+class CausalRobustnessEvidenceRecord(EvidenceRecordBase):
+    evidence_type: Literal[EvidenceType.CAUSAL_ROBUSTNESS] = EvidenceType.CAUSAL_ROBUSTNESS
+    robustness_analysis_id: NonEmptyStr
+    baseline_causal_analysis_id: NonEmptyStr
+    robustness_status: NonEmptyStr
+    baseline_estimate: float | None
+    minimum_estimate: float | None
+    maximum_estimate: float | None
+    median_estimate: float | None
+    successful_variant_count: int = Field(ge=0)
+    failed_variant_count: int = Field(ge=0)
+    number_positive: int = Field(ge=0)
+    number_negative: int = Field(ge=0)
+    number_crossing_zero: int = Field(ge=0)
+    significant_variant_count: int = Field(ge=0)
+    nonsignificant_variant_count: int = Field(ge=0)
+    changed_significance_count: int = Field(ge=0)
+    placebo_finding_count: int = Field(ge=0)
+    leave_one_out_count: int = Field(ge=0)
+    largest_leave_one_out_change: float | None = None
+    pretrend_status: NonEmptyStr
+    diagnostic_summary: NonEmptyStr
+
+
 EvidenceRecord = Annotated[
     DescriptiveEvidenceRecord
     | CorrelationEvidenceRecord
@@ -280,7 +309,8 @@ EvidenceRecord = Annotated[
     | AnalysisWarningEvidenceRecord
     | CausalTreatmentEffectEvidenceRecord
     | CausalAssumptionEvidenceRecord
-    | CausalDiagnosticEvidenceRecord,
+    | CausalDiagnosticEvidenceRecord
+    | CausalRobustnessEvidenceRecord,
     Field(discriminator="evidence_type"),
 ]
 
