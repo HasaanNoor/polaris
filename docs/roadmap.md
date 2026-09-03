@@ -312,3 +312,18 @@ ADR-027.
 The current Phase 23 registry contains templates and draft or blocked studies, so Phase 24 refuses
 real causal execution from those records. Synthetic validation is used instead. The workflow is
 causal estimate -> robustness checks -> sensitivity characterization, not proof of causality.
+
+## Phase 25 Completed: Visualization and Research Diagnostics
+
+Phase 25 adds `src/polaris/visualization` with strict `VisualizationSpecification`,
+structured `VisualizationArtifact`, deterministic visualization IDs, plotting-ready data
+exports, matplotlib PNG/SVG rendering, CSV/JSON plot-data export, report references, optional
+project `VISUALIZE` orchestration, and typed MCP visualization tools. It covers country trends,
+multi-country comparisons, scatterplots, regression relationships, coefficient plots, compatible
+model comparisons, event-study plots, causal estimates, robustness estimates, leave-one-out,
+placebo diagnostics, correlation matrices, missingness, country-year coverage, distributions,
+panel diagnostics, and causal-study design diagnostics.
+
+Visualization remains downstream of validated artifacts. It does not run alternative statistical
+models, impute missing data, cherry-pick countries, hide failed robustness variants, hide
+non-significant estimates, or create substantive claims from visual patterns.

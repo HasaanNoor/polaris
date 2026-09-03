@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from typing import Any
 
+from polaris.analysis.causal.models import CausalAnalysisResult
 from polaris.analysis.causal.service import run_causal_analysis as core_run_causal_analysis
+from polaris.analysis.models import AnalysisResult
+from polaris.analysis.robustness.models import RobustnessAnalysisResult
 from polaris.analysis.robustness.service import analyze_robustness as core_analyze_robustness
 from polaris.analysis.service import run_analysis as core_run_analysis
 from polaris.causal_studies.models import CausalStudySearchQuery
@@ -19,14 +22,18 @@ from polaris.causal_studies.service import (
 )
 from polaris.evaluation.service import evaluate_reasoning as core_evaluate_reasoning
 from polaris.harmonization.service import harmonize_datasets
+from polaris.ingestion.models import DatasetIngestionResult
 from polaris.literature.ingestion import ingest_literature_corpus
 from polaris.literature.retrieval import retrieve_literature as core_retrieve_literature
 from polaris.mcp.adapters import (
+    CreateVisualizationRequest,
     EvaluateReasoningRequest,
     GetReportRequest,
+    GetVisualizationRequest,
     InspectDatasetRequest,
     IntegrateDatasetsRequest,
     ListDatasetsRequest,
+    ListVisualizationsRequest,
     RetrieveLiteratureRequest,
     RunAnalysisRequest,
     RunCausalAnalysisRequest,
@@ -42,6 +49,8 @@ from polaris.mcp.serialization import bounded_payload, json_compatible
 from polaris.projects.service import run_research_project as core_run_research_project
 from polaris.reasoning.models import ReasoningArtifact
 from polaris.reasoning.service import build_reasoning_artifact
+from polaris.visualization.models import VisualizationArtifact
+from polaris.visualization.service import create_visualization as core_create_visualization
 
 TOOL_NAMES = (
     "list_datasets",
@@ -57,6 +66,9 @@ TOOL_NAMES = (
     "retrieve_literature",
     "run_reasoning",
     "evaluate_reasoning",
+    "create_visualization",
+    "list_visualizations",
+    "get_visualization",
     "get_report",
 )
 
@@ -365,6 +377,77 @@ class MCPToolService:
             ),
         }
 
+    def create_visualization(self, arguments: dict[str, Any]) -> dict[str, Any]:
+        request = CreateVisualizationRequest.model_validate(arguments)
+        artifact = core_create_visualization(
+            specification=request.specification(),
+            source_artifact=_visualization_source_from_payload(request.source_artifact),
+            data_artifact=(
+                _visualization_source_from_payload(request.data_artifact)
+                if request.data_artifact is not None
+                else None
+            ),
+            comparison_artifacts=tuple(
+                _visualization_source_from_payload(item) for item in request.comparison_artifacts
+            ),
+        )
+        return {
+            "artifact": json_compatible(
+                artifact_reference(
+                    artifact_id=artifact.visualization_id,
+                    artifact_type="visualization_artifact",
+                    resource_uri=f"polaris://visualizations/{artifact.visualization_id}",
+                    schema_version=artifact.schema_version,
+                    summary={
+                        "visualization_type": artifact.visualization_type.value,
+                        "source_artifact_ids": artifact.source_artifact_ids,
+                        "plotting_rows": len(artifact.plotting_data),
+                    },
+                )
+            ),
+            "visualization": bounded_payload(
+                artifact,
+                max_bytes=self.config.maximum_tool_output_bytes,
+            ),
+        }
+
+    def list_visualizations(self, arguments: dict[str, Any]) -> dict[str, Any]:
+        request = ListVisualizationsRequest.model_validate(arguments)
+        return {
+            "visualizations": json_compatible(
+                [
+                    {
+                        "visualization_id": artifact.visualization_id,
+                        "visualization_type": artifact.visualization_type.value,
+                        "source_artifact_ids": artifact.source_artifact_ids,
+                        "title": artifact.specification.title,
+                    }
+                    for artifact in sorted(
+                        request.artifacts(), key=lambda item: item.visualization_id
+                    )
+                ]
+            )
+        }
+
+    def get_visualization(self, arguments: dict[str, Any]) -> dict[str, Any]:
+        request = GetVisualizationRequest.model_validate(arguments)
+        artifact = next(
+            (
+                item
+                for item in request.artifacts()
+                if item.visualization_id == request.visualization_id
+            ),
+            None,
+        )
+        if artifact is None:
+            raise ValueError("visualization_id not found in supplied visualization artifacts")
+        return {
+            "visualization": bounded_payload(
+                artifact,
+                max_bytes=self.config.maximum_tool_output_bytes,
+            )
+        }
+
     def get_report(self, arguments: dict[str, Any]) -> dict[str, Any]:
         request = GetReportRequest.model_validate(arguments)
         resource = self.resources.read_resource(f"polaris://reports/{request.report_id}")
@@ -375,3 +458,20 @@ class MCPToolService:
 
 def _error_payload(error: PolarisMCPError) -> dict[str, Any]:
     return error.to_payload()
+
+
+def _visualization_source_from_payload(payload: dict[str, Any]) -> object:
+    candidates = (
+        VisualizationArtifact,
+        RobustnessAnalysisResult,
+        CausalAnalysisResult,
+        AnalysisResult,
+        DatasetIngestionResult,
+    )
+    last_error: Exception | None = None
+    for candidate in candidates:
+        try:
+            return candidate.model_validate(payload)
+        except Exception as exc:
+            last_error = exc
+    raise ValueError("unsupported visualization source artifact payload") from last_error

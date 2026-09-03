@@ -123,6 +123,7 @@ def render_report_markdown(report: ResearchReport) -> str:
         lines.extend(_statistical_results(report))
         lines.extend(_causal_design(report))
         lines.extend(_robustness(report))
+        lines.extend(_visualizations(report))
         lines.extend(
             [
                 "## Evidence and Claims",
@@ -614,6 +615,35 @@ def _evidence_grounded_interpretation(report: ResearchReport) -> list[str]:
                 )
         lines.append("")
     return lines
+
+
+def _visualizations(report: ResearchReport) -> list[str]:
+    section = report.visualization_section
+    if section is None:
+        return []
+    return [
+        "## Visualizations",
+        "",
+        _table(
+            ("Visualization ID", "Type", "Title", "Sources", "Outputs", "Warnings"),
+            (
+                (
+                    item["visualization_id"],
+                    item["visualization_type"],
+                    item.get("title"),
+                    ", ".join(item.get("source_artifact_ids", ())),
+                    ", ".join(
+                        output.get("path", "") for output in item.get("output_references", ())
+                    ),
+                    ", ".join(item.get("warnings", ())),
+                )
+                for item in section.visualizations
+            ),
+        ),
+        "",
+        "Visualizations represent existing artifacts and do not create independent claims.",
+        "",
+    ]
 
 
 def _statistical_results(report: ResearchReport) -> list[str]:

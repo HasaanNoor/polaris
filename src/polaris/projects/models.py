@@ -45,6 +45,7 @@ from polaris.schemas.dataset import DatasetManifest
 from polaris.schemas.research_question import ResearchQuestion
 from polaris.schemas.statistics import StatisticalSpecification
 from polaris.synthesis.models import SynthesisMode, SynthesisProviderConfig
+from polaris.visualization.models import VisualizationArtifact, VisualizationSpecification
 
 ORCHESTRATION_SCHEMA_VERSION = "1.0.0"
 
@@ -166,6 +167,17 @@ class RobustnessProjectConfig(FrozenPolarisBaseModel):
         return self
 
 
+class VisualizationProjectConfig(FrozenPolarisBaseModel):
+    enabled: bool = False
+    specifications: tuple[VisualizationSpecification, ...] = Field(default_factory=tuple)
+
+    @model_validator(mode="after")
+    def require_explicit_specifications(self) -> VisualizationProjectConfig:
+        if self.enabled and not self.specifications:
+            raise ValueError("enabled visualization requires explicit specifications")
+        return self
+
+
 class ProjectReportConfig(FrozenPolarisBaseModel):
     output_format: ReportFormat = ReportFormat.MARKDOWN
     report_title: NonEmptyStr | None = None
@@ -183,6 +195,7 @@ class ResearchProjectRequest(FrozenPolarisBaseModel):
     causal_specification: CausalSpecification | None = None
     selected_agents: tuple[AgentDomain, ...] = Field(min_length=1)
     robustness: RobustnessProjectConfig = Field(default_factory=RobustnessProjectConfig)
+    visualization: VisualizationProjectConfig = Field(default_factory=VisualizationProjectConfig)
     reasoning: ReasoningProjectConfig = Field(default_factory=ReasoningProjectConfig)
     synthesis: ProjectSynthesisConfig = Field(default_factory=ProjectSynthesisConfig)
     report: ProjectReportConfig = Field(default_factory=ProjectReportConfig)
@@ -222,6 +235,7 @@ class ResearchStage(StrEnum):
     HARMONIZE = "harmonize"
     ANALYZE = "analyze"
     ROBUSTNESS = "robustness"
+    VISUALIZE = "visualize"
     EXTRACT_EVIDENCE = "extract_evidence"
     RUN_AGENTS = "run_agents"
     COORDINATE = "coordinate"
@@ -252,6 +266,7 @@ class ProjectArtifactKind(StrEnum):
     ANALYSIS_RESULT = "analysis_result"
     CAUSAL_ANALYSIS_RESULT = "causal_analysis_result"
     ROBUSTNESS_ANALYSIS_RESULT = "robustness_analysis_result"
+    VISUALIZATION_ARTIFACT = "visualization_artifact"
     EVIDENCE_ARTIFACT = "evidence_artifact"
     AGENT_ASSESSMENT = "agent_assessment"
     COORDINATED_ASSESSMENT = "coordinated_assessment"
@@ -320,6 +335,7 @@ class ProjectProvenance(FrozenPolarisBaseModel):
     analysis_artifact_id: NonEmptyStr | None = None
     causal_analysis_artifact_id: NonEmptyStr | None = None
     robustness_analysis_artifact_id: NonEmptyStr | None = None
+    visualization_artifact_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
     evidence_artifact_id: NonEmptyStr | None = None
     agent_assessment_ids: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
     coordination_id: NonEmptyStr | None = None
@@ -359,6 +375,7 @@ class ResearchProjectResult(FrozenPolarisBaseModel):
     analysis_result: AnalysisResult | None = None
     causal_analysis_result: CausalAnalysisResult | None = None
     robustness_result: RobustnessAnalysisResult | None = None
+    visualization_artifacts: tuple[VisualizationArtifact, ...] = Field(default_factory=tuple)
     evidence_artifact: EvidenceArtifact | None = None
     domain_assessments: tuple[AgentAssessment, ...] = Field(default_factory=tuple)
     coordinated_assessment: CoordinatedAssessment | None = None

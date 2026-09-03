@@ -49,6 +49,7 @@ from polaris.reporting.service import generate_report
 from polaris.synthesis.models import SynthesisRequest
 from polaris.synthesis.provider import SynthesisProvider
 from polaris.synthesis.service import synthesize_assessment
+from polaris.visualization.service import create_visualization
 
 
 def run_research_project(
@@ -123,6 +124,7 @@ def run_research_project(
         analysis_result=context.analysis_result,
         causal_analysis_result=context.causal_analysis_result,
         robustness_result=context.robustness_result,
+        visualization_artifacts=context.visualization_artifacts,
         evidence_artifact=context.evidence_artifact,
         domain_assessments=context.domain_assessments,
         coordinated_assessment=context.coordinated_assessment,
@@ -185,6 +187,7 @@ class _ExecutionContext:
         self.analysis_result = None
         self.causal_analysis_result = None
         self.robustness_result = None
+        self.visualization_artifacts = ()
         self.evidence_artifact = None
         self.domain_assessments = ()
         self.coordinated_assessment = None
@@ -238,6 +241,19 @@ class _ExecutionContext:
                     )
                     if item is not None
                 )
+            ),
+            ResearchStage.VISUALIZE: tuple(
+                item
+                for item in (
+                    self.analysis_result.result_id if self.analysis_result is not None else None,
+                    self.causal_analysis_result.causal_analysis_id
+                    if self.causal_analysis_result is not None
+                    else None,
+                    self.robustness_result.robustness_analysis_id
+                    if self.robustness_result is not None
+                    else None,
+                )
+                if item is not None
             ),
             ResearchStage.RUN_AGENTS: (
                 (self.evidence_artifact.artifact_id,) if self.evidence_artifact is not None else ()
@@ -328,6 +344,9 @@ class _ExecutionContext:
                 if self.robustness_result is not None
                 else ()
             ),
+            ResearchStage.VISUALIZE: tuple(
+                artifact.visualization_id for artifact in self.visualization_artifacts
+            ),
             ResearchStage.EXTRACT_EVIDENCE: (
                 (self.evidence_artifact.artifact_id,) if self.evidence_artifact is not None else ()
             ),
@@ -378,6 +397,7 @@ def _run_stage(
         ResearchStage.HARMONIZE: lambda: _harmonize(context),
         ResearchStage.ANALYZE: lambda: _analyze(context),
         ResearchStage.ROBUSTNESS: lambda: _robustness(context),
+        ResearchStage.VISUALIZE: lambda: _visualize(context),
         ResearchStage.EXTRACT_EVIDENCE: lambda: _extract(context),
         ResearchStage.RUN_AGENTS: lambda: _run_agents(context),
         ResearchStage.COORDINATE: lambda: _coordinate(context),
@@ -580,6 +600,50 @@ def _robustness(context: _ExecutionContext) -> None:
     )
 
 
+def _visualize(context: _ExecutionContext) -> None:
+    artifacts = []
+    output_root = _project_output_root(context.request, context.plan_project_id) / "visualizations"
+    for spec in context.request.visualization.specifications:
+        source = _visualization_source(context, spec.source_artifact_id)
+        artifact = create_visualization(
+            specification=spec,
+            source_artifact=source,
+            data_artifact=context.analysis_ingestion,
+            output_directory=output_root
+            if context.request.execution_settings.write_outputs
+            else None,
+        )
+        artifacts.append(artifact)
+        context.add_artifact(
+            artifact.visualization_id,
+            ProjectArtifactKind.VISUALIZATION_ARTIFACT,
+        )
+    context.visualization_artifacts = tuple(artifacts)
+
+
+def _visualization_source(context: _ExecutionContext, source_artifact_id: str) -> object:
+    candidates = (
+        context.analysis_result,
+        context.causal_analysis_result,
+        context.robustness_result,
+        context.analysis_ingestion,
+        context.harmonized_dataset,
+    )
+    for candidate in candidates:
+        if candidate is None:
+            continue
+        ids = (
+            getattr(candidate, "result_id", None),
+            getattr(candidate, "causal_analysis_id", None),
+            getattr(candidate, "robustness_analysis_id", None),
+            getattr(candidate, "harmonized_dataset_id", None),
+            getattr(getattr(candidate, "dataset_manifest", None), "dataset_id", None),
+        )
+        if source_artifact_id in ids:
+            return candidate
+    raise DatasetResolutionError(f"visualization source not available: {source_artifact_id}")
+
+
 def _extract(context: _ExecutionContext) -> None:
     if context.analysis_result is None and context.causal_analysis_result is None:
         raise DatasetResolutionError("analysis result is required before evidence extraction")
@@ -713,6 +777,7 @@ def _report(context: _ExecutionContext) -> None:
             literature_context=context.literature_context,
             reasoning_artifact=context.reasoning_artifact,
             robustness_result=context.robustness_result,
+            visualization_artifacts=context.visualization_artifacts,
             dataset_manifest=context.analysis_ingestion.dataset_manifest,
             output_format=config.output_format,
             report_title=config.report_title,

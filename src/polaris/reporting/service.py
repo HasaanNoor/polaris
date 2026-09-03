@@ -35,6 +35,7 @@ from polaris.reporting.sections import (
     statistical_results_section,
     synthesis_section,
     unsupported_inferences_section,
+    visualization_section,
 )
 from polaris.reporting.validation import validate_report, validate_report_request
 
@@ -120,6 +121,7 @@ def build_research_report(
         evidence_grounded_interpretation_section=evidence_grounded_interpretation_section(
             request.reasoning_artifact
         ),
+        visualization_section=visualization_section(request.visualization_artifacts),
         synthesis_section=synthesis_section(request.synthesis_artifact),
         literature_context_section=literature_context_section(request.literature_context),
         limitations_section=limitations_section(
@@ -220,6 +222,7 @@ def _source_artifact_ids(request: ReportRequest) -> tuple[str, ...]:
                     if request.robustness_result is not None
                     else ()
                 ),
+                *(artifact.visualization_id for artifact in request.visualization_artifacts),
             }
         )
     )

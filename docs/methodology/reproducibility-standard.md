@@ -97,3 +97,13 @@ For causal robustness analysis, the reproducible artifact includes the baseline 
 specification, study ID, intervention ID, treatment provenance, every explicit variant, excluded
 observations and entities, estimator version, schema version, ruleset version, software version, and
 all failed variants. Raw provider data remains ignored and unmodified.
+
+## Phase 25 Visualization Reproducibility
+
+Visualization IDs are derived from source artifact IDs, source dataset/checksum provenance when
+available, the full `VisualizationSpecification`, schema version, and ruleset version. Timestamps
+are excluded. Every `VisualizationArtifact` preserves the plotting-ready rows used for rendering,
+axis and legend metadata, annotations, limitations, warnings, and output references. PNG and SVG
+are derived artifacts; CSV and JSON plotting data are part of the reproducibility package. No
+visualization may silently interpolate, impute, truncate axes, drop failed robustness variants, or
+change the analytical sample represented by an upstream result.

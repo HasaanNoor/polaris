@@ -30,6 +30,7 @@ from polaris.schemas.common import (
 from polaris.schemas.dataset import DatasetManifest
 from polaris.schemas.research_question import ResearchQuestion
 from polaris.synthesis.models import SynthesisArtifact, SynthesisMode
+from polaris.visualization.models import VisualizationArtifact
 
 REPORT_SCHEMA_VERSION = "1.0.0"
 REPORT_RULESET_VERSION = "deterministic_phase9_v1"
@@ -56,6 +57,7 @@ class ReportRequest(FrozenPolarisBaseModel):
     literature_context: LiteratureContextArtifact | None = None
     reasoning_artifact: ReasoningArtifact | None = None
     robustness_result: RobustnessAnalysisResult | None = None
+    visualization_artifacts: tuple[VisualizationArtifact, ...] = Field(default_factory=tuple)
     dataset_manifest: DatasetManifest | None = None
     output_format: ReportFormat = ReportFormat.JSON
     report_title: NonEmptyStr | None = None
@@ -305,6 +307,12 @@ class LiteratureContextSection(FrozenPolarisBaseModel):
     limitations: tuple[NonEmptyStr, ...] = Field(default_factory=tuple)
 
 
+class VisualizationReportSection(FrozenPolarisBaseModel):
+    status: SectionStatus
+    visualization_count: int = Field(ge=0)
+    visualizations: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+
+
 class LimitationsSection(FrozenPolarisBaseModel):
     limitation_codes: tuple[LimitationCode, ...]
     analysis_findings: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
@@ -376,6 +384,7 @@ class ResearchReport(FrozenPolarisBaseModel):
     domain_assessments_section: DomainAssessmentsSection
     cross_domain_section: CrossDomainSection
     evidence_grounded_interpretation_section: EvidenceGroundedInterpretationSection | None = None
+    visualization_section: VisualizationReportSection | None = None
     synthesis_section: SynthesisSection
     literature_context_section: LiteratureContextSection | None = None
     limitations_section: LimitationsSection

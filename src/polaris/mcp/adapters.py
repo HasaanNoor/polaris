@@ -21,6 +21,7 @@ from polaris.registry.models import (
 )
 from polaris.schemas.common import FrozenPolarisBaseModel, NonEmptyStr
 from polaris.schemas.statistics import StatisticalSpecification
+from polaris.visualization.models import VisualizationArtifact, VisualizationSpecification
 
 
 class MCPArtifactReference(FrozenPolarisBaseModel):
@@ -203,6 +204,37 @@ class EvaluateReasoningRequest(FrozenPolarisBaseModel):
 class GetReportRequest(FrozenPolarisBaseModel):
     report_id: NonEmptyStr
     format: Literal["json", "markdown", "html"] = "json"
+
+
+class CreateVisualizationRequest(FrozenPolarisBaseModel):
+    visualization_specification: dict[str, Any]
+    source_artifact: dict[str, Any]
+    data_artifact: dict[str, Any] | None = None
+    comparison_artifacts: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+
+    def specification(self) -> VisualizationSpecification:
+        return VisualizationSpecification.model_validate(self.visualization_specification)
+
+
+class ListVisualizationsRequest(FrozenPolarisBaseModel):
+    visualization_artifacts: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+
+    def artifacts(self) -> tuple[VisualizationArtifact, ...]:
+        return tuple(
+            VisualizationArtifact.model_validate(artifact)
+            for artifact in self.visualization_artifacts
+        )
+
+
+class GetVisualizationRequest(FrozenPolarisBaseModel):
+    visualization_id: NonEmptyStr
+    visualization_artifacts: tuple[dict[str, Any], ...] = Field(default_factory=tuple)
+
+    def artifacts(self) -> tuple[VisualizationArtifact, ...]:
+        return tuple(
+            VisualizationArtifact.model_validate(artifact)
+            for artifact in self.visualization_artifacts
+        )
 
 
 def artifact_reference(

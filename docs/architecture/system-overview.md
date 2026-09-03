@@ -173,3 +173,15 @@ significance stability, confidence-interval overlap, leave-one-out results, plac
 event-study comparison records, pre-trend summaries, failed variants, assumptions, treatment
 provenance, and plotting-ready table rows. It characterizes sensitivity and does not prove
 identifying assumptions.
+
+## Phase 25 Visualization Path
+
+Phase 25 adds an optional representation layer after existing research artifacts:
+
+`Statistical engine -> Research result -> Visualization layer -> Human interpretation`
+
+The visualization package builds plotting-ready rows from Phase 3 ingestion records, Phase 12
+harmonized country-year records, Phase 4 and Phase 21 model outputs, Phase 22 causal outputs,
+Phase 23 study metadata, and Phase 24 robustness outputs. It then renders or exports those rows
+without becoming a second analytical engine. Reports and projects can reference visualization
+artifacts, but evidence and reasoning remain separate.

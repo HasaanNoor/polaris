@@ -41,10 +41,12 @@ from polaris.reporting.models import (
     StatisticalResultsSection,
     SynthesisSection,
     UnsupportedInferencesSection,
+    VisualizationReportSection,
 )
 from polaris.schemas.dataset import DatasetManifest
 from polaris.schemas.research_question import ResearchQuestion
 from polaris.synthesis.models import SynthesisArtifact
+from polaris.visualization.models import VisualizationArtifact
 
 
 def research_question_section(
@@ -308,6 +310,32 @@ def robustness_section(
             item.model_dump(mode="json") for item in robustness_result.failed_variants
         ),
         limitations=robustness_result.limitations,
+    )
+
+
+def visualization_section(
+    visualization_artifacts: tuple[VisualizationArtifact, ...],
+) -> VisualizationReportSection | None:
+    if not visualization_artifacts:
+        return None
+    rows = tuple(
+        {
+            "visualization_id": artifact.visualization_id,
+            "visualization_type": artifact.visualization_type.value,
+            "title": artifact.specification.title,
+            "source_artifact_ids": artifact.source_artifact_ids,
+            "output_references": tuple(
+                item.model_dump(mode="json") for item in artifact.output_references
+            ),
+            "warnings": artifact.warnings,
+            "limitations": artifact.limitations,
+        }
+        for artifact in sorted(visualization_artifacts, key=lambda item: item.visualization_id)
+    )
+    return VisualizationReportSection(
+        status=SectionStatus.AVAILABLE,
+        visualization_count=len(rows),
+        visualizations=rows,
     )
 
 

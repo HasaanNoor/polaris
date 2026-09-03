@@ -105,3 +105,12 @@ significance changes, failed variants, placebo concerns, leave-one-out sensitivi
 robustness. Deterministic labels such as `ROBUSTNESS_CONSISTENT`, `ROBUSTNESS_MIXED`,
 `ROBUSTNESS_SENSITIVE`, and `ROBUSTNESS_INSUFFICIENT` summarize diagnostics only; they do not
 certify causal validity.
+
+## Phase 25 Visualization Evidence Boundary
+
+Visualization artifacts are representations of existing evidence and diagnostics. They must not
+create new empirical claims from visual patterns, outliers, slopes, map-like appearance, missing
+data, or apparent treatment timing. Reports may reference visualizations for inspection, but
+claim candidates and reasoning statements must still flow through the evidence and reasoning
+contracts. A scatterplot, coefficient plot, event-study figure, or robustness plot is not an
+independent evidence-generation agent.

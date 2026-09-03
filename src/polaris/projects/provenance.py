@@ -34,6 +34,7 @@ def build_project_provenance(
     research_report,
     literature_context=None,
     reasoning_artifact=None,
+    visualization_artifacts=(),
 ) -> ProjectProvenance:
     source_checksums = {
         result.dataset_manifest.dataset_id: result.checksum_sha256 for result in ingestion_artifacts
@@ -62,6 +63,9 @@ def build_project_provenance(
         ),
         robustness_analysis_artifact_id=(
             robustness_result.robustness_analysis_id if robustness_result is not None else None
+        ),
+        visualization_artifact_ids=tuple(
+            sorted(artifact.visualization_id for artifact in visualization_artifacts)
         ),
         evidence_artifact_id=(
             evidence_artifact.artifact_id if evidence_artifact is not None else None

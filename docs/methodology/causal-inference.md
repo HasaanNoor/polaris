@@ -38,3 +38,12 @@ Proof of causality
 
 Placebo and pre-trend diagnostics are warnings or supporting diagnostics, not automatic proof or
 disproof. Stable estimates remain conditional on identifying assumptions.
+
+## Phase 25 Causal Visualizations
+
+Phase 25 can visualize existing Phase 22 and Phase 24 causal artifacts, including ATT estimates,
+event-time coefficients, robustness variants, failed variants, leave-one-out diagnostics, and
+placebo diagnostics. Event-study plots preserve the omitted reference period, event-time ordering,
+zero-effect reference line, treatment-time reference line, missing event periods, and pre/post
+labels. These figures do not prove parallel trends or causal validity; they make the existing
+design and diagnostics easier to inspect.

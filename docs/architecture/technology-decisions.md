@@ -72,3 +72,12 @@ deterministic IDs, and Phase 22 estimators. Robustness IDs depend on the baselin
 specification, study and intervention IDs, treatment provenance, explicit variants, dataset
 checksums, schema version, and ruleset version. Polaris reports separate robustness dimensions and
 does not compute an overall robustness score.
+
+## Phase 25 Visualization Dependency
+
+Phase 25 adds an optional `visualization` extra with matplotlib. Matplotlib is used only in
+`polaris.visualization.renderers`, with the noninteractive Agg backend, for deterministic PNG and
+SVG research-figure export. Core Polaris imports, analysis, evidence, reasoning, project
+orchestration, and MCP tools remain usable without rendering figures. Dashboard frameworks,
+interactive editors, chart recommendation, Plotly, Altair, Bokeh, Dash, Streamlit, pandas, and
+statsmodels remain deferred.
