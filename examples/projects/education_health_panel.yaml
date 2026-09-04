@@ -1,0 +1,28 @@
+schema_version: 1.0.0
+project:
+  name: education-health-panel
+  description: Deterministic education and health panel template.
+research_question:
+  text: >
+    How is education expenditure associated with adult literacy in the UNESCO
+    education panel?
+datasets:
+  - dataset_id: unesco_education_panel_86c6b6c7ebe57b7951c56842eed443424a0acdc377dfcab21a016481b3b16b04
+    manifest_path: ../unesco/unesco_education_panel_manifest.json
+    source_path: ../unesco/unesco_education_panel_sample.csv
+analysis:
+  procedure: ordinary_least_squares
+  outcome: uis_adult_literacy_rate
+  predictors:
+    - uis_education_expenditure_pct_gdp
+agents:
+  - education
+  - economics
+reasoning:
+  enabled: true
+  mode: deterministic
+reporting:
+  formats:
+    - markdown
+outputs:
+  root: outputs/projects

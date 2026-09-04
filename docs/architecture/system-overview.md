@@ -115,6 +115,27 @@ catalog, derived artifact, project-output, and literature roots. Raw provider fi
 arbitrary filesystem paths, shell execution, secrets, environment variables, and network
 browsing are outside the MCP boundary.
 
+## CLI Research Interface
+
+Phase 26 adds a local command-line interface under `src/polaris/cli`:
+
+```text
+Python APIs
+     ^
+Phase 13 orchestration
+     ^
+CLI / MCP
+```
+
+The CLI and MCP are peer interfaces over the same research engine. The CLI parses strict YAML/JSON
+project configuration, validates datasets and variables, calls `plan_research_project(...)` for dry
+runs, calls `run_research_project(...)` for execution, and reads existing project/report/
+visualization artifacts for inspection. It does not select datasets, variables, statistical models,
+agents, causal controls, treatment dates, or AI modes.
+
+Provider-backed reasoning is never silently activated. A configuration must explicitly request it,
+and the CLI fails clearly when no provider-backed runtime is configured.
+
 ## WHO Health Panel
 
 Phase 15 adds a curated WHO integration layer between raw provider snapshots and Phase 3 ingestion. It reads the local WHO GHO acquisition catalog, validates checksums, profiles indicator schemas, applies reviewed dimension filters, excludes aggregates, keeps sex and age dimensions explicit, separates projections from historical observations, and writes `WHOHealthPanel` artifacts. The panel is then exported as a normal Phase 3 dataset and consumed by Phase 12 without WHO-specific harmonization code.

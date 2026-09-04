@@ -107,3 +107,12 @@ axis and legend metadata, annotations, limitations, warnings, and output referen
 are derived artifacts; CSV and JSON plotting data are part of the reproducibility package. No
 visualization may silently interpolate, impute, truncate axes, drop failed robustness variants, or
 change the analytical sample represented by an upstream result.
+
+## Phase 26 CLI Reproducibility
+
+Every CLI project run stores `normalized-config.json` and `reproducibility-manifest.json` beside the
+existing Phase 13 outputs. The manifest records the project ID, normalized configuration, dataset
+IDs, dataset versions, source checksums, variable mappings where applicable, analysis
+specification, agent selection, reasoning mode, visualization specifications, report formats,
+software version, and schema versions. Reproduction uses the stored normalized configuration and
+must resolve to the same deterministic project ID; it must not silently substitute newer data.

@@ -4,7 +4,24 @@ Agentic platform for societal intelligence and causal research.
 
 ## Status
 
-Polaris is in **Phase 24: causal robustness analysis complete locally**. The repository includes typed Python schema contracts for research questions, dataset manifests, agent messages, provenance records, statistical specifications, causal specifications, reviewed causal-study metadata, robustness specifications, and versioned research artifacts; deterministic ingestion, harmonization, statistical analysis, panel analysis, explicit Difference-in-Differences and event-study causal designs, causal-study readiness assessment, robustness analysis, evidence extraction, domain agents, coordination, synthesis, reporting, provider panels, literature retrieval, reasoning, evaluation, and MCP integration. Polaris does not yet contain application services, production infrastructure, internet search, autonomous synchronization, frontend workflows, PDF/DOCX export, external bibliography generation, vector databases, online academic search APIs, autonomous treatment discovery, autonomous causal-design selection, autonomous policy recommendations, or an external workflow engine.
+Polaris is in **Phase 26: user-facing research CLI complete locally**. The repository includes typed Python schema contracts for research questions, dataset manifests, agent messages, provenance records, statistical specifications, causal specifications, reviewed causal-study metadata, robustness specifications, visualization specifications, user-facing project configuration, and versioned research artifacts; deterministic ingestion, harmonization, statistical analysis, panel analysis, explicit Difference-in-Differences and event-study causal designs, causal-study readiness assessment, robustness analysis, evidence extraction, domain agents, coordination, synthesis, reporting, provider panels, literature retrieval, reasoning, evaluation, visualization, MCP integration, and the `polaris` command-line workflow. Polaris does not yet contain application services, production infrastructure, internet search, autonomous synchronization, frontend workflows, PDF/DOCX export, external bibliography generation, vector databases, online academic search APIs, autonomous treatment discovery, autonomous causal-design selection, autonomous policy recommendations, cloud execution, or an external workflow engine.
+
+## CLI Quickstart
+
+```bash
+pip install -e ".[cli,visualization]"
+polaris system info
+polaris datasets list
+polaris project validate examples/projects/governance_health_panel.yaml
+polaris project run examples/projects/governance_health_panel.yaml --dry-run
+polaris project run examples/projects/governance_health_panel.yaml
+polaris project inspect <project_id>
+```
+
+The installed `polaris` command is a thin interface over existing Polaris APIs. It validates strict
+YAML/JSON project configurations, calls Phase 13 orchestration for execution, writes normalized
+configuration and reproducibility manifests, and hides raw tracebacks unless `--debug` is requested.
+Shell completion is available through Typer's built-in completion support for installed commands.
 
 ## Package Overview
 
@@ -31,6 +48,18 @@ The Phase 9 reporting package lives under `src/polaris/reporting`. It consumes e
 The Phase 12 harmonization package lives under `src/polaris/harmonization`. It consumes two or more `DatasetIngestionResult` objects, explicit dataset configs, reviewed variable mappings, and an explicit join type. It normalizes country identifiers and years, excludes aggregate entities by default, validates units and definitions, detects duplicate keys and cross-provider conflicts, records missingness reasons, preserves value-level provenance, and exports derived Phase 3-compatible CSV plus manifest artifacts.
 
 The Phase 13 projects package lives under `src/polaris/projects`. It provides `ResearchProjectRequest`, `plan_research_project(...)`, and `run_research_project(...)` for a synchronous, single-entry workflow across dataset resolution, ingestion, optional harmonization, analysis, evidence extraction, selected domain agents, coordination, synthesis, and report generation. Project IDs are deterministic and exclude execution timestamps. Stage results preserve failure-stage metadata and completed upstream artifacts. Project-level provenance aggregates upstream artifact IDs and source checksums without replacing phase-specific provenance.
+
+The Phase 26 CLI package lives under `src/polaris/cli`. It exposes `polaris datasets`, `polaris project`, `polaris analyze`, `polaris causal`, `polaris visualize`, `polaris report`, and `polaris system`. The CLI is an interface layer over the same research engine used by Python APIs and MCP:
+
+```text
+Python APIs
+     ^
+Phase 13 orchestration
+     ^
+CLI / MCP
+```
+
+Neither CLI nor MCP contains independent research methodology.
 
 The Phase 14 literature package lives under `src/polaris/literature`. It ingests explicitly supplied local literature corpora, preserves document checksums and citation metadata, normalizes and chunks text deterministically, and retrieves relevant chunks with a local BM25-style lexical index. `LiteratureContextArtifact` records retrieved literature for existing empirical claim IDs while keeping literature claims separate from Polaris empirical evidence. Phase 8 synthesis and Phase 9 reporting can consume this optional artifact, and Phase 13 can add a `RETRIEVE_LITERATURE` stage only when a project-level literature configuration is supplied. No autonomous internet research or generated citations are supported.
 
@@ -146,6 +175,34 @@ axis metadata, output references, deterministic IDs, and report/project/MCP refe
 Supported outputs include PNG, SVG, CSV, and JSON. Matplotlib is isolated behind the optional
 `visualization` extra.
 
+## Phase 26 CLI Workflow
+
+Phase 26 introduces a user-facing command hierarchy:
+
+```bash
+polaris datasets list
+polaris datasets inspect <dataset_id>
+polaris datasets variables <dataset_id>
+polaris datasets providers
+polaris project init --template basic
+polaris project validate <config.yaml>
+polaris project run <config.yaml>
+polaris project run <config.yaml> --dry-run
+polaris project inspect <project_id>
+polaris project list
+polaris project reproduce <project_id>
+polaris causal studies list
+polaris causal studies readiness <study_id>
+polaris visualize create <config.yaml>
+polaris report generate <project_id>
+polaris system info
+```
+
+Project configs include `schema_version: 1.0.0`; future incompatible schemas must be rejected
+instead of silently reinterpreted. YAML is loaded with `yaml.safe_load`; JSON is supported for
+automation. Default CLI exit codes are documented in
+[First Research Project](docs/guides/first-research-project.md).
+
 ## Current Status and Next Phase
 
-Current decision records establish Polaris as a research system with mandatory multi-agent orchestration, a deterministic analytical core, Pydantic-based schema contracts, an in-memory deterministic dataset registry, local CSV ingestion, deterministic statistical execution, structured evidence extraction, deterministic domain-agent assessment, deterministic coordination of structured domain outputs, guardrailed synthesis from coordinated evidence, structured reporting, immutable provider dataset acquisition, real WDI validation, cross-provider country-year harmonization, and a synchronous project orchestrator. The next major research task is to broaden reviewed provider-variable mappings while preserving explicit dataset selection, explicit variable mappings, explicit statistical specifications, explicit agent selection, deterministic project IDs, and traceable project provenance.
+Current decision records establish Polaris as a research system with mandatory multi-agent orchestration, a deterministic analytical core, Pydantic-based schema contracts, an in-memory deterministic dataset registry, local CSV ingestion, deterministic statistical execution, structured evidence extraction, deterministic domain-agent assessment, deterministic coordination of structured domain outputs, guardrailed synthesis from coordinated evidence, structured reporting, immutable provider dataset acquisition, real WDI validation, cross-provider country-year harmonization, synchronous project orchestration, MCP, visualization, and a local command-line workflow. The next major research task is to broaden reviewed provider-variable mappings while preserving explicit dataset selection, explicit variable mappings, explicit statistical specifications, explicit agent selection, deterministic project IDs, and traceable project provenance.

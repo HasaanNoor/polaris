@@ -81,3 +81,11 @@ SVG research-figure export. Core Polaris imports, analysis, evidence, reasoning,
 orchestration, and MCP tools remain usable without rendering figures. Dashboard frameworks,
 interactive editors, chart recommendation, Plotly, Altair, Bokeh, Dash, Streamlit, pandas, and
 statsmodels remain deferred.
+
+## Phase 26 CLI Dependencies
+
+Phase 26 adds an optional `cli` extra with Typer and PyYAML. Typer provides a small mature command
+group layer and shell-completion support without adding an application framework. PyYAML is used
+only through `yaml.safe_load` for researcher-friendly project configuration. Core Python APIs,
+project orchestration, analysis, visualization models, and MCP remain importable without installing
+the CLI extra unless the command-line app is invoked.

@@ -114,3 +114,10 @@ data, or apparent treatment timing. Reports may reference visualizations for ins
 claim candidates and reasoning statements must still flow through the evidence and reasoning
 contracts. A scatterplot, coefficient plot, event-study figure, or robustness plot is not an
 independent evidence-generation agent.
+
+## Phase 26 CLI Evidence Boundary
+
+The CLI is a workflow interface, not a research agent. It may validate configuration, show datasets,
+show causal-study readiness, run an explicit project, inspect artifacts, and reproduce a previous
+run. It must not infer scientific preferences, choose outcomes or predictors, select countries,
+generate causal language, activate provider-backed AI, or reinterpret visual patterns as evidence.

@@ -1,0 +1,27 @@
+schema_version: 1.0.0
+project:
+  name: causal-template-not-reviewed
+  description: Template only. It is not a reviewed real intervention.
+research_question:
+  text: >
+    TEMPLATE ONLY: What is the estimated effect of an explicitly reviewed
+    intervention on an explicitly specified outcome?
+datasets:
+  - dataset_id: harmonized_country_year_610b7b1c05b09044
+    manifest_path: ../wgi/wdi_who_wgi_harmonized_manifest.json
+    source_path: ../wgi/wdi_who_wgi_harmonized_sample.csv
+analysis:
+  procedure: ordinary_least_squares
+  outcome: who_life_expectancy_at_birth_both_sexes
+  predictors:
+    - wgi_government_effectiveness
+  causal_identification: associational
+agents:
+  - governance
+reasoning:
+  enabled: false
+reporting:
+  formats:
+    - markdown
+outputs:
+  root: outputs/projects

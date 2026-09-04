@@ -327,3 +327,19 @@ panel diagnostics, and causal-study design diagnostics.
 Visualization remains downstream of validated artifacts. It does not run alternative statistical
 models, impute missing data, cherry-pick countries, hide failed robustness variants, hide
 non-significant estimates, or create substantive claims from visual patterns.
+
+## Phase 26 Completed: User-Facing Research Workflow and CLI
+
+Phase 26 adds the installed `polaris` command and `python -m polaris` entry point. The command
+hierarchy covers dataset inspection, provider status, project initialization, project validation,
+dry-run planning, deterministic Phase 13 execution, project inspection/listing, reproduction,
+focused analysis inspection, causal-study listing/inspection/readiness, visualization planning and
+inspection, report inspection, and system information.
+
+The CLI reads strict YAML/JSON `ResearchProjectConfig` files, validates referenced datasets and
+variables, requires explicit reasoning mode, writes normalized configuration and a
+machine-readable reproducibility manifest, and maps failures to deterministic exit codes. It is a
+thin interface over Phase 13 and existing public APIs. It does not contain independent research
+logic or make hidden research decisions. Web dashboards, notebook UI, cloud execution,
+multi-user management, automatic model selection, and automatic causal-design selection remain
+deferred.

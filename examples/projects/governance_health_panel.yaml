@@ -1,0 +1,33 @@
+schema_version: 1.0.0
+project:
+  name: governance-health-panel
+  description: Deterministic governance, income, and health panel example.
+research_question:
+  text: >
+    How is government effectiveness associated with life expectancy after
+    accounting for GDP per capita?
+datasets:
+  - dataset_id: harmonized_country_year_610b7b1c05b09044
+    manifest_path: ../wgi/wdi_who_wgi_harmonized_manifest.json
+    source_path: ../wgi/wdi_who_wgi_harmonized_sample.csv
+analysis:
+  procedure: ordinary_least_squares
+  outcome: who_life_expectancy_at_birth_both_sexes
+  predictors:
+    - wgi_government_effectiveness
+  covariates:
+    - wdi_gdp_per_capita_current_usd
+agents:
+  - governance
+  - economics
+  - public_health
+reasoning:
+  enabled: true
+  mode: deterministic
+reporting:
+  formats:
+    - markdown
+    - html
+    - json
+outputs:
+  root: outputs/projects

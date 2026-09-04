@@ -1,0 +1,28 @@
+schema_version: 1.0.0
+project:
+  name: basic-cross-sectional-example
+  description: Small harmonized governance-health correlation project.
+research_question:
+  text: >
+    How is government effectiveness associated with life expectancy in the
+    harmonized governance-health panel?
+datasets:
+  - dataset_id: harmonized_country_year_610b7b1c05b09044
+    manifest_path: ../wgi/wdi_who_wgi_harmonized_manifest.json
+    source_path: ../wgi/wdi_who_wgi_harmonized_sample.csv
+analysis:
+  procedure: pearson_correlation
+  outcome: who_life_expectancy_at_birth_both_sexes
+  predictors:
+    - wgi_government_effectiveness
+agents:
+  - economics
+  - public_health
+reasoning:
+  enabled: true
+  mode: deterministic
+reporting:
+  formats:
+    - markdown
+outputs:
+  root: outputs/projects

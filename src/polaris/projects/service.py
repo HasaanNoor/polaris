@@ -622,6 +622,18 @@ def _visualize(context: _ExecutionContext) -> None:
 
 
 def _visualization_source(context: _ExecutionContext, source_artifact_id: str) -> object:
+    if source_artifact_id in {"analysis", "__analysis__"} and context.analysis_result is not None:
+        return context.analysis_result
+    if (
+        source_artifact_id in {"causal_analysis", "__causal_analysis__"}
+        and context.causal_analysis_result is not None
+    ):
+        return context.causal_analysis_result
+    if (
+        source_artifact_id in {"robustness", "__robustness__"}
+        and context.robustness_result is not None
+    ):
+        return context.robustness_result
     candidates = (
         context.analysis_result,
         context.causal_analysis_result,

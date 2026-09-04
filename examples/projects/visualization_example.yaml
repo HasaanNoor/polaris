@@ -1,0 +1,40 @@
+schema_version: 1.0.0
+project:
+  name: visualization-example
+  description: Governance-health example with explicit Phase 25 visualization.
+research_question:
+  text: >
+    How is government effectiveness associated with life expectancy after
+    accounting for GDP per capita?
+datasets:
+  - dataset_id: harmonized_country_year_610b7b1c05b09044
+    manifest_path: ../wgi/wdi_who_wgi_harmonized_manifest.json
+    source_path: ../wgi/wdi_who_wgi_harmonized_sample.csv
+analysis:
+  procedure: ordinary_least_squares
+  outcome: who_life_expectancy_at_birth_both_sexes
+  predictors:
+    - wgi_government_effectiveness
+  covariates:
+    - wdi_gdp_per_capita_current_usd
+agents:
+  - governance
+  - public_health
+reasoning:
+  enabled: true
+  mode: deterministic
+visualizations:
+  specifications:
+    - visualization_type: scatterplot
+      source_artifact_id: analysis
+      title: Government effectiveness and life expectancy
+      x_variable: wgi_government_effectiveness
+      y_variable: who_life_expectancy_at_birth_both_sexes
+      output_formats:
+        - png
+        - svg
+reporting:
+  formats:
+    - markdown
+outputs:
+  root: outputs/projects
